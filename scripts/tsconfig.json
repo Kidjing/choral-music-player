@@ -1,0 +1,12 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "target": "ES5",
+        "module": "commonjs",
+        "allowJs": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "noImplicitAny": false
+    },
+    "typeRoots": ["./typings", "./node_modules/@types"]
+}

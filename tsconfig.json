@@ -1,0 +1,44 @@
+{
+    "compilerOptions": {
+        "jsx": "preserve",
+        "target": "es6",
+        "module": "esnext",
+        "lib": [
+            "es6",
+            "dom"
+        ],
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "strictBindCallApply": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "declaration": false,
+        "outDir": "dist",
+        "sourceMap": true,
+        "removeComments": false,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node",
+        "skipLibCheck": true,
+        "baseUrl": "./",
+        "paths": {
+            "src/*": [
+                "src/*"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*",
+        "test/**/*",
+        "scripts/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+    ],
+    "typeRoots": [
+        "./src/typings",
+        "./node_modules/@types"
+    ]
+}
