@@ -27,6 +27,7 @@
   "license": "ISC",
   "dependencies": {
     "@arco-design/web-react": "^2.25.1",
+    "@arco-themes/react-choral": "^0.0.1",
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
     "core-js": "^3.6.4",
@@ -40,6 +41,7 @@
     "regenerator-runtime": "^0.13.5"
   },
   "devDependencies": {
+    "@arco-design/webpack-plugin": "^1.7.0",
     "@babel/core": "^7.16.0",
     "@babel/plugin-transform-runtime": "^7.16.4",
     "@babel/preset-env": "^7.16.4",
