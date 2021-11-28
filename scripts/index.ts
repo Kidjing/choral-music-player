@@ -1,3 +1,5 @@
+import fs from 'fs';
+import os from 'os';
 import webpack from 'webpack';
 import { execSync } from 'child_process';
 import { outputPath, publicPath, releaseVersion } from './config';
@@ -48,8 +50,18 @@ class Build {
 
     private beforeBuild() {
         console.log('当前构建版本:', releaseVersion);
-
+        
+        // 判断操作系统
+        const platform = os.platform();
         // 清理构建目录
+        if (platform === 'win32') {
+            fs.rmdirSync(outputPath, {
+                recursive: true,
+            });
+            fs.rmdirSync(publicPath, {
+                recursive: true,
+            });
+        }
         execSync(`rm -rf ${outputPath}`);
         execSync(`rm -rf ${publicPath}`);
     }
