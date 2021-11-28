@@ -1,7 +1,5 @@
 /*
  * 构建流程的工具函数
- * @Author: CntChen
- * @Date: 2020-05-09
  */
 
 import fs from 'fs';

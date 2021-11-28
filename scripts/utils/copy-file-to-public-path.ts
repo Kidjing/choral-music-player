@@ -1,7 +1,5 @@
 /*
  * production 模式下复制 output 目录资源到 public 目录
- * @Author: CntChen
- * @Date: 2020-05-13
  */
 
 import path from 'path';

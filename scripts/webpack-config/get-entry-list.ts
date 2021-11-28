@@ -1,7 +1,5 @@
 /*
  * 获取构建的资源入口
- * @Author: CntChen
- * @Date: 2020-05-09
  */
 
 import path from 'path';
