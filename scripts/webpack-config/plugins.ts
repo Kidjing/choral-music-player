@@ -25,7 +25,7 @@ const getPlugins = ({ isProduction }: IBuildOptions) => {
             chunkFilename: isProduction ? `[name]${HASH}.css` : '[name].css',
         }),
         new ArcoWebpackPlugin({
-            theme: '@arco-design/react-choral'
+            theme: '@arco-themes/react-choral'
         })
     ];
 
