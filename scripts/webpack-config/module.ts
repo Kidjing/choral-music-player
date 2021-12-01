@@ -37,7 +37,7 @@ const getModule = ({ isProduction }: IBuildOptions) => {
                         loader: 'less-loader',
                         options: {
                             lessOptions: {
-                                strictMath: true,
+                                sourceMap: true,
                             },
                         },
                     },
