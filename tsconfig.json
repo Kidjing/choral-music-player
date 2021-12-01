@@ -38,7 +38,7 @@
         "node_modules",
     ],
     "typeRoots": [
-        "./src/typings",
+        "./src/types",
         "./node_modules/@types"
     ]
 }

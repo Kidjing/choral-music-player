@@ -8,5 +8,5 @@
         "resolveJsonModule": true,
         "noImplicitAny": false
     },
-    "typeRoots": ["./typings", "./node_modules/@types"]
+    "typeRoots": ["./types", "./node_modules/@types"]
 }
