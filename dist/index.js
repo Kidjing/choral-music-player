@@ -2586,8 +2586,13 @@ var Meta = _arco_design_web_react_es_Card__WEBPACK_IMPORTED_MODULE_6__["default"
 
 var FmCard = function FmCard(props) {
   var imgSrc = props.imgSrc,
+      style = props.style,
       title = props.title,
       desc = props.desc,
+      _props$shape = props.shape,
+      shape = _props$shape === void 0 ? "round" : _props$shape,
+      _props$textPostion = props.textPostion,
+      textPostion = _props$textPostion === void 0 ? 'left' : _props$textPostion,
       goToAlbum = props.goToAlbum;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
@@ -2596,8 +2601,8 @@ var FmCard = function FmCard(props) {
       setIsVisible = _useState2[1];
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_arco_design_web_react_es_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    style: style,
     className: "fm-card",
-    hoverable: true,
     bordered: false,
     cover: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement("div", {
       className: "fm-card-cover",
@@ -2619,6 +2624,9 @@ var FmCard = function FmCard(props) {
       })
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement("img", {
       className: "fm-card-cover-img",
+      style: {
+        borderRadius: shape === 'round' ? '0.75em' : '50%'
+      },
       alt: "dessert",
       src: imgSrc,
       onClick: function onClick() {
@@ -2627,6 +2635,9 @@ var FmCard = function FmCard(props) {
     }))
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(Meta, {
     className: "fm-card-text",
+    style: {
+      justifyContent: textPostion
+    },
     title: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement("a", {
       href: ""
     }, title),
@@ -2654,11 +2665,19 @@ __webpack_require__.r(__webpack_exports__);
 
 var App = function App() {
   return /*#__PURE__*/React.createElement("div", null, "Welcome to the choral music!", /*#__PURE__*/React.createElement(src_components_fm_card__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    imgSrc: "https://p1.music.126.net/lHjRKW5bkXO4ZXy5ShoDFA==/109951165517309896.jpg?param=512y512",
-    title: "\u7F51\u6613\u4E91\u90A3\u4E9B\u8BC4\u8BBA\u8FC7\u4E07\u7684\u6B4C",
+    imgSrc: "https://p1.music.126.net/gCxvN2bzA2IxdLO98lqAbw==/109951166277134169.jpg?param=512y512",
+    title: "\u7F51\u6613\u4E91\u6700\u53D7\u6B22\u8FCE\u7684\u6B4C\u5355",
     desc: /*#__PURE__*/React.createElement("a", {
       href: ""
     }, "\u70ED\u95E8\u63A8\u8350")
+  }), /*#__PURE__*/React.createElement(src_components_fm_card__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    style: {
+      width: "120px"
+    },
+    imgSrc: "https://p1.music.126.net/11NBW2T83KnHLZ89eXLXbw==/109951165663271282.jpg?param=512y512",
+    title: "\u7F51\u6613\u4E91",
+    shape: "circle",
+    textPostion: "center"
   }));
 };
 

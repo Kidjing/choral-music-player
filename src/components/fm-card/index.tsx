@@ -8,6 +8,8 @@ const { Meta } = Card;
 
 interface FmCardProps {
     imgSrc: string;
+    shape?: 'circle' | 'round';
+    textPostion?: 'left' | 'center' | 'right';
     title?: string | React.ReactNode;
     titleSrc?: string;
     desc?: string | React.ReactNode;
@@ -17,13 +19,13 @@ interface FmCardProps {
 }
 
 const FmCard = (props: FmCardProps) => {
-    const { imgSrc, title, desc, goToAlbum } = props;
+    const { imgSrc, style,title, desc, shape="round", textPostion='left',goToAlbum } = props;
     const [isVisible, setIsVisible] = useState<boolean>(false);
 
     return (
         <Card
+            style={style}
             className="fm-card"
-            hoverable
             bordered={false}
             cover={
                 <div
@@ -38,11 +40,17 @@ const FmCard = (props: FmCardProps) => {
                         shape="round"
                         icon={<IconCaretRight style={{ fontSize: 24 }} />}
                     />
-                    <img className="fm-card-cover-img" alt="dessert" src={imgSrc} onClick={() => goToAlbum} />
+                    <img
+                        className="fm-card-cover-img"
+                        style={{ borderRadius: shape === 'round' ? '0.75em' : '50%' }}
+                        alt="dessert"
+                        src={imgSrc}
+                        onClick={() => goToAlbum}
+                    />
                 </div>
             }
         >
-            <Meta className="fm-card-text" title={<a href="">{title}</a>} description={desc} />
+            <Meta className="fm-card-text" style={{justifyContent:textPostion}} title={<a href="">{title}</a>} description={desc} />
         </Card>
     );
 };
