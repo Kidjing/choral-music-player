@@ -13087,7 +13087,11 @@ var PlayList = function PlayList(props) {
   }, {
     title: 'Album',
     render: function render(col, record) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", null, record.album.name);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
+        className: "playlist-album"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("a", {
+        href: record.album.picUrl
+      }, record.album.name));
     }
   }, {
     title: 'Action',
@@ -13109,11 +13113,13 @@ var PlayList = function PlayList(props) {
         },
         icon: record.id === LikeAction.musicId && LikeAction.like ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_icon_react_icon_IconHeartFill__WEBPACK_IMPORTED_MODULE_9__["default"], {
           style: {
-            fontSize: 20
+            fontSize: 20,
+            color: 'red'
           }
         }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_icon_react_icon_IconHeart__WEBPACK_IMPORTED_MODULE_10__["default"], {
           style: {
-            fontSize: 20
+            fontSize: 20,
+            color: 'red'
           }
         })
       }));

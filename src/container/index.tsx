@@ -29,7 +29,7 @@ const data = [
         duration:180,
         album: {id:1,name:'路上',picUrl:'https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224'},
         time: '3:14',
-    }
+    },
 ];
 
 const App = () => {

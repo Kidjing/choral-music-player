@@ -51,7 +51,11 @@ const PlayList = (props: PlaylistProps<IMusic>) => {
         },
         {
             title: 'Album',
-            render: (col: string, record: IMusic) => <div>{record.album.name}</div>,
+            render: (col: string, record: IMusic) => (
+                <div className="playlist-album">
+                    <a href={record.album.picUrl}>{record.album.name}</a>
+                </div>
+            ),
         },
         {
             title: 'Action',
@@ -67,9 +71,9 @@ const PlayList = (props: PlaylistProps<IMusic>) => {
                         style={{ background: 'transparent' }}
                         icon={
                             record.id === LikeAction.musicId && LikeAction.like ? (
-                                <IconHeartFill style={{ fontSize: 20 }} />
+                                <IconHeartFill style={{ fontSize: 20 ,color:'red'}} />
                             ) : (
-                                <IconHeart style={{ fontSize: 20 }} />
+                                <IconHeart style={{ fontSize: 20 ,color:'red'}} />
                             )
                         }
                     />
