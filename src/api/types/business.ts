@@ -93,44 +93,48 @@ export interface IMyMusic {
     [key: string]: any;
 }
 
+
 export interface ISonglist {
-    adType: number;
-    backgroundCoverId: number;
-    cloudTrackCount: number;
-    commentCount: number;
-    coverImgUrl: string;
-    picUrl?: string;
-    createTime: number;
-    copywriter?: string;
+    adType: number
+    backgroundCoverId: number
+    cloudTrackCount: number
+    commentCount: number
+    coverImgUrl: string
+    picUrl?: string
+    createTime: number
+    copywriter?: string
     creator: {
-        avatarUrl: string;
-        nickname: string;
-        userId: number;
-    };
-    description: string;
-    highQuality: boolean;
-    id: number;
-    name: string;
-    newImported: boolean;
-    opRecommend: boolean;
-    ordered: boolean;
-    playCount: number;
-    privacy: number;
-    shareCount: number;
-    specialType: number;
-    status: number;
-    subscribed: boolean;
-    subscribedCount: number;
-    subscribers: [];
-    tags: string[];
-    trackCount: number;
-    trackIds: [];
-    trackNumberUpdateTime: number;
-    trackUpdateTime: number;
-    tracks: ISimpleMusic[];
-    updateTime: number;
-    userId: number;
+        avatarUrl: string
+        nickname: string
+        userId: number
+    }
+    description: string
+    highQuality: boolean
+    id: number
+    name: string
+    newImported: boolean
+    opRecommend: boolean
+    ordered: boolean
+    playCount: number
+    privacy: number
+    shareCount: number
+    specialType: number
+    status: number
+    subscribed: boolean
+    subscribedCount: number
+    subscribers: []
+    tags: string[]
+    trackCount: number
+    trackIds: []
+    trackNumberUpdateTime: number
+    trackUpdateTime: number
+    tracks: ISimpleMusic[]
+    updateTime: number
+    userId: number
 }
+
+
+
 
 export interface ISimpleMusic {
     al: {
@@ -146,3 +150,4 @@ export interface ISimpleMusic {
     fee?: number;
     status?: number;
 }
+
