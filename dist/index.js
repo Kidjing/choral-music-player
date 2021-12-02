@@ -13013,10 +13013,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _arco_design_web_react_icon_react_icon_IconHeart__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @arco-design/web-react/icon/react-icon/IconHeart */ "./node_modules/@arco-design/web-react/icon/react-icon/IconHeart/index.js");
 /* harmony import */ var _arco_design_web_react_icon_react_icon_IconHeartFill__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @arco-design/web-react/icon/react-icon/IconHeartFill */ "./node_modules/@arco-design/web-react/icon/react-icon/IconHeartFill/index.js");
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
-/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _index_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./index.less */ "./src/components/playlist/index.less");
@@ -13066,11 +13066,29 @@ var PlayList = function PlayList(props) {
   }, {
     title: 'Song',
     render: function render(col, record) {
-      record.artists.map();
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
+        className: "playlist-song"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
+        className: "playlist-song-name"
+      }, record.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
+        className: "playlist-song-artist"
+      }, record.artists.map(function (item, index) {
+        if (index === record.artists.length - 1) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("a", {
+            href: item.img1v1Url
+          }, item.name, " ");
+        } else {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("a", {
+            href: item.img1v1Url
+          }, item.name, ",");
+        }
+      })));
     }
   }, {
     title: 'Album',
-    dataIndex: 'album'
+    render: function render(col, record) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", null, record.album.name);
+    }
   }, {
     title: 'Action',
     dataIndex: 'action',
@@ -13102,12 +13120,11 @@ var PlayList = function PlayList(props) {
     }
   }, {
     title: 'Time',
-    dataIndex: 'time',
     width: '8%',
     render: function render(col, record) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
         className: "playlist-time"
-      }, record.time);
+      }, record.duration);
     }
   }];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_es_Table__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -13171,6 +13188,16 @@ var data = [{
     picId: 1,
     picUrl: "https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224",
     topicPerson: 555
+  }, {
+    albumSize: 345,
+    id: 1,
+    img1v1Id: 34,
+    img1v1Url: "https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224",
+    musicSize: 3462,
+    name: '周杰伦',
+    picId: 1,
+    picUrl: "https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224",
+    topicPerson: 555
   }],
   duration: 180,
   album: {
@@ -13190,6 +13217,8 @@ var App = function App() {
     title: "\u7F51\u6613\u4E91",
     shape: "circle",
     textPostion: "center"
+  }), /*#__PURE__*/React.createElement(src_components__WEBPACK_IMPORTED_MODULE_1__.PlayList, {
+    data: data
   }));
 };
 

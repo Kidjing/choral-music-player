@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Table, Button } from '@arco-design/web-react';
 import { IconHeart, IconHeartFill } from '@arco-design/web-react/icon';
-import { IMusic } from '../../api/types/playlist';
+import { IMusic, IArtist } from '../../api/types/playlist';
 
 import './index.less';
 import classNames from 'classnames';
@@ -30,23 +30,34 @@ const PlayList = (props: PlaylistProps<IMusic>) => {
         {
             title: 'Cover',
             width: 20,
-            render: (col: string, record: any) => <img className="playlist-img" src={record.album.picUrl} />,
+            render: (col: string, record: IMusic) => <img className="playlist-img" src={record.album.picUrl} />,
         },
         {
             title: 'Song',
-            render: (col: string, record: any) => {
-                record.artists.map();
-            },
+            render: (col: string, record: IMusic) => (
+                <div className="playlist-song">
+                    <div className="playlist-song-name">{record.name}</div>
+                    <div className="playlist-song-artist">
+                        {record.artists.map((item: IArtist, index: number) => {
+                            if (index === record.artists.length - 1) {
+                                return <a href={item.img1v1Url}>{item.name} </a>;
+                            } else {
+                                return <a href={item.img1v1Url}>{item.name},</a>;
+                            }
+                        })}
+                    </div>
+                </div>
+            ),
         },
         {
             title: 'Album',
-            dataIndex: 'album',
+            render: (col: string, record: IMusic) => <div>{record.album.name}</div>,
         },
         {
             title: 'Action',
             dataIndex: 'action',
             width: '20%',
-            render: (col: string, record: any) => (
+            render: (col: string, record: IMusic) => (
                 <div className="playlist-action">
                     <Button
                         className={classNames(record.id === showAction.musicId && showAction.show ? '' : 'hidden')}
@@ -67,9 +78,8 @@ const PlayList = (props: PlaylistProps<IMusic>) => {
         },
         {
             title: 'Time',
-            dataIndex: 'time',
             width: '8%',
-            render: (col: string, record: any) => <div className="playlist-time">{record.time}</div>,
+            render: (col: string, record: IMusic) => <div className="playlist-time">{record.duration}</div>,
         },
     ];
     return (

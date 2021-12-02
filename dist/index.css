@@ -7525,6 +7525,28 @@ div.arco-table-tfoot::-webkit-scrollbar {
   border: 1px solid rgba(0, 0, 0, 0.04);
   cursor: pointer;
 }
+.playlist-song-name {
+  font-size: 18px;
+  font-weight: 600;
+  cursor: default;
+  padding-right: 16px;
+  overflow: hidden;
+}
+.playlist-song-artist {
+  margin-top: 2px;
+  font-size: 13px;
+  opacity: 0.68;
+  overflow: hidden;
+}
+.playlist-song-artist a {
+  color: inherit;
+  -webkit-text-decoration: auto;
+          text-decoration: auto;
+  cursor: pointer;
+}
+.playlist-song-artist a:hover {
+  text-decoration: underline;
+}
 .playlist-time {
   font-size: 16px;
   width: 50px;

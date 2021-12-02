@@ -15,6 +15,16 @@ const data = [
             picId: 1,
             picUrl: "https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224",
             topicPerson: 555,
+        },{
+            albumSize: 345,
+            id: 1,
+            img1v1Id: 34,
+            img1v1Url: "https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224",
+            musicSize: 3462,
+            name: '周杰伦',
+            picId: 1,
+            picUrl: "https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224",
+            topicPerson: 555,
         }],
         duration:180,
         album: {id:1,name:'路上',picUrl:'https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224'},
@@ -39,7 +49,7 @@ const App = () => {
                 shape="circle"
                 textPostion="center"
             />
-            {/* <PlayList data={data}/> */}
+            <PlayList data={data}/>
         </div>
     );
 };
