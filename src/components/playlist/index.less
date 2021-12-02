@@ -1,0 +1,30 @@
+.playlist{
+    width: 95%;
+    margin-left: 20px;
+    &-img{
+        border-radius: 8px;
+        height: 46px;
+        width: 46px;
+        margin-right: -20px;
+        border: 1px solid rgba(0,0,0,.04);
+        cursor: pointer;
+    }
+    &-time{
+        font-size: 16px;
+        width: 50px;
+        cursor: default;
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 10px;
+        font-variant-numeric: tabular-nums;
+        opacity: 0.88;
+        color: var(--color-text);
+    }
+    &-action{
+        display: flex;
+        justify-content: flex-end;
+        .hidden{
+            display: none;
+        }
+    }
+}

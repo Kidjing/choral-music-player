@@ -11,7 +11,7 @@ interface FmCardProps {
     shape?: 'circle' | 'round';
     textPostion?: 'left' | 'center' | 'right';
     title?: string | React.ReactNode;
-    titleSrc?: string;
+    titleUrl?: string;
     desc?: string | React.ReactNode;
     style?: React.CSSProperties;
     className?: string | string[];
@@ -35,10 +35,10 @@ const FmCard = (props: FmCardProps) => {
                 >
                     <Button
                         onClick={() => {}}
-                        className={classNames('play-button', isVisible ? '' : 'none')}
+                        className={classNames('play-button',isVisible?"":"none")}
                         size="large"
                         shape="round"
-                        icon={<IconCaretRight style={{ fontSize: 24 }} />}
+                        icon={<IconCaretRight style={{ width:"70%",height:"70%" }} />}
                     />
                     <img
                         className="fm-card-cover-img"
