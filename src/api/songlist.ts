@@ -1,14 +1,14 @@
 import request from "./axios";
-import { IPlaylistDetail,IPlaylist,IGetSonglistsRequest } from './types/songlist'
+import { ISonglistDetail,ISonglist,IGetSonglistsRequest } from './types/songlist'
 
 // 分页获取歌单信息（可以使用offset和limit）
-type GetSonglists = (params: IGetSonglistsRequest) => Promise<{playlists:IPlaylist[];total: number}>
+type GetSonglists = (params: IGetSonglistsRequest) => Promise<{playlists:ISonglist[];total: number}>
 // 获取歌单详细信息
-type GetPlaylistDetail = (id: number) => Promise<{ playlists: IPlaylistDetail}>
+type GetPlaylistDetail = (id: number) => Promise<{ playlists: ISonglistDetail}>
 // 获取精品歌单
-type GetSonglistByCat = (limit: number,cat?: string, before?: number) => Promise<IPlaylist[]>
+type GetSonglistByCat = (limit: number,cat?: string, before?: number) => Promise<ISonglist[]>
 // 获取推荐歌单（只能使用limit，不支持懒加载和分页）
-type RecommendPlaylist = (limit: number) => Promise<IPlaylist[]>
+type RecommendPlaylist = (limit: number) => Promise<ISonglist[]>
 
 // 通过歌单id获取歌单详情，在歌单详情页面需要使用。
 export const getPlaylistDetail: GetPlaylistDetail = async (id) => {

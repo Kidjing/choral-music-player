@@ -1,34 +1,25 @@
 import ReactDOM from 'react-dom';
-import {FmCard, PlayList } from 'src/components';
+import { FmCard, PlayList } from 'src/components';
 
 const data = [
     {
-        id: 1,
-        name: 'For Jenni',
-        artists: [{
-            albumSize: 345,
-            id: 1,
-            img1v1Id: 34,
-            img1v1Url: "https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224",
-            musicSize: 3462,
-            name: '周杰伦',
-            picId: 1,
-            picUrl: "https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224",
-            topicPerson: 555,
-        },{
-            albumSize: 345,
-            id: 1,
-            img1v1Id: 34,
-            img1v1Url: "https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224",
-            musicSize: 3462,
-            name: '周杰伦',
-            picId: 1,
-            picUrl: "https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224",
-            topicPerson: 555,
-        }],
-        duration:180,
-        album: {id:1,name:'路上',picUrl:'https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224'},
-        time: '3:14',
+        "name": "Ride It",
+        "id": 1379945341,
+        "ar": [
+            {
+                "id": 12260125,
+                "name": "Regard",
+            }
+        ],
+        "al": {
+            "id": 80594567,
+            "name": "Ride It",
+            "picUrl": "https://p2.music.126.net/_FEXx8L4oNvuBsiKUdxbQw==/109951165986861088.jpg",
+            "pic_str": "109951165986861088",
+            "pic": 109951165986861090
+        },
+        "dt": 157648,
+        "publishTime": 1564070400000,
     },
 ];
 
@@ -49,7 +40,7 @@ const App = () => {
                 shape="circle"
                 textPostion="center"
             />
-            <PlayList data={data}/>
+            <PlayList data={data} />
         </div>
     );
 };

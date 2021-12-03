@@ -1,6 +1,6 @@
 
 // 歌单简要信息
-export interface IPlaylist {
+export interface ISonglist {
     alg: string; // alg_sq_official_tagOnly 为官方歌单
     name: string;  // 歌单名称
     id: number;  // 歌单ID，可以用来获取详情歌单
@@ -11,7 +11,7 @@ export interface IPlaylist {
 }
 
 // 歌单详情信息
-export interface IPlaylistDetail {
+export interface ISonglistDetail {
     coverImgUrl: string;  // 封面url
     createTime: number;   // 创建时间
     trackCount: number;   // 歌曲数目

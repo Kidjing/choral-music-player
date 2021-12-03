@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Table, Button } from '@arco-design/web-react';
 import { IconHeart, IconHeartFill } from '@arco-design/web-react/icon';
-import { IMusic, IArtist } from '../../api/types/playlist';
+import { IMusic ,IArtistItem} from '../../api/types/song';
+
 
 import './index.less';
 import classNames from 'classnames';
@@ -30,7 +31,7 @@ const PlayList = (props: PlaylistProps<IMusic>) => {
         {
             title: 'Cover',
             width: 20,
-            render: (col: string, record: IMusic) => <img className="playlist-img" src={record.album.picUrl} />,
+            render: (col: string, record: IMusic) => <img className="playlist-img" src={record.al.picUrl} />,
         },
         {
             title: 'Song',
@@ -38,11 +39,11 @@ const PlayList = (props: PlaylistProps<IMusic>) => {
                 <div className="playlist-song">
                     <div className="playlist-song-name">{record.name}</div>
                     <div className="playlist-song-artist">
-                        {record.artists.map((item: IArtist, index: number) => {
-                            if (index === record.artists.length - 1) {
-                                return <a href={item.img1v1Url}>{item.name} </a>;
+                        {record.ar.map((item: IArtistItem, index: number) => {
+                            if (index === record.ar.length - 1) {
+                                return <a>{item.name} </a>;
                             } else {
-                                return <a href={item.img1v1Url}>{item.name},</a>;
+                                return <a>{item.name},</a>;
                             }
                         })}
                     </div>
@@ -53,7 +54,7 @@ const PlayList = (props: PlaylistProps<IMusic>) => {
             title: 'Album',
             render: (col: string, record: IMusic) => (
                 <div className="playlist-album">
-                    <a href={record.album.picUrl}>{record.album.name}</a>
+                    <a href={record.al.picUrl}>{record.al.name}</a>
                 </div>
             ),
         },
@@ -83,7 +84,7 @@ const PlayList = (props: PlaylistProps<IMusic>) => {
         {
             title: 'Time',
             width: '8%',
-            render: (col: string, record: IMusic) => <div className="playlist-time">{record.duration}</div>,
+            render: (col: string, record: IMusic) => <div className="playlist-time">{record.dt}</div>,
         },
     ];
     return (
