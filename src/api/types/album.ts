@@ -1,3 +1,5 @@
+import { IMusic } from "./song";
+
 export interface IAlbum {
     blurPicUrl: string;   // 也是专辑封面
     publishTime: number;  // 发布时间
@@ -21,3 +23,14 @@ export interface IAlbumArtistItem {
     picId_str: string; 
     img1v1Id_str: string;
 }
+
+
+
+
+
+// ---------------------下面是请求和翻译参数的接口
+export interface IGetAlbumResponse {
+    album: IAlbum
+    songs: IMusic[]
+}
+  
