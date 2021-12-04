@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Table, Button } from '@arco-design/web-react';
 import { IconHeart, IconHeartFill } from '@arco-design/web-react/icon';
 import { IMusic ,IArtistItem} from '../../api/types/song';
-
+import timeTrans from 'src/utils/timetrans';
 
 import './index.less';
 import classNames from 'classnames';
@@ -84,7 +84,7 @@ const PlayList = (props: PlaylistProps<IMusic>) => {
         {
             title: 'Time',
             width: '8%',
-            render: (col: string, record: IMusic) => <div className="playlist-time">{record.dt}</div>,
+            render: (col: string, record: IMusic) => <div className="playlist-time">{timeTrans(record.dt)}</div>,
         },
     ];
     return (
@@ -92,7 +92,7 @@ const PlayList = (props: PlaylistProps<IMusic>) => {
             className="playlist"
             showHeader={false}
             border={{ cell: false }}
-            size="middle"
+            size="small"
             onRow={(record) => {
                 return {
                     onDoubleClick: () => {

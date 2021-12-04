@@ -4512,6 +4512,146 @@ _c) {
 
 /***/ }),
 
+/***/ "./node_modules/@arco-design/web-react/es/Space/index.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@arco-design/web-react/es/Space/index.js ***!
+  \***************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _util_classNames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../_util/classNames */ "./node_modules/@arco-design/web-react/es/_util/classNames.js");
+/* harmony import */ var _ConfigProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ConfigProvider */ "./node_modules/@arco-design/web-react/es/ConfigProvider/index.js");
+/* harmony import */ var _util_is__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../_util/is */ "./node_modules/@arco-design/web-react/es/_util/is.js");
+/* harmony import */ var _util_hooks_useMergeProps__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../_util/hooks/useMergeProps */ "./node_modules/@arco-design/web-react/es/_util/hooks/useMergeProps.js");
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __rest = (undefined && undefined.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+
+
+
+
+
+var defaultProps = {
+    size: 'small',
+    direction: 'horizontal',
+};
+function Space(baseProps, ref) {
+    var _a;
+    var _b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_ConfigProvider__WEBPACK_IMPORTED_MODULE_1__.ConfigContext), getPrefixCls = _b.getPrefixCls, componentConfig = _b.componentConfig;
+    var props = (0,_util_hooks_useMergeProps__WEBPACK_IMPORTED_MODULE_2__["default"])(baseProps, defaultProps, componentConfig === null || componentConfig === void 0 ? void 0 : componentConfig.Space);
+    var className = props.className, style = props.style, children = props.children, size = props.size, direction = props.direction, align = props.align, wrap = props.wrap, split = props.split, rest = __rest(props, ["className", "style", "children", "size", "direction", "align", "wrap", "split"]);
+    var prefixCls = getPrefixCls('space');
+    var innerAlign = align || (direction === 'horizontal' ? 'center' : '');
+    var classNames = (0,_util_classNames__WEBPACK_IMPORTED_MODULE_3__["default"])(prefixCls, (_a = {},
+        _a[prefixCls + "-" + direction] = direction,
+        _a[prefixCls + "-align-" + innerAlign] = innerAlign,
+        _a[prefixCls + "-wrap"] = wrap,
+        _a), className);
+    function getMargin(size) {
+        if ((0,_util_is__WEBPACK_IMPORTED_MODULE_4__.isNumber)(size)) {
+            return size;
+        }
+        switch (size) {
+            case 'mini':
+                return 4;
+            case 'small':
+                return 8;
+            case 'medium':
+                return 16;
+            case 'large':
+                return 24;
+            default:
+                return 8;
+        }
+    }
+    var childrenList = react__WEBPACK_IMPORTED_MODULE_0___default().Children.toArray(children);
+    function getMarginStyle(index) {
+        var _a;
+        var isLastOne = childrenList.length === index + 1;
+        if (typeof size === 'string' || typeof size === 'number') {
+            var margin = getMargin(size);
+            if (wrap) {
+                return isLastOne
+                    ? { marginBottom: margin }
+                    : {
+                        marginRight: margin,
+                        marginBottom: margin,
+                    };
+            }
+            return !isLastOne
+                ? (_a = {},
+                    _a[direction === 'vertical' ? 'marginBottom' : 'marginRight'] = margin,
+                    _a) : {};
+        }
+        if ((0,_util_is__WEBPACK_IMPORTED_MODULE_4__.isArray)(size)) {
+            var marginRight = getMargin(size[0]);
+            var marginBottom = getMargin(size[1]);
+            if (wrap) {
+                return isLastOne
+                    ? { marginBottom: marginBottom }
+                    : {
+                        marginRight: marginRight,
+                        marginBottom: marginBottom,
+                    };
+            }
+            if (direction === 'vertical') {
+                return { marginBottom: marginBottom };
+            }
+            return { marginRight: marginRight };
+        }
+    }
+    return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", __assign({ ref: ref, className: classNames, style: style }, rest), childrenList.map(function (child, index) {
+        var shouldRenderSplit = split !== undefined && split !== null && index > 0;
+        return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, { key: index },
+            shouldRenderSplit && react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: prefixCls + "-item-split" }, split),
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", { className: prefixCls + "-item", style: getMarginStyle(index) }, child)));
+    })));
+}
+var SpaceComponent = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(Space);
+SpaceComponent.displayName = 'Space';
+/* harmony default export */ __webpack_exports__["default"] = (SpaceComponent);
+
+
+/***/ }),
+
+/***/ "./node_modules/@arco-design/web-react/es/Space/style/index.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@arco-design/web-react/es/Space/style/index.js ***!
+  \*********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _style_index_less__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../style/index.less */ "./node_modules/@arco-design/web-react/es/style/index.less");
+/* harmony import */ var _index_less__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.less */ "./node_modules/@arco-design/web-react/es/Space/style/index.less");
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/@arco-design/web-react/es/Spin/dot-loading.js":
 /*!********************************************************************!*\
   !*** ./node_modules/@arco-design/web-react/es/Spin/dot-loading.js ***!
@@ -12879,6 +13019,119 @@ Tween.prototype.stop = function stop () {
 
 /***/ }),
 
+/***/ "./src/components/dynamic-tag/index.tsx":
+/*!**********************************************!*\
+  !*** ./src/components/dynamic-tag/index.tsx ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _arco_design_web_react_icon_react_icon_IconMore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @arco-design/web-react/icon/react-icon/IconMore */ "./node_modules/@arco-design/web-react/icon/react-icon/IconMore/index.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _arco_design_web_react_es_Space_style__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @arco-design/web-react/es/Space/style */ "./node_modules/@arco-design/web-react/es/Space/style/index.js");
+/* harmony import */ var _arco_design_web_react_es_Space__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @arco-design/web-react/es/Space */ "./node_modules/@arco-design/web-react/es/Space/index.js");
+/* harmony import */ var _arco_design_web_react_es_Tag_style__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @arco-design/web-react/es/Tag/style */ "./node_modules/@arco-design/web-react/es/Tag/style/index.js");
+/* harmony import */ var _arco_design_web_react_es_Tag__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @arco-design/web-react/es/Tag */ "./node_modules/@arco-design/web-react/es/Tag/index.js");
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _index_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./index.less */ "./src/components/dynamic-tag/index.less");
+
+
+
+
+
+
+
+
+
+var data = [{
+  category: '语种',
+  tags: ['华语', '欧美', '日语', '韩语']
+}, {
+  category: '风格',
+  tags: ['流行', '摇滚', '民谣', '电子', '流行', '摇滚', '民谣', '电子', '流行', '摇滚', '民谣', '电子', '流行', '摇滚', '民谣', '电子', '流行', '摇滚', '民谣', '电子']
+}];
+
+var PanelTag = function PanelTag() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", {
+    className: "dynamic-tag-panel"
+  }, data.map(function (item, i) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", {
+      key: i,
+      className: "dynamic-tag-panel-item"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", {
+      className: "dynamic-tag-panel-item-category"
+    }, item.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", {
+      className: "dynamic-tag-panel-item-tags"
+    }, item.tags.map(function (tag, index) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_arco_design_web_react_es_Space__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        key: index,
+        wrap: true
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_arco_design_web_react_es_Tag__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        style: {
+          fontSize: 16,
+          marginRight: 24,
+          borderRadius: 10,
+          height: 30
+        },
+        color: "arcoblue",
+        checkable: true
+      }, tag));
+    })));
+  }));
+};
+
+var DynamicTag = function DynamicTag() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(['全部', '推荐歌单', '精品推荐', '官方', '排行榜']),
+      _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+      tags = _useState2[0],
+      setTags = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(false),
+      _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
+      showMore = _useState4[0],
+      setShowMore = _useState4[1];
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", {
+    className: "dynamic-tag"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement("div", {
+    className: "dynamic-tag-display"
+  }, tags.map(function (tag, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_arco_design_web_react_es_Space__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      key: index,
+      wrap: true
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_arco_design_web_react_es_Tag__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      checkable: true,
+      color: "arcoblue",
+      style: {
+        fontSize: 18,
+        height: 40,
+        borderRadius: 10,
+        marginRight: 16
+      }
+    }, tag));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_arco_design_web_react_es_Tag__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(_arco_design_web_react_icon_react_icon_IconMore__WEBPACK_IMPORTED_MODULE_8__["default"], null),
+    color: "gray",
+    style: {
+      fontSize: 18,
+      height: 40,
+      borderRadius: 10,
+      marginRight: 16
+    },
+    onClick: function onClick() {
+      return setShowMore(!showMore);
+    }
+  })), showMore ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4___default().createElement(PanelTag, null) : null);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (DynamicTag);
+
+/***/ }),
+
 /***/ "./src/components/fm-card/index.tsx":
 /*!******************************************!*\
   !*** ./src/components/fm-card/index.tsx ***!
@@ -12985,13 +13238,16 @@ var FmCard = function FmCard(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FmCard": function() { return /* reexport safe */ src_components_fm_card__WEBPACK_IMPORTED_MODULE_0__["default"]; },
-/* harmony export */   "PlayList": function() { return /* reexport safe */ src_components_playlist__WEBPACK_IMPORTED_MODULE_1__["default"]; }
+/* harmony export */   "PlayList": function() { return /* reexport safe */ src_components_playlist__WEBPACK_IMPORTED_MODULE_1__["default"]; },
+/* harmony export */   "DynamicTag": function() { return /* reexport safe */ _dynamic_tag__WEBPACK_IMPORTED_MODULE_2__["default"]; }
 /* harmony export */ });
 /* harmony import */ var src_components_fm_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/components/fm-card */ "./src/components/fm-card/index.tsx");
 /* harmony import */ var src_components_playlist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/components/playlist */ "./src/components/playlist/index.tsx");
+/* harmony import */ var _dynamic_tag__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dynamic-tag */ "./src/components/dynamic-tag/index.tsx");
 /**
  * 统一导出组件
  */
+
 
 
 
@@ -13007,11 +13263,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _arco_design_web_react_es_Table_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @arco-design/web-react/es/Table/style */ "./node_modules/@arco-design/web-react/es/Table/style/index.js");
-/* harmony import */ var _arco_design_web_react_es_Table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @arco-design/web-react/es/Table */ "./node_modules/@arco-design/web-react/es/Table/index.js");
+/* harmony import */ var _arco_design_web_react_es_Table__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @arco-design/web-react/es/Table */ "./node_modules/@arco-design/web-react/es/Table/index.js");
 /* harmony import */ var _arco_design_web_react_es_Button_style__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @arco-design/web-react/es/Button/style */ "./node_modules/@arco-design/web-react/es/Button/style/index.js");
-/* harmony import */ var _arco_design_web_react_es_Button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @arco-design/web-react/es/Button */ "./node_modules/@arco-design/web-react/es/Button/index.js");
-/* harmony import */ var _arco_design_web_react_icon_react_icon_IconHeart__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @arco-design/web-react/icon/react-icon/IconHeart */ "./node_modules/@arco-design/web-react/icon/react-icon/IconHeart/index.js");
-/* harmony import */ var _arco_design_web_react_icon_react_icon_IconHeartFill__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @arco-design/web-react/icon/react-icon/IconHeartFill */ "./node_modules/@arco-design/web-react/icon/react-icon/IconHeartFill/index.js");
+/* harmony import */ var _arco_design_web_react_es_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @arco-design/web-react/es/Button */ "./node_modules/@arco-design/web-react/es/Button/index.js");
+/* harmony import */ var _arco_design_web_react_icon_react_icon_IconHeart__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @arco-design/web-react/icon/react-icon/IconHeart */ "./node_modules/@arco-design/web-react/icon/react-icon/IconHeart/index.js");
+/* harmony import */ var _arco_design_web_react_icon_react_icon_IconHeartFill__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @arco-design/web-react/icon/react-icon/IconHeartFill */ "./node_modules/@arco-design/web-react/icon/react-icon/IconHeartFill/index.js");
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
@@ -13019,9 +13275,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _index_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./index.less */ "./src/components/playlist/index.less");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var src_utils_timetrans__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/utils/timetrans */ "./src/utils/timetrans.ts");
+/* harmony import */ var _index_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./index.less */ "./src/components/playlist/index.less");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__);
+
 
 
 
@@ -13060,7 +13318,7 @@ var PlayList = function PlayList(props) {
     render: function render(col, record) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("img", {
         className: "playlist-img",
-        src: record.album.picUrl
+        src: record.al.picUrl
       });
     }
   }, {
@@ -13072,15 +13330,11 @@ var PlayList = function PlayList(props) {
         className: "playlist-song-name"
       }, record.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
         className: "playlist-song-artist"
-      }, record.artists.map(function (item, index) {
-        if (index === record.artists.length - 1) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("a", {
-            href: item.img1v1Url
-          }, item.name, " ");
+      }, record.ar.map(function (item, index) {
+        if (index === record.ar.length - 1) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("a", null, item.name, " ");
         } else {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("a", {
-            href: item.img1v1Url
-          }, item.name, ",");
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("a", null, item.name, ",");
         }
       })));
     }
@@ -13090,8 +13344,8 @@ var PlayList = function PlayList(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
         className: "playlist-album"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("a", {
-        href: record.album.picUrl
-      }, record.album.name));
+        href: record.al.picUrl
+      }, record.al.name));
     }
   }, {
     title: 'Action',
@@ -13100,8 +13354,8 @@ var PlayList = function PlayList(props) {
     render: function render(col, record) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
         className: "playlist-action"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_es_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        className: classnames__WEBPACK_IMPORTED_MODULE_7___default()(record.id === showAction.musicId && showAction.show ? '' : 'hidden'),
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_es_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        className: classnames__WEBPACK_IMPORTED_MODULE_8___default()(record.id === showAction.musicId && showAction.show ? '' : 'hidden'),
         onClick: function onClick() {
           setLikeAction({
             musicId: record.id,
@@ -13111,12 +13365,12 @@ var PlayList = function PlayList(props) {
         style: {
           background: 'transparent'
         },
-        icon: record.id === LikeAction.musicId && LikeAction.like ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_icon_react_icon_IconHeartFill__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        icon: record.id === LikeAction.musicId && LikeAction.like ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_icon_react_icon_IconHeartFill__WEBPACK_IMPORTED_MODULE_10__["default"], {
           style: {
             fontSize: 20,
             color: 'red'
           }
-        }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_icon_react_icon_IconHeart__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_icon_react_icon_IconHeart__WEBPACK_IMPORTED_MODULE_11__["default"], {
           style: {
             fontSize: 20,
             color: 'red'
@@ -13130,16 +13384,16 @@ var PlayList = function PlayList(props) {
     render: function render(col, record) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
         className: "playlist-time"
-      }, record.duration);
+      }, (0,src_utils_timetrans__WEBPACK_IMPORTED_MODULE_6__["default"])(record.dt));
     }
   }];
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_es_Table__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_es_Table__WEBPACK_IMPORTED_MODULE_12__["default"], {
     className: "playlist",
     showHeader: false,
     border: {
       cell: false
     },
-    size: "middle",
+    size: "small",
     onRow: function onRow(record) {
       return {
         onDoubleClick: function onDoubleClick() {
@@ -13182,36 +13436,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var data = [{
-  id: 1,
-  name: 'For Jenni',
-  artists: [{
-    albumSize: 345,
-    id: 1,
-    img1v1Id: 34,
-    img1v1Url: "https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224",
-    musicSize: 3462,
-    name: '周杰伦',
-    picId: 1,
-    picUrl: "https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224",
-    topicPerson: 555
-  }, {
-    albumSize: 345,
-    id: 1,
-    img1v1Id: 34,
-    img1v1Url: "https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224",
-    musicSize: 3462,
-    name: '周杰伦',
-    picId: 1,
-    picUrl: "https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224",
-    topicPerson: 555
+  name: 'Ride It',
+  id: 1379945341,
+  ar: [{
+    id: 12260125,
+    name: 'Regard'
   }],
-  duration: 180,
-  album: {
-    id: 1,
-    name: '路上',
-    picUrl: 'https://p4.music.126.net/WFNnQjdVR6ihsBYRcoyYrQ==/109951166629187074.jpg?param=224y224'
+  al: {
+    id: 80594567,
+    name: 'Ride It',
+    picUrl: 'https://p2.music.126.net/_FEXx8L4oNvuBsiKUdxbQw==/109951165986861088.jpg',
+    pic_str: '109951165986861088',
+    pic: 109951165986861090
   },
-  time: '3:14'
+  dt: 157648,
+  publishTime: 1564070400000
 }];
 
 var App = function App() {
@@ -13224,11 +13463,30 @@ var App = function App() {
     shape: "circle",
     textPostion: "center"
   }), /*#__PURE__*/React.createElement(src_components__WEBPACK_IMPORTED_MODULE_1__.PlayList, {
+    className: "playlist",
     data: data
-  }));
+  }), /*#__PURE__*/React.createElement(src_components__WEBPACK_IMPORTED_MODULE_1__.DynamicTag, null));
 };
 
 react_dom__WEBPACK_IMPORTED_MODULE_0___default().render( /*#__PURE__*/React.createElement(App, null), document.getElementById('root'));
+
+/***/ }),
+
+/***/ "./src/utils/timetrans.ts":
+/*!********************************!*\
+  !*** ./src/utils/timetrans.ts ***!
+  \********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var timeTrans = function timeTrans(dt) {
+  var minutes = Math.round(dt % (1000 * 60 * 60) / (1000 * 60));
+  var seconds = Math.round(dt % (1000 * 60) / 1000);
+  return minutes + ':' + seconds;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (timeTrans);
 
 /***/ }),
 
@@ -19613,6 +19871,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/@arco-design/web-react/es/Space/style/index.less":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@arco-design/web-react/es/Space/style/index.less ***!
+  \***********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./node_modules/@arco-design/web-react/es/Spin/style/index.less":
 /*!**********************************************************************!*\
   !*** ./node_modules/@arco-design/web-react/es/Spin/style/index.less ***!
@@ -19682,6 +19953,19 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************************************!*\
   !*** ./node_modules/@arco-design/web-react/es/style/index.less ***!
   \*****************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/components/dynamic-tag/index.less":
+/*!***********************************************!*\
+  !*** ./src/components/dynamic-tag/index.less ***!
+  \***********************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

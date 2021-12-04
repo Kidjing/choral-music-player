@@ -7584,5 +7584,91 @@ div.arco-table-tfoot::-webkit-scrollbar {
   display: none;
 }
 
+/*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[2].use[3]!./node_modules/@arco-design/web-react/es/Space/style/index.less ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************/
+/******** borderSize *******/
+/******** borderStyle *******/
+/******** radius *******/
+/******** shadow distance *******/
+/******** size *******/
+/******** spacing *******/
+/******** shadow *******/
+/******** opacity *******/
+/******** fontSize *******/
+/******** fontWeight ********/
+/******** Primary *******/
+/******** success *******/
+/******** warning *******/
+/******** danger *******/
+/******** link *******/
+/******** radius *******/
+/********* icon hover *********/
+.arco-space {
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+.arco-space-vertical {
+  -ms-flex-direction: column;
+      flex-direction: column;
+}
+.arco-space-align-baseline {
+  -ms-flex-align: baseline;
+      align-items: baseline;
+}
+.arco-space-align-start {
+  -ms-flex-align: start;
+      align-items: flex-start;
+}
+.arco-space-align-end {
+  -ms-flex-align: end;
+      align-items: flex-end;
+}
+.arco-space-align-center {
+  -ms-flex-align: center;
+      align-items: center;
+}
+.arco-space-wrap {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+/*!**************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[2].use[3]!./src/components/dynamic-tag/index.less ***!
+  \**************************************************************************************************************************************************************************************************************************************************************/
+.dynamic-tag {
+  width: 80%;
+  margin: 24px;
+}
+.dynamic-tag-panel {
+  background: #f5f5f7;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 8px;
+}
+.dynamic-tag-panel-item {
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 32px;
+  -ms-flex-align: baseline;
+      align-items: baseline;
+}
+.dynamic-tag-panel-item-category {
+  font-size: 24px;
+  font-weight: 700;
+  opacity: 0.68;
+  margin-left: 24px;
+  min-width: 54px;
+  height: 26px;
+  margin-top: 8px;
+}
+.dynamic-tag-panel-item-tags {
+  margin-left: 24px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
 
 /*# sourceMappingURL=index.css.map*/
