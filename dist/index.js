@@ -12835,6 +12835,72 @@ IconSearch.displayName = 'IconSearch';
 
 /***/ }),
 
+/***/ "./node_modules/@arco-design/web-react/icon/react-icon/IconSound/index.js":
+/*!********************************************************************************!*\
+  !*** ./node_modules/@arco-design/web-react/icon/react-icon/IconSound/index.js ***!
+  \********************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../context */ "./node_modules/@arco-design/web-react/icon/react-icon/context.js");
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+
+
+function IconSoundComponent(iconProps, ref) {
+  var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_context__WEBPACK_IMPORTED_MODULE_3__.IconContext),
+      prefixCls = _useContext.prefixCls;
+
+  var spin = iconProps.spin,
+      className = iconProps.className;
+
+  var props = _objectSpread(_objectSpread({
+    ref: ref
+  }, iconProps), {}, {
+    className: "".concat(className ? className + ' ' : '').concat(prefixCls, "-icon ").concat(prefixCls, "-icon-sound")
+  });
+
+  if (spin) {
+    props.className = "".concat(props.className, " ").concat(prefixCls, "-icon-loading");
+  }
+
+  delete props.spin;
+  delete props.isIcon;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("svg", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "4",
+    viewBox: "0 0 48 48",
+    width: "1em",
+    height: "1em"
+  }, props), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("path", {
+    strokeLinejoin: "round",
+    d: "m14 16 10-9v34l-10-9H6V16h8Z"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("path", {
+    d: "M31.071 16.929c3.905 3.905 3.905 10.237 0 14.142M36.727 11.272c7.03 7.03 7.03 18.426 0 25.456"
+  }));
+}
+
+var IconSound = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().forwardRef(IconSoundComponent);
+IconSound.defaultProps = {
+  isIcon: true
+};
+IconSound.displayName = 'IconSound';
+/* harmony default export */ __webpack_exports__["default"] = (IconSound);
+
+/***/ }),
+
 /***/ "./node_modules/@arco-design/web-react/icon/react-icon/context.js":
 /*!************************************************************************!*\
   !*** ./node_modules/@arco-design/web-react/icon/react-icon/context.js ***!
@@ -13238,11 +13304,11 @@ var FmCard = function FmCard(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FmCard": function() { return /* reexport safe */ src_components_fm_card__WEBPACK_IMPORTED_MODULE_0__["default"]; },
-/* harmony export */   "PlayList": function() { return /* reexport safe */ src_components_playlist__WEBPACK_IMPORTED_MODULE_1__["default"]; },
+/* harmony export */   "MusicTable": function() { return /* reexport safe */ src_components_music_table__WEBPACK_IMPORTED_MODULE_1__["default"]; },
 /* harmony export */   "DynamicTag": function() { return /* reexport safe */ _dynamic_tag__WEBPACK_IMPORTED_MODULE_2__["default"]; }
 /* harmony export */ });
 /* harmony import */ var src_components_fm_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/components/fm-card */ "./src/components/fm-card/index.tsx");
-/* harmony import */ var src_components_playlist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/components/playlist */ "./src/components/playlist/index.tsx");
+/* harmony import */ var src_components_music_table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/components/music-table */ "./src/components/music-table/index.tsx");
 /* harmony import */ var _dynamic_tag__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dynamic-tag */ "./src/components/dynamic-tag/index.tsx");
 /**
  * 统一导出组件
@@ -13254,20 +13320,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/components/playlist/index.tsx":
-/*!*******************************************!*\
-  !*** ./src/components/playlist/index.tsx ***!
-  \*******************************************/
+/***/ "./src/components/music-table/index.tsx":
+/*!**********************************************!*\
+  !*** ./src/components/music-table/index.tsx ***!
+  \**********************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _arco_design_web_react_es_Table_style__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @arco-design/web-react/es/Table/style */ "./node_modules/@arco-design/web-react/es/Table/style/index.js");
-/* harmony import */ var _arco_design_web_react_es_Table__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @arco-design/web-react/es/Table */ "./node_modules/@arco-design/web-react/es/Table/index.js");
+/* harmony import */ var _arco_design_web_react_es_Table__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @arco-design/web-react/es/Table */ "./node_modules/@arco-design/web-react/es/Table/index.js");
+/* harmony import */ var _arco_design_web_react_icon_react_icon_IconHeart__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @arco-design/web-react/icon/react-icon/IconHeart */ "./node_modules/@arco-design/web-react/icon/react-icon/IconHeart/index.js");
+/* harmony import */ var _arco_design_web_react_icon_react_icon_IconHeartFill__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @arco-design/web-react/icon/react-icon/IconHeartFill */ "./node_modules/@arco-design/web-react/icon/react-icon/IconHeartFill/index.js");
 /* harmony import */ var _arco_design_web_react_es_Button_style__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @arco-design/web-react/es/Button/style */ "./node_modules/@arco-design/web-react/es/Button/style/index.js");
 /* harmony import */ var _arco_design_web_react_es_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @arco-design/web-react/es/Button */ "./node_modules/@arco-design/web-react/es/Button/index.js");
-/* harmony import */ var _arco_design_web_react_icon_react_icon_IconHeart__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @arco-design/web-react/icon/react-icon/IconHeart */ "./node_modules/@arco-design/web-react/icon/react-icon/IconHeart/index.js");
-/* harmony import */ var _arco_design_web_react_icon_react_icon_IconHeartFill__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @arco-design/web-react/icon/react-icon/IconHeartFill */ "./node_modules/@arco-design/web-react/icon/react-icon/IconHeartFill/index.js");
+/* harmony import */ var _arco_design_web_react_icon_react_icon_IconCaretRight__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @arco-design/web-react/icon/react-icon/IconCaretRight */ "./node_modules/@arco-design/web-react/icon/react-icon/IconCaretRight/index.js");
+/* harmony import */ var _arco_design_web_react_icon_react_icon_IconSound__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @arco-design/web-react/icon/react-icon/IconSound */ "./node_modules/@arco-design/web-react/icon/react-icon/IconSound/index.js");
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
@@ -13276,7 +13344,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var src_utils_timetrans__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/utils/timetrans */ "./src/utils/timetrans.ts");
-/* harmony import */ var _index_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./index.less */ "./src/components/playlist/index.less");
+/* harmony import */ var _index_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./index.less */ "./src/components/music-table/index.less");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__);
 
@@ -13293,59 +13361,104 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var PlayList = function PlayList(props) {
-  var data = props.data;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)({
+
+var MusicTable = function MusicTable(props) {
+  var data = props.data,
+      type = props.type;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
+      _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState, 2),
+      play = _useState2[0],
+      setPlay = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(0),
+      _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState3, 2),
+      checkId = _useState4[0],
+      setCheckId = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)({
+    num: 1,
+    show: false
+  }),
+      _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState5, 2),
+      showPlay = _useState6[0],
+      setShowPlay = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)({
     musicId: 1,
     show: false
   }),
-      _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState, 2),
-      showAction = _useState2[0],
-      setShowAction = _useState2[1];
+      _useState8 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState7, 2),
+      showAction = _useState8[0],
+      setShowAction = _useState8[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)({
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)({
     musicId: 1,
     like: false
   }),
-      _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState3, 2),
-      LikeAction = _useState4[0],
-      setLikeAction = _useState4[1];
+      _useState10 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState9, 2),
+      LikeAction = _useState10[0],
+      setLikeAction = _useState10[1];
 
   var columns = [{
-    title: 'Cover',
-    width: 20,
-    render: function render(col, record) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("img", {
-        className: "playlist-img",
-        src: record.al.picUrl
-      });
+    title: '',
+    width: '20px',
+    render: function render(col, record, item) {
+      if (type === 'playlist') {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("img", {
+          className: "playlist-img",
+          src: record.al.picUrl
+        });
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
+          className: "songlist-prefix"
+        }, item === showPlay.num && showPlay.show ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_es_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          onClick: function onClick() {
+            setPlay(true);
+          },
+          className: "songlist-prefix-btn",
+          icon: play ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_icon_react_icon_IconSound__WEBPACK_IMPORTED_MODULE_10__["default"], {
+            style: {
+              fontSize: 16,
+              color: 'blue'
+            }
+          }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_icon_react_icon_IconCaretRight__WEBPACK_IMPORTED_MODULE_11__["default"], {
+            style: {
+              fontSize: 16,
+              color: 'blue'
+            }
+          })
+        }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
+          className: "songlist-prefix-num"
+        }, item + 1));
+      }
     }
   }, {
     title: 'Song',
     render: function render(col, record) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
-        className: "playlist-song"
+        className: "music-table-song"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
-        className: "playlist-song-name"
-      }, record.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
-        className: "playlist-song-artist"
+        className: "music-table-song-name"
+      }, record.name), type === 'playlist' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
+        className: "music-table-song-artist"
       }, record.ar.map(function (item, index) {
         if (index === record.ar.length - 1) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("a", null, item.name, " ");
         } else {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("a", null, item.name, ",");
         }
-      })));
+      })) : null);
     }
   }, {
     title: 'Album',
     render: function render(col, record) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
+      return type === "playlist" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
         className: "playlist-album"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("a", {
         href: record.al.picUrl
-      }, record.al.name));
+      }, record.al.name)) : null;
     }
   }, {
     title: 'Action',
@@ -13353,7 +13466,7 @@ var PlayList = function PlayList(props) {
     width: '20%',
     render: function render(col, record) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
-        className: "playlist-action"
+        className: "music-table-action"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_es_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
         className: classnames__WEBPACK_IMPORTED_MODULE_8___default()(record.id === showAction.musicId && showAction.show ? '' : 'hidden'),
         onClick: function onClick() {
@@ -13365,12 +13478,12 @@ var PlayList = function PlayList(props) {
         style: {
           background: 'transparent'
         },
-        icon: record.id === LikeAction.musicId && LikeAction.like ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_icon_react_icon_IconHeartFill__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        icon: record.id === LikeAction.musicId && LikeAction.like ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_icon_react_icon_IconHeartFill__WEBPACK_IMPORTED_MODULE_12__["default"], {
           style: {
             fontSize: 20,
             color: 'red'
           }
-        }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_icon_react_icon_IconHeart__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_icon_react_icon_IconHeart__WEBPACK_IMPORTED_MODULE_13__["default"], {
           style: {
             fontSize: 20,
             color: 'red'
@@ -13383,29 +13496,42 @@ var PlayList = function PlayList(props) {
     width: '8%',
     render: function render(col, record) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement("div", {
-        className: "playlist-time"
+        className: "music-table-time"
       }, (0,src_utils_timetrans__WEBPACK_IMPORTED_MODULE_6__["default"])(record.dt));
     }
   }];
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_es_Table__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    className: "playlist",
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_5___default().createElement(_arco_design_web_react_es_Table__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    className: "music-table",
     showHeader: false,
     border: {
       cell: false
     },
-    size: "small",
-    onRow: function onRow(record) {
+    rowClassName: function rowClassName(record) {
+      return record.id === checkId ? 'clickrow' : '';
+    },
+    onRow: function onRow(record, index) {
       return {
+        onClick: function onClick() {
+          setCheckId(record.id);
+        },
         onDoubleClick: function onDoubleClick() {
           console.log(record.name);
         },
         onMouseEnter: function onMouseEnter() {
+          setShowPlay({
+            num: index,
+            show: true
+          });
           setShowAction({
             musicId: record.id,
             show: true
           });
         },
         onMouseLeave: function onMouseLeave() {
+          setShowPlay({
+            num: index,
+            show: false
+          });
           setShowAction({
             musicId: record.id,
             show: false
@@ -13418,7 +13544,7 @@ var PlayList = function PlayList(props) {
   });
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (PlayList);
+/* harmony default export */ __webpack_exports__["default"] = (MusicTable);
 
 /***/ }),
 
@@ -13451,6 +13577,38 @@ var data = [{
   },
   dt: 157648,
   publishTime: 1564070400000
+}, {
+  name: 'Ride It',
+  id: 1379945342,
+  ar: [{
+    id: 12260125,
+    name: 'Regard'
+  }],
+  al: {
+    id: 80594567,
+    name: 'Ride It',
+    picUrl: 'https://p2.music.126.net/_FEXx8L4oNvuBsiKUdxbQw==/109951165986861088.jpg',
+    pic_str: '109951165986861088',
+    pic: 109951165986861090
+  },
+  dt: 157648,
+  publishTime: 1564070400000
+}, {
+  name: 'Ride It',
+  id: 1379945343,
+  ar: [{
+    id: 12260125,
+    name: 'Regard'
+  }],
+  al: {
+    id: 80594567,
+    name: 'Ride It',
+    picUrl: 'https://p2.music.126.net/_FEXx8L4oNvuBsiKUdxbQw==/109951165986861088.jpg',
+    pic_str: '109951165986861088',
+    pic: 109951165986861090
+  },
+  dt: 157648,
+  publishTime: 1564070400000
 }];
 
 var App = function App() {
@@ -13462,7 +13620,8 @@ var App = function App() {
     title: "\u7F51\u6613\u4E91",
     shape: "circle",
     textPostion: "center"
-  }), /*#__PURE__*/React.createElement(src_components__WEBPACK_IMPORTED_MODULE_1__.PlayList, {
+  }), /*#__PURE__*/React.createElement(src_components__WEBPACK_IMPORTED_MODULE_1__.MusicTable, {
+    type: "songlist",
     className: "playlist",
     data: data
   }), /*#__PURE__*/React.createElement(src_components__WEBPACK_IMPORTED_MODULE_1__.DynamicTag, null));
@@ -19988,10 +20147,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/components/playlist/index.less":
-/*!********************************************!*\
-  !*** ./src/components/playlist/index.less ***!
-  \********************************************/
+/***/ "./src/components/music-table/index.less":
+/*!***********************************************!*\
+  !*** ./src/components/music-table/index.less ***!
+  \***********************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

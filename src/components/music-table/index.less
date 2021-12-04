@@ -1,13 +1,29 @@
-.playlist{
+.music-table{
     width: 95%;
     margin-left: 20px;
-    &-img{
+    .playlist-img{
         border-radius: 8px;
         height: 46px;
         width: 46px;
         margin-right: -20px;
         border: 1px solid rgba(0,0,0,.04);
         cursor: pointer;
+    }
+    .songlist-prefix{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        height: 40px;
+        cursor: default;
+        &-btn{
+            width: 12px;
+            background: transparent;
+        }
+        &-num{
+            width: 12px;
+            text-align: center;
+        }
     }
     &-song{
         &-name{
@@ -32,7 +48,7 @@
             }
         }
     }
-    &-album{
+    .playlist-album{
         font-size: 16px;
         opacity: .68;
         overflow: hidden;
@@ -54,7 +70,6 @@
         margin-right: 10px;
         font-variant-numeric: tabular-nums;
         opacity: 0.88;
-        color: var(--color-text);
     }
     &-action{
         display: flex;
@@ -62,5 +77,8 @@
         .hidden{
             display: none;
         }
+    }
+    .clickrow{
+        background-color: aqua;
     }
 }

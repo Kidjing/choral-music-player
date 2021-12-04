@@ -1,10 +1,48 @@
 import ReactDOM from 'react-dom';
-import { FmCard, PlayList, DynamicTag } from 'src/components';
+import { FmCard, MusicTable, DynamicTag } from 'src/components';
 
 const data = [
     {
         name: 'Ride It',
         id: 1379945341,
+        ar: [
+            {
+                id: 12260125,
+                name: 'Regard',
+            },
+        ],
+        al: {
+            id: 80594567,
+            name: 'Ride It',
+            picUrl: 'https://p2.music.126.net/_FEXx8L4oNvuBsiKUdxbQw==/109951165986861088.jpg',
+            pic_str: '109951165986861088',
+            pic: 109951165986861090,
+        },
+        dt: 157648,
+        publishTime: 1564070400000,
+    },
+    {
+        name: 'Ride It',
+        id: 1379945342,
+        ar: [
+            {
+                id: 12260125,
+                name: 'Regard',
+            },
+        ],
+        al: {
+            id: 80594567,
+            name: 'Ride It',
+            picUrl: 'https://p2.music.126.net/_FEXx8L4oNvuBsiKUdxbQw==/109951165986861088.jpg',
+            pic_str: '109951165986861088',
+            pic: 109951165986861090,
+        },
+        dt: 157648,
+        publishTime: 1564070400000,
+    },
+    {
+        name: 'Ride It',
+        id: 1379945343,
         ar: [
             {
                 id: 12260125,
@@ -40,7 +78,7 @@ const App = () => {
                 shape="circle"
                 textPostion="center"
             />
-            <PlayList className="playlist" data={data} />
+            <MusicTable type="songlist" className="playlist" data={data} />
             <DynamicTag />
         </div>
             
