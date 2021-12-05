@@ -1,5 +1,5 @@
 import React from "react";
-import { Slider, Layout, Button } from "@arco-design/web-react";
+import { Button } from "@arco-design/web-react";
 import { IconPlayArrow,IconSkipPrevious,IconSkipNext, IconPause } from '@arco-design/web-react/icon';
 
 const PlayControl = () =>{
@@ -10,16 +10,16 @@ const PlayControl = () =>{
             <Button style={{height:50}} >
                 <IconSkipPrevious style={{fontSize:26}} />
             </Button>
-            <Button style={{height:50}} onClick={()=>{setValue((isPlay=='Playing')? 'Suspending' : 'Playing')}} >
-                {isPlay == 'Playing'?(
+            <Button style={{height:50}} onClick={()=>{setValue((isPlay==='Playing')? 'Suspending' : 'Playing')}} >
+                {isPlay === 'Playing'?(
                     <IconPause style={{fontSize:36}} />
                 ) : (
                     <IconPlayArrow style={{fontSize:36}} />
-                    )
+                )
                 }
             </Button>
             <Button style={{height:50}}>
-            <IconSkipNext style={{fontSize:26}} />
+                <IconSkipNext style={{fontSize:26}} />
             </Button>
         </div>
     )
