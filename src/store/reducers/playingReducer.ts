@@ -7,12 +7,12 @@ const playControl = {
 }
 
 const playingReducer = (state=playControl,action:any) =>{
-    if(action.type=='SET_PLAY_MODE'){
+    if(action.type==='SET_PLAY_MODE'){
         const newState = JSON.parse(JSON.stringify(state));
         newState.playMode = action.playMode;
         return newState;
     }
-    if(action.type == 'CHANGE_VOLUME'){
+    if(action.type === 'CHANGE_VOLUME'){
         console.log(action.playVolume)
         const newState = JSON.parse(JSON.stringify(state));
         newState.volume = action.playVolume;
