@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const Head = Layout.Header
 
 const Header = () =>{
-
     return(
         <Head style={{position:'fixed',alignItems:'center',width:'100%',top:0,left:0,height:60}}>
             <Button onClick={goBack} style={{ marginLeft:'4%',width:'3%',backgroundColor:'transparent'}}>
