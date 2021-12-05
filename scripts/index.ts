@@ -50,7 +50,7 @@ class Build {
 
     private beforeBuild() {
         console.log('当前构建版本:', releaseVersion);
-        
+
         // 判断操作系统
         const platform = os.platform();
         // 清理构建目录
@@ -61,9 +61,11 @@ class Build {
             fs.rmdirSync(publicPath, {
                 recursive: true,
             });
+        } else {
+            execSync(`rm -rf ${outputPath}`);
+            execSync(`rm -rf ${publicPath}`);
         }
-        execSync(`rm -rf ${outputPath}`);
-        execSync(`rm -rf ${publicPath}`);
+
     }
 
     private distBuild() {

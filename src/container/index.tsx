@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import { FmCard, MusicTable, DynamicTag } from 'src/components';
+import APITest from 'src/components/api-test';
 
 const data = [
     {
@@ -80,6 +81,7 @@ const App = () => {
             />
             <MusicTable type="songlist" className="playlist" data={data} />
             <DynamicTag />
+            <APITest />
         </div>
             
     );
