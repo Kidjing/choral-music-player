@@ -8,18 +8,17 @@ const PlayVolume = () => {
 
     return(
         <div style={{float:'left',width:'10%',height:50,display:'flex',alignItems:'center'}}>
-            {volume == 0? (
+            {volume === 0? (
                 <IconMute style={{margin:10,fontSize:40,height:50}}/>
             ) : (
                 <IconSound style={{margin:10,fontSize:40,height:50}}/>
             )}
             <Slider value={volume} onChange={setVolume} onAfterChange={()=>{
-                console.log(volume)
                 const action = {
                     type:'CHANGE_VOLUME',
                     playVolume:volume
                 }
-                playingStore.dispatch(action)}}></Slider>
+                playingStore.dispatch(action)}} />
         </div>
     )
 }
