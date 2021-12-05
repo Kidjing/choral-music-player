@@ -33,7 +33,7 @@ const Song = (props:SongMsg) =>{
                 </Link>
             </div>
             <Button style={{float:'left',height:50,display:'flex',alignItems:'center',border:'none',backgroundColor:'#f5f5f4'}} title='收藏'>
-                {props.isCollected == 'true'?(
+                {props.isCollected === 'true'?(
                     <IconHeart style={{fontSize:26,color:'red'}}/>
                 ) : (
                     <IconHeart style={{fontSize:26}}/>
