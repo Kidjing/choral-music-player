@@ -10,7 +10,7 @@ import classNames from 'classnames';
 interface MusicTableProps<T> {
     style?: React.CSSProperties;
     className?: string;
-    type: 'playlist' | 'songlist';
+    type: 'playlist' | 'album';
     data?: T[];
 }
 
@@ -40,13 +40,13 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
                     return <img className="playlist-img" src={record.al.picUrl} />;
                 } else {
                     return (
-                        <div className='songlist-prefix'>
+                        <div className='album-prefix'>
                             {(item===showPlay.num && showPlay.show) ? (
                                 <Button
                                     onClick={() => {
                                         setPlay(true);
                                     }}
-                                    className="songlist-prefix-btn"
+                                    className="album-prefix-btn"
                                     icon={
                                         play ? (
                                             <IconSound style={{ fontSize: 16, color: 'blue' }} />
@@ -56,7 +56,7 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
                                     }
                                 />
                             ) : (
-                                <div className="songlist-prefix-num">{item + 1}</div>
+                                <div className="album-prefix-num">{item + 1}</div>
                             )}
                         </div>
                     );

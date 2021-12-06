@@ -1,17 +1,15 @@
 import React from 'react';
-
 import Header from './header';
 import Footer from './footer';
+import Body from './body';
 
 import './index.less';
 
 const Layout: React.FC = ({ children }) => {
     return (
-        <div>
+        <div className="layout">
             <Header />
-            <div className="layout-content">
-                {children}
-            </div>
+            <Body>{children}</Body>
             <Footer />
         </div>
     );

@@ -1,12 +1,12 @@
 import ReactDOM from 'react-dom';
 import { Layout } from 'src/components';
-import Home from 'src/views/Home';
+// import Home from 'src/views/home';
 
 const App = () => {
     return (
         <div>
             <Layout>
-                <Home />
+                {/* <Home /> */}
             </Layout>
         </div>
     );
