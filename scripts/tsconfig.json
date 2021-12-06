@@ -6,7 +6,7 @@
         "allowJs": true,
         "esModuleInterop": true,
         "resolveJsonModule": true,
-        "noImplicitAny": false
+        "noImplicitAny": false,
     },
     "typeRoots": ["./types", "./node_modules/@types"]
 }
