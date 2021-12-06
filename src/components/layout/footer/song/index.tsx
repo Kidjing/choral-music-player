@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Button } from "@arco-design/web-react";
 import { IconHeart } from '@arco-design/web-react/icon';
-
+// import { Link } from "react-router-dom";
 
 interface SongMsg {
     picture:string
@@ -14,7 +13,7 @@ interface SongMsg {
 const Song = (props:SongMsg) =>{
     return(
         <div style={{float:'left',marginLeft:'4%',width:'20%'}} >
-            <Link to='/Album'>
+            {/* <Link to='/Album'>
                 <div style={{float:'left',height:46,width:46,borderRadius:5,background:'red'}}>
                     <img src={props.picture}  />
                 </div>
@@ -31,7 +30,7 @@ const Song = (props:SongMsg) =>{
                         {props.singer}
                     </text>
                 </Link>
-            </div>
+            </div> */}
             <Button style={{float:'left',height:50,display:'flex',alignItems:'center',border:'none',backgroundColor:'#f5f5f4'}} title='收藏'>
                 {props.isCollected === 'true'?(
                     <IconHeart style={{fontSize:26,color:'red'}}/>

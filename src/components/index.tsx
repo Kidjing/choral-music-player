@@ -4,5 +4,6 @@
 import FmCard from 'src/components/fm-card';
 import MusicTable from 'src/components/music-table';
 import DynamicTag from './dynamic-tag';
+import Layout from './layout';
 
-export { FmCard, MusicTable, DynamicTag };
+export { FmCard, MusicTable, DynamicTag, Layout };
