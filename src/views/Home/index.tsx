@@ -1,5 +1,6 @@
 import { FmCard, MusicTable, DynamicTag } from 'src/components';
 import APITest from 'src/components/api-test';
+import './index.less';
 
 const data = [
     {
@@ -64,12 +65,12 @@ const data = [
 const Home = () => {
     return (
         <div className="home">
-            {/* <FmCard
+            <FmCard
                 style={{ width: '290px' }}
                 imgSrc="https://p1.music.126.net/gCxvN2bzA2IxdLO98lqAbw==/109951166277134169.jpg?param=512y512"
                 title="网易云最受欢迎的歌单"
                 desc={<a href="">热门推荐</a>}
-            /> */}
+            />
             <FmCard
                 style={{ width: '220px' }}
                 imgSrc="https://p1.music.126.net/11NBW2T83KnHLZ89eXLXbw==/109951165663271282.jpg?param=512y512"

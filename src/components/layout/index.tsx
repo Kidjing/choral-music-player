@@ -3,12 +3,14 @@ import React from 'react';
 import Header from './header';
 import Footer from './footer';
 
+import './index.less';
+
 const Layout: React.FC = ({ children }) => {
     return (
         <div>
             <Header />
             <div className="layout-content">
-                <div>{children}</div>
+                {children}
             </div>
             <Footer />
         </div>
