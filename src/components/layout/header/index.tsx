@@ -7,22 +7,15 @@ import './index.less';
 
 const Head = Layout.Header;
 
-const goBack = () => {
-    window.history.back();
-};
-const goForward = () => {
-    window.history.forward();
-};
-
 const Header = () => {
     return (
         <Head className="layout-header">
             <nav className="navbar">
                 <div className="navbar-btn">
-                    <Button onClick={goBack} style={{background:'transparent'}}>
+                    <Button onClick={()=> window.history.back()} style={{background:'transparent'}}>
                         <IconLeft style={{ fontSize: 26 }} />
                     </Button>
-                    <Button onClick={goForward} style={{background:'transparent'}}>
+                    <Button onClick={()=> window.history.forward()} style={{background:'transparent'}}>
                         <IconRight style={{ fontSize: 26 }} />
                     </Button>
                 </div>
