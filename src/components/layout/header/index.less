@@ -1,5 +1,6 @@
-.layout-header{
+.layout-header {
     position: fixed;
+    display: flex;
     align-items: center;
     width: 100%;
     top: 0;
@@ -8,14 +9,42 @@
     padding: 0 5vw;
     background-color: #ffffff;
     z-index: 100;
-    &-btn{
-        width: 3%;
-        background-color: transparent;
-        .left{
-            margin-left: 4%;
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 64px;
+        width: 100%;
+        &-btn {
+            display: flex;
+            flex: 1;
+            align-items: center;
         }
-        .right{
-            margin-right: 15%;
+        &-link {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            text-transform: uppercase;
+            a {
+                font-size: 18px;
+                font-weight: 700;
+                text-decoration: none;
+                border-radius: 6px;
+                padding: 6px 10px;
+                color: var(--color-text);
+                margin-right: 12px;
+                margin-left: 12px;
+            }
+        }
+        &-right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            &-avatar{
+                margin-left: 12px;
+                cursor: pointer;
+            }
         }
     }
 }

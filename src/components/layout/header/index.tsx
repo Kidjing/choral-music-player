@@ -1,43 +1,50 @@
-import { Layout, Button } from '@arco-design/web-react';
-import { IconLeft, IconRight /* IconUser */ } from '@arco-design/web-react/icon';
-import classNames from 'classnames';
-// import { Link } from "react-router-dom";
+import { Layout, Button, Avatar } from '@arco-design/web-react';
+import { IconLeft, IconRight } from '@arco-design/web-react/icon';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import Searcher from './searcher';
+
 import './index.less';
 
 const Head = Layout.Header;
-
-const Header = () => {
-    return (
-        <Head className="layout-header">
-            <Button className={classNames('layout-header-btn', 'left')} onClick={goBack}>
-                <IconLeft style={{ fontSize: 26 }} />
-            </Button>
-            <Button className={classNames('layout-header-btn', 'right')} onClick={goForward}>
-                <IconRight style={{ fontSize: 26 }} />
-            </Button>
-            {/* <Link to='/HomePage' style={{width:'6%',marginLeft:'16%'}} >
-                <Button style={{height:60,fontSize:22,backgroundColor:'transparent'}}>首页</Button>
-            </Link>
-            <Link to='/Discover' style={{width:'6%'}} >
-                <Button style={{height:60,fontSize:22,backgroundColor:'transparent'}}>发现</Button>
-            </Link>
-            <Link to='/MusicLibrary' style={{width:'6%',marginRight:'16%'}} >
-                <Button style={{height:60,fontSize:22,backgroundColor:'transparent'}}>音乐库</Button>
-            </Link>
-            <Link to='/MusicLibrary' >
-                <Button style={{fontSize:32,height:60,backgroundColor:'transparent'}} >
-                    <IconUser style={{fontSize:32}} />
-                </Button>
-            </Link> */}
-        </Head>
-    );
-};
 
 const goBack = () => {
     window.history.back();
 };
 const goForward = () => {
     window.history.forward();
+};
+
+const Header = () => {
+    return (
+        <Head className="layout-header">
+            <nav className="navbar">
+                <div className="navbar-btn">
+                    <Button onClick={goBack} style={{background:'transparent'}}>
+                        <IconLeft style={{ fontSize: 26 }} />
+                    </Button>
+                    <Button onClick={goForward} style={{background:'transparent'}}>
+                        <IconRight style={{ fontSize: 26 }} />
+                    </Button>
+                </div>
+                <div className="navbar-link">
+                    <Router basename="choral-music-player">
+                        <Link to="/">首页</Link>
+                        <Link to="/explore">发现</Link>
+                        <Link to="/library">个人音乐库</Link>
+                    </Router>
+                </div>
+                <div className="navbar-right">
+                    <Searcher />
+                    <Avatar className="navbar-right-avatar" onClick={()=>{}} size={30}>
+                        <img
+                            alt="avatar"
+                            src="//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp"
+                        />
+                    </Avatar>
+                </div>
+            </nav>
+        </Head>
+    );
 };
 
 export default Header;

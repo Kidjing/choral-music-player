@@ -6,6 +6,7 @@ import getEntry from './entry';
 import getOutput from './output';
 import getModule from './module';
 import getPlugins from './plugins';
+import getDevServer from './dev-server';
 
 /**
  * 获取 webpack 构建配置
@@ -38,6 +39,7 @@ const getWebpackConfig = (options: IBuildOptions): Configuration => {
         output: getOutput(options),
         module: getModule(options),
         plugins: getPlugins(options),
+        devServer:getDevServer(options),
     };
 
     return config;

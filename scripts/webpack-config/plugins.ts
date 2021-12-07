@@ -1,5 +1,6 @@
 import type { IBuildOptions } from '../index';
 import path from 'path';
+import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ArcoWebpackPlugin from '@arco-design/webpack-plugin';
@@ -15,18 +16,21 @@ const LibraryMap = {
  * 获取项目构建插件
  */
 const getPlugins = ({ isProduction }: IBuildOptions) => {
-    
     const plugins = [
         // 将 node 的运行环境传递到 webpack 的构建环境
         // 用于设置 react / react-dom 为调试模式; 除非调试 lib 库本身错误, 正常不需要开启
         // new webpack.EnvironmentPlugin(['NODE_ENV']),
+        new webpack.DefinePlugin({
+            'process.env': '{}',
+            __LOCALHOST__: process.env.LOCAL === 'true',
+        }),
         new MiniCssExtractPlugin({
             filename: isProduction ? `[name]${HASH}.css` : '[name].css',
             chunkFilename: isProduction ? `[name]${HASH}.css` : '[name].css',
         }),
         new ArcoWebpackPlugin({
-            theme: '@arco-themes/react-choral'
-        })
+            theme: '@arco-themes/react-choral',
+        }),
     ];
 
     /**
