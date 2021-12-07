@@ -11,13 +11,13 @@ export interface LoginInResponce {
     bindings: IBindingsItem[];  // 和返回值所绑定的一些信息
     cookie: string;  // 很重要cookie，后续很多参数需要cookie
 }
-interface IAccount {
+export interface IAccount {
     id: number;  // 用户id
     userName: string;  // 账户名
     createTime: number;   // 创建时间
 }
 // 个人简介
-interface IProfile {
+export interface IProfile {
     detailDescription: string;  // 简介
     userId: number;  // 用户id
     gender: number;  // 性别

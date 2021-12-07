@@ -28,7 +28,7 @@ type LogOut = () => Promise<boolean>
 export const logout: LogOut = async () => {
     const response = await request({
         method: 'post',
-        url: '/logout/cellphone',
+        url: '/logout',
     })
     // 登出直接删除cookie
     cookie.remove("user-cookie")

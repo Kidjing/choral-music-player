@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, useRoutes } from 'react-router-dom';
-
+import {  useRoutes } from 'react-router-dom';
+import { Layout } from 'src/components';
 import Explore from 'src/views/explore';
 import Home from 'src/views/home';
 import Library from 'src/views/library';
@@ -20,9 +20,9 @@ const RouteConfig = () => {
 
 const Routes = () => {
     return (
-        <Router>
+        <Layout>
             <RouteConfig />
-        </Router>
+        </Layout>
     );
 };
 
