@@ -1,22 +1,22 @@
 import { Layout, Button, Avatar } from '@arco-design/web-react';
 import { IconLeft, IconRight } from '@arco-design/web-react/icon';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Searcher from './searcher';
-
 
 import './index.less';
 
 const Head = Layout.Header;
 
 const Header = () => {
+    const navigate = useNavigate();
     return (
         <Head className="layout-header">
             <nav className="navbar">
                 <div className="navbar-btn">
-                    <Button onClick={() => window.history.back()} style={{ background: 'transparent' }}>
+                    <Button onClick={() => navigate(-1)} style={{ background: 'transparent' }}>
                         <IconLeft style={{ fontSize: 26 }} />
                     </Button>
-                    <Button onClick={() => window.history.forward()} style={{ background: 'transparent' }}>
+                    <Button onClick={() => navigate(1)} style={{ background: 'transparent' }}>
                         <IconRight style={{ fontSize: 26 }} />
                     </Button>
                 </div>
@@ -27,7 +27,7 @@ const Header = () => {
                 </div>
                 <div className="navbar-right">
                     <Searcher />
-                    <Avatar className="navbar-right-avatar" onClick={() => { }} size={30}>
+                    <Avatar className="navbar-right-avatar" onClick={() => {}} size={30}>
                         <img
                             alt="avatar"
                             src="//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp"

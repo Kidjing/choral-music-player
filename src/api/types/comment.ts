@@ -1,6 +1,6 @@
-interface ICommentsItem {
+export interface IComment {
     user: IUser;  // 评论的用户
-    beReplied: IBeRepliedItem[]; // 这个表示他评论的内容
+    beReplied: IBeReplied[]; // 这个表示他评论的内容
     status: number;   // 是否存在
     commentId: number;  // 评论的id
     content: string; // 评论的内容
@@ -23,7 +23,7 @@ interface IUser {
     avatarUrl: string;  // 用户头像地址
 }
 
-interface IBeRepliedItem {
+interface IBeReplied {
     user: IUser;  // 回复的用户
     beRepliedCommentId: number;  // 被评论的id
     content: string | null;  // 被评论的类型
@@ -40,16 +40,16 @@ export interface CommentsRequest {
 
 
 export interface CommentsResponce {
-    hotComments: ICommentsItem[]; // 热评歌曲
+    hotComments: IComment[]; // 热评歌曲
     code: number;
-    comments: ICommentsItem[]; // 所查找的评论类型
+    comments: IComment[]; // 所查找的评论类型
     total: number;  // 总共的评论数目，如果大于5000最好显示5000，之后就需要使用before来进行查询了
     more: boolean;  // 是否还有更多的歌曲
     moreHot: boolean // 是否还有更多的热门歌曲
 }
 
 export interface HotCommentsResponce {
-    hotComments: ICommentsItem[]; // 热评歌曲
+    hotComments: IComment[]; // 热评歌曲
     code: number;
     total: number;  // 总共的评论数目，如果大于5000最好显示5000，之后就需要使用before来进行查询了
     hasMore: boolean // 是否还有更多的热门歌曲
@@ -73,7 +73,7 @@ export interface NewTypeCommentsRequest {
 
 
 export interface NewTypeCommentsResponce {
-    comments: ICommentsItem[]; // 热评歌曲
+    comments: IComment[]; // 热评歌曲
     totalCount: number;  // 总共的评论数目，如果大于5000最好显示5000，之后就需要使用before来进行查询了
     hasMore: boolean // 是否还有更多的热门歌曲
     cursor: string // 时间戳

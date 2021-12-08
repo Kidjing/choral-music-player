@@ -6,7 +6,7 @@ import entryList from './get-entry-list';
 /**
  * 获取项目构建入口
  */
-const getEntry = ({}: IBuildOptions) => {
+const getEntry = ({isProduction}: IBuildOptions) => {
     const entry = entryList.reduce(
         (
             pre: {

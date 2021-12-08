@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Table, Button } from '@arco-design/web-react';
 import { IconCaretRight, IconHeart, IconHeartFill, IconSound } from '@arco-design/web-react/icon';
 import { IMusic, IArtistItem } from '../../api/types/song';
-import timeTrans from 'src/utils/timetrans';
+import { timeToMinute } from 'src/utils/timetrans';
 
 import './index.less';
 import classNames from 'classnames';
@@ -26,7 +26,7 @@ interface LikeState {
 const MusicTable = (props: MusicTableProps<IMusic>) => {
     const { data, type } = props;
     const [play, setPlay] = useState<boolean>(false);
-    const [checkId,setCheckId]=useState(0);
+    const [checkId, setCheckId] = useState(0);
     const [showPlay, setShowPlay] = useState({ num: 1, show: false });
     const [showAction, setShowAction] = useState<ShowState>({ musicId: 1, show: false });
     const [LikeAction, setLikeAction] = useState<LikeState>({ musicId: 1, like: false });
@@ -40,8 +40,8 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
                     return <img className="playlist-img" src={record.al.picUrl} />;
                 } else {
                     return (
-                        <div className='album-prefix'>
-                            {(item===showPlay.num && showPlay.show) ? (
+                        <div className="album-prefix">
+                            {item === showPlay.num && showPlay.show ? (
                                 <Button
                                     onClick={() => {
                                         setPlay(true);
@@ -84,11 +84,12 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
         },
         {
             title: 'Album',
-            render: (col: string, record: IMusic) => type==="playlist"?(
-                <div className="playlist-album">
-                    <a href={record.al.picUrl}>{record.al.name}</a>
-                </div>
-            ):null,
+            render: (col: string, record: IMusic) =>
+                type === 'playlist' ? (
+                    <div className="playlist-album">
+                        <a href={record.al.picUrl}>{record.al.name}</a>
+                    </div>
+                ) : null,
         },
         {
             title: 'Action',
@@ -116,7 +117,7 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
         {
             title: 'Time',
             width: '8%',
-            render: (col: string, record: IMusic) => <div className="music-table-time">{timeTrans(record.dt)}</div>,
+            render: (col: string, record: IMusic) => <div className="music-table-time">{timeToMinute(record.dt)}</div>,
         },
     ];
     return (
@@ -124,23 +125,23 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
             className="music-table"
             showHeader={false}
             border={{ cell: false }}
-            rowClassName={(record)=>{
-                return record.id===checkId ?'clickrow':''
+            rowClassName={(record) => {
+                return record.id === checkId ? 'clickrow' : '';
             }}
-            onRow={(record,index) => {
+            onRow={(record, index) => {
                 return {
-                    onClick:()=>{
+                    onClick: () => {
                         setCheckId(record.id);
                     },
                     onDoubleClick: () => {
                         console.log(record.name);
                     },
                     onMouseEnter: () => {
-                        setShowPlay({ num: index, show: true })
+                        setShowPlay({ num: index, show: true });
                         setShowAction({ musicId: record.id, show: true });
                     },
                     onMouseLeave: () => {
-                        setShowPlay({ num: index, show: false })
+                        setShowPlay({ num: index, show: false });
                         setShowAction({ musicId: record.id, show: false });
                     },
                 };

@@ -6,5 +6,6 @@ import MusicTable from 'src/components/music-table';
 import DynamicTag from './dynamic-tag';
 import Layout from './layout';
 import TextModal from './text-modal';
+import Comments from './comment';
 
-export { FmCard, MusicTable, DynamicTag, TextModal, Layout };
+export { FmCard, MusicTable, DynamicTag, TextModal, Layout ,Comments as Comment};

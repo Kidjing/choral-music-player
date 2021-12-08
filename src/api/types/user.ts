@@ -22,7 +22,8 @@ export interface UserPlaylist {
     name: string;  // 歌单的姓名
     id: number;  // 这个歌单的id
 }
-interface ICreator {
+
+export interface ICreator {
     avatarUrl: string;   // 创建这个歌单的头像
     userId: number;   // 创建者id
     nickname: string;  // 创建者的昵称
