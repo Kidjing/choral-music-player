@@ -1,63 +1,39 @@
 import React, { useState } from 'react';
 import { Space, Tag } from '@arco-design/web-react';
 import { IconMore } from '@arco-design/web-react/icon';
+import { useDispatch, useStore } from 'react-redux';
+import { tagData } from './tagData';
 
 import './index.less';
 
-const data = [
-    {
-        category: '语种',
-        tags: ['华语', '欧美', '日语', '韩语'],
-    },
-    {
-        category: '风格',
-        tags: [
-            '流行',
-            '摇滚',
-            '民谣',
-            '电子',
-            '流行',
-            '摇滚',
-            '民谣',
-            '电子',
-            '流行',
-            '摇滚',
-            '民谣',
-            '电子',
-            '流行',
-            '摇滚',
-            '民谣',
-            '电子',
-            '流行',
-            '摇滚',
-            '民谣',
-            '电子',
-        ],
-    },
-];
-
 const PanelTag = () => {
+    const store = useStore();
+    const dispatch = useDispatch();
     return (
         <div className="dynamic-tag-panel">
-            {data.map((item, i) => {
+            {tagData.map((item, i) => {
                 return (
                     <div key={i} className="dynamic-tag-panel-item">
                         <div className="dynamic-tag-panel-item-category">{item.category}</div>
                         <div className="dynamic-tag-panel-item-tags">
                             {item.tags.map((tag: string, index: number) => {
                                 return (
-                                    <Space key={index} wrap>
+                                    <div className="dynamic-tag-panel-item-tag" key={index}>
                                         <Tag
                                             style={{ fontSize: 16, marginRight: 24, borderRadius: 10, height: 30 }}
                                             color="arcoblue"
                                             checkable
-                                            // checked={false}
-                                            // onCheck={(checked) => {
-                                            // }}
+                                            checked={store.getState().tagReducer.includes(tag)}
+                                            onCheck={() => {
+                                                dispatch({
+                                                    type: 'CHANGE_TAG',
+                                                    payload: tag,
+                                                });
+                                            }}
                                         >
                                             {tag}
                                         </Tag>
-                                    </Space>
+                                    </div>
                                 );
                             })}
                         </div>
@@ -69,13 +45,12 @@ const PanelTag = () => {
 };
 
 const DynamicTag = () => {
-    const [tags, setTags] = useState(['全部', '推荐歌单', '精品推荐', '官方', '排行榜']);
+    const store = useStore();
     const [showMore, setShowMore] = useState(false);
-
     return (
         <div className="dynamic-tag">
             <div className="dynamic-tag-display">
-                {tags.map((tag, index) => {
+                {store.getState().tagReducer.map((tag: string, index: number) => {
                     return (
                         <Space key={index} wrap>
                             <Tag
@@ -109,4 +84,5 @@ const DynamicTag = () => {
         </div>
     );
 };
+
 export default DynamicTag;

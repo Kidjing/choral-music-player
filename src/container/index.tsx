@@ -1,16 +1,24 @@
 import ReactDOM from 'react-dom';
 import Routes from 'src/router';
 import { BrowserRouter as Router } from 'react-router-dom';
-
+import { Provider } from 'react-redux';
+import { store } from 'src/store';
 
 const App = () => {
     return (
-        <div>
+        <Provider store={store}>
             <Router>
-                <Routes/>
+                <Routes />
             </Router>
-        </div>
+        </Provider>
     );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const renderApp = () => {
+    ReactDOM.render(<App />, document.getElementById('root'));
+};
+
+renderApp();
+store.subscribe(renderApp);
+
+// ReactDOM.render(<App />, document.getElementById('root'));

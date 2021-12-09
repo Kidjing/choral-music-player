@@ -1,11 +1,12 @@
 import React from 'react';
 import { Button } from '@arco-design/web-react';
 import { IconLoop, IconSwap } from '@arco-design/web-react/icon';
-import { playingStore } from 'src/store/reducers/playingReducer';
+import { useDispatch } from 'react-redux';
 
 import './index.less';
 
 const PlayMode = () => {
+    const dispatch = useDispatch();
     const [mode, setMode] = React.useState(0);
     let modes = ['PLAY_IN_ORDER', 'PLAY_IN_SINGLE', 'PLAY_IN_RANDOM'];
     const judgeMode = (mode: number) => {
@@ -34,11 +35,10 @@ const PlayMode = () => {
             <Button
                 onClick={() => {
                     setMode((mode + 1) % 3);
-                    const action = {
+                    dispatch({
                         type: 'SET_PLAY_MODE',
                         playMode: modes[mode],
-                    };
-                    playingStore.dispatch(action);
+                    });
                 }}
             >
                 {judgeMode(mode)}

@@ -1,11 +1,12 @@
 import React from "react";
 import { Slider } from "@arco-design/web-react";
 import { IconSound, IconMute } from '@arco-design/web-react/icon';
-import { playingStore } from "src/store/reducers/playingReducer";
+import { useStore } from "react-redux";
 
 import './index.less';
 
 const PlayVolume = () => {
+    const store=useStore();
     const [volume,setVolume] = React.useState<number | number[]>(30);
 
     return(
@@ -18,9 +19,9 @@ const PlayVolume = () => {
             <Slider value={volume} onChange={setVolume} onAfterChange={()=>{
                 const action = {
                     type:'CHANGE_VOLUME',
-                    playVolume:volume
+                    playVolume:volume,
                 }
-                playingStore.dispatch(action)}} />
+                store.dispatch(action)}} />
         </div>
     )
 }

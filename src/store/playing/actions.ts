@@ -1,0 +1,4 @@
+export enum ACTIONS {
+    SET_PLAY_MODE = 'SET_PLAY_MODE',
+    CHANGE_VOLUME = 'CHANGE_VOLUME',
+}

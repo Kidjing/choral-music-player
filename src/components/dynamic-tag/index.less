@@ -1,28 +1,38 @@
-.dynamic-tag{
+.dynamic-tag {
     width: 80%;
     margin: 24px;
-    &-panel{
+    &-panel {
         background: #f5f5f7;
         margin-top: 10px;
         border-radius: 10px;
         padding: 8px;
-        &-item{
+        &-item {
             display: flex;
             margin-bottom: 32px;
             align-items: baseline;
-            &-category{
+            &-category {
                 font-size: 24px;
                 font-weight: 700;
-                opacity: .68;
+                opacity: 0.68;
                 margin-left: 24px;
                 min-width: 54px;
                 height: 26px;
                 margin-top: 8px;
             }
-            &-tags{
+            &-tags {
                 margin-left: 24px;
                 display: flex;
                 flex-wrap: wrap;
+            }
+            &-tag {
+                user-select: none;
+                margin: 4px 0 0 0;
+                display: flex;
+                align-items: center;
+                font-weight: 500;
+                font-size: 16px;
+                transition: 0.2s;
+                min-width: 133px;
             }
         }
     }
