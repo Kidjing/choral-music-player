@@ -1,45 +1,50 @@
-.fm-card{
-    width: 150px;
-    background: transparent;
-    &-cover{
+.fm-card {
+    padding: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    height: 198px;
+    box-sizing: border-box;
+    &-cover {
         height: 100%;
-        overflow: 'hidden';
+        clip-path: border-box;
+        border-radius: 0.75rem;
+        margin-right: 1.2rem;
         cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .play-button{
-            position: absolute;
-            background: transparent;
-            color: #fff;
-            width: 20%;
-            height: 16%;
-            backdrop-filter: blur(8px);
-            background: rgba(255,255,255,0.14);
-            border: 1px solid rgba(255,255,255,0.08);
-            cursor: default;
-            transition: .2s;
-        }
-        .none{
-            display: none;
-        }
-        &-img{
-            width: 100%;
-            user-select: none;
-            aspect-ratio: 1/1;
-            border: 1px solid rgba(0,0,0,.04);
-        }
+        user-select: none;
     }
-    &-text{
-        margin: -10px;
+    &-right {
         display: flex;
-        a{
-            color: inherit;
-            text-decoration: auto;
-            cursor: pointer;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        color: #fff;
+        .info {
+            .title {
+                font-size: 1.6rem;
+                font-weight: 600;
+                margin-bottom: 0.6rem;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
+                word-break: break-all;
+            }
+            .artist {
+                opacity: 0.68;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
+                word-break: break-all;
+            }
         }
-        a:hover{
-            text-decoration:underline;
+        .control {
+            margin-left: -0.4rem;
+            .btn {
+                margin: 0 8px 0 0;
+                background: transparent;
+                color: #fff;
+            }
         }
     }
 }

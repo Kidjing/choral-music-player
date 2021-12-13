@@ -1,0 +1,46 @@
+.common-card {
+    background: transparent;
+    &-cover {
+        height: 100%;
+        overflow: 'hidden';
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .play-button {
+            position: absolute;
+            background: transparent;
+            color: #fff;
+            width: 20%;
+            height: 16%;
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: default;
+        }
+        .none {
+            display: none;
+        }
+        &-img {
+            width: 100%;
+            user-select: none;
+            aspect-ratio: 1/1;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+    }
+    &-text {
+        margin: -10px;
+        display: flex;
+        a {
+            color: inherit;
+            text-decoration: auto;
+            cursor: pointer;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    }
+}

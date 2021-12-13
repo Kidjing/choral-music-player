@@ -23,7 +23,7 @@ const Header = () => {
                 <div className="navbar-link">
                     <Link to="/">首页</Link>
                     <Link to="/explore">发现</Link>
-                    <Link to="/library">个人音乐库</Link>
+                    <Link to="/library">音乐库</Link>
                 </div>
                 <div className="navbar-right">
                     <Searcher />

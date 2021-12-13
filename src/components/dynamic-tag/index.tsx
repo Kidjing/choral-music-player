@@ -8,7 +8,6 @@ import './index.less';
 
 
 const DynamicTag = (props:any) => {
-    // const store = useStore();
     const [showMore, setShowMore] = useState(false);
     return (
         <div className="dynamic-tag">
@@ -18,13 +17,8 @@ const DynamicTag = (props:any) => {
                         <Space key={index} wrap>
                             <Tag
                                 checkable
+                                className="tag"
                                 color="arcoblue"
-                                style={{
-                                    fontSize: 18,
-                                    height: 40,
-                                    borderRadius: 10,
-                                    marginRight: 16,
-                                }}
                             >
                                 {tag}
                             </Tag>
@@ -33,13 +27,8 @@ const DynamicTag = (props:any) => {
                 })}
                 <Tag
                     icon={<IconMore />}
+                    className="tag"
                     color="gray"
-                    style={{
-                        fontSize: 18,
-                        height: 40,
-                        borderRadius: 10,
-                        marginRight: 16,
-                    }}
                     onClick={() => setShowMore(!showMore)}
                 />
             </div>

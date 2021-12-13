@@ -1,9 +1,13 @@
 import React from 'react';
 import {  useRoutes } from 'react-router-dom';
 import { Layout } from 'src/components';
+import Alubum from 'src/views/album';
+import Artist from 'src/views/artist';
 import Explore from 'src/views/explore';
 import Home from 'src/views/home';
 import Library from 'src/views/library';
+import Playlist from 'src/views/playlist';
+import Search from 'src/views/search';
 
 const RouteConfig = () => {
     let routes = useRoutes([
@@ -14,6 +18,10 @@ const RouteConfig = () => {
         },
         { path: '/explore', element: <Explore /> },
         { path: '/library', element: <Library /> },
+        { path: '/playlist', element: <Playlist /> },
+        { path: '/album', element: <Alubum /> },
+        { path: '/artist', element: <Artist /> },
+        { path: '/search', element: <Search /> },
     ]);
     return routes;
 };

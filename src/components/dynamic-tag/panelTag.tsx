@@ -6,8 +6,7 @@ import { changeTag } from 'src/store/dynamic-tag/reducer';
 
 import './index.less';
 
-
-const PanelTag = (props:any) => {
+const PanelTag = (props: any) => {
     // const store = useStore();
     // const dispatch = useDispatch();
     return (
@@ -21,11 +20,14 @@ const PanelTag = (props:any) => {
                                 return (
                                     <div className="dynamic-tag-panel-item-tag" key={index}>
                                         <Tag
-                                            style={{ fontSize: 16, marginRight: 24, borderRadius: 10, height: 30 }}
+                                            className="tag"
+                                            key={index}
                                             color="arcoblue"
                                             checkable
                                             checked={props.tags.includes(tag)}
-                                            onCheck={()=>{props.changeTag(tag)}}
+                                            onCheck={() => {
+                                                props.changeTag(tag);
+                                            }}
                                         >
                                             {tag}
                                         </Tag>
@@ -40,12 +42,12 @@ const PanelTag = (props:any) => {
     );
 };
 
-const mapStateToProps=(state:any)=>{
-    return{
-        tags:state.tagReducer
-    }
+const mapStateToProps = (state: any) => {
+    return {
+        tags: state.tagReducer,
+    };
 };
 
-const mapDispatchToProps={changeTag};
+const mapDispatchToProps = { changeTag };
 
-export default connect(mapStateToProps,mapDispatchToProps)(PanelTag);
+export default connect(mapStateToProps, mapDispatchToProps)(PanelTag);
