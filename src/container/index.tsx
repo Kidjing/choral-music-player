@@ -14,11 +14,4 @@ const App = () => {
     );
 };
 
-const renderApp = () => {
-    ReactDOM.render(<App />, document.getElementById('root'));
-};
-
-renderApp();
-store.subscribe(renderApp);
-
-// ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));

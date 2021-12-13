@@ -13,4 +13,12 @@ const tagReducer = (state = initState, action: any) => {
     return state;
 };
 
+
+export const changeTag=(tag:string)=>{
+    return{
+        type: 'CHANGE_TAG',
+        payload: tag,
+    }
+}
+
 export default tagReducer;
