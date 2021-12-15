@@ -1,0 +1,4 @@
+export enum ACTIONS {
+    ADD_RECORD = 'ADD_RECORD',
+    CLEAR_RECORD = 'CLEAR_RECORD',
+}

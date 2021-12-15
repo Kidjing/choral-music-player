@@ -7,6 +7,7 @@ import Explore from 'src/views/explore';
 import Home from 'src/views/home';
 import Library from 'src/views/library';
 import Playlist from 'src/views/playlist';
+import Song from 'src/views/song';
 import Search from 'src/views/search';
 
 const RouteConfig = () => {
@@ -19,6 +20,7 @@ const RouteConfig = () => {
         { path: '/explore', element: <Explore /> },
         { path: '/library', element: <Library /> },
         { path: '/playlist', element: <Playlist /> },
+        { path: '/song', element: <Song /> },
         { path: '/album', element: <Alubum /> },
         { path: '/artist', element: <Artist /> },
         { path: '/search', element: <Search /> },

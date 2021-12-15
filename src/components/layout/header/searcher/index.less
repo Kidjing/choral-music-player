@@ -11,6 +11,23 @@
         border-radius: 0;
     }
 }
-.searcher-list-header {
-    margin-left: -12px;
+.searcher-list {
+    &-header {
+        margin-left: -12px;
+        margin-right: -12px;
+    }
+    &-item {
+        div {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
+        }
+        
+        &:hover {
+            color: wheat;
+            background-color: rgb(var(--primary-4),1);
+            cursor: pointer;
+        }
+    }
 }
