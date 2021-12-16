@@ -37,7 +37,7 @@ export const getSonglistComment: GetSonglistComment = async (req) => {
     return response
 }
 
-// 分页获取歌单评论信息
+// 分页获取歌曲评论信息
 // http://www.yili.fit:3000/comment/music?id=121012393&limit=20
 type GetMusicComment = (req: CommentsRequest) => Promise<CommentsResponce>
 
@@ -55,6 +55,7 @@ export const getMusicComment: GetMusicComment = async (req) => {
     return response
 }
 
+// 另一种形式获取歌曲评价的方式
 // http://www.yili.fit:3000/comment/album?id=121012393&limit=20
 type GetNewComment = (req: NewTypeCommentsRequest) => Promise<NewTypeCommentsResponce>
 

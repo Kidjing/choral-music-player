@@ -2,9 +2,9 @@ import { Input, Trigger, List, Typography, Button, Space, Message } from '@arco-
 import { IconSearch, IconUser, IconMusic, IconFileAudio, IconRecord, IconList, IconDelete } from '@arco-design/web-react/icon';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { suggestSearch } from '../../../../api/search'
-import { ISuggestSearch } from '../../../../api/types/search'
-import { addRecord, clearRecord } from '../../../../store/search-record/reducer'
+import { suggestSearch } from 'src/api/search'
+import { ISuggestSearch } from 'src/api/types/search'
+import { addRecord, clearRecord } from 'src/store/search-record/reducer'
 import { connect } from 'react-redux';
 import './index.less';
 
@@ -20,7 +20,6 @@ const Searcher = (props: any) => {
         suggestSearch(inputValue).then(res => {
             console.log(input);
             setSearch(res)
-
         })
     }
     const addRecord = (input: string) => {
@@ -31,10 +30,12 @@ const Searcher = (props: any) => {
     const clickSearchRecord = (item: string) => {
         inputChange(item)
     }
+    
     const clickClearRecord = () => {
         props.clearRecord()
         Message.success("成功删除搜索记录")
     }
+
     const pop = () => {
         return (
             <div className='demo-trigger-popup'>
@@ -112,7 +113,8 @@ const Searcher = (props: any) => {
     return (
         <Trigger popup={pop} position='bottom' trigger={['click']} clickToClose={false}>
             <Input size='large' className="searcher" prefix={<IconSearch />}
-                allowClear placeholder="搜索" onChange={inputChange} value={input} />
+                allowClear placeholder="搜索" onPressEnter={()=>{navigate('/search/?keyword='+input)}}
+                onChange={inputChange} value={input} />
         </Trigger>
     );
 };
