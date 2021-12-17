@@ -2,17 +2,17 @@ import request from "./axios";
 import { ISonglistDetail,ISonglist,IGetSonglistsRequest } from './types/songlist'
 
 // 获取歌单详细信息
-type GetPlaylistDetail = (id: number) => Promise<{ playlists: ISonglistDetail}>
+type GetPlaylistDetail = (id: number) => Promise<ISonglistDetail[]>
 // 通过歌单id获取歌单详情，在歌单详情页面需要使用。
 export const getPlaylistDetail: GetPlaylistDetail = async (id) => {
     const response = await request({
-        url: '/top/playlist',
+        url: 'playlist/detail',
         params: {
             id
-        },
+        }
     })
   
-    return response
+    return response.playlist
 }
 
 // 获取精品歌单
@@ -29,7 +29,7 @@ export const getSonglistByCat: GetSonglistByCat = async (limit,cat?,before = 0) 
         },
     })
   
-    return response
+    return response.playlists
 }
 
 

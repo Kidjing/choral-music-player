@@ -1,6 +1,6 @@
 // http://www.yili.fit:3000/search/suggest
 import request from "./axios";
-import { ISuggestSearch } from "./types/search"
+import { ISearchDetail, ISuggestSearch } from "./types/search"
 
 type SuggestSearch = (req: string) => Promise<ISuggestSearch>
 
@@ -26,11 +26,11 @@ interface ISearchParams {
     offset?: number,
 }
 
-type Search = (req: ISearchParams) => Promise<ISuggestSearch>
+type Search = (req: ISearchParams) => Promise<ISearchDetail>
 
 export const search: Search = async (req) => {
     const response = await request({
-        url: '/search',
+        url: '/cloudsearch',
         params: {
             keywords: req.key,
             type: req.type,

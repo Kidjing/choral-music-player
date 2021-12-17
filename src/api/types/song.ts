@@ -5,7 +5,7 @@ export interface IMusic {
     name: string;
     ar: IArtistItem[];  // 歌手信息
     al: IAlbumItem;   // 专辑信息，歌曲的封面在专辑中
-    publishTime?: number;
+    publishTime: number;
     dt: number; // 歌曲时长，单位ms
 }
 

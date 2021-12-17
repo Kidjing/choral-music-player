@@ -117,7 +117,7 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
         {
             title: 'Time',
             width: '8%',
-            render: (col: string, record: IMusic) => <div className="music-table-time">{timeToMinute(record.dt)}</div>,
+            render: (col: string, record: IMusic) => <div className="music-table-time">{timeToMinute(record.dt!)}</div>,
         },
     ];
     return (
