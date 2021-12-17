@@ -1,74 +1,90 @@
-import { Comment } from 'src/components';
-const comment = [
+import { Avatar, Button, Tag, Space } from '@arco-design/web-react';
+import { IconPlus } from '@arco-design/web-react/icon';
+import { LikeCard, SelectTag, TrackList } from 'src/components';
+import { ICreator } from '../../api/types/user';
+
+import './index.less';
+const playlist = [
     {
-        user: {
-            anonym: 0,
-            userId: 391484028,
-            userType: 1,
-            followed: false,
-            mutual: false,
-            nickname: '小叽蹲蹲',
-            avatarUrl: 'https://p1.music.126.net/nnrCcSB3ShvTh0nR0ellIw==/109951165349884304.jpg',
-        },
-        beReplied: [],
-        commentId: 5471303921,
-        content: '小时候蹲点看',
-        status: 0,
-        time: 1638370100622,
-        timeStr: '7天前',
-        needDisplayTime: true,
-        likedCount: 0,
-        liked: false,
-        parentCommentId: 0,
-        commentLocationType: 2,
-    },
-    {
-        user: {
-            followed: false,
-            anonym: 0,
-            userId: 409041521,
-            userType: 0,
-            mutual: false,
-            nickname: '嘟噜o匈',
-            avatarUrl: 'https://p1.music.126.net/4cA7-y3r_aUqC5k8RUZImQ==/19057835044640063.jpg',
-        },
-        beReplied: [
+        name: 'Ride It',
+        id: 1379945341,
+        ar: [
             {
-                user: {
-                    followed: false,
-                    anonym: 0,
-                    userId: 1530426558,
-                    userType: 0,
-                    mutual: false,
-                    nickname: '不说晚安你试试',
-                    avatarUrl: 'https://p1.music.126.net/wpzr8TLvrTxShuC-kjwCNQ==/109951166654259753.jpg',
-                },
-                beRepliedCommentId: 5470677913,
-                content: '@顺利力力',
+                id: 12260125,
+                name: 'Regard',
             },
         ],
-        commentId: 5476337836,
-        content: 'test',
-        status: 0,
-        time: 1638940292044,
-        timeStr: '13:11',
-        needDisplayTime: true,
-        likedCount: 0,
-        liked: false,
-        commentLocationType: 2,
-        parentCommentId: 5462838137,
+        al: {
+            id: 80594567,
+            name: 'Ride It',
+            picUrl: 'https://p2.music.126.net/_FEXx8L4oNvuBsiKUdxbQw==/109951165986861088.jpg',
+            pic_str: '109951165986861088',
+            pic: 109951165986861090,
+        },
+        dt: 157648,
+        publishTime: 1564070400000,
+    },
+    {
+        name: 'Ride It',
+        id: 1379945341,
+        ar: [
+            {
+                id: 12260125,
+                name: 'Regard',
+            },
+        ],
+        al: {
+            id: 80594567,
+            name: 'Ride It',
+            picUrl: 'https://p2.music.126.net/_FEXx8L4oNvuBsiKUdxbQw==/109951165986861088.jpg',
+            pic_str: '109951165986861088',
+            pic: 109951165986861090,
+        },
+        dt: 157648,
+        publishTime: 1564070400000,
     },
 ];
 
-const creator = {
-    userId: 409041521,
-    nickname: '嘟噜o匈',
-    avatarUrl: 'https://p1.music.126.net/4cA7-y3r_aUqC5k8RUZImQ==/19057835044640063.jpg',
-};
 const Library = () => {
+    const userInfo: ICreator = {
+        userId: 409041521,
+        nickname: '嘟噜o匈',
+        avatarUrl: 'https://p1.music.126.net/4cA7-y3r_aUqC5k8RUZImQ==/19057835044640063.jpg',
+    };
+    const playlistOpt = ['全部歌单', '创建的歌单', '收藏的歌单'];
+    const tagOpt = ['专辑', '艺人', 'MV', '云盘'];
     return (
         <div className="library">
-            <Comment commentList={comment} creator={creator} />
+            <h1>
+                <Avatar className="avatar">
+                    <img src={userInfo.avatarUrl} />
+                </Avatar>
+                {userInfo.nickname + '的音乐库'}
+            </h1>
+            <div className="section-one">
+                <LikeCard />
+                <TrackList playlist={playlist} />
+            </div>
+            <div className="section-two">
+                <div className="tabs-row">
+                    <div className="tabs">
+                        <SelectTag options={playlistOpt}/>
+                        {tagOpt.map((tag: string, index: number) => {
+                            return (
+                                <Space key={index} wrap>
+                                    <Tag checkable className="tag" color="gray">
+                                        {tag}
+                                    </Tag>
+                                </Space>
+                            );
+                        })}
+                    </div>
+                    <Button className="add-btn">
+                        <IconPlus />
+                        新建歌单
+                    </Button>
+                </div>
+            </div>
         </div>
     );
 };

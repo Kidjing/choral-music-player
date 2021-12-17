@@ -1,0 +1,52 @@
+.library {
+    h1 {
+        font-size: 42px;
+        display: flex;
+        align-items: center;
+        .avatar {
+            margin-right: 12px;
+        }
+    }
+    .section-one {
+        display: flex;
+        margin-top: 24px;
+    }
+    .section-two {
+        margin-top: 54px;
+        min-height: calc(100vh - 182px);
+        .tabs-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            .tabs {
+                display: flex;
+                flex-wrap: wrap;
+                font-size: 18px;
+                .tag {
+                    font-weight: 600;
+                    padding: 8px 14px;
+                    margin-right: 14px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    user-select: none;
+                    transition: 0.2s;
+                    opacity: 0.68;
+                    font-size: 16px;
+                    height: 36px;
+                }
+            }
+            .add-btn {
+                border-radius: 8px;
+                padding: 0 14px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: 0.2s;
+                opacity: 0.68;
+                font-weight: 500;
+                font-size: 16px;
+                height: 36px;
+            }
+        }
+    }
+}
