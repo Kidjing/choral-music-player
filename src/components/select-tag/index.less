@@ -1,7 +1,11 @@
 .select-tag {
-    .tag {
+    .select {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 136px;
+        padding: 8px 0 8px 14px;
         font-weight: 600;
-        padding: 8px 14px;
         margin-right: 14px;
         border-radius: 8px;
         cursor: pointer;
@@ -11,7 +15,7 @@
         font-size: 16px;
         height: 36px;
     }
-    .drown-btn{
+    .drown-btn {
         background: transparent;
     }
     .opt-drown {
@@ -19,10 +23,9 @@
         height: 100%;
         user-select: none;
         .menu {
-            position: fixed;
+            position: absolute;
             min-width: 136px;
             max-width: 240px;
-            list-style: none;
             background: rgba(255, 255, 255, 0.88);
             box-shadow: 0 6px 12px -4px rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(0, 0, 0, 0.06);
@@ -35,7 +38,18 @@
                 outline: none;
             }
             .item {
-
+                font-weight: 600;
+                font-size: 14px;
+                padding: 10px 14px;
+                border-radius: 7px;
+                cursor: default;
+                color: #000;
+                display: flex;
+                align-items: center;
+                &:hover {
+                    color: #335eea;
+                    background: rgba(189, 207, 255, 0.28);
+                }
             }
         }
     }

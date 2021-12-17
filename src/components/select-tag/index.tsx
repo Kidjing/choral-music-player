@@ -15,7 +15,7 @@ const SelectTag = (props: SelectTagProps) => {
     const [showOpt, setShowOpt] = useState(false);
     return (
         <div className="select-tag">
-            <Tag checkable className="tag" color="gray">
+            <Tag checkable className="select" color="gray">
                 <span>{value}</span>
                 <Button
                     className="drown-btn"
@@ -34,6 +34,7 @@ const SelectTag = (props: SelectTagProps) => {
                                 key={index}
                                 onClick={() => {
                                     setValue(item);
+                                    setShowOpt(false);
                                 }}
                             >
                                 {item}

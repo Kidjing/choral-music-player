@@ -46,7 +46,47 @@
                 font-weight: 500;
                 font-size: 16px;
                 height: 36px;
+                background-color: transparent;
             }
         }
+    }
+}
+
+.modal {
+    width: 25vw;
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &-title {
+            font-weight: 600;
+            font-size: 20px;
+        }
+        &-btn {
+            border-radius: 50%;
+            height: 32px;
+            width: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.68;
+            transition: 0.2s;
+        }
+    }
+    &-content {
+        .input{
+            margin-bottom: 12px;
+        }
+        .checkbox {
+            display: flex;
+            align-items: center;
+        }
+    }
+    &-footer-btn {
+        width: 100%;
+        margin-left: 0;
+        font-weight: 500;
+        border-radius: 8px;
+        font-size: 14px;
     }
 }
