@@ -8,6 +8,7 @@ import { ISonglistDetail,ITrackId } from 'src/api/types/songlist'
 import { dateTrans } from 'src/utils/timetrans'
 import { IMusic } from 'src/api/types/song'
 import { getSongDetail } from 'src/api/song'
+import { useSearchParams} from 'react-router-dom';
 
 const Table = (props:{ids:ITrackId[]|undefined}) =>{
     const trackIds = props.ids
@@ -32,12 +33,12 @@ const Table = (props:{ids:ITrackId[]|undefined}) =>{
 }
 
 const Playlist=()=>{
-    const urlParams = new URL(window.location.href);
-    const params = urlParams?.pathname.split('/')
-    const id = Number(params[2])
+    const [searchParams] = useSearchParams()
+    let id:number
     const [list, setList] = React.useState<ISonglistDetail>()
     const [heart, setHeart] = React.useState<boolean>(false)
     useEffect(()=>{
+        id = Number(searchParams.get('id'))
         getPlaylistDetail(id).then(res =>{
             setList(res);
         })
