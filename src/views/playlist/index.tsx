@@ -41,16 +41,15 @@ const data = [
     },
 ];
 
-
-const Playlist=()=>{
-    return(
+const Playlist = () => {
+    return (
         <div>
-             <TextModal
+            <TextModal
                 desc=" 这里有一本奇妙的记事簿，名为“恋恋”。“恋”字拆开是亦心，即亦如初心，一如既往"
                 title="专辑介绍"
             />
             <MusicTable type="playlist" data={data} />
         </div>
-    )
-}
+    );
+};
 export default Playlist;

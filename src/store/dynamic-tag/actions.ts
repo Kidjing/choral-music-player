@@ -1,3 +1,4 @@
 export enum ACTIONS {
     CHANGE_TAG = 'CHANGE_TAG',
+    SEARCH_TAG='SEARCH_TAG',
 }

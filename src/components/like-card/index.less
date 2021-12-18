@@ -1,0 +1,50 @@
+.like-card {
+    flex: 3;
+    margin-top: 8px;
+    cursor: pointer;
+    border-radius: 16px;
+    padding: 18px 24px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s;
+    background: #eaeffd;
+    .top {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 14px;
+        opacity: 0.88;
+        color: #335eea;
+        p {
+            margin-top: 2px;
+        }
+    }
+    .bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #335eea;
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .sub-title {
+            font-size: 15px;
+            margin-top: 2px;
+        }
+        .play-btn {
+            margin-bottom: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 44px;
+            width: 44px;
+            color: #ffffff;
+            background: #335eea;
+            border-radius: 50%;
+            transition: 0.2s;
+            box-shadow: 0 6px 12px -4px rgb(0 0 0 / 20%);
+            cursor: default;
+        }
+    }
+}

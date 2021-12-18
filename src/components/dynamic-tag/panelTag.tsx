@@ -3,12 +3,12 @@ import { Tag } from '@arco-design/web-react';
 import { connect } from 'react-redux';
 import { tagData } from './tagData';
 import { changeTag } from 'src/store/dynamic-tag/reducer';
+import { ITag } from 'src/types/actions';
 
 import './index.less';
 
 const PanelTag = (props: any) => {
-    // const store = useStore();
-    // const dispatch = useDispatch();
+
     return (
         <div className="dynamic-tag-panel">
             {tagData.map((item, i) => {
@@ -16,7 +16,11 @@ const PanelTag = (props: any) => {
                     <div key={i} className="dynamic-tag-panel-item">
                         <div className="dynamic-tag-panel-item-category">{item.category}</div>
                         <div className="dynamic-tag-panel-item-tags">
-                            {item.tags.map((tag: string, index: number) => {
+                            {item.tags.map((name: string, index: number) => {
+                                const tag = { name: name, isCheck: false };
+                                const tags=props.tags.map((item:ITag)=>{
+                                    return item.name;
+                                })
                                 return (
                                     <div className="dynamic-tag-panel-item-tag" key={index}>
                                         <Tag
@@ -24,12 +28,12 @@ const PanelTag = (props: any) => {
                                             key={index}
                                             color="arcoblue"
                                             checkable
-                                            checked={props.tags.includes(tag)}
+                                            checked={tags.includes(name)}
                                             onCheck={() => {
                                                 props.changeTag(tag);
                                             }}
                                         >
-                                            {tag}
+                                            {name}
                                         </Tag>
                                     </div>
                                 );

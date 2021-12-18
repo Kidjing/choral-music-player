@@ -19,11 +19,11 @@ const RouteConfig = () => {
         },
         { path: '/explore', element: <Explore /> },
         { path: '/library', element: <Library /> },
-        { path: '/playlist', element: <Playlist /> },
-        { path: '/song', element: <Song /> },
-        { path: '/album', element: <Alubum /> },
-        { path: '/artist', element: <Artist /> },
-        { path: '/search', element: <Search /> },
+        { path: '/playlist/:id', element: <Playlist /> },
+        { path: '/song/:id', element: <Song /> },
+        { path: '/album/:id', element: <Alubum /> },
+        { path: '/artist/:id', element: <Artist /> },
+        { path: '/search', element: <Search /> }
     ]);
     return routes;
 };
