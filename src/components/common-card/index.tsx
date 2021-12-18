@@ -29,7 +29,7 @@ const CommonCard = (props: CommonCardProps) => {
             >
                 <Button
                     onClick={() => {}}
-                    className={classNames('play-button', isVisible ? '' : '')}
+                    className={classNames('play-button', isVisible ? '' : 'none')}
                     size="large"
                     shape="round"
                     icon={<IconCaretRight style={{ width: '80%', height: '80%' }} />}

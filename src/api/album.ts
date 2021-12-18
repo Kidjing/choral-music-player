@@ -17,18 +17,19 @@ export const getAlbum: GetAlbum = async (id) => {
 }
 
 // 新专辑速递
-type GetNewAlbum = (limit: number,offset:number) => Promise<IAlbum[]>
+type GetNewAlbum = (limit?: number,offset?:number,area?:string) => Promise<IAlbum[]>
 
-export const getNewAlbum: GetNewAlbum = async (limit,offset) => {
+export const getNewAlbum: GetNewAlbum = async (limit=30,offset=0,area='all') => {
     const response = await request({
-        url: '/top/album',
+        url: '/album/new',
         params: {
             limit,
             offset,
+            area,
         },
     })
 
-    return response.monthData
+    return response.albums
 }
 
 // 获取歌手专辑 id：歌手id

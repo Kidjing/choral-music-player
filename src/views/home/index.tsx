@@ -1,23 +1,39 @@
 import { Grid } from '@arco-design/web-react';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
+import { getNewAlbum } from 'src/api/album';
+import { getTopArtist } from 'src/api/artist';
+import { IAlbum } from 'src/api/types/album';
+import { IArtist } from 'src/api/types/artist';
 import { CommonCard, DailyCard, FmCard } from 'src/components';
-import { recommendPlaylist } from '../../api/songlist';
-import { IRecommandSonglist } from '../../api/types/songlist';
+import { recommendPlaylist, topPlaylist } from '../../api/songlist';
+import { IRecommandSonglist, ISonglist } from '../../api/types/songlist';
 
 import './index.less';
 
 const Row = Grid.Row;
 const Col = Grid.Col;
-const data = [1, 1, 1, 1, 1, 1];
 
 const Home = () => {
     const [personList, setPersonList] = useState<IRecommandSonglist[]>([]);
+    const [artistList, setArtistList] = useState<IArtist[]>([]);
+    const [albumList, setAlbumList]=useState<IAlbum[]>([]);
+    const [rankList, setRankList]=useState<ISonglist[]>([]);
+    
     
     useEffect(()=>{
         recommendPlaylist(12).then((res) => {
             setPersonList(res);
         });
+        getTopArtist(1).then((res)=>{
+            setArtistList(res.slice(0,6))
+        });
+        topPlaylist().then(res=>{
+            setRankList(res.slice(0,6))
+        })
+        getNewAlbum(12,0).then(res=>{
+            setAlbumList(res)
+        })
     },[])
     return (
         <div className="home">
@@ -62,12 +78,12 @@ const Home = () => {
             <div className="index-row">
                 <div className="title">推荐艺人</div>
                 <Row gutter={[44, 24]}>
-                    {data.map((item, index) => {
+                    {artistList.map((item:IArtist, index:number) => {
                         return (
                             <Col key={index} span={4}>
                                 <CommonCard
-                                    imgSrc="https://p1.music.126.net/11NBW2T83KnHLZ89eXLXbw==/109951165663271282.jpg?param=512y512"
-                                    title="网易云"
+                                    imgSrc={item.picUrl}
+                                    title={item.name}
                                     shape="circle"
                                     textPostion="center"
                                 />
@@ -79,12 +95,13 @@ const Home = () => {
             <div className="index-row">
                 <div className="title">新专速递</div>
                 <Row gutter={[44, 24]}>
-                    {data.map((item, index) => {
+                    {albumList.map((album:IAlbum, index:number) => {
                         return (
                             <Col key={index} span={4}>
                                 <CommonCard
-                                    imgSrc="https://p1.music.126.net/ushHeJuVgLag0oUONbUJxg==/109951166709761190.jpg?param=512y512"
-                                    title="网易云"
+                                    imgSrc={album.picUrl}
+                                    title={album.name}
+                                    desc={<a href=''>{album.artist.name} </a>}
                                     shape="round"
                                     textPostion="left"
                                 />
@@ -96,12 +113,13 @@ const Home = () => {
             <div className="index-row">
                 <div className="title">排行榜</div>
                 <Row gutter={[44, 24]}>
-                    {data.map((item, index) => {
+                    {rankList.map((item:ISonglist, index:number) => {
                         return (
                             <Col key={index} span={4}>
                                 <CommonCard
-                                    imgSrc="https://p1.music.126.net/ushHeJuVgLag0oUONbUJxg==/109951166709761190.jpg?param=512y512"
-                                    title="网易云"
+                                    imgSrc={item.coverImgUrl}
+                                    title={item.name}
+                                    desc={item.updateFrequency}
                                     shape="round"
                                     textPostion="left"
                                 />

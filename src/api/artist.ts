@@ -31,6 +31,6 @@ export const getTopArtist: GetTopArtist = async (type) => {
         },
     })
 
-    return response
+    return response.list.artists
 }
 
