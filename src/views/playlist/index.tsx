@@ -1,55 +1,80 @@
-import { MusicTable, TextModal } from 'src/components';
+import { MusicTable,CommonCard } from 'src/components';
+import React, { useEffect } from 'react';
+import { Button, Space } from '@arco-design/web-react';
+import { IconHeart, IconCaretRight} from '@arco-design/web-react/icon';
+import './index.less';
+import { getPlaylistDetail } from 'src/api/songlist';
+import { ISonglistDetail,ITrackId } from 'src/api/types/songlist'
+import { dateTrans } from 'src/utils/timetrans'
+import { IMusic } from 'src/api/types/song'
+import { getSongDetail } from 'src/api/song'
 
-const data = [
-    {
-        name: 'Ride It',
-        id: 1379945341,
-        ar: [
-            {
-                id: 12260125,
-                name: 'Regard',
-            },
-        ],
-        al: {
-            id: 80594567,
-            name: 'Ride It',
-            picUrl: 'https://p2.music.126.net/_FEXx8L4oNvuBsiKUdxbQw==/109951165986861088.jpg',
-            pic_str: '109951165986861088',
-            pic: 109951165986861090,
-        },
-        dt: 157648,
-        publishTime: 1564070400000,
-    },
-    {
-        name: 'Ride It',
-        id: 1379945342,
-        ar: [
-            {
-                id: 12260125,
-                name: 'Regard',
-            },
-        ],
-        al: {
-            id: 80594567,
-            name: 'Ride It',
-            picUrl: 'https://p2.music.126.net/_FEXx8L4oNvuBsiKUdxbQw==/109951165986861088.jpg',
-            pic_str: '109951165986861088',
-            pic: 109951165986861090,
-        },
-        dt: 157648,
-        publishTime: 1564070400000,
-    },
-];
-
-const Playlist = () => {
-    return (
-        <div>
-            <TextModal
-                desc=" 这里有一本奇妙的记事簿，名为“恋恋”。“恋”字拆开是亦心，即亦如初心，一如既往"
-                title="专辑介绍"
-            />
-            <MusicTable type="playlist" data={data} />
+const Table = (props:{ids:ITrackId[]|undefined}) =>{
+    const trackIds = props.ids
+    let ids:number[] = []
+    const [songs, setSongs] = React.useState<{songs:IMusic[]}>()
+    useEffect(()=>{
+        if(trackIds !== undefined){
+            let trackId:ITrackId
+            for(trackId of trackIds){
+                ids.push(trackId.id)
+            }
+        }
+        getSongDetail(ids).then(res=>{
+            setSongs(res)
+        })
+    },[trackIds])
+    return(
+        <div className='table'>
+            <MusicTable type="playlist" data={songs?.songs} />
         </div>
-    );
-};
+    )
+}
+
+const Playlist=()=>{
+    const urlParams = new URL(window.location.href);
+    const params = urlParams?.pathname.split('/')
+    const id = Number(params[2])
+    const [list, setList] = React.useState<ISonglistDetail>()
+    const [heart, setHeart] = React.useState<boolean>(false)
+    useEffect(()=>{
+        getPlaylistDetail(id).then(res =>{
+            setList(res);
+        })
+    },[])
+    let date = ''
+    if(list?.createTime !== undefined){
+        date = dateTrans(list?.createTime)
+    }
+    return(
+        <div className='list'>
+            <div className='list-msg'>
+                <div className='list-img'>
+                    <CommonCard
+                        imgSrc={list?.coverImgUrl}
+                        title=""
+                        shape="round"
+                        textPostion="left"
+                    />
+                </div>
+                <div className='list-detail'>
+                    <h1>{list?.name}</h1>
+                    <p>最后更新于{date}.{list?.trackCount}首歌</p>
+                    <p>{list?.description}</p>
+                    <Space size='large'>
+                        <Button type='primary' icon={<IconCaretRight />}> 播放</Button>
+                    </Space>
+                    <Space size='large'>
+                        <Button style={{marginLeft:20,backgroundColor:'transparent'}} title='收藏'>
+                            {heart? (<IconHeart onClick={()=>{setHeart(!heart)}} style={{fontSize:26,color:'red'}}/>):
+                                (<IconHeart onClick={()=>{setHeart(!heart)}} style={{fontSize:26}}/>)}
+                        </Button>
+                    </Space>
+                </div>
+            </div>
+            <Table ids={list?.trackIds} />
+        </div>
+    )
+}
+
 export default Playlist;
