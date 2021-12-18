@@ -42,7 +42,7 @@ const Playlist=()=>{
         getPlaylistDetail(id).then(res =>{
             setList(res);
         })
-    },[])
+    },[searchParams])
     let date = ''
     if(list?.createTime !== undefined){
         date = dateTrans(list?.createTime)
