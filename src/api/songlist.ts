@@ -1,5 +1,5 @@
-import request from './axios';
-import { ISonglistDetail, ISonglist, IGetSonglistsRequest } from './types/songlist';
+import request from "./axios";
+import { ISonglistDetail,ISonglist,IGetSonglistsRequest,IRecommandSonglist } from './types/songlist'
 
 // 获取歌单详细信息
 type GetPlaylistDetail = (id: number) => Promise<ISonglistDetail>;
@@ -54,8 +54,8 @@ export const getSonglists: GetSonglists = async ({ cat, order, limit = 30, offse
 // http://www.yili.fit:3000/personalized
 // limit: 参数
 // 获取推荐歌单（只能使用limit，不支持懒加载和分页）
-type RecommendPlaylist = (limit: number) => Promise<ISonglist[]>;
-export const recommendPlaylist: RecommendPlaylist = async (limit) => {
+type RecommendPlaylist = (limit: number) => Promise<IRecommandSonglist[]>
+export const recommendPlaylist:RecommendPlaylist = async (limit)=> {
     const response = await request({
         url: '/personalized',
         params: {

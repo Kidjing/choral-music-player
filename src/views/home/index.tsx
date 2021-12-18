@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { CommonCard, DailyCard, FmCard } from 'src/components';
 import { recommendPlaylist } from '../../api/songlist';
-import { ISonglist } from '../../api/types/songlist';
+import { IRecommandSonglist } from '../../api/types/songlist';
 
 import './index.less';
 
@@ -12,7 +12,7 @@ const Col = Grid.Col;
 const data = [1, 1, 1, 1, 1, 1];
 
 const Home = () => {
-    const [personList, setPersonList] = useState<ISonglist[]>([]);
+    const [personList, setPersonList] = useState<IRecommandSonglist[]>([]);
     
     useEffect(()=>{
         recommendPlaylist(12).then((res) => {
@@ -24,7 +24,7 @@ const Home = () => {
             <div className={classNames('index-row', 'first-row')}>
                 <div className="title">推荐歌单</div>
                 <Row className="cover-row" gutter={[44, 24]}>
-                    {personList.map((item:ISonglist, index:number) => {
+                    {personList.map((item:IRecommandSonglist, index:number) => {
                         return (
                             <Col key={index} span={4}>
                                 <CommonCard
