@@ -4,10 +4,11 @@ export interface ISonglist {
     alg?: string; // alg_sq_official_tagOnly 为官方歌单
     name: string;  // 歌单名称
     id: number;  // 歌单ID，可以用来获取详情歌单
-    coverImgUrl: string;  // 封面图片
+    copywriter:string;
+    picUrl: string;  // 封面图片
     coverImgId: number;  // 封面信息
     playCount: number; // 观看次数
-    updateTime?: number; // 需要通过这个来获取下一页信息
+    trackNumberUpdateTime?: number; // 需要通过这个来获取下一页信息
 }
 
 // 歌单详情信息

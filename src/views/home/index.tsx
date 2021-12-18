@@ -1,6 +1,9 @@
 import { Grid } from '@arco-design/web-react';
 import classNames from 'classnames';
+import { useEffect, useState } from 'react';
 import { CommonCard, DailyCard, FmCard } from 'src/components';
+import { recommendPlaylist } from '../../api/songlist';
+import { ISonglist } from '../../api/types/songlist';
 
 import './index.less';
 
@@ -9,17 +12,25 @@ const Col = Grid.Col;
 const data = [1, 1, 1, 1, 1, 1];
 
 const Home = () => {
+    const [personList, setPersonList] = useState<ISonglist[]>([]);
+    
+    useEffect(()=>{
+        recommendPlaylist(12).then((res) => {
+            setPersonList(res);
+        });
+    },[])
     return (
         <div className="home">
             <div className={classNames('index-row', 'first-row')}>
                 <div className="title">推荐歌单</div>
                 <Row className="cover-row" gutter={[44, 24]}>
-                    {data.map((item, index) => {
+                    {personList.map((item:ISonglist, index:number) => {
                         return (
                             <Col key={index} span={4}>
                                 <CommonCard
-                                    imgSrc="https://p2.music.126.net/3S-U3XHLH6Z4Vmcijc76Xg==/109951166673278474.jpg?param=512y512"
-                                    title="网易云"
+                                    imgSrc={item.picUrl}
+                                    title={item.name}
+                                    desc={item.copywriter}
                                     shape="round"
                                     textPostion="left"
                                 />
