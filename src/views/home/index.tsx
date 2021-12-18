@@ -5,6 +5,7 @@ import { getNewAlbum } from 'src/api/album';
 import { getTopArtist } from 'src/api/artist';
 import { IAlbum } from 'src/api/types/album';
 import { IArtist } from 'src/api/types/artist';
+// import { IMusic } from 'src/api/types/song';
 import { CommonCard, DailyCard, FmCard } from 'src/components';
 import { recommendPlaylist, topPlaylist } from '../../api/songlist';
 import { IRecommandSonglist, ISonglist } from '../../api/types/songlist';
@@ -15,32 +16,41 @@ const Row = Grid.Row;
 const Col = Grid.Col;
 
 const Home = () => {
+    /**
+     * TODO: 异步状态优化
+     */
     const [personList, setPersonList] = useState<IRecommandSonglist[]>([]);
     const [artistList, setArtistList] = useState<IArtist[]>([]);
-    const [albumList, setAlbumList]=useState<IAlbum[]>([]);
-    const [rankList, setRankList]=useState<ISonglist[]>([]);
-    
-    
-    useEffect(()=>{
+    const [albumList, setAlbumList] = useState<IAlbum[]>([]);
+    const [rankList, setRankList] = useState<ISonglist[]>([]);
+    // const [dailyList,setDailyList]=useState<IMusic[]>([]);
+
+    useEffect(() => {
         recommendPlaylist(12).then((res) => {
             setPersonList(res);
         });
-        getTopArtist(1).then((res)=>{
-            setArtistList(res.slice(0,6))
+        getTopArtist(1).then((res) => {
+            setArtistList(res.slice(0, 6));
         });
-        topPlaylist().then(res=>{
-            setRankList(res.slice(0,6))
-        })
-        getNewAlbum(12,0).then(res=>{
-            setAlbumList(res)
-        })
-    },[])
+        topPlaylist().then((res) => {
+            setRankList(res.slice(0, 6));
+        });
+        getNewAlbum(12, 0).then((res) => {
+            setAlbumList(res);
+        });
+        // getDailyPlaylist().then(res=>{
+        //     setDailyList(res)
+        // }).catch(
+        //     res=>console.log(res)
+        // )
+    }, []);
+
     return (
         <div className="home">
             <div className={classNames('index-row', 'first-row')}>
                 <div className="title">推荐歌单</div>
                 <Row className="cover-row" gutter={[44, 24]}>
-                    {personList.map((item:IRecommandSonglist, index:number) => {
+                    {personList.map((item: IRecommandSonglist, index: number) => {
                         return (
                             <Col key={index} span={4}>
                                 <CommonCard
@@ -78,7 +88,7 @@ const Home = () => {
             <div className="index-row">
                 <div className="title">推荐艺人</div>
                 <Row gutter={[44, 24]}>
-                    {artistList.map((item:IArtist, index:number) => {
+                    {artistList.map((item: IArtist, index: number) => {
                         return (
                             <Col key={index} span={4}>
                                 <CommonCard
@@ -95,13 +105,13 @@ const Home = () => {
             <div className="index-row">
                 <div className="title">新专速递</div>
                 <Row gutter={[44, 24]}>
-                    {albumList.map((album:IAlbum, index:number) => {
+                    {albumList.map((album: IAlbum, index: number) => {
                         return (
                             <Col key={index} span={4}>
                                 <CommonCard
                                     imgSrc={album.picUrl}
                                     title={album.name}
-                                    desc={<a href=''>{album.artist.name} </a>}
+                                    desc={<a href="">{album.artist.name} </a>}
                                     shape="round"
                                     textPostion="left"
                                 />
@@ -113,7 +123,7 @@ const Home = () => {
             <div className="index-row">
                 <div className="title">排行榜</div>
                 <Row gutter={[44, 24]}>
-                    {rankList.map((item:ISonglist, index:number) => {
+                    {rankList.map((item: ISonglist, index: number) => {
                         return (
                             <Col key={index} span={4}>
                                 <CommonCard

@@ -15,7 +15,6 @@ const tagReducer = (state = initState, action: IAction<ITag>) => {
             return item.name;
         });
         if (tags.includes(action.payload.name)) {
-            console.log('asdasd');
             const newTag = state.filter((tag) => tag.name !== action.payload.name);
             return newTag;
         }

@@ -1,4 +1,5 @@
 import request from "./axios";
+import { IMusic } from "./types/song";
 import { ISonglistDetail,ISonglist,IGetSonglistsRequest,IRecommandSonglist } from './types/songlist'
 
 // 获取歌单详细信息
@@ -74,4 +75,14 @@ export const topPlaylist: TopPlaylist = async () => {
     });
 
     return response.list;
+};
+
+// 每日推荐
+type DailyRecommendPlaylist =()=> Promise<IMusic[]>;
+export const getDailyPlaylist:DailyRecommendPlaylist = async () => {
+    const response = await request({
+        url: '/recommend/songs',
+    });
+
+    return response.data.dailySongs;
 };

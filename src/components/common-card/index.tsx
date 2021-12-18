@@ -46,7 +46,7 @@ const CommonCard = (props: CommonCardProps) => {
                 className="common-card-text"
                 style={{ justifyContent: textPostion}}
             >
-                <div className="common-card-text-title">
+                <div className="common-card-text-title" style={{width:textPostion==='left'?'100%':''}}>
                     <a href="">{title}</a>
                 </div>
                 <div className="common-card-text-info">
