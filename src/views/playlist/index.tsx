@@ -52,7 +52,7 @@ const Playlist=()=>{
             <div className='list-msg'>
                 <div className='list-img'>
                     <CommonCard
-                        imgSrc={list?.coverImgUrl}
+                        imgSrc={list?.coverImgUrl as string}
                         title=""
                         shape="round"
                         textPostion="left"

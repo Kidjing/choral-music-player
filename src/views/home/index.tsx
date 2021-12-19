@@ -44,7 +44,6 @@ const Home = () => {
         //     res=>console.log(res)
         // )
     }, []);
-
     return (
         <div className="home">
             <div className={classNames('index-row', 'first-row')}>
@@ -57,6 +56,8 @@ const Home = () => {
                                     imgSrc={item.picUrl}
                                     title={item.name}
                                     desc={item.copywriter}
+                                    type='playlist'
+                                    id={item.id}
                                     shape="round"
                                     textPostion="left"
                                 />
@@ -94,6 +95,8 @@ const Home = () => {
                                 <CommonCard
                                     imgSrc={item.picUrl}
                                     title={item.name}
+                                    type='artist'
+                                    id={item.id}
                                     shape="circle"
                                     textPostion="center"
                                 />
@@ -112,6 +115,8 @@ const Home = () => {
                                     imgSrc={album.picUrl}
                                     title={album.name}
                                     desc={<a href="">{album.artist.name} </a>}
+                                    type='album'
+                                    id={album.id}
                                     shape="round"
                                     textPostion="left"
                                 />
@@ -130,6 +135,8 @@ const Home = () => {
                                     imgSrc={item.coverImgUrl}
                                     title={item.name}
                                     desc={item.updateFrequency}
+                                    type='playlist'
+                                    id={item.id}
                                     shape="round"
                                     textPostion="left"
                                 />

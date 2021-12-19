@@ -3,6 +3,7 @@ import { Button } from '@arco-design/web-react';
 import { IconCaretRight } from '@arco-design/web-react/icon';
 import classNames from 'classnames';
 import './index.less';
+import { useNavigate } from 'react-router-dom';
 
 interface CommonCardProps {
     imgSrc: string;
@@ -13,13 +14,18 @@ interface CommonCardProps {
     desc?: string | React.ReactNode;
     style?: React.CSSProperties;
     className?: string | string[];
-    goToAlbum?: Function;
+    id?:number;
+    type?:string;
 }
 
 const CommonCard = (props: CommonCardProps) => {
-    const { imgSrc, style, title, desc, shape = 'round', textPostion, goToAlbum } = props;
+    const navigate = useNavigate();
+    const { imgSrc, style, title, desc, shape = 'round', textPostion, id ,type} = props;
     const [isVisible, setIsVisible] = useState<boolean>(false);
-
+    const goToAlbum=(id:number,type:string)=>{
+        if(id===0) return;
+        navigate(type+'/'+id);
+    }
     return (
         <div style={style} className="common-card">
             <div
@@ -39,7 +45,7 @@ const CommonCard = (props: CommonCardProps) => {
                     style={{ borderRadius: shape === 'round' ? '0.75em' : '50%' }}
                     alt="dessert"
                     src={imgSrc}
-                    onClick={() => goToAlbum}
+                    onClick={()=>goToAlbum(id as number,type as string)}
                 />
             </div>
             <div
@@ -47,7 +53,7 @@ const CommonCard = (props: CommonCardProps) => {
                 style={{ justifyContent: textPostion}}
             >
                 <div className="common-card-text-title" style={{width:textPostion==='left'?'100%':''}}>
-                    <a href="">{title}</a>
+                    <a href={type+'/'+id}>{title}</a>
                 </div>
                 <div className="common-card-text-info">
                     <span>{desc}</span>
