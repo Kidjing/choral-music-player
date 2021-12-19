@@ -5,6 +5,16 @@ import { Provider } from 'react-redux';
 import { store } from 'src/store';
 
 const App = () => {
+    const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)');
+    console.log(darkThemeMq)
+    darkThemeMq.addEventListener('change', (e) => {
+        console.log(e.matches)
+        if (e.matches) {
+            document.body.setAttribute('arco-theme', 'dark');
+        } else {
+            document.body.removeAttribute('arco-theme');
+        }
+    });
     return (
         <Provider store={store}>
             <Router>
