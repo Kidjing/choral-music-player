@@ -2,53 +2,59 @@ import { CommonCard, MusicTable } from 'src/components';
 import React, { useEffect } from 'react';
 import { Button, Space, Grid } from '@arco-design/web-react';
 import { IconHeart, IconCaretRight } from '@arco-design/web-react/icon';
-import { getAlbum } from 'src/api/album';
-import { IGetAlbumResponse } from 'src/api/types/album';
+import { getAlbum, getArtistAlbum } from 'src/api/album';
+import { IGetAlbumResponse, IAlbum } from 'src/api/types/album'
 import { IMusic } from 'src/api/types/song';
 import { dateTrans } from 'src/utils/timetrans';
-import { IArtist } from 'src/api/types/artist';
-import { getArtistDetail } from 'src/api/artist';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import './index.less';
 
 const Row = Grid.Row;
 const Col = Grid.Col;
 
-const More = (props: { artist: number }) => {
+const More = (props:{ artist:number,name:string }) => {
     const navigate = useNavigate();
     const id = props.artist;
-    const [artist, setArtist] = React.useState<{ artist: IArtist; hotSongs: IMusic[] }>();
-    useEffect(() => {
-        getArtistDetail(id).then((res) => {
-            setArtist(res);
-        });
-    }, [id]);
-    let data = [1, 1, 1, 1, 1, 1];
+    const [album, setAlbum] = React.useState<IAlbum[]>()
+    useEffect(()=>{
+        getArtistAlbum(id).then(res =>{
+            setAlbum(res);
+        })
+    },[id])
+    let data = [1]
+    if(album !== undefined){
+        const n = album?.length>=6? 6 : album?.length
+        for(let i=0;i<n;i++){
+            data[i] = 1
+        }
+    }
     return (
         <div className="more">
-            <h2>More by {artist?.artist.name}</h2>
+            <h2>More by {props.name}</h2>
             <div className="index-row">
                 <Row gutter={[44, 24]}>
                     {data.map((item, index) => {
                         return (
                             <Col
                                 onClick={() => {
-                                    navigate('/album/?id=' + artist?.hotSongs[index].al.id);
+                                    navigate('/album/?id='+(album !== undefined?(album[index].id):0));
                                 }}
                                 key={index}
                                 span={4}
                             >
                                 <CommonCard
                                     imgSrc={
-                                        artist?.hotSongs[index].al.picUrl !== undefined
-                                            ? artist.hotSongs[index].al.picUrl
-                                            : ''
+                                        ((album !== undefined?
+                                            (album[index].picUrl)
+                                            :''))
                                     }
-                                    title={artist?.hotSongs[index].al.name}
+                                    title={String((album !== undefined?
+                                        (album[index].name):''))
+                                    }
                                     shape="round"
                                     textPostion="left"
-                                    type="ablum"
-                                    id={artist?.hotSongs[index].al.id}
+                                    type="album"
+                                    id={album !== undefined?(album[index].id):0}
                                 />
                             </Col>
                         );
@@ -148,7 +154,7 @@ const Album = () => {
                     <MusicTable type="album" data={data} />
                 </div>
 
-                {album !== undefined ? <More artist={album.album.artist.id} /> : <div className="more">More by</div>}
+                {album !== undefined ? <More artist={album.album.artist.id} name={album.album.artist.name} /> : <div className="more">More by</div>}
             </div>
         </div>
     );

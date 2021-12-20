@@ -61,7 +61,7 @@ const Playlist=()=>{
                 <div className='list-detail'>
                     <h1>{list?.name}</h1>
                     <p>最后更新于{date}.{list?.trackCount}首歌</p>
-                    <p>{list?.description}</p>
+                    <p style={{height:100,width:500,overflow: 'hidden'}}>{list?.description}</p>
                     <Space size='large'>
                         <Button type='primary' icon={<IconCaretRight />}> 播放</Button>
                     </Space>
