@@ -28,7 +28,7 @@ export const tagData = [
             'New Age',
             '古风',
             '后摇',
-            'Bossa Nove',
+            'Bossa Nova',
         ],
     },
     {

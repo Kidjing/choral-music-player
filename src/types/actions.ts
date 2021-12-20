@@ -5,5 +5,5 @@ export interface IAction<T>{
 
 export interface ITag{
     name:string;
-    isCheck:boolean;
+    isCheck?:boolean;
 }

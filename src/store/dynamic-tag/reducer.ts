@@ -1,15 +1,15 @@
 import { ACTIONS } from './actions';
 import { IAction, ITag } from '../../types/actions';
 
-const initState = [
+const initState: ITag[] = [
     { name: '全部', isCheck: true },
     { name: '推荐歌单', isCheck: false },
-    { name: '精品推荐', isCheck: false },
+    { name: '精品歌单', isCheck: false },
     { name: '官方', isCheck: false },
     { name: '排行榜', isCheck: false },
 ];
 
-const tagReducer = (state = initState, action: IAction<ITag>) => {
+export const tagReducer = (state = initState, action: IAction<ITag>) => {
     if (action.type === ACTIONS.CHANGE_TAG) {
         const tags = state.map((item: ITag) => {
             return item.name;
@@ -45,5 +45,3 @@ export const searchTag = (tag: ITag) => {
         payload: tag,
     };
 };
-
-export default tagReducer;

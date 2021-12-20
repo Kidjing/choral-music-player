@@ -1,29 +1,21 @@
-import { Button, Grid } from '@arco-design/web-react';
-import { useEffect, useState } from 'react';
+import { Grid } from '@arco-design/web-react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getSonglists } from 'src/api/songlist';
-import { ISonglist } from 'src/api/types/songlist';
+import { IRecommandSonglist, ISonglist } from 'src/api/types/songlist';
 import { CommonCard, DynamicTag } from 'src/components';
+import { searchTag } from 'src/store/dynamic-tag/reducer';
 
 import './index.less';
 
 const Row = Grid.Row;
 const Col = Grid.Col;
 
-const Explore = () => {
-    const [playList, setPlayList] = useState<ISonglist[]>([]);
-    const [offset,setOffset]=useState<number>(0);
-    const limit = 30;
-    
-    useEffect(() => {
-        getSonglists({ limit: limit, offset: offset }).then((res) => {
-            setPlayList([...playList,...res.playlists]);
-        });
-    }, [offset]);
+const Explore = (props: any) => {
+    // 初始化playList
+    useEffect(()=>{
+        props.searchTag({name:'全部',isCheck:true})
+    },[])
 
-    const loadMore = () => {
-        setOffset(offset+limit);
-    };
     return (
         <div className="explore">
             <h1>发现</h1>
@@ -32,11 +24,11 @@ const Explore = () => {
             </div>
             <div className="explore-playlist">
                 <Row gutter={[44, 24]}>
-                    {playList.map((item: ISonglist, index: number) => {
+                    {props.playList.map((item: ISonglist & IRecommandSonglist, index: number) => {
                         return (
                             <Col key={index} span={4}>
                                 <CommonCard
-                                    imgSrc={item.coverImgUrl}
+                                    imgSrc={item.coverImgUrl?item.coverImgUrl:item.picUrl}
                                     title={item.name}
                                     shape="round"
                                     textPostion="left"
@@ -46,8 +38,10 @@ const Explore = () => {
                     })}
                 </Row>
             </div>
-            <div className='load-more'>
-                <Button className='load-more-btn' onClick={loadMore}>加载更多</Button>
+            <div className="load-more">
+                {/* <Button className="load-more-btn" onClick={loadMore}>
+                    加载更多
+                </Button> */}
             </div>
         </div>
     );
@@ -55,8 +49,12 @@ const Explore = () => {
 
 const mapStateToProps = (state: any) => {
     return {
-        tags: state.tagReducer,
+        playList: state.playListReducer,
     };
 };
 
-export default connect(mapStateToProps)(Explore);
+const mapDispatchToProps={
+    searchTag
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Explore);

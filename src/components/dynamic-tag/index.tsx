@@ -20,7 +20,7 @@ const DynamicTag = (props: any) => {
                                 checkable
                                 checked={tag.isCheck}
                                 onCheck={() => {
-                                    props.searchTag(tag)
+                                    props.searchTag(tag);
                                 }}
                                 className="tag"
                                 color="arcoblue"
@@ -45,4 +45,4 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = { searchTag };
 
-export default connect(mapStateToProps,mapDispatchToProps)(DynamicTag);
+export default connect(mapStateToProps, mapDispatchToProps)(DynamicTag);
