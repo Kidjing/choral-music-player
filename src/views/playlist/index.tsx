@@ -1,4 +1,4 @@
-import { MusicTable,CommonCard } from 'src/components';
+import { MusicTable,CommonCard, TextModal } from 'src/components';
 import React, { useEffect } from 'react';
 import { Button, Space } from '@arco-design/web-react';
 import { IconHeart, IconCaretRight} from '@arco-design/web-react/icon';
@@ -60,8 +60,13 @@ const Playlist=()=>{
                 </div>
                 <div className='list-detail'>
                     <h1>{list?.name}</h1>
-                    <p>最后更新于{date}.{list?.trackCount}首歌</p>
-                    <p style={{height:100,width:500,overflow: 'hidden'}}>{list?.description}</p>
+                    <p>最后更新于{date}</p>
+                    <p>{list?.trackCount}首歌</p>
+                    <p>
+                        <TextModal 
+                            desc={String(list?.description)} 
+                        />
+                    </p>
                     <Space size='large'>
                         <Button type='primary' icon={<IconCaretRight />}> 播放</Button>
                     </Space>
