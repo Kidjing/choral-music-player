@@ -1,4 +1,4 @@
-import { CommonCard, MusicTable } from 'src/components';
+import { CommonCard, MusicTable, TextModal } from 'src/components';
 import React, { useEffect } from 'react';
 import { Button, Space, Grid } from '@arco-design/web-react';
 import { IconHeart, IconCaretRight } from '@arco-design/web-react/icon';
@@ -120,9 +120,10 @@ const Album = () => {
                     <p>
                         {date}.{album?.album.size}首歌,{Math.floor(dt / 1000 / 60)}分钟
                     </p>
-                    <p style={{ width: 500, height: 50, overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {album?.album.description}
-                    </p>
+                    <TextModal 
+                        desc={String(album?album.album.description:'')} 
+                    />
+                    <br/>
                     <Space size="large">
                         <Button type="primary" icon={<IconCaretRight />}>
                             {' '}
@@ -149,13 +150,13 @@ const Album = () => {
                         </Button>
                     </Space>
                 </div>
-
-                <div className="table">
-                    <MusicTable type="album" data={data} />
-                </div>
-
-                {album !== undefined ? <More artist={album.album.artist.id} name={album.album.artist.name} /> : <div className="more">More by</div>}
             </div>
+
+            <div className="table">
+                <MusicTable type="album" data={data} />
+            </div>
+
+            {album !== undefined ? <More artist={album.album.artist.id} name={album.album.artist.name} /> : <div className="more">More by</div>}
         </div>
     );
 };
