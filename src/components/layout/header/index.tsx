@@ -1,5 +1,5 @@
-import { Layout, Button, Avatar } from '@arco-design/web-react';
-import { IconLeft, IconRight } from '@arco-design/web-react/icon';
+import { Layout, Button, Avatar, Switch } from '@arco-design/web-react';
+import { IconLeft, IconMoon, IconRight, IconSun } from '@arco-design/web-react/icon';
 import { Link, useNavigate } from 'react-router-dom';
 import Searcher from './searcher';
 
@@ -9,6 +9,14 @@ const Head = Layout.Header;
 
 const Header = () => {
     const navigate = useNavigate();
+    const handleTheme = (e: any) => {
+        console.log(e);
+        if (e === true) {
+            document.body.setAttribute('arco-theme', 'dark');
+        }else{
+            document.body.removeAttribute('arco-theme');
+        }
+    };
     return (
         <Head className="layout-header">
             <nav className="navbar">
@@ -33,6 +41,7 @@ const Header = () => {
                             src="//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp"
                         />
                     </Avatar>
+                    <Switch className="navbar-right-switch" onChange={handleTheme} uncheckedIcon={<IconSun />} checkedIcon={<IconMoon />}/>
                 </div>
             </nav>
         </Head>
