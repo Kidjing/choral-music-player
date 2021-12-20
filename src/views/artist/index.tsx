@@ -1,4 +1,4 @@
-import { CommonCard } from 'src/components';
+import { CommonCard, TextModal, TrackList  } from 'src/components';
 import React, { useEffect } from 'react';
 import { Button, Space, Grid } from '@arco-design/web-react';
 import {  IconCaretRight} from '@arco-design/web-react/icon';
@@ -36,12 +36,6 @@ const Artist = () =>{
             albumNum[i] = 1
         }
     }
-    let songs = []
-    if(artist !== undefined){
-        for(i=0;i<artist?.hotSongs.length;i++){
-            songs[i] = 1
-        }
-    }
     return(
         <div className='artist'>
             <div className='artist-msg'>
@@ -53,7 +47,7 @@ const Artist = () =>{
                         textPostion="left"
                     />
                 </div>
-                <div className='album-detail'>
+                <div className='artist-detail'>
                     <h1>{artist?.artist.name}</h1>  
                     <p>艺人</p>
                     <p>
@@ -61,7 +55,10 @@ const Artist = () =>{
                          . <a style={{ color:'black'}} href='#album'>{artist?.artist.albumSize}专辑</a>
                          . {artist?.artist.mvSize}个MV
                     </p>
-                    <p style={{width:500,height:87, overflow:'hidden',textOverflow:'ellipsis'}}>{artist?.artist.briefDesc}</p>
+                    <TextModal 
+                        desc={String(artist?.artist.briefDesc)} 
+                    />
+                    <br/>
                     <Space style={{marginRight:20}} size='large'>
                         <Button type='primary' icon={<IconCaretRight />}> 播放</Button>
                     </Space>
@@ -70,6 +67,7 @@ const Artist = () =>{
                     </Space>
                 </div>
             </div>
+
             
             <div className='new'>
                 <h2>最新发布</h2>
@@ -107,31 +105,11 @@ const Artist = () =>{
 
             <div id='hotSongs'>
                 <h2>热门歌曲</h2>
-                <div className="index-row">
-                    <Row gutter={[44, 24]}>
-                        {songs.map((item, index) => {
-                            return (
-                                <Col key={index} span={6} >
-                                    <div style={{height:40,width:200}}>
-                                        <div onClick={()=>{navigate('/album/?id='+(artist?.hotSongs !== undefined?(artist?.hotSongs[index].al.id):0))}} style={{float:'left',marginRight:10}}>
-                                            <CommonCard style={{height:40,width:40}}
-                                                imgSrc={(artist?.hotSongs[index].al.picUrl !==undefined)?(artist.hotSongs[index].al.picUrl):''}
-                                                title=''
-                                                shape="round"
-                                                textPostion="left"
-                                                id = {artist?.hotSongs[index].al.id}
-                                            />
-                                        </div>
-                                        <div>
-                                            <h4 style={{height:20,width:120,overflow:'hidden',textOverflow:'ellipsis'}}>{artist?.hotSongs[index].name}</h4>
-                                            <p style={{marginTop:-13,fontSize:'small'}}>{artist?.artist.name}</p>
-                                        </div>
-                                    </div>
-                                </Col>
-                            );
-                        })}
-                    </Row>
-                </div>
+                {artist?.hotSongs!=undefined?(
+                    <TrackList playlist={artist?.hotSongs} />
+                ):(
+                    <div>加载中</div>
+                )}
             </div>
 
             <div id='album'>
