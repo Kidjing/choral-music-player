@@ -14,7 +14,7 @@ interface TrackListProps {
 const Row = Grid.Row;
 const Col = Grid.Col;
 
-const Track = (props: TrackProps) => {
+export const Track = (props: TrackProps) => {
     const { album } = props;
     return (
         <div className="track">

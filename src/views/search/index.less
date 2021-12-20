@@ -1,7 +1,24 @@
-.search-artist {
-    &-text{
+.search {
+    .title {
         display: flex;
         justify-content: space-between;
-        align-items: baseline;
+        align-items: center;
+        color: var(--color-text-1);
+        font-size: 28px;
+        font-weight: 700;
+        a {
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0.68;
+            color: inherit;
+            -webkit-text-decoration: auto;
+            text-decoration: auto;
+            cursor: pointer;
+            background-color: transparent;
+        }
+    }
+    .card{
+        margin-top: -5px !important;
+        margin-bottom: 5px !important;
     }
 }

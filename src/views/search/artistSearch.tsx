@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 import { search } from 'src/api/search';
 import { IArtist } from 'src/api/types/artist';
 import React, { useState, useEffect } from 'react';
-import { Grid,Typography,Link } from '@arco-design/web-react';
+import { Grid } from '@arco-design/web-react';
 import { CommonCard } from 'src/components';
 import './index.less';
 
@@ -16,17 +16,16 @@ const ArtistSearch = () => {
     const [searchParams] = useSearchParams();
     useEffect(() => {
         const key = searchParams.get('keyword')!;
-        search({key,type:100,limit:4}).then(res => {
+        search({ key, type: 100, limit: 4 }).then(res => {
             setArtistList(res.artists);
         })
     }, [searchParams])
     return (
         <div>
-            <div className='search-artist-text'>
-                <Typography.Title heading={3}>艺人</Typography.Title>
-                <Link>查看全部</Link>
+            <div className="title">艺人
+                <a href='explore/?category=推荐歌单'>查看全部</a>
             </div>
-            <Row gutter={[20, 24]}>
+            <Row gutter={[30, 40]} className='card'>
                 {artistList ? artistList.map((item, index) => {
                     return (
                         <Col key={index} span={6}>

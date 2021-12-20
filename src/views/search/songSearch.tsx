@@ -1,9 +1,13 @@
-import { Grid, Typography, Link, Card } from '@arco-design/web-react';
-import FormCard from 'src/components/fm-card'
+import { Grid } from '@arco-design/web-react';
+import { Track } from 'src/components/track-list';
 import { useSearchParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { search } from 'src/api/search';
 import { IMusic } from 'src/api/types/song';
+
+const Row = Grid.Row;
+const Col = Grid.Col;
+
 
 const SongSearch = () => {
 
@@ -11,20 +15,31 @@ const SongSearch = () => {
     const [searchParams] = useSearchParams();
     useEffect(() => {
         const key = searchParams.get('keyword')!;
-        search({ key, type: 1, limit: 4 }).then(res => {
+        search({ key, type: 1, limit: 16 }).then(res => {
             setSongList(res.songs);
             console.log(songList);
         })
+
     }, [searchParams])
 
 
     return (
         <div>
-            {songList?.map((item, index) => {
-                return (
-                    <FormCard key={index} title={item.name} artists={item.ar} imgSrc={item.al.picUrl} />
-                )
-            })}
+
+            {songList ? <div>
+                <div className="title">歌曲
+                    <a href='explore/?category=推荐歌单'>查看全部</a>
+                </div>
+                <Row gutter={[4, 4]}>
+                    {songList.map((item, index) => {
+                        return (
+                            <Col key={index} span={6}>
+                                <Track album={item} />
+                            </Col>
+                        );
+                    })}
+                </Row>
+            </div> : null}
         </div>
     )
 }

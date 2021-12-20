@@ -8,7 +8,6 @@ import { addRecord, clearRecord } from 'src/store/search-record/reducer'
 import { connect } from 'react-redux';
 import './index.less';
 
-
 const Searcher = (props: any) => {
     const navigate = useNavigate();
     const [input, setInput] = React.useState('')

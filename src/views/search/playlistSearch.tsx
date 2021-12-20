@@ -1,36 +1,33 @@
 import { useSearchParams } from 'react-router-dom';
 import { search } from 'src/api/search';
-import { IAlbum } from 'src/api/types/album';
+import { ISonglist } from 'src/api/types/songlist';
 import React, { useState, useEffect } from 'react';
 import { Grid } from '@arco-design/web-react';
 import { CommonCard } from 'src/components';
 
-
-
 const Row = Grid.Row;
 const Col = Grid.Col;
 
-
-const AlbumSearch = () => {
-    let [albumList, setAlbumList] = useState<IAlbum[]>();
+const PlaylistSearch = () => {
+    let [songList, setPlaylistList] = useState<ISonglist[]>();
     const [searchParams] = useSearchParams();
     useEffect(() => {
         const key = searchParams.get('keyword')!;
-        search({ key, type: 10, limit: 4 }).then(res => {
-            setAlbumList(res.albums);
+        search({ key, type: 1000, limit: 12 }).then(res => {
+            setPlaylistList(res.playlists);
         })
     }, [searchParams])
     return (
         <div>
-            <div className="title">专辑
+            {songList ? <div className="title">歌单
                 <a href='explore/?category=推荐歌单'>查看全部</a>
-            </div>
-            <Row gutter={[30, 40]} className='card'>
-                {albumList ? albumList.map((item, index) => {
+            </div> : null}
+            <Row gutter={[20, 20]} className='card'>
+                {songList ? songList.map((item, index) => {
                     return (
-                        <Col key={index} span={6}>
+                        <Col key={index} span={4}>
                             <CommonCard
-                                imgSrc={item.picUrl}
+                                imgSrc={item.coverImgUrl}
                                 title={item.name}
                             />
                         </Col>
@@ -40,4 +37,4 @@ const AlbumSearch = () => {
         </div>
     )
 }
-export default AlbumSearch
+export default PlaylistSearch
