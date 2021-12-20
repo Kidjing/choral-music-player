@@ -12,12 +12,18 @@ const Col = Grid.Col;
 
 const Explore = (props: any) => {
     // 初始化playList
-    useEffect(()=>{
-        props.searchTag({name:'全部',isCheck:true})
-    },[])
-
+    useEffect(() => {
+        props.searchTag({ name: '全部', isCheck: true });
+    }, []);
+    const handleScroll = (e:any) => {
+        console.log(e)
+        const { scrollTop, clientHeight, scrollHeight } = e.target;
+        if (scrollTop + clientHeight === scrollHeight) {
+            alert('滚动到底部啦');
+        }
+    };
     return (
-        <div className="explore">
+        <div className="explore" onScroll={handleScroll}>
             <h1>发现</h1>
             <div className="explore-tags">
                 <DynamicTag />
@@ -28,7 +34,7 @@ const Explore = (props: any) => {
                         return (
                             <Col key={index} span={4}>
                                 <CommonCard
-                                    imgSrc={item.coverImgUrl?item.coverImgUrl:item.picUrl}
+                                    imgSrc={item.coverImgUrl ? item.coverImgUrl : item.picUrl}
                                     title={item.name}
                                     shape="round"
                                     textPostion="left"
@@ -53,8 +59,8 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-const mapDispatchToProps={
-    searchTag
-}
+const mapDispatchToProps = {
+    searchTag,
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(Explore);
+export default connect(mapStateToProps, mapDispatchToProps)(Explore);

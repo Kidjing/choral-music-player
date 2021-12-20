@@ -8,7 +8,6 @@ const App = () => {
     const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)');
     console.log(darkThemeMq)
     darkThemeMq.addEventListener('change', (e) => {
-        console.log(e.matches)
         if (e.matches) {
             document.body.setAttribute('arco-theme', 'dark');
         } else {

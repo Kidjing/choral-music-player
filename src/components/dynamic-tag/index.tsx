@@ -4,12 +4,14 @@ import { IconMore } from '@arco-design/web-react/icon';
 import { connect } from 'react-redux';
 import PanelTag from './panelTag';
 import { searchTag } from 'src/store/dynamic-tag/reducer';
+import { useNavigate } from 'react-router-dom';
 import { ITag } from 'src/types/actions';
 
 import './index.less';
 
 const DynamicTag = (props: any) => {
     const [showMore, setShowMore] = useState(false);
+    const navigate = useNavigate();
     return (
         <div className="dynamic-tag">
             <div className="dynamic-tag-display">
@@ -20,6 +22,7 @@ const DynamicTag = (props: any) => {
                                 checkable
                                 checked={tag.isCheck}
                                 onCheck={() => {
+                                    navigate('?category=' + tag.name);
                                     props.searchTag(tag);
                                 }}
                                 className="tag"

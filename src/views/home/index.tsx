@@ -47,7 +47,7 @@ const Home = () => {
     return (
         <div className="home">
             <div className={classNames('index-row', 'first-row')}>
-                <div className="title">推荐歌单</div>
+                <div className="title">推荐歌单<a href='explore/?category=推荐歌单'>查看全部</a></div>
                 <Row className="cover-row" gutter={[44, 24]}>
                     {personList.map((item: IRecommandSonglist, index: number) => {
                         return (
@@ -106,7 +106,7 @@ const Home = () => {
                 </Row>
             </div>
             <div className="index-row">
-                <div className="title">新专速递</div>
+                <div className="title">新专速递<a href='explore/?category=排行榜'>查看全部</a></div>
                 <Row gutter={[44, 24]}>
                     {albumList.map((album: IAlbum, index: number) => {
                         return (
@@ -126,7 +126,7 @@ const Home = () => {
                 </Row>
             </div>
             <div className="index-row">
-                <div className="title">排行榜</div>
+                <div className="title">排行榜<a href='explore/?category=排行榜'>查看全部</a></div>
                 <Row gutter={[44, 24]}>
                     {rankList.map((item: ISonglist, index: number) => {
                         return (
