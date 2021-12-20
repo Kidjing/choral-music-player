@@ -113,7 +113,7 @@ const Artist = () =>{
                             return (
                                 <Col key={index} span={6} >
                                     <div style={{height:40,width:200}}>
-                                        <div style={{float:'left',marginRight:10}}>
+                                        <div onClick={()=>{navigate('/album/?id='+(artist?.hotSongs !== undefined?(artist?.hotSongs[index].al.id):0))}} style={{float:'left',marginRight:10}}>
                                             <CommonCard style={{height:40,width:40}}
                                                 imgSrc={(artist?.hotSongs[index].al.picUrl !==undefined)?(artist.hotSongs[index].al.picUrl):''}
                                                 title=''
@@ -141,13 +141,15 @@ const Artist = () =>{
                         {albumNum.map((item, index) => {
                             return (
                                 <Col key={index} span={4} >
-                                    <CommonCard
-                                        imgSrc={(albums?.[index].blurPicUrl !== undefined)?(String(albums[index].blurPicUrl)):''}
-                                        title={(albums!==undefined)?(albums[index].name):''}
-                                        shape="round"
-                                        textPostion="left"
-                                        id = {(albums !== undefined?(albums[index].id):0)}
-                                    />
+                                    <div onClick={()=>{navigate('/album/?id='+(albums !== undefined?(albums[index].id):0))}} >
+                                        <CommonCard
+                                            imgSrc={(albums?.[index].blurPicUrl !== undefined)?(String(albums[index].blurPicUrl)):''}
+                                            title={(albums!==undefined)?(albums[index].name):''}
+                                            shape="round"
+                                            textPostion="left"
+                                            id = {(albums !== undefined?(albums[index].id):0)}
+                                        />
+                                    </div>
                                 </Col>
                             );
                         })}
