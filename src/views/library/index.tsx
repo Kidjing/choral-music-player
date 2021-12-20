@@ -66,6 +66,25 @@ const playlist = [
         },
         dt: 157648,
         publishTime: 1564070400000,
+    },
+    {
+        name: 'Ride It',
+        id: 1379945341,
+        ar: [
+            {
+                id: 12260125,
+                name: 'Regard',
+            },
+        ],
+        al: {
+            id: 80594567,
+            name: 'Ride It',
+            picUrl: 'https://p2.music.126.net/_FEXx8L4oNvuBsiKUdxbQw==/109951165986861088.jpg',
+            pic_str: '109951165986861088',
+            pic: 109951165986861090,
+        },
+        dt: 157648,
+        publishTime: 1564070400000,
     }
 ];
 
@@ -79,7 +98,7 @@ const Library = () => {
     const tagOpt = ['专辑', '艺人', 'MV', '云盘'];
     const [visible, setVisible] = useState(false);
 
-    
+
     return (
         <div className="library">
             <h1>

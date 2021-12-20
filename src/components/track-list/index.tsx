@@ -42,7 +42,7 @@ const TrackList = (props: TrackListProps) => {
             <Row gutter={[4, 4]}>
                 {playlist.map((item, index) => {
                     return (
-                        <Col key={index} span={8}>
+                        <Col key={index} span={6}>
                             <Track album={item} />
                         </Col>
                     );
