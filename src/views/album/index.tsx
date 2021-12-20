@@ -21,7 +21,13 @@ const More = (props:{ artist:number,name:string }) => {
             setAlbum(res);
         })
     },[id])
-    let data = [1, 1, 1, 1, 1, 1];
+    let data = [1]
+    if(album !== undefined){
+        const n = album?.length>=6? 6 : album?.length
+        for(let i=0;i<n;i++){
+            data[i] = 1
+        }
+    }
     return (
         <div className="more">
             <h2>More by {props.name}</h2>
@@ -38,8 +44,8 @@ const More = (props:{ artist:number,name:string }) => {
                             >
                                 <CommonCard
                                     imgSrc={
-                                        String((album !== undefined?
-                                            (album[index].blurPicUrl)
+                                        ((album !== undefined?
+                                            (album[index].picUrl)
                                             :''))
                                     }
                                     title={String((album !== undefined?
