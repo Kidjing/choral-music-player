@@ -1,9 +1,11 @@
-import { Grid } from '@arco-design/web-react';
-import { useEffect } from 'react';
+import { Button, Grid } from '@arco-design/web-react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { IRecommandSonglist, ISonglist } from 'src/api/types/songlist';
 import { CommonCard, DynamicTag } from 'src/components';
 import { searchTag } from 'src/store/dynamic-tag/reducer';
+import { loadMore } from 'src/store/playlist/reducer';
+import { ITag } from 'src/types/actions';
 
 import './index.less';
 
@@ -11,17 +13,25 @@ const Row = Grid.Row;
 const Col = Grid.Col;
 
 const Explore = (props: any) => {
+    const [limit,setLimit]=useState(30)
+    const tag = props.tag.filter((item: ITag) => item.isCheck)[0].name;
     // 初始化playList
     useEffect(() => {
         props.searchTag({ name: '全部', isCheck: true });
     }, []);
-    const handleScroll = (e:any) => {
-        console.log(e)
+
+    const handleScroll = (e: any) => {
+        console.log(e);
         const { scrollTop, clientHeight, scrollHeight } = e.target;
         if (scrollTop + clientHeight === scrollHeight) {
             alert('滚动到底部啦');
         }
     };
+
+    useEffect(()=>{
+        props.loadMore(tag,limit);
+    },[limit])
+
     return (
         <div className="explore" onScroll={handleScroll}>
             <h1>发现</h1>
@@ -45,9 +55,9 @@ const Explore = (props: any) => {
                 </Row>
             </div>
             <div className="load-more">
-                {/* <Button className="load-more-btn" onClick={loadMore}>
+                {(tag!=='推荐歌单'&&tag!=='排行榜')?<Button className="load-more-btn" onClick={()=>setLimit(limit+30)}>
                     加载更多
-                </Button> */}
+                </Button>:''}
             </div>
         </div>
     );
@@ -55,12 +65,14 @@ const Explore = (props: any) => {
 
 const mapStateToProps = (state: any) => {
     return {
+        tag: state.tagReducer,
         playList: state.playListReducer,
     };
 };
 
 const mapDispatchToProps = {
     searchTag,
+    loadMore,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Explore);

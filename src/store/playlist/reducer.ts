@@ -5,9 +5,9 @@ import { IAction } from '../../types/actions';
 let initState: ISonglist[] = [];
 
 export const playListReducer = (state = initState, action: IAction<ISonglist[] | IRecommandSonglist[]>) => {
-    if (action.type === ACTIONS.LOAD_MORE) {
-        return [...state, action.payload];
-    }
+    // if (action.type === ACTIONS.SEARCH_MORE) {
+    //     return [...state, action.payload];
+    // }
     if (action.type === ACTIONS.SEARCH_PLAYLIST) {
         return action.payload;
     }
@@ -20,3 +20,13 @@ export const getPlayList = (playList: ISonglist[] | IRecommandSonglist[]) => {
         payload: playList,
     };
 };
+
+export const loadMore=(tag:string,limit:number)=>{
+    return {
+        type: 'LOAD_MORE',
+        payload: {
+            tag:tag,
+            limit:limit
+        },
+    };
+}

@@ -27,3 +27,18 @@ export function* searchPlayList(action: Effect) {
         yield put({ type: 'SEARCH_TAG', message: e.message });
     }
 }
+
+export function* loadMorePlayList(action: Effect) {
+    const { tag, limit } = action.payload;
+    try {
+        if (tag === '精品歌单') {
+            const playList: getServiceSongListByCat = yield call(getSonglistByCat, limit);
+            yield put(getPlayList(playList));
+        } else {
+            const result: getServiceSongList = yield call(getSonglists, { limit: limit, cat: tag, offset: 30 });
+            yield put(getPlayList(result.playlists));
+        }
+    } catch (e) {
+        yield put({ type: 'LOAD_MORE', message: e.message });
+    }
+}
