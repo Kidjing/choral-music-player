@@ -1,4 +1,11 @@
-import { IAccount,IProfile } from './auth'
+import { IAccount, IProfile } from './auth'
+
+export interface UserInfo {
+    nickname: string,
+    status: boolean,
+    userId: number,
+    avatarUrl: string,
+}
 
 export interface UserDetailResponce {
     account: IAccount,

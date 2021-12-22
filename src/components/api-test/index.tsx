@@ -1,7 +1,7 @@
 import { Button } from '@arco-design/web-react';
 import { getAlbum } from '../../api/album'
 import { login, logout } from '../../api/auth'
-import { LoginInRequest } from '../../api/types/auth'
+import { ILoginInRequest } from '../../api/types/auth'
 import { getUserSonglistByID } from '../../api/user'
 import { getPlaylistDetail } from 'src/api/songlist'
 
@@ -12,7 +12,7 @@ const testAlbum = () => {
 }
 
 const testLoginIn = () => {
-    const loginParams: LoginInRequest = {
+    const loginParams: ILoginInRequest = {
         phone: "17814775526",
         password: "979yili."
     }

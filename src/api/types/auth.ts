@@ -1,8 +1,8 @@
-export interface LoginInRequest {
+export interface ILoginInRequest {
     phone: string;
     password: string;
 }
-export interface LoginInResponce {
+export interface ILoginInResponce {
     loginType: number;
     code: number;
     account: IAccount;  // 账户信息
@@ -11,6 +11,12 @@ export interface LoginInResponce {
     bindings: IBindingsItem[];  // 和返回值所绑定的一些信息
     cookie: string;  // 很重要cookie，后续很多参数需要cookie
 }
+
+export interface ILoginStatus {
+    account: IAccount,
+    profile: IProfile,
+}
+
 export interface IAccount {
     id: number;  // 用户id
     userName: string;  // 账户名

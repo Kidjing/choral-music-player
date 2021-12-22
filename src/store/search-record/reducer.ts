@@ -13,7 +13,6 @@ const searchRecordReducer = (state = initState, action: any) => {
         return [action.payload, ...state]
     }
     if (action.type === ACTIONS.CLEAR_RECORD) {
-        console.log("ddd");
         const res :Array<string> = []
         return res;
     }

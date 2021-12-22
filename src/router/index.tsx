@@ -9,6 +9,8 @@ import Library from 'src/views/library';
 import Playlist from 'src/views/playlist';
 import Song from 'src/views/song';
 import Search from 'src/views/search';
+import QrLogin from 'src/views/login/qr';
+import PasswordLogin from 'src/views/login/password';
 
 const RouteConfig = () => {
     let routes = useRoutes([
@@ -23,7 +25,9 @@ const RouteConfig = () => {
         { path: '/song', element: <Song /> },
         { path: '/album', element: <Alubum /> },
         { path: '/artist', element: <Artist /> },
-        { path: '/search', element: <Search /> }
+        { path: '/search', element: <Search /> },
+        { path: '/login/qr', element: <QrLogin /> },
+        { path: '/login/password', element: <PasswordLogin /> },
     ]);
     return routes;
 };
