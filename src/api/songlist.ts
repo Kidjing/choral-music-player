@@ -1,5 +1,5 @@
 import request from "./axios";
-import { IMusic } from "./types/song";
+import { IFmMusic, IMusic } from "./types/song";
 import { ISonglistDetail,ISonglist,IGetSonglistsRequest,IRecommandSonglist } from './types/songlist'
 
 // 获取歌单详细信息
@@ -88,11 +88,26 @@ export const getDailyPlaylist:DailyRecommendPlaylist = async () => {
 };
 
 // 私人FM
-type PersonalFM =()=> Promise<IMusic[]>;
+type PersonalFM =()=> Promise<IFmMusic[]>;
 export const getPersonalFM:PersonalFM = async () => {
     const response = await request({
         url: '/personal_fm',
+        params:{
+            timestamp: Date.now()
+        }
     });
 
+    return response.data;
+};
+
+type TrashFM =(id:number)=> Promise<IFmMusic[]>;
+export const trashPersonalFM:TrashFM = async (id) => {
+    const response = await request({
+        url: '/fm_trash',
+        params: {
+            id
+        },
+    });
+    console.log(response)
     return response.data;
 };

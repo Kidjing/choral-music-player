@@ -69,7 +69,7 @@ const Home = () => {
                         <DailyCard />
                     </Col>
                     <Col span={12}>
-                        {/* <FmCard /> */}
+                        <FmCard />
                     </Col>
                 </Row>
             </div>

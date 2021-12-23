@@ -1,56 +1,53 @@
 import { Button } from '@arco-design/web-react';
-import { IArtistItem, IMusic } from '../../api/types/song';
+import { usePalette } from 'color-thief-react';
+import { IArtistItem, IFmMusic } from '../../api/types/song';
 import { IconThumbDown, IconPlayArrow, IconPause, IconSkipNext } from '@arco-design/web-react/icon';
-import './index.less';
-import { useEffect, useState } from 'react';
-import { getPersonalFM } from 'src/api/songlist';
+import { useState } from 'react';
 import { connect } from 'react-redux';
+import { getFm } from 'src/store/fm-card/reducer';
+import { trashPersonalFM } from 'src/api/songlist';
+
+import './index.less';
 
 const FmCard = (props: any) => {
     const [play, setPlay] = useState(false);
-    const [personalFM, setPersonalFM] = useState<IMusic[]>([]);
-    const defaultFM = {
-        imgSrc: 'https://p4.music.126.net/5AQU0WlqeDsA5XSDVaXTqA==/4420036743669830.jpg?param=512y512',
-        title: 'MOM',
-        artists: [
-            {
-                id: 12260125,
-                name: 'Regard',
-            },
-        ],
+    const [currentFm, setCurrentFm] = useState<IFmMusic>(props.personalFm.shift());
+    const { data } = usePalette(currentFm.album.picUrl, 2, 'hex', { crossOrigin: 'anonymous' });
+
+    const getNext = () => {
+        setCurrentFm(props.personalFm.shift());
+        props.getFm(props.userInfo);
+    };
+    const trashFm = (id: number) => {
+        trashPersonalFM(id)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch();
     };
 
-    useEffect(() => {
-        if (props.userInfo.status) {
-            getPersonalFM().then((res) => {
-                setPersonalFM(res);
-            });
-        }
-    }, [props.userInfo.status]);
-
     return (
-        <div
-            className="fm-card"
-            style={{ background: 'linear-gradient(to left top, rgb(119, 127, 103), rgb(173, 169, 154))' }}
-        >
-            <img className="fm-card-cover" src={personalFM[0] ? personalFM[0].al.picUrl : defaultFM.imgSrc} />
+        <div className="fm-card" style={{ background: `linear-gradient(to top left, ${data?.[0]}, ${data?.[1]})` }}>
+            <img className="fm-card-cover" src={currentFm.album.picUrl} />
             <div className="fm-card-right">
                 <div className="info">
-                    <div className="title">{personalFM[0] ? personalFM[0].name : defaultFM.title}</div>
+                    <div className="title">{currentFm.name}</div>
                     <div className="artist">
-                        {(personalFM[0] ? personalFM[0].ar : defaultFM.artists).map(
-                            (item: IArtistItem, index: number) => {
-                                if (index === (personalFM[0] ? personalFM[0].ar : defaultFM.artists).length - 1) {
-                                    return <a>{item.name} </a>;
-                                } else {
-                                    return <a>{item.name},</a>;
-                                }
-                            },
-                        )}
+                        {currentFm.artists.map((item: IArtistItem, index: number) => {
+                            if (index === currentFm.artists.length - 1) {
+                                return <a href={'/?artist=' + item.id}>{item.name} </a>;
+                            } else {
+                                return <a href={'/?artist=' + item.id}>{item.name},</a>;
+                            }
+                        })}
                     </div>
                 </div>
                 <div className="control">
-                    <Button className="btn" icon={<IconThumbDown style={{ width: '100%', height: '100%' }} />} />
+                    <Button
+                        className="btn"
+                        onClick={() => trashFm(currentFm.id)}
+                        icon={<IconThumbDown style={{ width: '100%', height: '100%' }} />}
+                    />
                     <Button
                         className="btn"
                         onClick={() => {
@@ -63,7 +60,11 @@ const FmCard = (props: any) => {
                             <IconPlayArrow style={{ width: '100%', height: '100%' }} />
                         )}
                     </Button>
-                    <Button className="btn" icon={<IconSkipNext style={{ width: '100%', height: '100%' }} />} />
+                    <Button
+                        className="btn"
+                        onClick={getNext}
+                        icon={<IconSkipNext style={{ width: '100%', height: '100%' }} />}
+                    />
                 </div>
             </div>
         </div>
@@ -73,7 +74,12 @@ const FmCard = (props: any) => {
 const mapStateToProps = (state: any) => {
     return {
         userInfo: state.userInfoReducer,
+        personalFm: state.personalFmReducer,
     };
 };
 
-export default connect(mapStateToProps)(FmCard);
+const mapDispatchToProps = {
+    getFm,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FmCard);

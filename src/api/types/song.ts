@@ -23,6 +23,16 @@ export interface IAlbumItem {
     id: number;
     name: string;
     picUrl: string;
-    pic_str: string;
-    pic: number;
+    pic_str?: string;
+    pic?: number;
+}
+
+// 私人FM
+export interface IFmMusic {
+    id: number;
+    name: string;
+    artists: IArtistItem[];  // 歌手信息
+    album: IAlbumItem;   // 专辑信息，歌曲的封面在专辑中
+    publishTime?: number;
+    duration: number; // 歌曲时长，单位ms
 }
