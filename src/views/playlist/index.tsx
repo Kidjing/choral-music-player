@@ -69,6 +69,7 @@ const Playlist=()=>{
                     <p>
                         <TextModal 
                             desc={String(list?.description)} 
+                            title='歌单介绍'
                         />
                     </p>
                     <Space size='large'>
