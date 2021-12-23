@@ -1,4 +1,4 @@
-import React from 'react';
+    import React from 'react';
 import { Button } from '@arco-design/web-react';
 import { IconLoop, IconSwap } from '@arco-design/web-react/icon';
 import { useDispatch } from 'react-redux';
@@ -32,7 +32,8 @@ const PlayMode = () => {
     };
     return (
         <div className="play-mode">
-            <Button
+            <Button 
+                className='play-mode-btn'
                 onClick={() => {
                     setMode((mode + 1) % 3);
                     dispatch({
