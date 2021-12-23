@@ -20,15 +20,15 @@ export const Track = (props: TrackProps) => {
     const navigate = useNavigate()
     return (
         <div className="track">
-            <img src={album.al.picUrl} onClick={()=>{navigate('/album/?id='+album.al.id)}} />
+            <img src={album.al.picUrl} onClick={()=>{navigate('/album?id='+album.al.id)}} />
             <div className="title-and-artist">
-                <div className="title" onClick={()=>{navigate('/song/?id='+album.id)}}>{album.name}</div>
+                <div className="title" onClick={()=>{navigate('/song?id='+album.id)}}>{album.name}</div>
                 <div className="artist">
                     {album.ar.map((item: IArtistItem, index: number) => {
                         if (index === album.ar.length - 1) {
-                            return <a onClick={()=>{navigate('/artist/?id='+item.id)}}>{item.name} </a>;
+                            return <a onClick={()=>{navigate('/artist?id='+item.id)}}>{item.name} </a>;
                         } else {
-                            return <a onClick={()=>{navigate('/artist/?id='+item.id)}}>{item.name},</a>;
+                            return <a onClick={()=>{navigate('/artist?id='+item.id)}}>{item.name},</a>;
                         }
                     })}
                 </div>

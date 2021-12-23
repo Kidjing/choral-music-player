@@ -44,7 +44,7 @@ const Artist = () => {
                 <div
                     className="artist-img"
                     onClick={() => {
-                        navigate('/artist/?id=' + artist?.artist.id);
+                        navigate('/artist?id=' + artist?.artist.id);
                     }}
                 >
                     <CommonCard
@@ -122,7 +122,7 @@ const Artist = () => {
                     <div
                         className="new-album-img"
                         onClick={() => {
-                            navigate('/album/?id=' + (albums !== undefined ? albums[0].id : 0));
+                            navigate('/album?id=' + (albums !== undefined ? albums[0].id : 0));
                         }}
                     >
                         <CommonCard
@@ -137,7 +137,7 @@ const Artist = () => {
                             <h3
                                 className="h3"
                                 onClick={() => {
-                                    navigate('/album/?id=' + (albums !== undefined ? albums[0].id : 0));
+                                    navigate('/album?id=' + (albums !== undefined ? albums[0].id : 0));
                                 }}
                             >
                                 {albums !== undefined ? albums[0].name : ''}
@@ -152,7 +152,7 @@ const Artist = () => {
                 <div className="new-album">
                     <div
                         onClick={() => {
-                            navigate('/album/?id=' + (albums !== undefined ? albums[1].id : 0));
+                            navigate('/album?id=' + (albums !== undefined ? albums[1].id : 0));
                         }}
                         className="new-album-img"
                     >
@@ -167,7 +167,7 @@ const Artist = () => {
                         <h3
                             className="h3"
                             onClick={() => {
-                                navigate('/album/?id=' + (albums !== undefined ? albums[0].id : 0));
+                                navigate('/album?id=' + (albums !== undefined ? albums[0].id : 0));
                             }}
                         >
                             {albums !== undefined ? albums[1].name : ''}
@@ -192,7 +192,7 @@ const Artist = () => {
                                 <Col key={index} span={4}>
                                     <div
                                         onClick={() => {
-                                            navigate('/album/?id=' + (albums !== undefined ? albums[index].id : 0));
+                                            navigate('/album?id=' + (albums !== undefined ? albums[index].id : 0));
                                         }}
                                     >
                                         <CommonCard

@@ -11,7 +11,7 @@ const DailyCard = (props: any) => {
         if (props.userInfo.status) {
             navigate('/daily/songs');
         } else {
-            navigate('/login/qr');
+            navigate('/login_qr');
         }
     };
 

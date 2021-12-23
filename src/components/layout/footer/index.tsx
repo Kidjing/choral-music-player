@@ -12,7 +12,7 @@ const Foot = Layout.Footer;
 const Footer = () => {
     return (
         <Foot className="layout-footer">
-            <Song picture="" songName="songName" singer="singer" />
+            <Song isCollected='' picture="" songName="songName" singer="singer" />
             <PlayControl />
             <PlayList />
             <PlayMode />

@@ -53,7 +53,7 @@ const Playlist=()=>{
         <div className='list'>
             <div className='list-msg'>
                 <div className='list-img'
-                    onClick={()=>{navigate('/playlist/?id=' + list?.id);}}
+                    onClick={()=>{navigate('/playlist?id=' + list?.id);}}
                 >
                     <CommonCard
                         imgSrc={list?.coverImgUrl as string}

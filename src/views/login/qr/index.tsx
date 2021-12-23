@@ -81,7 +81,7 @@ const QrLogin = (props: any) => {
                             />
                             <div>状态:{message}</div>
                             <h3>打开网易云APP扫码登录</h3>
-                            <a onClick={()=>{navigate('/login/password')}}>手机号登录</a>
+                            <a onClick={()=>{navigate('/login_password')}}>手机号登录</a>
                         </div>
                     </div>
                     : null

@@ -27,8 +27,8 @@ const RouteConfig = () => {
         { path: '/album', element: <Alubum /> },
         { path: '/artist', element: <Artist /> },
         { path: '/search', element: <Search /> },
-        { path: '/login/qr', element: <QrLogin /> },
-        { path: '/login/password', element: <PasswordLogin /> },
+        { path: '/login_qr', element: <QrLogin /> },
+        { path: '/login_password', element: <PasswordLogin /> },
         { path: '/daily/songs', element: <Daily /> },
     ]);
     return routes;

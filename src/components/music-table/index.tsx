@@ -39,7 +39,7 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
             width: '20px',
             render: (col: string, record: IMusic, item: number) => {
                 if (type === 'playlist') {
-                    return <img className="playlist-img" src={record.al.picUrl} onClick={()=>{navigate('/album/?id='+record.al.id)}} />;
+                    return <img className="playlist-img" src={record.al.picUrl} onClick={()=>{navigate('/album?id='+record.al.id)}} />;
                 } else {
                     return (
                         <div className="album-prefix">
@@ -70,7 +70,7 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
             render: (col: string, record: IMusic) => (
                 <div className="music-table-song">
                     <div className="music-table-song-name"
-                        onClick={()=>{navigate('/song/?id='+record.id)}}
+                        onClick={()=>{navigate('/song?id='+record.id)}}
                     >
                         {record.name}
                     </div>
@@ -78,9 +78,9 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
                         <div className="music-table-song-artist">
                             {record.ar.map((item: IArtistItem, index: number) => {
                                 if (index === record.ar.length - 1) {
-                                    return <a onClick={()=>{navigate('/artist/?id='+record.ar[index].id)}}>{item.name} </a>;
+                                    return <a onClick={()=>{navigate('/artist?id='+record.ar[index].id)}}>{item.name} </a>;
                                 } else {
-                                    return <a onClick={()=>{navigate('/artist/?id='+record.ar[index].id)}}>{item.name},</a>;
+                                    return <a onClick={()=>{navigate('/artist?id='+record.ar[index].id)}}>{item.name},</a>;
                                 }
                             })}
                         </div>
@@ -93,7 +93,7 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
             render: (col: string, record: IMusic) =>
                 type === 'playlist' ? (
                     <div className="playlist-album">
-                        <a onClick={()=>{navigate('/album/?id='+record.al.id)}}>{record.al.name}</a>
+                        <a onClick={()=>{navigate('/album?id='+record.al.id)}}>{record.al.name}</a>
                     </div>
                 ) : null,
         },

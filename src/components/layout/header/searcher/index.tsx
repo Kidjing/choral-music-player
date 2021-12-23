@@ -48,7 +48,7 @@ const Searcher = (props: any) => {
                             </div>}
                         dataSource={search?.artists}
                         render={(item, index) =>
-                            <List.Item onClick={() => { navigate('/artist/?id=' + item.id); addRecord(input) }}
+                            <List.Item onClick={() => { navigate('/artist?id=' + item.id); addRecord(input) }}
                                 className='searcher-list-item' key={index}>
                                 {item.name}</List.Item>} />}
                     {search?.songs !== undefined && <List size='small'
@@ -61,7 +61,7 @@ const Searcher = (props: any) => {
                             </div>}
                         dataSource={search?.songs}
                         render={(item, index) =>
-                            <List.Item onClick={() => { navigate('/song/?id=' + item.id); addRecord(input) }}
+                            <List.Item onClick={() => { navigate('/song?id=' + item.id); addRecord(input) }}
                                 className='searcher-list-item' key={index}>
                                 {item.name + '——' + item.artists[0].name}</List.Item>} />}
                     {search?.playlists !== undefined && <List size='small'
@@ -73,7 +73,7 @@ const Searcher = (props: any) => {
                                 </Typography.Text>
                             </div>}
                         dataSource={search?.playlists}
-                        render={(item, index) => <List.Item onClick={() => { navigate('/playlist/?id=' + item.id); addRecord(input) }} className='searcher-list-item' key={index}>
+                        render={(item, index) => <List.Item onClick={() => { navigate('/playlist?id=' + item.id); addRecord(input) }} className='searcher-list-item' key={index}>
                             {item.name}
                         </List.Item>} />}
                     {search?.albums !== undefined && <List size='small'
@@ -86,7 +86,7 @@ const Searcher = (props: any) => {
                             </div>}
                         dataSource={search?.albums}
                         render={(item, index) =>
-                            <List.Item onClick={() => { navigate('/album/?id=' + item.id); addRecord(input) }}
+                            <List.Item onClick={() => { navigate('/album?id=' + item.id); addRecord(input) }}
                                 className='searcher-list-item' key={index}>
                                 {item.name + '——' + item.artist.name}</List.Item>} />}
                 </div> : null}
@@ -111,7 +111,7 @@ const Searcher = (props: any) => {
     return (
         <Trigger popup={pop} position='bottom' trigger={['click']} clickToClose={false}>
             <Input size='large' className="searcher" prefix={<IconSearch />}
-                allowClear placeholder="搜索" onPressEnter={()=>{navigate('/search/?keyword='+input)}}
+                allowClear placeholder="搜索" onPressEnter={()=>{navigate('/search?keyword='+input)}}
                 onChange={inputChange} value={input} />
         </Trigger>
     );

@@ -37,7 +37,7 @@ const More = (props:{ artist:number,name:string }) => {
                         return (
                             <Col
                                 onClick={() => {
-                                    navigate('/album/?id='+(album !== undefined?(album[index].id):0));
+                                    navigate('/album?id='+(album !== undefined?(album[index].id):0));
                                 }}
                                 key={index}
                                 span={4}
@@ -100,7 +100,7 @@ const Album = () => {
         <div className="album">
             <div className="album-msg">
                 <div className="album-img"
-                    onClick={()=>{navigate('/album/?id=' + albumId);}}
+                    onClick={()=>{navigate('/album?id=' + albumId);}}
                 >
                     <CommonCard
                         imgSrc={album?.album.blurPicUrl !== undefined ? album.album.blurPicUrl : ''}
@@ -116,7 +116,7 @@ const Album = () => {
                         <u
                             style={{ cursor: 'pointer' }}
                             onClick={() => {
-                                navigate('/artist/?id=' + artistId);
+                                navigate('/artist?id=' + artistId);
                             }}
                         >
                             {album?.album.artist.name}

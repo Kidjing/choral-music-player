@@ -57,7 +57,7 @@ const PasswordLogin = (props: any) => {
                             <Button className='button' type='primary' onClick={summit}>提交</Button>
                         </Space>
                     </div>
-                    <a onClick={() => { navigate('/login/qr') }}>二维码登录</a>
+                    <a onClick={() => { navigate('/login_qr') }}>二维码登录</a>
                 </div>
             </div>
         </div>
