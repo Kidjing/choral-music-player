@@ -6,7 +6,6 @@ import { store } from 'src/store';
 
 const App = () => {
     const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)');
-    console.log(darkThemeMq)
     darkThemeMq.addEventListener('change', (e) => {
         if (e.matches) {
             document.body.setAttribute('arco-theme', 'dark');

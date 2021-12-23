@@ -22,12 +22,9 @@ const FmCard = (props: any) => {
 
     useEffect(() => {
         if (props.userInfo.status) {
-            console.log('logjin');
             getPersonalFM().then((res) => {
                 setPersonalFM(res);
             });
-        } else {
-            console.log('asdasfasf');
         }
     }, [props.userInfo.status]);
 

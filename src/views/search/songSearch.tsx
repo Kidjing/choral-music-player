@@ -17,7 +17,6 @@ const SongSearch = () => {
         const key = searchParams.get('keyword')!;
         search({ key, type: 1, limit: 16 }).then(res => {
             setSongList(res.songs);
-            console.log(songList);
         })
 
     }, [searchParams])

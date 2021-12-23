@@ -17,7 +17,6 @@ const Searcher = (props: any) => {
         setShow(inputValue === '' ? 0 : 1)
         setInput(inputValue)
         suggestSearch(inputValue).then(res => {
-            console.log(input);
             setSearch(res)
         })
     }

@@ -21,7 +21,6 @@ const Explore = (props: any) => {
     }, []);
 
     const handleScroll = (e: any) => {
-        console.log(e);
         const { scrollTop, clientHeight, scrollHeight } = e.target;
         if (scrollTop + clientHeight === scrollHeight) {
             alert('滚动到底部啦');

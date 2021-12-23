@@ -28,7 +28,6 @@ const PasswordLogin = (props: any) => {
                     nickname: res.profile.nickname,
                     status: true,
                 };
-                console.log(res);
 
                 props.setInfo(state);
                 navigate('/library');

@@ -104,7 +104,6 @@ const Library = (props:any) => {
 
     },[])
 
-    console.log("playList",playList)
     return (
         <div className="library">
             <h1>

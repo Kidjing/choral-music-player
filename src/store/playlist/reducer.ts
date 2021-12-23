@@ -5,9 +5,6 @@ import { IAction } from '../../types/actions';
 let initState: ISonglist[] = [];
 
 export const playListReducer = (state = initState, action: IAction<ISonglist[] | IRecommandSonglist[]>) => {
-    // if (action.type === ACTIONS.SEARCH_MORE) {
-    //     return [...state, action.payload];
-    // }
     if (action.type === ACTIONS.SEARCH_PLAYLIST) {
         return action.payload;
     }

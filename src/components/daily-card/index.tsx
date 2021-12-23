@@ -1,27 +1,16 @@
 import { Button } from '@arco-design/web-react';
 import { IconCaretRight } from '@arco-design/web-react/icon';
-import { useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getDailyPlaylist } from 'src/api/songlist';
-import { IMusic } from 'src/api/types/song';
 
 import './index.less';
 
 const DailyCard = (props: any) => {
     const navigate = useNavigate();
-    const [dailyList, setDailyList] = useState<IMusic[]>([]);
-    const defaultCovers = 'https://p2.music.126.net/0-Ybpa8FrDfRgKYCTJD8Xg==/109951164796696795.jpg';
-
     const handleDaily = () => {
         if (props.userInfo.status) {
-            getDailyPlaylist()
-                .then((res) => {
-                    setDailyList(res);
-                });
             navigate('daily/songs');
         } else {
-            console.log('asdasfasf');
             navigate('login/qr');
         }
     };
@@ -29,7 +18,7 @@ const DailyCard = (props: any) => {
     return (
         <div className="daily-card">
             <div onClick={handleDaily}>
-                <img src={dailyList[0] ? dailyList[0].al.picUrl : defaultCovers} />
+                <img src={props.dailyPlayList[0].al.picUrl} />
                 <div className="title-box">
                     <div className="title">
                         <span>每</span>
@@ -51,7 +40,8 @@ const DailyCard = (props: any) => {
 const mapStateToProps = (state: any) => {
     return {
         userInfo: state.userInfoReducer,
-    };
+        dailyPlayList:state.dailySongsReducer,
+    }
 };
 
 export default connect(mapStateToProps)(DailyCard);
