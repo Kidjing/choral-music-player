@@ -4,6 +4,7 @@ import {tagReducer} from './dynamic-tag/reducer';
 import { playListReducer } from './playlist/reducer';
 import searchRecordReducer from './search-record/reducer';
 import userInfoReducer from './user/reducer';
+import { libReducer } from './library/reducer';
 
 export const reducer = combineReducers({
     playingReducer,
@@ -11,4 +12,5 @@ export const reducer = combineReducers({
     playListReducer,
     searchRecordReducer,
     userInfoReducer,
+    libReducer,
 });

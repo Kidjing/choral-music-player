@@ -31,3 +31,5 @@ export const getUserSonglistByID: GetUserSonglistByID = async (uid) => {
     // 直接返回歌单列表
     return response.playlist
 }
+
+// type GetCloud=(limit:number,offset:number)=>Promise<>

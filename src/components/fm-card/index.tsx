@@ -1,11 +1,14 @@
 import { Button } from '@arco-design/web-react';
-import { IArtistItem } from '../../api/types/song';
+import { IArtistItem, IMusic } from '../../api/types/song';
 import { IconThumbDown, IconPlayArrow, IconPause, IconSkipNext } from '@arco-design/web-react/icon';
 import './index.less';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getPersonalFM } from 'src/api/songlist';
+import { connect } from 'react-redux';
 
 const FmCard = (props: any) => {
     const [play, setPlay] = useState(false);
+    const [personalFM, setPersonalFM] = useState<IMusic[]>([]);
     const defaultFM = {
         imgSrc: 'https://p4.music.126.net/5AQU0WlqeDsA5XSDVaXTqA==/4420036743669830.jpg?param=512y512',
         title: 'MOM',
@@ -16,23 +19,37 @@ const FmCard = (props: any) => {
             },
         ],
     };
+
+    useEffect(() => {
+        if (props.userInfo.status) {
+            console.log('logjin');
+            getPersonalFM().then((res) => {
+                setPersonalFM(res);
+            });
+        } else {
+            console.log('asdasfasf');
+        }
+    }, [props.userInfo.status]);
+
     return (
         <div
             className="fm-card"
             style={{ background: 'linear-gradient(to left top, rgb(119, 127, 103), rgb(173, 169, 154))' }}
         >
-            <img className="fm-card-cover" src={defaultFM.imgSrc} />
+            <img className="fm-card-cover" src={personalFM[0] ? personalFM[0].al.picUrl : defaultFM.imgSrc} />
             <div className="fm-card-right">
                 <div className="info">
-                    <div className="title">{defaultFM.title}</div>
+                    <div className="title">{personalFM[0] ? personalFM[0].name : defaultFM.title}</div>
                     <div className="artist">
-                        {defaultFM.artists.map((item: IArtistItem, index: number) => {
-                            if (index === defaultFM.artists.length - 1) {
-                                return <a>{item.name} </a>;
-                            } else {
-                                return <a>{item.name},</a>;
-                            }
-                        })}
+                        {(personalFM[0] ? personalFM[0].ar : defaultFM.artists).map(
+                            (item: IArtistItem, index: number) => {
+                                if (index === (personalFM[0] ? personalFM[0].ar : defaultFM.artists).length - 1) {
+                                    return <a>{item.name} </a>;
+                                } else {
+                                    return <a>{item.name},</a>;
+                                }
+                            },
+                        )}
                     </div>
                 </div>
                 <div className="control">
@@ -56,4 +73,10 @@ const FmCard = (props: any) => {
     );
 };
 
-export default FmCard;
+const mapStateToProps = (state: any) => {
+    return {
+        userInfo: state.userInfoReducer,
+    };
+};
+
+export default connect(mapStateToProps)(FmCard);

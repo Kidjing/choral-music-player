@@ -1,14 +1,18 @@
 import { Avatar, Button, Tag, Space, Modal, Input, Checkbox ,Grid} from '@arco-design/web-react';
 import { IconClose, IconPlus } from '@arco-design/web-react/icon';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+// import { IMusic } from 'src/api/types/song';
+import { UserPlaylist } from 'src/api/types/user';
+import { getUserSonglistByID } from 'src/api/user';
 import { CommonCard, LikeCard, SelectTag, TrackList } from 'src/components';
-import { ICreator } from '../../api/types/user';
+import { filterPlaylist } from 'src/store/library/reducer';
+import { ITag } from 'src/types/actions';
 
 import './index.less';
 
 const Row = Grid.Row;
 const Col = Grid.Col;
-const data = [1, 1, 1, 1, 1, 1];
 const playlist = [
     {
         name: 'Ride It',
@@ -88,23 +92,26 @@ const playlist = [
     }
 ];
 
-const Library = () => {
-    const userInfo: ICreator = {
-        userId: 409041521,
-        nickname: '嘟噜o匈',
-        avatarUrl: 'https://p1.music.126.net/4cA7-y3r_aUqC5k8RUZImQ==/19057835044640063.jpg',
-    };
+const Library = (props:any) => {
     const playlistOpt = ['全部歌单', '创建的歌单', '收藏的歌单'];
-    const tagOpt = ['专辑', '艺人', 'MV', '云盘'];
+    const [playList,setPlayList]=useState<UserPlaylist[]>([])
+    // const [cloud,setCloud]=useState<IMusic[]>([])
     const [visible, setVisible] = useState(false);
-    
+    useEffect(()=>{
+        getUserSonglistByID(props.userInfo.userId).then(res=>{
+            setPlayList(res)
+        });
+
+    },[])
+
+    console.log("playList",playList)
     return (
         <div className="library">
             <h1>
                 <Avatar className="avatar">
-                    <img src={userInfo.avatarUrl} />
+                    <img src={props.userInfo.avatarUrl} />
                 </Avatar>
-                {userInfo.nickname + '的音乐库'}
+                {props.userInfo.nickname + '的音乐库'}
             </h1>
             <div className="section-one">
                 <LikeCard />
@@ -114,11 +121,13 @@ const Library = () => {
                 <div className="tabs-row">
                     <div className="tabs">
                         <SelectTag options={playlistOpt} />
-                        {tagOpt.map((tag: string, index: number) => {
+                        {props.tag.map((tag: ITag, index: number) => {
                             return (
                                 <Space key={index} wrap>
-                                    <Tag checkable className="tag" color="gray">
-                                        {tag}
+                                    <Tag checkable className="tag" checked={tag.isCheck} onCheck={()=>{
+                                        props.filterPlaylist(tag)
+                                    }} color="gray">
+                                        {tag.name}
                                     </Tag>
                                 </Space>
                             );
@@ -135,12 +144,12 @@ const Library = () => {
                     </Button>
                 </div>
                 <Row className="cover-row" gutter={[44, 24]}>
-                    {data.map((item, index) => {
+                    {playList.map((item:UserPlaylist, index:number) => {
                         return (
                             <Col key={index} span={4}>
                                 <CommonCard
-                                    imgSrc="https://p2.music.126.net/3S-U3XHLH6Z4Vmcijc76Xg==/109951166673278474.jpg?param=512y512"
-                                    title="网易云"
+                                    imgSrc={item.coverImgUrl}
+                                    title={item.name}
                                     shape="round"
                                     textPostion="left"
                                 />
@@ -186,6 +195,15 @@ const Library = () => {
 };
 
 
+const mapStateToProps = (state: any) => {
+    return {
+        tag: state.libReducer,
+        userInfo:state.userInfoReducer
+    };
+};
 
+const mapDispatchToProps = {
+    filterPlaylist,
+}; 
 
-export default Library;
+export default connect(mapStateToProps, mapDispatchToProps)(Library);
