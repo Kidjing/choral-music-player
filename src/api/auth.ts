@@ -89,8 +89,6 @@ export const logout: LogOut = async () => {
 // http://www.yili.fit:3000/login/status
 
 type LoginStatus = () => Promise<ILoginStatus>
-// 检查二维码状态
-// http://www.yili.fit:3000/login/qr/create
 export const loginStatus: LoginStatus = async () => {
     const response = await request({
         url: '/login/status',

@@ -1,10 +1,14 @@
 import { Layout, Button, Avatar, Switch, Popover } from '@arco-design/web-react';
 import { IconLeft, IconMoon, IconRight, IconSun, IconToRight } from '@arco-design/web-react/icon';
-import { logout } from 'src/api/auth';
+import { logout,loginStatus } from 'src/api/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import Searcher from './searcher';
+import { UserInfo } from 'src/api/types/user'
+
 import { connect } from 'react-redux';
-import { clearInfo } from 'src/store/user/reducer'
+import { clearInfo, setInfo } from 'src/store/user/reducer'
+import { useEffect } from 'react';
+import {getLoginStatus} from 'src/utils/user'
 import './index.less';
 
 
@@ -18,8 +22,26 @@ const Header = (props: any) => {
     const libraryLink = () => {
         if (!props.userInfo.status) {
             navigate('/login/qr');
+        }else{
+            navigate('/library')
         }
     }
+
+    useEffect(()=>{
+        if(getLoginStatus()){
+            loginStatus().then(res=>{
+                const state: UserInfo = {
+                    userId: res.account.id,
+                    avatarUrl: res.profile.avatarUrl,
+                    nickname: res.profile.nickname,
+                    status: true,
+                };
+
+                props.setInfo(state);
+            })
+
+        }
+    },[])
 
     const content = <span>
         {
@@ -82,7 +104,7 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-const mapDispatchToProps = { clearInfo };
+const mapDispatchToProps = { clearInfo,setInfo};
 
 
 
