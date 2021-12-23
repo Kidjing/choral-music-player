@@ -86,3 +86,13 @@ export const getDailyPlaylist:DailyRecommendPlaylist = async () => {
 
     return response.data.dailySongs;
 };
+
+// 私人FM
+type PersonalFM =()=> Promise<IMusic[]>;
+export const getPersonalFM:PersonalFM = async () => {
+    const response = await request({
+        url: '/personal_fm',
+    });
+
+    return response.data;
+};

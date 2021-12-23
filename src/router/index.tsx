@@ -11,6 +11,7 @@ import Song from 'src/views/song';
 import Search from 'src/views/search';
 import QrLogin from 'src/views/login/qr';
 import PasswordLogin from 'src/views/login/password';
+import Daily from 'src/views/daily';
 
 const RouteConfig = () => {
     let routes = useRoutes([
@@ -28,6 +29,7 @@ const RouteConfig = () => {
         { path: '/search', element: <Search /> },
         { path: '/login/qr', element: <QrLogin /> },
         { path: '/login/password', element: <PasswordLogin /> },
+        { path: '/daily/songs', element: <Daily /> },
     ]);
     return routes;
 };
