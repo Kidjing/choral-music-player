@@ -1,7 +1,7 @@
 import { CommonCard, MusicTable, TextModal } from 'src/components';
 import React, { useEffect } from 'react';
 import { Button, Space, Grid } from '@arco-design/web-react';
-import { IconHeart, IconCaretRight } from '@arco-design/web-react/icon';
+import { IconHeart, IconCaretRight, IconPause } from '@arco-design/web-react/icon';
 import { getAlbum, getArtistAlbum } from 'src/api/album';
 import { IGetAlbumResponse, IAlbum } from 'src/api/types/album'
 import { IMusic } from 'src/api/types/song';
@@ -71,6 +71,7 @@ const Album = () => {
     let id: number;
     const [album, setAlbum] = React.useState<IGetAlbumResponse>();
     const [heart, setHeart] = React.useState<boolean>(false);
+    const [play, setPlay] = React.useState<boolean>(false)
     useEffect(() => {
         id = Number(searchParams.get('id'));
         getAlbum(Number(id)).then((res) => {
@@ -90,13 +91,17 @@ const Album = () => {
         date = dateTrans(album.album.publishTime);
     }
     let artistId: number;
-    if (album?.album.artist.id !== undefined) {
+    let albumId:number;
+    if (album?.album !== undefined) {
         artistId = album.album.artist.id;
+        albumId = album.album.id;
     }
     return (
         <div className="album">
             <div className="album-msg">
-                <div className="album-img">
+                <div className="album-img"
+                    onClick={()=>{navigate('/album/?id=' + albumId);}}
+                >
                     <CommonCard
                         imgSrc={album?.album.blurPicUrl !== undefined ? album.album.blurPicUrl : ''}
                         title=""
@@ -125,10 +130,23 @@ const Album = () => {
                     />
                     <br/>
                     <Space size="large">
-                        <Button type="primary" icon={<IconCaretRight />}>
-                            {' '}
-                            播放
-                        </Button>
+                    {play?(
+                            <Button
+                                onClick={()=>{setPlay(!play)}}
+                                type='primary' 
+                                icon={<IconPause />}
+                            > 
+                                暂停
+                            </Button>
+                        ):(
+                            <Button
+                                onClick={()=>{setPlay(!play)}} 
+                                type='primary' 
+                                icon={<IconCaretRight />}
+                            > 
+                                播放
+                            </Button>
+                        )}
                     </Space>
                     <Space size="large">
                         <Button style={{ marginLeft: 20, backgroundColor: 'transparent' }} title="收藏">
