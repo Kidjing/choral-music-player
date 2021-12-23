@@ -1,57 +1,57 @@
-.track-list {
-    flex: 7;
-    margin-top: 8px;
-    margin-left: 36px;
-    overflow: hidden;
+import { Grid } from '@arco-design/web-react';
+import { IMusic, IArtistItem } from '../../api/types/song';
+import { useNavigate} from 'react-router-dom';
+
+import './index.less';
+
+interface TrackProps {
+    album: IMusic;
 }
 
-.track {
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    border-radius: 12px;
-    user-select: none;
-    &:hover {
-        background: var(--color-text-4);
-    }
-    img {
-        height: 36px;
-        width: 36px;
-        border-radius: 6px;
-        margin-right: 14px;
-        cursor: pointer;
-    }
-    .title-and-artist {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        .title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--color-text-1);
-            cursor: default;
-            padding-right: 16px;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        .artist {
-            font-size: 12px;
-            margin-top: 2px;
-            opacity: 0.68;
-            color: var(--color-text-2);
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-            overflow: hidden;
-            a {
-                color: inherit;
-                text-decoration: none;
-                cursor: pointer;
-            }
-        }
-    }
+interface TrackListProps {
+    playlist: IMusic[];
 }
 
+const Row = Grid.Row;
+const Col = Grid.Col;
+
+export const Track = (props: TrackProps) => {
+    const { album } = props;
+    const navigate = useNavigate()
+    return (
+        <div className="track">
+            <img src={album.al.picUrl} onClick={()=>{navigate('/album/?id='+album.al.id)}} />
+            <div className="title-and-artist">
+                <div className="title" onClick={()=>{navigate('/song/?id='+album.id)}}>{album.name}</div>
+                <div className="artist">
+                    {album.ar.map((item: IArtistItem, index: number) => {
+                        if (index === album.ar.length - 1) {
+                            return <a onClick={()=>{navigate('/artist/?id='+item.id)}}>{item.name} </a>;
+                        } else {
+                            return <a onClick={()=>{navigate('/artist/?id='+item.id)}}>{item.name},</a>;
+                        }
+                    })}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const TrackList = (props: TrackListProps) => {
+    const {playlist}=props;
+    return (
+        <div className="track-list">
+            <Row gutter={[4, 4]}>
+                {playlist.map((item, index) => {
+                    return (
+                        <Col key={index} span={6}>
+                            <Track album={item} />
+                        </Col>
+                    );
+                })}
+            </Row>
+        </div>
+    );
+};
+
+export default TrackList;
