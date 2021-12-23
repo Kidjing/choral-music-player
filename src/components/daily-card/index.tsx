@@ -9,9 +9,9 @@ const DailyCard = (props: any) => {
     const navigate = useNavigate();
     const handleDaily = () => {
         if (props.userInfo.status) {
-            navigate('daily/songs');
+            navigate('/daily/songs');
         } else {
-            navigate('login/qr');
+            navigate('/login/qr');
         }
     };
 
