@@ -3,6 +3,7 @@ import { Table, Button } from '@arco-design/web-react';
 import { IconCaretRight, IconHeart, IconHeartFill, IconSound } from '@arco-design/web-react/icon';
 import { IMusic, IArtistItem } from '../../api/types/song';
 import { timeToMinute } from 'src/utils/timetrans';
+import { useNavigate} from 'react-router-dom';
 
 import './index.less';
 import classNames from 'classnames';
@@ -25,6 +26,7 @@ interface LikeState {
 }
 const MusicTable = (props: MusicTableProps<IMusic>) => {
     const { data, type } = props;
+    const navigate = useNavigate()
     const [play, setPlay] = useState<boolean>(false);
     const [checkId, setCheckId] = useState(0);
     const [showPlay, setShowPlay] = useState({ num: 1, show: false });
@@ -37,7 +39,7 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
             width: '20px',
             render: (col: string, record: IMusic, item: number) => {
                 if (type === 'playlist') {
-                    return <img className="playlist-img" src={record.al.picUrl} />;
+                    return <img className="playlist-img" src={record.al.picUrl} onClick={()=>{navigate('/album/?id='+record.al.id)}} />;
                 } else {
                     return (
                         <div className="album-prefix">
@@ -67,14 +69,18 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
             title: 'Song',
             render: (col: string, record: IMusic) => (
                 <div className="music-table-song">
-                    <div className="music-table-song-name">{record.name}</div>
+                    <div className="music-table-song-name"
+                        onClick={()=>{navigate('/song/?id='+record.id)}}
+                    >
+                        {record.name}
+                    </div>
                     {type === 'playlist' ? (
                         <div className="music-table-song-artist">
                             {record.ar.map((item: IArtistItem, index: number) => {
                                 if (index === record.ar.length - 1) {
-                                    return <a>{item.name} </a>;
+                                    return <a onClick={()=>{navigate('/artist/?id='+record.ar[index].id)}}>{item.name} </a>;
                                 } else {
-                                    return <a>{item.name},</a>;
+                                    return <a onClick={()=>{navigate('/artist/?id='+record.ar[index].id)}}>{item.name},</a>;
                                 }
                             })}
                         </div>
@@ -87,7 +93,7 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
             render: (col: string, record: IMusic) =>
                 type === 'playlist' ? (
                     <div className="playlist-album">
-                        <a href={record.al.picUrl}>{record.al.name}</a>
+                        <a onClick={()=>{navigate('/album/?id='+record.al.id)}}>{record.al.name}</a>
                     </div>
                 ) : null,
         },
