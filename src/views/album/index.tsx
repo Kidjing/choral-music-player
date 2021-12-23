@@ -127,6 +127,7 @@ const Album = () => {
                     </p>
                     <TextModal 
                         desc={String(album?album.album.description:'')} 
+                        title='专辑介绍'
                     />
                     <br/>
                     <Space size="large">
