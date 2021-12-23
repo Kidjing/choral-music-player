@@ -45,6 +45,8 @@ const Explore = (props: any) => {
                                 <CommonCard
                                     imgSrc={item.coverImgUrl ? item.coverImgUrl : item.picUrl}
                                     title={item.name}
+                                    type="playlist"
+                                    id={item.id}
                                     shape="round"
                                     textPostion="left"
                                 />
