@@ -6,6 +6,7 @@
 export const timeToMinute = (dt: number): string => {
     const minutes = Math.round((dt % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.round((dt % (1000 * 60)) / 1000);
+    if(Math.floor(seconds/10)===0) return minutes + ':0' + seconds;
     return minutes + ':' + seconds;
 };
 
