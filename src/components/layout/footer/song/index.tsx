@@ -7,15 +7,16 @@ interface SongMsg {
     picture:string
     songName:string
     singer:string
-    isCollected:string
+    isCollected?:string
 }
 
 const Song = (props:SongMsg) =>{
     const navigate = useNavigate()
+    const [heart, setHeart] = React.useState<boolean>(false)
     return(
-        <div style={{float:'left',marginLeft:'4%',width:'20%'}} >
+        <div style={{float:'left',marginLeft:'4%',width:'54%'}} >
             
-            <div onClick={()=>{navigate('/album/?id=122524667')}} style={{cursor:'pointer',float:'left',height:46,width:46,borderRadius:5,background:'red'}}>
+            <div onClick={()=>{navigate('/album/?id=122524667')}} style={{cursor:'pointer',float:'left',height:46,width:46,borderRadius:5,border:'dashed'}}>
                 <img src={props.picture}  />
             </div>
             
@@ -28,11 +29,11 @@ const Song = (props:SongMsg) =>{
                     {props.singer}
                 </text>
             </div>
-            <Button style={{float:'left',height:50,display:'flex',alignItems:'center',border:'none',backgroundColor:'#f5f5f4'}} title='收藏'>
-                {props.isCollected === 'true'?(
-                    <IconHeart style={{fontSize:26,color:'red'}}/>
+            <Button style={{float:'left',height:50,display:'flex',alignItems:'center',border:'none',backgroundColor:'transparent'}} title='收藏'>
+                {heart?(
+                    <IconHeart onClick={()=>{setHeart(!heart)}} style={{fontSize:26,color:'red'}}/>
                 ) : (
-                    <IconHeart style={{fontSize:26}}/>
+                    <IconHeart onClick={()=>{setHeart(!heart)}} style={{fontSize:26}}/>
                 )}
             </Button>
         </div>

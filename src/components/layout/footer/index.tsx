@@ -5,7 +5,6 @@ import PlayMode from './play-mode';
 import PlayVolume from './play-volume';
 import PlayControl from './play-control';
 import Song from './song';
-// import { Link } from 'react-router-dom';
 import './index.less';
 
 const Foot = Layout.Footer;
@@ -13,7 +12,7 @@ const Foot = Layout.Footer;
 const Footer = () => {
     return (
         <Foot className="layout-footer">
-            <Song picture="src\assets\zjl.jpg" songName="songName" singer="singer" isCollected="true" />
+            <Song picture="" songName="songName" singer="singer" />
             <PlayControl />
             <PlayList />
             <PlayMode />
@@ -25,25 +24,21 @@ const Footer = () => {
 
 const PlayList = () => {
     return (
-        // <Link to='/PlayList'>
-        <div className="footer-menu-btn">
-            <Button title="播放列表">
-                <IconMenu style={{ fontSize: 26 }} />
+        <div>
+            <Button className="footer-btn" title="播放列表">
+                <IconMenu style={{ fontSize: 26, backgroundColor:'transparent' }} />
             </Button>
         </div>
-        // </Link>
     );
 };
 
 const WordsOfSong = () => {
     return (
-        // <Link to='/WordsOfSong'>
-        <div className="footer-up-btn">
-            <Button title="歌词">
-                <IconUp style={{ fontSize: 26 }} />
+        <div>
+            <Button className="footer-btn" title="歌词">
+                <IconUp style={{ fontSize: 26, backgroundColor:'transparent' }} />
             </Button>
         </div>
-        // </Link>
     );
 };
 

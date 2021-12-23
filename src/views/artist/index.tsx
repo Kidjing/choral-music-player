@@ -1,7 +1,7 @@
 import { CommonCard, TextModal, TrackList  } from 'src/components';
 import React, { useEffect } from 'react';
 import { Button, Space, Grid } from '@arco-design/web-react';
-import {  IconCaretRight} from '@arco-design/web-react/icon';
+import {  IconCaretRight, IconPause } from '@arco-design/web-react/icon';
 import { getArtistDetail } from 'src/api/artist'
 import { IArtist } from 'src/api/types/artist'
 import { IMusic } from 'src/api/types/song'
@@ -19,6 +19,8 @@ const Artist = () =>{
     const [searchParams] = useSearchParams()
     const [artist, setArtist] = React.useState<{artist:IArtist;hotSongs:IMusic[]}>()
     const [albums, setAlbums] = React.useState<IAlbum[]>()
+    const [play, setPlay] = React.useState<boolean>(false)
+    const [follow, setFollow] = React.useState<boolean>(false)
     let id:number
     useEffect(()=>{
         id = Number(searchParams.get('id'))
@@ -39,7 +41,9 @@ const Artist = () =>{
     return(
         <div className='artist'>
             <div className='artist-msg'>
-                <div className='artist-img'>
+                <div className='artist-img'
+                    onClick={()=>{navigate('/artist/?id=' + artist?.artist.id);}}
+                >
                     <CommonCard
                         imgSrc={(artist?.artist.picUrl !==undefined)?(artist.artist.picUrl):''}
                         title=""
@@ -51,19 +55,50 @@ const Artist = () =>{
                     <h1>{artist?.artist.name}</h1>  
                     <p>艺人</p>
                     <p>
-                        <a style={{ color:'black'}} href='#hotSongs'>{artist?.artist.musicSize}首歌</a>
-                         . <a style={{ color:'black'}} href='#album'>{artist?.artist.albumSize}专辑</a>
+                        <a href='#hotSongs' className='a'>{artist?.artist.musicSize}首歌</a>
+                         . <a href='#album' className='a'>{artist?.artist.albumSize}专辑</a>
                          . {artist?.artist.mvSize}个MV
                     </p>
                     <TextModal 
                         desc={String(artist?.artist.briefDesc)} 
+                        title='艺术家介绍'
                     />
                     <br/>
                     <Space style={{marginRight:20}} size='large'>
-                        <Button type='primary' icon={<IconCaretRight />}> 播放</Button>
+                        {play?(
+                                <Button
+                                    onClick={()=>{setPlay(!play)}}
+                                    type='primary' 
+                                    icon={<IconPause />}
+                                > 
+                                    暂停
+                                </Button>
+                            ):(
+                                <Button
+                                    onClick={()=>{setPlay(!play)}} 
+                                    type='primary' 
+                                    icon={<IconCaretRight />}
+                                > 
+                                    播放
+                                </Button>
+                        )}
                     </Space>
                     <Space size='large'>
-                        <Button type='primary'>关注</Button>
+                        {follow?(
+                                <Button
+                                    onClick={()=>{setFollow(!follow)}}
+                                    type='primary' 
+                                > 
+                                    已关注
+                                </Button>
+                            ):(
+                                <Button
+                                    onClick={()=>{setFollow(!follow)}} 
+                                    type='primary' 
+                                > 
+                                    关注
+                                </Button>
+                        )}
                     </Space>
                 </div>
             </div>
@@ -72,7 +107,7 @@ const Artist = () =>{
             <div className='new'>
                 <h2>最新发布</h2>
                 <div className='new-album'>
-                    <div onClick={()=>{navigate('/album/?id='+(albums !== undefined?(albums[0].id):0))}} className='new-album-img'>
+                    <div className='new-album-img' onClick={()=>{navigate('/album/?id='+(albums !== undefined?(albums[0].id):0))}}>
                         <CommonCard
                             imgSrc={(albums?.[0].blurPicUrl !== undefined)?(String(albums[0].blurPicUrl)):''}
                             title=''
@@ -80,11 +115,15 @@ const Artist = () =>{
                             textPostion="left"
                         />
                     </div>
-                    <div className='new-album-msg'>
-                        <h3>{(albums!==undefined)?(albums[0].name):''}</h3>
-                        <p>{dateTrans(Number(albums !== undefined?(albums[0].publishTime):0))}</p>
-                        <p>{(albums !== undefined?(albums[0].size):0)}首歌</p>
-                    </div>
+                    {(albums!==undefined?albums?.length:0)>=2?(
+                        <div className='new-album-msg'>
+                            <h3 className='h3' onClick={()=>{navigate('/album/?id='+(albums !== undefined?(albums[0].id):0))}}>{(albums!==undefined)?(albums[0].name):''}</h3>
+                            <p>{dateTrans(Number(albums !== undefined?(albums[0].publishTime):0))}</p>
+                            <p>{(albums !== undefined?(albums[0].size):0)}首歌</p>
+                        </div>
+                    ):(
+                        <p/>
+                    )}
                 </div>
                 <div className='new-album'>
                     <div onClick={()=>{navigate('/album/?id='+(albums !== undefined?(albums[1].id):0))}} className='new-album-img'>
@@ -96,7 +135,7 @@ const Artist = () =>{
                         />
                     </div>
                     <div className='new-album-msg'>
-                        <h3>{(albums!==undefined)?(albums[1].name):''}</h3>
+                        <h3 className='h3' onClick={()=>{navigate('/album/?id='+(albums !== undefined?(albums[0].id):0))}}>{(albums!==undefined)?(albums[1].name):''}</h3>
                         <p>{dateTrans(Number(albums !== undefined?(albums[1].publishTime):0))}</p>
                         <p>{(albums !== undefined?(albums[1].size):0)}首歌</p>
                     </div>

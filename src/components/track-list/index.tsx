@@ -1,5 +1,6 @@
 import { Grid } from '@arco-design/web-react';
 import { IMusic, IArtistItem } from '../../api/types/song';
+import { useNavigate} from 'react-router-dom';
 
 import './index.less';
 
@@ -16,17 +17,18 @@ const Col = Grid.Col;
 
 export const Track = (props: TrackProps) => {
     const { album } = props;
+    const navigate = useNavigate()
     return (
         <div className="track">
-            <img src={album.al.picUrl} />
+            <img src={album.al.picUrl} onClick={()=>{navigate('/album/?id='+album.al.id)}} />
             <div className="title-and-artist">
-                <div className="title">{album.name}</div>
+                <div className="title" onClick={()=>{navigate('/song/?id='+album.id)}}>{album.name}</div>
                 <div className="artist">
                     {album.ar.map((item: IArtistItem, index: number) => {
                         if (index === album.ar.length - 1) {
-                            return <a href={'/artist/' + item.id}>{item.name} </a>;
+                            return <a onClick={()=>{navigate('/artist/?id='+item.id)}}>{item.name} </a>;
                         } else {
-                            return <a href={'/artist/' + item.id}>{item.name},</a>;
+                            return <a onClick={()=>{navigate('/artist/?id='+item.id)}}>{item.name},</a>;
                         }
                     })}
                 </div>
