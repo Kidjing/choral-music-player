@@ -180,7 +180,7 @@ const Artist = () => {
 
             <div id="hotSongs">
                 <h2>热门歌曲</h2>
-                {artist?.hotSongs != undefined ? <TrackList playlist={artist?.hotSongs} /> : <div>加载中</div>}
+                {artist?.hotSongs !== undefined ? <TrackList playlist={artist?.hotSongs} /> : <div>加载中</div>}
             </div>
 
             <div id="album">

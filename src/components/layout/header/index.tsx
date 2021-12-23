@@ -11,21 +11,20 @@ import { useEffect } from 'react';
 import {getLoginStatus} from 'src/utils/user'
 import './index.less';
 
-
 const Head = Layout.Header;
 const Header = (props: any) => {
     const navigate = useNavigate();
     const loginOut = () => {
         logout();
-        props.clearInfo()
-    }
+        props.clearInfo();
+    };
     const libraryLink = () => {
         if (!props.userInfo.status) {
-            navigate('/login_qr');
+            navigate('/login/qr');
         }else{
             navigate('/library')
         }
-    }
+    };
 
     useEffect(()=>{
         if(getLoginStatus()){
@@ -47,7 +46,7 @@ const Header = (props: any) => {
         {
             // 如果status为false显示登录，否则显示登出
             !props.userInfo.status ?
-                <Button onClick={() => { navigate('/login_qr') }} >
+                <Button onClick={() => { navigate('/login/qr') }} >
                     <IconToRight />登录
                 </Button> :
                 <Button onClick={loginOut} >
@@ -81,17 +80,25 @@ const Header = (props: any) => {
                 <div className="navbar-right">
                     <Searcher />
 
-
-                    <Popover position='bl' content={content} trigger='click'>
+                    <Popover position="bl" content={content} trigger="click">
                         <Avatar className="navbar-right-avatar" size={30}>
-                            <img
-                                alt="avatar"
-                                src="//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp"
-                            />
+                            {props.userInfo.status ? (
+                                <img alt="avatar" src={props.userInfo.avatarUrl} />
+                            ) : (
+                                <img
+                                    alt="avatar"
+                                    src="https://s4.music.126.net/style/web2/img/default/default_avatar.jpg?param=60y60"
+                                />
+                            )}
                         </Avatar>
                     </Popover>
 
-                    <Switch className="navbar-right-switch" onChange={handleTheme} uncheckedIcon={<IconSun />} checkedIcon={<IconMoon />} />
+                    <Switch
+                        className="navbar-right-switch"
+                        onChange={handleTheme}
+                        uncheckedIcon={<IconSun />}
+                        checkedIcon={<IconMoon />}
+                    />
                 </div>
             </nav>
         </Head>
@@ -105,7 +112,5 @@ const mapStateToProps = (state: any) => {
 };
 
 const mapDispatchToProps = { clearInfo,setInfo};
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

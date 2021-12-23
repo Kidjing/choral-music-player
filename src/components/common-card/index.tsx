@@ -24,7 +24,7 @@ const CommonCard = (props: CommonCardProps) => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const goToAlbum=(id:number,type:string)=>{
         if(id===0) return;
-        navigate(type+'?id='+id);
+        navigate('/'+type+'?id='+id);
     }
     return (
         <div style={style} className="common-card">
@@ -43,7 +43,6 @@ const CommonCard = (props: CommonCardProps) => {
                 <img
                     className="common-card-cover-img"
                     style={{ borderRadius: shape === 'round' ? '0.75em' : '50%' }}
-                    alt="dessert"
                     src={imgSrc}
                     onClick={()=>goToAlbum(id as number,type as string)}
                 />
@@ -53,7 +52,7 @@ const CommonCard = (props: CommonCardProps) => {
                 style={{ justifyContent: textPostion}}
             >
                 <div className="common-card-text-title" style={{width:textPostion==='left'?'100%':''}}>
-                    <a href={type+'/?id='+id}>{title}</a>
+                    <a href={'/'+type+'?id='+id}>{title}</a>
                 </div>
                 <div className="common-card-text-info">
                     <span>{desc}</span>
