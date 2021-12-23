@@ -21,7 +21,9 @@ const FmCard = (props: any) => {
     const trashFm = (id: number) => {
         trashPersonalFM(id)
             .then((res) => {
-                console.log(res);
+                if (res) {
+                    console.log(res);
+                }
             })
             .catch();
     };
@@ -43,28 +45,31 @@ const FmCard = (props: any) => {
                     </div>
                 </div>
                 <div className="control">
-                    <Button
-                        className="btn"
-                        onClick={() => trashFm(currentFm.id)}
-                        icon={<IconThumbDown style={{ width: '100%', height: '100%' }} />}
-                    />
-                    <Button
-                        className="btn"
-                        onClick={() => {
-                            setPlay(!play);
-                        }}
-                    >
-                        {play ? (
-                            <IconPause style={{ width: '100%', height: '100%' }} />
-                        ) : (
-                            <IconPlayArrow style={{ width: '100%', height: '100%' }} />
-                        )}
-                    </Button>
-                    <Button
-                        className="btn"
-                        onClick={getNext}
-                        icon={<IconSkipNext style={{ width: '100%', height: '100%' }} />}
-                    />
+                    <div className='buttons'>
+                        <Button
+                            className="btn"
+                            onClick={() => trashFm(currentFm.id)}
+                            icon={<IconThumbDown style={{ width: '100%', height: '100%' }} />}
+                        />
+                        <Button
+                            className="btn"
+                            onClick={() => {
+                                setPlay(!play);
+                            }}
+                        >
+                            {play ? (
+                                <IconPause style={{ width: '100%', height: '100%' }} />
+                            ) : (
+                                <IconPlayArrow style={{ width: '100%', height: '100%' }} />
+                            )}
+                        </Button>
+                        <Button
+                            className="btn"
+                            onClick={getNext}
+                            icon={<IconSkipNext style={{ width: '100%', height: '100%' }} />}
+                        />
+                    </div>
+                    <div className="card-name">私人FM</div>
                 </div>
             </div>
         </div>

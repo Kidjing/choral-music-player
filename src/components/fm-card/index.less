@@ -39,11 +39,25 @@
             }
         }
         .control {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-left: -0.4rem;
-            .btn {
-                margin: 0 8px 0 0;
-                background: transparent;
-                color: #fff;
+            .buttons {
+                display: flex;
+                .btn {
+                    margin: 0 8px 0 0;
+                    background: transparent;
+                    color: #fff;
+                }
+            }
+            .card-name {
+                font-size: 1rem;
+                opacity: 0.18;
+                display: flex;
+                align-items: center;
+                font-weight: 600;
+                user-select: none;
             }
         }
     }
