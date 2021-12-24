@@ -29,7 +29,7 @@ const NewAlbum = () => {
                                 <CommonCard
                                     imgSrc={album.picUrl}
                                     title={album.name}
-                                    desc={<a href={'artist/' + album.id}>{album.artist.name} </a>}
+                                    desc={<a href={'artist' + album.id}>{album.artist.name} </a>}
                                     type="album"
                                     id={album.id}
                                     shape="round"

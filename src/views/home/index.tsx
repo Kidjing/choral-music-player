@@ -45,7 +45,7 @@ const Home = (props: any) => {
                 <div className="title">
                     推荐歌单
                     <a
-                        href="explore/?category=推荐歌单"
+                        href="explore?category=推荐歌单"
                         onClick={() =>{ props.searchTag({ name: '推荐歌单', isCheck: true })}}
                     >
                         查看全部
@@ -110,7 +110,7 @@ const Home = (props: any) => {
                                 <CommonCard
                                     imgSrc={album.picUrl}
                                     title={album.name}
-                                    desc={<a href={'artist/' + album.id}>{album.artist.name} </a>}
+                                    desc={<a href={'artist?' + album.id}>{album.artist.name} </a>}
                                     type="album"
                                     id={album.id}
                                     shape="round"
@@ -125,7 +125,7 @@ const Home = (props: any) => {
                 <div className="title">
                     排行榜
                     <a
-                        href="explore/?category=排行榜"
+                        href="explore?category=排行榜"
                         onClick={() => props.searchTag({ name: '推荐歌单', isCheck: true })}
                     >
                         查看全部

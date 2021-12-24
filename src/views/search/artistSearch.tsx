@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { search } from 'src/api/search';
 import { IArtist } from 'src/api/types/artist';
 import React, { useState, useEffect } from 'react';
@@ -13,7 +13,9 @@ const Col = Grid.Col;
 
 const ArtistSearch = () => {
     let [artistList, setArtistList] = useState<IArtist[]>();
+    const navigate = useNavigate();
     const [searchParams] = useSearchParams();
+    const key = searchParams.get('keyword')!;
     useEffect(() => {
         const key = searchParams.get('keyword')!;
         search({ key, type: 100, limit: 4 }).then(res => {
@@ -23,7 +25,7 @@ const ArtistSearch = () => {
     return (
         <div>
             <div className="title">艺人
-                <a href='explore/?category=推荐歌单'>查看全部</a>
+                <a onClick={() => navigate('artist?keyword=' + key)}>查看全部</a>
             </div>
             <Row gutter={[30, 40]} className='card'>
                 {artistList ? artistList.map((item, index) => {
@@ -32,6 +34,8 @@ const ArtistSearch = () => {
                             <CommonCard
                                 imgSrc={item.picUrl}
                                 title={item.name}
+                                id={item.id}
+                                type='artist'
                                 shape="circle"
                                 textPostion="center"
                             />
