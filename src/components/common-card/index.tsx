@@ -47,7 +47,7 @@ const CommonCard = (props: any) => {
                     className="common-card-cover-img"
                     loading='lazy'
                     style={{ borderRadius: shape === 'round' ? '0.75em' : '50%' }}
-                    src={imgSrc}
+                    src={imgSrc+'?param=300y300'}
                     onClick={()=>goToAlbum(id as number,type as string)}
                 />
             </div>

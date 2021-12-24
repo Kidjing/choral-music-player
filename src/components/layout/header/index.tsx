@@ -17,6 +17,7 @@ const Header = (props: any) => {
     const loginOut = () => {
         logout();
         props.clearInfo();
+        navigate('/');
     };
     const libraryLink = () => {
         if (!props.userInfo.status) {
