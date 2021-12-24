@@ -16,7 +16,7 @@ import './index.less';
 const Row = Grid.Row;
 const Col = Grid.Col;
 
-const Home = (props: any) => {
+const Home = () => {
     /**
      * TODO: 异步状态优化
      */
@@ -44,12 +44,7 @@ const Home = (props: any) => {
             <div className={classNames('index-row', 'first-row')}>
                 <div className="title">
                     推荐歌单
-                    <a
-                        href="explore?category=推荐歌单"
-                        onClick={() =>{ props.searchTag({ name: '推荐歌单', isCheck: true })}}
-                    >
-                        查看全部
-                    </a>
+                    <a href="explore?category=推荐歌单">查看全部</a>
                 </div>
                 <Row className="cover-row" gutter={[44, 24]}>
                     {personList.map((item: IRecommandSonglist, index: number) => {
@@ -124,12 +119,7 @@ const Home = (props: any) => {
             <div className="index-row">
                 <div className="title">
                     排行榜
-                    <a
-                        href="explore?category=排行榜"
-                        onClick={() => props.searchTag({ name: '推荐歌单', isCheck: true })}
-                    >
-                        查看全部
-                    </a>
+                    <a href="explore?category=排行榜">查看全部</a>
                 </div>
                 <Row gutter={[44, 24]}>
                     {rankList.map((item: ISonglist, index: number) => {

@@ -38,27 +38,6 @@ const initState: IFmMusic[] = [
         },
         duration: 270367,
     },
-    {
-        name: '锦鲤抄',
-        id: 28188434,
-        artists: [
-            {
-                name: '银临',
-                id: 188565,
-            },
-            {
-                name: '云の泣',
-                id: 981005,
-            },
-        ],
-        album: {
-            name: '腐草为萤',
-            id: 2742059,
-            pic: 5859297464524710,
-            picUrl: 'http://p4.music.126.net/LBnYDAUED2mD1veBvBnC8g==/5859297464524710.jpg',
-        },
-        duration: 245120,
-    },
 ];
 
 export const personalFmReducer = (state = initState, action: IAction<IFmMusic[]>) => {
