@@ -1,8 +1,7 @@
 import { Button } from '@arco-design/web-react';
 import { usePalette } from 'color-thief-react';
-import { IArtistItem, IFmMusic } from '../../api/types/song';
+import { IArtistItem } from '../../api/types/song';
 import { IconThumbDown, IconPlayArrow, IconPause, IconSkipNext } from '@arco-design/web-react/icon';
-import { useState } from 'react';
 import { connect } from 'react-redux';
 import { getFm } from 'src/store/fm-card/reducer';
 import { trashPersonalFM } from 'src/api/songlist';
@@ -11,25 +10,22 @@ import './index.less';
 import { changeStatus } from 'src/store/playing/reducer';
 
 const FmCard = (props: any) => {
-    
-    const [currentFm, setCurrentFm] = useState<IFmMusic>(props.personalFm.shift());
+    const currentFm=props.personalFm[0]
     const { data } = usePalette(currentFm.album.picUrl, 2, 'hex', { crossOrigin: 'anonymous' });
 
     const getNext = () => {
-        setCurrentFm(props.personalFm.shift());
         props.getFm(props.userInfo);
     };
     const trashFm = (id: number) => {
         trashPersonalFM(id)
             .then((res) => {
                 if (res) {
-                    setCurrentFm(props.personalFm.shift());
                     props.getFm(props.userInfo);
                 }
             })
             .catch();
     };
-
+    
     return (
         <div className="fm-card" style={{ background: `linear-gradient(to top left, ${data?.[0]}, ${data?.[1]})` }}>
             <img className="fm-card-cover" loading="lazy" src={currentFm.album.picUrl} />
