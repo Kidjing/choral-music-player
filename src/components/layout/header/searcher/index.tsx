@@ -28,7 +28,7 @@ const Searcher = (props: any) => {
     const clickSearchRecord = (item: string) => {
         inputChange(item)
     }
-    
+
     const clickClearRecord = () => {
         props.clearRecord()
         Message.success("成功删除搜索记录")
@@ -37,7 +37,7 @@ const Searcher = (props: any) => {
     const pop = () => {
         return (
             <div className='demo-trigger-popup'>
-                {show ? <div>
+                {show ? <div className='search-item'>
                     {search?.artists !== undefined && <List size='small'
                         header={
                             <div className="searcher-list-header">
@@ -110,9 +110,9 @@ const Searcher = (props: any) => {
     }
     return (
         <Trigger popup={pop} position='bottom' trigger={['click']} clickToClose={false}>
-            <Input size='large' className="searcher" prefix={<IconSearch />}
-                allowClear placeholder="搜索" onPressEnter={()=>{navigate('/search?keyword='+input)}}
-                onChange={inputChange} value={input} />
+            <Input size='large' className="searcher" prefix={<IconSearch style={{ fontSize: 18}}/>}
+                allowClear placeholder="搜索" onPressEnter={() => { navigate('/search?keyword=' + input) }}
+                onChange={inputChange} value={input} style={{ borderRadius: "6px" }} />
         </Trigger>
     );
 };
