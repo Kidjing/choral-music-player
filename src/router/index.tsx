@@ -1,5 +1,5 @@
 import React from 'react';
-import {  useRoutes } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 import { Layout } from 'src/components';
 import Album from 'src/views/album';
 import Artist from 'src/views/artist';
@@ -9,6 +9,12 @@ import Library from 'src/views/library';
 import Playlist from 'src/views/playlist';
 import Song from 'src/views/song';
 import Search from 'src/views/search';
+// 详情搜索
+import ArtistSearch from 'src/views/search/artist';
+import AlbumSearch from 'src/views/search/album';
+import PlaylistSearch from 'src/views/search/playlist';
+import SongSearch from 'src/views/search/song';
+
 import QrLogin from 'src/views/login/qr';
 import PasswordLogin from 'src/views/login/password';
 import Daily from 'src/views/daily';
@@ -38,7 +44,25 @@ const RouteConfig = () => {
         { path: '/album', element: <Album /> },
         { path: '/new-album', element: <NewAlbum /> },
         { path: '/artist', element: <Artist /> },
-        { path: '/search', element: <Search /> },
+        {
+            path: '/search', children: [
+                {
+                    index: true, element: <Search />
+                },
+                {
+                    path: 'artist', element: <ArtistSearch />
+                },
+                {
+                    path: 'album', element: <AlbumSearch />
+                },
+                {
+                    path: 'playlist', element: <PlaylistSearch />
+                },
+                {
+                    path: 'song', element: <SongSearch />
+                }
+            ]
+        },
         { path: '/login_qr', element: <QrLogin /> },
         { path: '/login_password', element: <PasswordLogin /> },
         { path: '/daily/songs', element: <Daily /> },
