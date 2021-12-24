@@ -1,18 +1,36 @@
-.layout-footer{
-    display: flex;
-    align-items: center;
+.layout-footer {
     position: fixed;
     width: 100%;
     bottom: 0;
     right: 0;
     background: var(--color-bg-2);
+    opacity: 0.95;
     color: var(--color-text-1);
-    height: 50px;
-    .footer-btn{
-        display: flex;
-        align-items: center;
-        border: none;
-        background-color: transparent;
+    height: 64px;
+    .controls {
+        height: 100%;
+        padding-right: 10vw;
+        padding-left: 10vw;
+        @media (max-width: 1336px) {
+            padding: 0 5vw;
+        }
+        .footer-btn {
+            display: flex;
+            align-items: center;
+            border: none;
+            padding: 8px;
+            justify-content: center;
+            background-color: transparent;
+        }
+        .middle-control-buttons {
+            display: flex;
+            height: 100%;
+        }
+        .right-control-buttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            height: 100%;
+        }
     }
 }
-

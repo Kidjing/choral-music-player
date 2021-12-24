@@ -10,7 +10,7 @@ const PlayControl = () => {
     return (
         <div className="play-control">
             <Button className="play-control-btn">
-                <IconSkipPrevious style={{ fontSize: 26 }} />
+                <IconSkipPrevious style={{ fontSize: 20 }} />
             </Button>
             <Button
                 className="play-control-btn"
@@ -19,13 +19,13 @@ const PlayControl = () => {
                 }}
             >
                 {isPlay === 'Playing' ? (
-                    <IconPause style={{ fontSize: 36 }} />
+                    <IconPause style={{ fontSize: 28 }} />
                 ) : (
-                    <IconPlayArrow style={{ fontSize: 36 }} />
+                    <IconPlayArrow style={{ fontSize: 28 }} />
                 )}
             </Button>
             <Button className="play-control-btn">
-                <IconSkipNext style={{ fontSize: 26 }} />
+                <IconSkipNext style={{ fontSize: 20 }} />
             </Button>
         </div>
     );

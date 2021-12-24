@@ -1,3 +1,5 @@
+import { IMusic } from "./song";
+
 export interface IRecommandSonglist {
     alg?: string; // alg_sq_official_tagOnly 为官方歌单
     name: string; // 歌单名称
@@ -30,6 +32,7 @@ export interface ISonglistDetail {
     id: number; // 歌曲id
     name: string; // 歌单名
     playCount: number; // 观看数量，可以放在首页进行展示
+    tracks:IMusic[];
     trackIds: ITrackId[]; // 这个是这个songlist的ID集合，需要通过ids来获取所有的歌曲，以后会用到
 }
 

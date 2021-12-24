@@ -3,9 +3,11 @@ import { IMusic, IArtistItem } from '../../api/types/song';
 import { useNavigate} from 'react-router-dom';
 
 import './index.less';
+import classNames from 'classnames';
 
 interface TrackProps {
     album: IMusic;
+    hoverable?:boolean;
 }
 
 interface TrackListProps {
@@ -16,10 +18,10 @@ const Row = Grid.Row;
 const Col = Grid.Col;
 
 export const Track = (props: TrackProps) => {
-    const { album } = props;
+    const { album , hoverable=true} = props;
     const navigate = useNavigate()
     return (
-        <div className="track">
+        <div className={classNames("track", hoverable?'hover':'')}>
             <img src={album.al.picUrl} onClick={()=>{navigate('/album?id='+album.al.id)}} />
             <div className="title-and-artist">
                 <div className="title" onClick={()=>{navigate('/song?id='+album.id)}}>{album.name}</div>

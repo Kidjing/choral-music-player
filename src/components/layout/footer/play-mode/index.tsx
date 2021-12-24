@@ -12,28 +12,28 @@ const PlayMode = () => {
     const judgeMode = (mode: number) => {
         if (mode === 0)
             return (
-                <div className="play-mode-loop-btn" title="列表循环">
-                    <IconLoop style={{ fontSize: 26 }} />
-                </div>
+                <Button className="footer-btn" title="列表循环">
+                    <IconLoop style={{ fontSize: 20 }} />
+                </Button>
             );
         else if (mode === 1)
             return (
-                <div className="play-mode-loop-btn" title="单曲循环">
-                    <IconLoop style={{ fontSize: 26 }} />
+                <Button className="footer-btn" title="单曲循环">
+                    <IconLoop style={{ fontSize: 20 }} />
                     <text style={{ fontSize: 10 }}>1</text>
-                </div>
+                </Button>
             );
         else
             return (
-                <div className="play-mode-loop-btn" title="随机播放">
-                    <IconSwap style={{ fontSize: 26 }} />
-                </div>
+                <Button className="footer-btn" title="随机播放">
+                    <IconSwap style={{ fontSize: 20 }} />
+                </Button>
             );
     };
     return (
         <div className="play-mode">
             <Button 
-                className='play-mode-btn'
+                className='footer-btn'
                 onClick={() => {
                     setMode((mode + 1) % 3);
                     dispatch({

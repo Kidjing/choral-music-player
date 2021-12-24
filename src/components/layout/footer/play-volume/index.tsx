@@ -12,9 +12,9 @@ const PlayVolume = () => {
     return(
         <div className="play-volume">
             {volume === 0? (
-                <IconMute style={{margin:10,fontSize:40,height:50}}/>
+                <IconMute style={{fontSize:20,marginRight:8}}/>
             ) : (
-                <IconSound style={{margin:10,fontSize:40,height:50}}/>
+                <IconSound style={{fontSize:20,marginRight:8}}/>
             )}
             <Slider value={volume} onChange={setVolume} onAfterChange={()=>{
                 const action = {

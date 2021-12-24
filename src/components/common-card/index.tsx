@@ -4,6 +4,8 @@ import { IconCaretRight } from '@arco-design/web-react/icon';
 import classNames from 'classnames';
 import './index.less';
 import { useNavigate } from 'react-router-dom';
+import { playMusic } from 'src/store/playing/reducer';
+import { connect } from 'react-redux';
 
 interface CommonCardProps {
     imgSrc: string;
@@ -18,14 +20,15 @@ interface CommonCardProps {
     type?:string;
 }
 
-const CommonCard = (props: CommonCardProps) => {
+const CommonCard = (props: any) => {
     const navigate = useNavigate();
-    const { imgSrc, style, title, desc, shape = 'round', textPostion, id ,type} = props;
+    const { imgSrc, style, title, desc, shape = 'round', textPostion, id ,type} = props.ownProps;
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const goToAlbum=(id:number,type:string)=>{
         if(id===0) return;
         navigate('/'+type+'?id='+id);
     }
+
     return (
         <div style={style} className="common-card">
             <div
@@ -34,7 +37,7 @@ const CommonCard = (props: CommonCardProps) => {
                 onMouseLeave={() => setIsVisible(false)}
             >
                 <Button
-                    onClick={() => {}}
+                    onClick={() => {props.playMusic(id,type)}}
                     className={classNames('play-button', isVisible ? '' : 'none')}
                     size="large"
                     shape="round"
@@ -62,4 +65,15 @@ const CommonCard = (props: CommonCardProps) => {
     );
 };
 
-export default CommonCard;
+const mapStateToProps = (state: any,ownProps:CommonCardProps) => {
+    return {
+        song: state.currentMusicReducer,
+        ownProps:ownProps
+    };
+};
+
+const mapDispatchToProps = {
+    playMusic,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CommonCard);
+

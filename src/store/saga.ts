@@ -2,6 +2,7 @@ import { all, takeLatest } from 'redux-saga/effects';
 import { loadMorePlayList, searchPlayList } from '../store/playlist/saga';
 import { loadDailyPlayList } from './daily-card/saga';
 import { loadFmPlayList } from './fm-card/saga';
+import { getPlayingSongList } from './playing/saga';
 
 function* saga() {
     yield all([
@@ -10,6 +11,7 @@ function* saga() {
         takeLatest('SET_INFO', loadDailyPlayList),
         takeLatest('SET_INFO', loadFmPlayList),
         takeLatest('GET_FM', loadFmPlayList),
+        takeLatest('PLAY', getPlayingSongList),
     ]);
 }
 
