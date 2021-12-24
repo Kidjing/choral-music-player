@@ -43,13 +43,23 @@
         width: 44px;
         cursor: default;
     }
+
     img {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        animation: move-data-v-6af2f2b8 38s infinite;
+        animation: move 38s infinite;
         animation-direction: alternate;
         z-index: -1;
+    }
+}
+
+@keyframes move {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-50%);
     }
 }
