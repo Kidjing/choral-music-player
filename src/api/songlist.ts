@@ -105,7 +105,8 @@ export const trashPersonalFM:TrashFM = async (id) => {
     const response = await request({
         url: '/fm_trash',
         params: {
-            id
+            timestamp: Date.now(),
+            id,
         },
     });
     return response.code;

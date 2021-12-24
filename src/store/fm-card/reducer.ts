@@ -45,8 +45,7 @@ export const personalFmReducer = (state = initState, action: IAction<IFmMusic[]>
         return [...state,...action.payload];
     }
     if (action.type === 'GET_FM') {
-        const newState=state.concat();
-        newState.shift();
+        let newState=state.slice(1);
         return [...newState];
     }
     return state;
