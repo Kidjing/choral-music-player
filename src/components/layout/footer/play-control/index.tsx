@@ -4,10 +4,10 @@ import { IconPlayArrow, IconSkipPrevious, IconSkipNext, IconPause } from '@arco-
 
 import './index.less';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import { changeStatus } from 'src/store/playing/reducer';
 
-const PlayControl = () => {
-    const [isPlay, setValue] = React.useState('Playing');
-
+const PlayControl = (props: any) => {
     return (
         <div className="play-control">
             <Button className="play-control-btn">
@@ -16,10 +16,10 @@ const PlayControl = () => {
             <Button
                 className={classNames('play-control-btn', 'play')}
                 onClick={() => {
-                    setValue(isPlay === 'Playing' ? 'Suspending' : 'Playing');
+                    props.changeStatus(props.playStatus);
                 }}
             >
-                {isPlay === 'Playing' ? (
+                {props.playStatus ? (
                     <IconPause style={{ width: '100%', height: '100%' }} />
                 ) : (
                     <IconPlayArrow style={{ width: '100%', height: '100%' }} />
@@ -32,4 +32,12 @@ const PlayControl = () => {
     );
 };
 
-export default PlayControl;
+const mapStateToProps = (state: any) => {
+    return {
+        playStatus: state.playStatusReducer,
+    };
+};
+
+const mapDispatchToProps = { changeStatus };
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayControl);

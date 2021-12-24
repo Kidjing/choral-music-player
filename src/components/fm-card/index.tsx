@@ -8,9 +8,10 @@ import { getFm } from 'src/store/fm-card/reducer';
 import { trashPersonalFM } from 'src/api/songlist';
 
 import './index.less';
+import { changeStatus } from 'src/store/playing/reducer';
 
 const FmCard = (props: any) => {
-    const [play, setPlay] = useState(false);
+    
     const [currentFm, setCurrentFm] = useState<IFmMusic>(props.personalFm.shift());
     const { data } = usePalette(currentFm.album.picUrl, 2, 'hex', { crossOrigin: 'anonymous' });
 
@@ -55,10 +56,10 @@ const FmCard = (props: any) => {
                         <Button
                             className="btn"
                             onClick={() => {
-                                setPlay(!play);
+                                props.changeStatus(props.playStatus);
                             }}
                         >
-                            {play ? (
+                            {props.playStatus ? (
                                 <IconPause style={{ width: '100%', height: '100%' }} />
                             ) : (
                                 <IconPlayArrow style={{ width: '100%', height: '100%' }} />
@@ -81,11 +82,13 @@ const mapStateToProps = (state: any) => {
     return {
         userInfo: state.userInfoReducer,
         personalFm: state.personalFmReducer,
+        playStatus: state.playStatusReducer,
     };
 };
 
 const mapDispatchToProps = {
     getFm,
+    changeStatus,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FmCard);

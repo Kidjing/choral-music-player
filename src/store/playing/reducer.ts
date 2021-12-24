@@ -56,6 +56,13 @@ export const musicReducer=(state=initsongList,action:IAction<IMusic[]>)=>{
     return state;
 }
 
+export const playStatusReducer=(state=false,action:IAction<boolean>)=>{
+    if(action.type==='CHANGE_STATUS'){
+        return !action.payload;
+    }
+    return state;
+}
+
 export const getSongList=(songList:IMusic[])=>{
     return {
         type:"GET_SONGLIST",
@@ -70,5 +77,12 @@ export const playMusic=(id:number,type:string)=>{
             id:id,
             type:type
         }
+    }
+}
+
+export const changeStatus=(status:boolean)=>{
+    return {
+        type:"CHANGE_STATUS",
+        payload:status,
     }
 }
