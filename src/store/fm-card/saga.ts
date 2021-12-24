@@ -11,6 +11,8 @@ export function* loadFmPlayList(action: Effect) {
             const result: getFmPlayList = yield call(getPersonalFM);
             yield put(pushFm(result));
         }
+        const result: getFmPlayList = yield call(getPersonalFM);
+        yield put(pushFm(result));
     } catch (e) {
         yield put({ type: 'SET_INFO', message: e.message });
     }
