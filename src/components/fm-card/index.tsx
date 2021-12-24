@@ -2,7 +2,7 @@ import { Button } from '@arco-design/web-react';
 import { usePalette } from 'color-thief-react';
 import { IArtistItem, IFmMusic } from '../../api/types/song';
 import { IconThumbDown, IconPlayArrow, IconPause, IconSkipNext } from '@arco-design/web-react/icon';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getFm } from 'src/store/fm-card/reducer';
 import { trashPersonalFM } from 'src/api/songlist';
@@ -22,7 +22,8 @@ const FmCard = (props: any) => {
         trashPersonalFM(id)
             .then((res) => {
                 if (res) {
-                    console.log(res);
+                    setCurrentFm(props.personalFm.shift());
+                    props.getFm(props.userInfo);
                 }
             })
             .catch();
@@ -30,7 +31,7 @@ const FmCard = (props: any) => {
 
     return (
         <div className="fm-card" style={{ background: `linear-gradient(to top left, ${data?.[0]}, ${data?.[1]})` }}>
-            <img className="fm-card-cover" loading='lazy' src={currentFm.album.picUrl} />
+            <img className="fm-card-cover" loading="lazy" src={currentFm.album.picUrl} />
             <div className="fm-card-right">
                 <div className="info">
                     <div className="title">{currentFm.name}</div>
@@ -45,7 +46,7 @@ const FmCard = (props: any) => {
                     </div>
                 </div>
                 <div className="control">
-                    <div className='buttons'>
+                    <div className="buttons">
                         <Button
                             className="btn"
                             onClick={() => trashFm(currentFm.id)}

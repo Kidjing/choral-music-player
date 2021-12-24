@@ -100,7 +100,7 @@ export const getPersonalFM:PersonalFM = async () => {
     return response.data;
 };
 
-type TrashFM =(id:number)=> Promise<IFmMusic[]>;
+type TrashFM =(id:number)=> Promise<{code:number}>;
 export const trashPersonalFM:TrashFM = async (id) => {
     const response = await request({
         url: '/fm_trash',
@@ -108,6 +108,5 @@ export const trashPersonalFM:TrashFM = async (id) => {
             id
         },
     });
-    console.log(response)
-    return response.data;
+    return response.code;
 };
