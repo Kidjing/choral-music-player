@@ -26,7 +26,6 @@ interface IData {
 }
 
 const UserLibrary = (data: IData) => {
-    console.log(data);
     
     for (let item of data.tag) {
         if (item.name === '创建的歌单'&&item.isCheck) {

@@ -30,7 +30,7 @@ const FmCard = (props: any) => {
 
     return (
         <div className="fm-card" style={{ background: `linear-gradient(to top left, ${data?.[0]}, ${data?.[1]})` }}>
-            <img className="fm-card-cover" src={currentFm.album.picUrl} />
+            <img className="fm-card-cover" loading='lazy' src={currentFm.album.picUrl} />
             <div className="fm-card-right">
                 <div className="info">
                     <div className="title">{currentFm.name}</div>

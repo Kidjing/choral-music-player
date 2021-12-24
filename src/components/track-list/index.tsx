@@ -22,7 +22,7 @@ export const Track = (props: TrackProps) => {
     const navigate = useNavigate()
     return (
         <div className={classNames("track", hoverable?'hover':'')}>
-            <img src={album.al.picUrl} onClick={()=>{navigate('/album?id='+album.al.id)}} />
+            <img src={album.al.picUrl} loading='lazy' onClick={()=>{navigate('/album?id='+album.al.id)}} />
             <div className="title-and-artist">
                 <div className="title" onClick={()=>{navigate('/song?id='+album.id)}}>{album.name}</div>
                 <div className="artist">

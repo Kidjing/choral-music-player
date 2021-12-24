@@ -18,7 +18,7 @@ const DailyCard = (props: any) => {
     return (
         <div className="daily-card">
             <div onClick={handleDaily}>
-                <img src={props.dailyPlayList[0].al.picUrl} />
+                <img loading='lazy' src={props.dailyPlayList[0].al.picUrl} />
                 <div className="title-box">
                     <div className="title">
                         <span>每</span>
