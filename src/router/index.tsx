@@ -1,7 +1,7 @@
 import React from 'react';
 import {  useRoutes } from 'react-router-dom';
 import { Layout } from 'src/components';
-import Alubum from 'src/views/album';
+import Album from 'src/views/album';
 import Artist from 'src/views/artist';
 import Explore from 'src/views/explore';
 import Home from 'src/views/home';
@@ -12,6 +12,7 @@ import Search from 'src/views/search';
 import QrLogin from 'src/views/login/qr';
 import PasswordLogin from 'src/views/login/password';
 import Daily from 'src/views/daily';
+import NewAlbum from 'src/views/new-album';
 
 const RouteConfig = () => {
     let routes = useRoutes([
@@ -24,7 +25,8 @@ const RouteConfig = () => {
         { path: '/library', element: <Library /> },
         { path: '/playlist', element: <Playlist /> },
         { path: '/song', element: <Song /> },
-        { path: '/album', element: <Alubum /> },
+        { path: '/album', element: <Album /> },
+        { path: '/new-album', element: <NewAlbum /> },
         { path: '/artist', element: <Artist /> },
         { path: '/search', element: <Search /> },
         { path: '/login_qr', element: <QrLogin /> },
