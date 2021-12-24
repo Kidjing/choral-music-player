@@ -2,7 +2,7 @@ import { Button } from '@arco-design/web-react';
 import { usePalette } from 'color-thief-react';
 import { IArtistItem, IFmMusic } from '../../api/types/song';
 import { IconThumbDown, IconPlayArrow, IconPause, IconSkipNext } from '@arco-design/web-react/icon';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { connect } from 'react-redux';
 import { getFm } from 'src/store/fm-card/reducer';
 import { trashPersonalFM } from 'src/api/songlist';
