@@ -2,7 +2,6 @@ import { Button } from '@arco-design/web-react';
 import { getAlbum } from '../../api/album'
 import { login, logout } from '../../api/auth'
 import { ILoginInRequest } from '../../api/types/auth'
-import { getUserSonglistByID } from '../../api/user'
 import { getPlaylistDetail } from 'src/api/songlist'
 
 const testAlbum = () => {
@@ -27,11 +26,7 @@ const testLogout = () => {
     })
 }
 
-const testGetUserDetailByID = () => {
-    getUserSonglistByID(1880030641).then(res => {
-        console.log(res);
-    })
-}
+
 const testGetArtistDetail = () => {
     getPlaylistDetail(514947114).then(res => {
         console.log(res);
@@ -44,7 +39,6 @@ const APITest = () => {
             <Button onClick={testAlbum} type='primary'>测试专辑</Button>
             <Button onClick={testLoginIn} type='primary'>测试登录</Button>
             <Button onClick={testLogout} type='primary'>测试登出</Button>
-            <Button onClick={testGetUserDetailByID} type='primary'>测试获取用户详细信息</Button>
             <Button onClick={testGetArtistDetail} type='primary'>测试获取用户详细信息</Button>
 
         </div>

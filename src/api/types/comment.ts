@@ -36,6 +36,7 @@ export interface CommentsRequest {
     limit?: number;
     offset?: number;
     before?: number;
+    type?:number;
 }
 
 

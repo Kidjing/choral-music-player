@@ -4,6 +4,7 @@ export interface IAlbum {
     blurPicUrl?: string;   // 也是专辑封面
     publishTime?: number;  // 发布时间
     artist: IAlbumArtistItem;  // 专辑的艺人
+    artists?: IAlbumArtistItem[];  // 专辑的艺人
     picUrl: string;  // 专辑封面
     commentThreadId?: string;   // 评论线程id
     description?: string;  // 简介

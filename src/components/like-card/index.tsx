@@ -1,15 +1,20 @@
 import { Button } from '@arco-design/web-react';
 import { IconCaretRight } from '@arco-design/web-react/icon';
 import './index.less'
+import { useNavigate } from 'react-router-dom'
 
-const LikeCard = () => {
+interface IProps {
+    likedNumber: number,
+    comment: string,
+}
+
+const LikeCard = (props: IProps) => {
+    const navigate = useNavigate();
     return (
-        <div className="like-card">
+        <div className="like-card" onClick={() => { navigate('/library/songs') }}>
             <div className="top">
                 <p>
-                    <span>Hello world</span><br/>
-                    <span>Hello world</span><br/>
-                    <span>Hello world</span>
+                    <span>{props.comment}</span>
                 </p>
             </div>
             <div className="bottom">
@@ -18,10 +23,10 @@ const LikeCard = () => {
                         我喜欢的音乐
                     </div>
                     <div className='sub-title'>
-                        84首歌
+                        {props.likedNumber}首歌
                     </div>
                 </div>
-                <Button className="play-btn" icon={<IconCaretRight style={{ width:"80%",height:"80%" }} />}/>
+                <Button className="play-btn" icon={<IconCaretRight style={{ width: "80%", height: "80%" }} />} />
             </div>
         </div>
     );

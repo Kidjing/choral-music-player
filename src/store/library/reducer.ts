@@ -3,8 +3,9 @@ import { IAction, ITag } from '../../types/actions';
 const initState: ITag[] = [
     { name: '专辑', isCheck: false },
     { name: '艺人', isCheck: false },
-    { name: 'MV', isCheck: false },
-    { name: '云盘', isCheck: false },
+    { name: '全部歌单', isCheck: true },
+    { name: '创建的歌单', isCheck: false },
+    { name: '收藏的歌单', isCheck: false },
 ];
 
 export const libReducer = (state = initState, action: IAction<ITag>) => {

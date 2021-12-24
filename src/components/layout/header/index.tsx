@@ -20,7 +20,7 @@ const Header = (props: any) => {
     };
     const libraryLink = () => {
         if (!props.userInfo.status) {
-            navigate('/login/qr');
+            navigate('/login_qr');
         }else{
             navigate('/library')
         }
@@ -46,7 +46,7 @@ const Header = (props: any) => {
         {
             // 如果status为false显示登录，否则显示登出
             !props.userInfo.status ?
-                <Button onClick={() => { navigate('/login/qr') }} >
+                <Button onClick={() => { navigate('/login_qr') }} >
                     <IconToRight />登录
                 </Button> :
                 <Button onClick={loginOut} >

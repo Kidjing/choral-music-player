@@ -13,6 +13,7 @@ import QrLogin from 'src/views/login/qr';
 import PasswordLogin from 'src/views/login/password';
 import Daily from 'src/views/daily';
 import NewAlbum from 'src/views/new-album';
+import UserSongs from 'src/views/library/songs';
 
 const RouteConfig = () => {
     let routes = useRoutes([
@@ -22,7 +23,16 @@ const RouteConfig = () => {
             element: <Home />,
         },
         { path: '/explore', element: <Explore /> },
-        { path: '/library', element: <Library /> },
+        {
+            path: '/library', children: [
+                {
+                    index: true, element: <Library />
+                },
+                {
+                    path: 'songs', element: <UserSongs />
+                }
+            ]
+        },
         { path: '/playlist', element: <Playlist /> },
         { path: '/song', element: <Song /> },
         { path: '/album', element: <Album /> },

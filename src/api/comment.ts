@@ -1,5 +1,8 @@
 import request from "./axios";
-import { CommentsResponce ,CommentsRequest ,NewTypeCommentsRequest,NewTypeCommentsResponce } from "./types/comment";
+import {
+    CommentsResponce, CommentsRequest, IComment
+    , NewTypeCommentsRequest, NewTypeCommentsResponce
+} from "./types/comment";
 
 // 分页获取专辑评论信息
 // http://www.yili.fit:3000/comment/album?id=121012393&limit=20
@@ -72,4 +75,24 @@ export const getNewComment: GetNewComment = async (req) => {
     })
 
     return response
+}
+
+
+// 分页获取歌曲评论信息
+// http://www.yili.fit:3000/comment/music?id=121012393&limit=20
+type GetHotComment = (req: CommentsRequest) => Promise<IComment[]>
+
+export const getHotComment: GetHotComment = async (req) => {
+    const response = await request({
+        url: '/comment/hot',
+        params: {
+            id: req.id,
+            limit: req.limit,
+            before: req.before,
+            offset: req.offset,
+            type: req.type,
+        },
+    })
+
+    return response.hotComments
 }
