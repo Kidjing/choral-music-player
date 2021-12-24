@@ -7,6 +7,7 @@ import { getTopArtist } from 'src/api/artist';
 import { IAlbum } from 'src/api/types/album';
 import { IArtist } from 'src/api/types/artist';
 import { CommonCard, DailyCard, FmCard } from 'src/components';
+import { searchTag } from 'src/store/dynamic-tag/reducer';
 import { recommendPlaylist, topPlaylist } from '../../api/songlist';
 import { IRecommandSonglist, ISonglist } from '../../api/types/songlist';
 
@@ -15,7 +16,7 @@ import './index.less';
 const Row = Grid.Row;
 const Col = Grid.Col;
 
-const Home = () => {
+const Home = (props: any) => {
     /**
      * TODO: 异步状态优化
      */
@@ -42,7 +43,13 @@ const Home = () => {
         <div className="home">
             <div className={classNames('index-row', 'first-row')}>
                 <div className="title">
-                    推荐歌单<a href="explore/?category=推荐歌单">查看全部</a>
+                    推荐歌单
+                    <a
+                        href="explore/?category=推荐歌单"
+                        onClick={() =>{ props.searchTag({ name: '推荐歌单', isCheck: true })}}
+                    >
+                        查看全部
+                    </a>
                 </div>
                 <Row className="cover-row" gutter={[44, 24]}>
                     {personList.map((item: IRecommandSonglist, index: number) => {
@@ -116,7 +123,13 @@ const Home = () => {
             </div>
             <div className="index-row">
                 <div className="title">
-                    排行榜<a href="explore/?category=排行榜">查看全部</a>
+                    排行榜
+                    <a
+                        href="explore/?category=排行榜"
+                        onClick={() => props.searchTag({ name: '推荐歌单', isCheck: true })}
+                    >
+                        查看全部
+                    </a>
                 </div>
                 <Row gutter={[44, 24]}>
                     {rankList.map((item: ISonglist, index: number) => {
@@ -146,4 +159,6 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = { searchTag };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
