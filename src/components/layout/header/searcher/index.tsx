@@ -33,6 +33,9 @@ const Searcher = (props: any) => {
         props.clearRecord()
         Message.success("成功删除搜索记录")
     }
+    const replaceStyle = (str: string) => {
+        return str.replace(input, "<span class='searcher-list-item-hunt'>" + input + "</span>");
+    }
 
     const pop = () => {
         return (
@@ -50,7 +53,7 @@ const Searcher = (props: any) => {
                         render={(item, index) =>
                             <List.Item onClick={() => { navigate('/artist?id=' + item.id); addRecord(input) }}
                                 className='searcher-list-item' key={index}>
-                                {item.name}</List.Item>} />}
+                                <span dangerouslySetInnerHTML={{ __html: replaceStyle(item.name) }} /></List.Item>} />}
                     {search?.songs !== undefined && <List size='small'
                         header={
                             <div className="searcher-list-header">
@@ -62,8 +65,10 @@ const Searcher = (props: any) => {
                         dataSource={search?.songs}
                         render={(item, index) =>
                             <List.Item onClick={() => { navigate('/song?id=' + item.id); addRecord(input) }}
-                                className='searcher-list-item' key={index}>
-                                {item.name + '——' + item.artists[0].name}</List.Item>} />}
+                                className='searcher-list-item' key={index} >
+                                <span dangerouslySetInnerHTML={{ __html: replaceStyle(item.name + '——' + item.artists[0].name) }} />
+                            </List.Item>
+                        } />}
                     {search?.playlists !== undefined && <List size='small'
                         header={
                             <div className="searcher-list-header">
@@ -74,7 +79,7 @@ const Searcher = (props: any) => {
                             </div>}
                         dataSource={search?.playlists}
                         render={(item, index) => <List.Item onClick={() => { navigate('/playlist?id=' + item.id); addRecord(input) }} className='searcher-list-item' key={index}>
-                            {item.name}
+                            <span dangerouslySetInnerHTML={{ __html: replaceStyle(item.name) }} />
                         </List.Item>} />}
                     {search?.albums !== undefined && <List size='small'
                         header={
@@ -88,7 +93,7 @@ const Searcher = (props: any) => {
                         render={(item, index) =>
                             <List.Item onClick={() => { navigate('/album?id=' + item.id); addRecord(input) }}
                                 className='searcher-list-item' key={index}>
-                                {item.name + '——' + item.artist.name}</List.Item>} />}
+                                <span dangerouslySetInnerHTML={{ __html: replaceStyle(item.name + '——' + item.artist.name) }} /></List.Item>} />}
                 </div> : null}
                 {show ? null :
                     <List size='small'
@@ -110,7 +115,7 @@ const Searcher = (props: any) => {
     }
     return (
         <Trigger popup={pop} position='bottom' trigger={['click']} clickToClose={false}>
-            <Input size='large' className="searcher" prefix={<IconSearch style={{ fontSize: 18}}/>}
+            <Input size='large' className="searcher" prefix={<IconSearch style={{ fontSize: 18 }} />}
                 allowClear placeholder="搜索" onPressEnter={() => { navigate('/search?keyword=' + input) }}
                 onChange={inputChange} value={input} style={{ borderRadius: "6px" }} />
         </Trigger>

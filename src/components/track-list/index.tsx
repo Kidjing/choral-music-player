@@ -33,7 +33,7 @@ export const Track = (props: TrackProps) => {
     }
     return (
         <div className={classNames("track", hoverable ? 'hover' : '')} onClick={() => { navigate('/song?id=' + album.id) }}>
-            <img src={album.al.picUrl} loading='lazy' onClick={(event) => clickImg(event)} />
+            <img src={album.al.picUrl+'?param=80y80'} loading='lazy' onClick={(event) => clickImg(event)} />
             <div className="title-and-artist">
                 <div className="title">{album.name}</div>
                 <div className="artist">
