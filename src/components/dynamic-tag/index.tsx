@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import PanelTag from './panelTag';
 import { searchTag } from 'src/store/dynamic-tag/reducer';
 import { useNavigate } from 'react-router-dom';
-import { ITag } from 'src/types/actions';
+import { ITag } from 'src/store/type';
 
 import './index.less';
 

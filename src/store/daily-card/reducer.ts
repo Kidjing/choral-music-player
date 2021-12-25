@@ -1,4 +1,4 @@
-import { IAction } from '../../types/actions';
+import { IAction } from '../type';
 import { IMusic } from '../../api/types/song';
 
 const initState: IMusic[] = [

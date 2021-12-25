@@ -1,6 +1,6 @@
 import { ACTIONS } from './actions';
 import { IRecommandSonglist, ISonglist } from 'src/api/types/songlist';
-import { IAction } from '../../types/actions';
+import { IAction } from '../type';
 
 let initState: ISonglist[] = [];
 

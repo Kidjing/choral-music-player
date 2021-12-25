@@ -7,3 +7,8 @@ export interface ITag{
     name:string;
     isCheck?:boolean;
 }
+
+export interface IPlay{
+    name:string;
+    status:boolean;
+}

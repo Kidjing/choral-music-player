@@ -1,5 +1,5 @@
 import { IMusic } from 'src/api/types/song';
-import { IAction } from 'src/types/actions';
+import { IAction } from 'src/store/type';
 import { ACTIONS } from './actions';
 
 const playControl = {

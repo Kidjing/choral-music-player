@@ -7,7 +7,7 @@ import { UserPlaylist } from 'src/api/types/user';
 import { getUserSonglistByID, getUserLikelistByID, getUserAlbumlist, getUserArtistlist } from 'src/api/user';
 import { CommonCard, LikeCard, SelectTag, TrackList } from 'src/components';
 import { filterPlaylist } from 'src/store/library/reducer';
-import { ITag } from 'src/types/actions';
+import { ITag } from 'src/store/type';
 import { getSongDetail } from 'src/api/song'
 import { getHotComment } from 'src/api/comment'
 import { IAlbum } from 'src/api/types/album';

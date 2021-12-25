@@ -1,5 +1,5 @@
 import { ACTIONS } from './actions';
-import { IAction, ITag } from '../../types/actions';
+import { IAction, ITag } from '../type';
 
 const initState: ITag[] = [
     { name: '全部', isCheck: true },

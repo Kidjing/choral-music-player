@@ -5,11 +5,13 @@ import { IconThumbDown, IconPlayArrow, IconPause, IconSkipNext } from '@arco-des
 import { connect } from 'react-redux';
 import { getFm } from 'src/store/fm-card/reducer';
 import { trashPersonalFM } from 'src/api/songlist';
+import { changeStatus, playMusic } from 'src/store/playing/reducer';
+import { useEffect, useState } from 'react';
 
 import './index.less';
-import { changeStatus } from 'src/store/playing/reducer';
 
 const FmCard = (props: any) => {
+    const [play,setPlay]=useState(false);
     const currentFm=props.personalFm[0]
     const { data } = usePalette(currentFm.album.picUrl, 2, 'hex', { crossOrigin: 'anonymous' });
 
@@ -26,6 +28,10 @@ const FmCard = (props: any) => {
             .catch();
     };
     
+    useEffect(()=>{
+        props.playMusic(currentFm.album.id,'album');
+    },[currentFm.album])
+
     return (
         <div className="fm-card" style={{ background: `linear-gradient(to top left, ${data?.[0]}, ${data?.[1]})` }}>
             <img className="fm-card-cover" loading="lazy" src={currentFm.album.picUrl} />
@@ -52,10 +58,10 @@ const FmCard = (props: any) => {
                         <Button
                             className="btn"
                             onClick={() => {
-                                props.changeStatus(props.playStatus);
+                                setPlay(!play);
                             }}
                         >
-                            {props.playStatus ? (
+                            {play ? (
                                 <IconPause style={{ width: '100%', height: '100%' }} />
                             ) : (
                                 <IconPlayArrow style={{ width: '100%', height: '100%' }} />
@@ -85,6 +91,7 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = {
     getFm,
     changeStatus,
+    playMusic
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FmCard);

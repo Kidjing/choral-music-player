@@ -3,7 +3,7 @@ import { Tag } from '@arco-design/web-react';
 import { connect } from 'react-redux';
 import { tagData } from './tagData';
 import { changeTag } from 'src/store/dynamic-tag/reducer';
-import { ITag } from 'src/types/actions';
+import { ITag } from 'src/store/type';
 
 import './index.less';
 

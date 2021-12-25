@@ -1,4 +1,4 @@
-import { IAction } from '../../types/actions';
+import { IAction } from '../type';
 import { IFmMusic } from '../../api/types/song';
 import { UserInfo } from 'src/api/types/user';
 

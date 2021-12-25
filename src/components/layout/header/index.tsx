@@ -84,7 +84,7 @@ const Header = (props: any) => {
                     <Popover position="bl" content={content} trigger="click">
                         <Avatar className="navbar-right-avatar" size={30}>
                             {props.userInfo.status ? (
-                                <img alt="avatar" src={props.userInfo.avatarUrl} />
+                                <img alt="avatar" src={props.userInfo.avatarUrl+'?param=60y60'} />
                             ) : (
                                 <img
                                     alt="avatar"

@@ -1,4 +1,4 @@
-import { IAction, ITag } from '../../types/actions';
+import { IAction, ITag } from '../type';
 
 const initState: ITag[] = [
     { name: '专辑', isCheck: false },
