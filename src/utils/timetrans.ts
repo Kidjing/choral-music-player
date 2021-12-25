@@ -16,15 +16,16 @@ export const timeToMinute = (dt: number): string => {
  * @param num :时间戳
  * @returns 具体时间
  */
-export const dateTrans = (num: number) => {
+export const dateTrans = (num:number) => {
     const date = new Date(num);
     const Y = date.getFullYear() + '-';
     const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
     const D = date.getDate();
     const h = date.getHours();
-    let m = date.getMinutes();
-    let s = date.getSeconds();
-    if(Math.floor(m/10)===0) return Y + M + D + ' '+ h +':0'+ m +':'+ s;
-    if(Math.floor(s/10)===0) return Y + M + D + ' '+ h +':'+ m +':0'+ s;
+    const m = date.getMinutes();
+    const s = date.getSeconds();
+    if(Math.floor(m/10)===0 && Math.floor(s/10)!==0) return Y + M + D + ' '+ h +':0'+ m +':'+ s;
+    if(Math.floor(s/10)===0 && Math.floor(m/10)!==0) return Y + M + D + ' '+ h +':'+ m +':0'+ s;
+    if(Math.floor(m/10)===0 && Math.floor(s/10)===0) return Y + M + D + ' '+ h +':0'+ m +':0'+ s;
     return Y + M + D + ' '+ h +':'+ m +':'+ s
 };
