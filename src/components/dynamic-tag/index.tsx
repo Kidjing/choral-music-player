@@ -23,7 +23,11 @@ const DynamicTag = (props: any) => {
                                 checked={tag.isCheck}
                                 onCheck={() => {
                                     // 编码特殊字符
-                                    navigate('?category=' + escape(tag.name));
+                                    if (tag.name === 'R&B/Soul') {
+                                        navigate('?category=' + escape(tag.name));
+                                    }else{
+                                        navigate('?category=' + tag.name);
+                                    }
                                     props.searchTag(tag);
                                 }}
                                 className="tag"
