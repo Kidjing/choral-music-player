@@ -17,7 +17,7 @@ const PanelTag = (props: any) => {
                         <div className="dynamic-tag-panel-item-category">{item.category}</div>
                         <div className="dynamic-tag-panel-item-tags">
                             {item.tags.map((name: string, index: number) => {
-                                const tag = { name: name, isCheck: false };
+                                const tag = { name:name, isCheck: false };
                                 const tags=props.tags.map((item:ITag)=>{
                                     return item.name;
                                 })

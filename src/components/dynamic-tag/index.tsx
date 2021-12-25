@@ -22,7 +22,8 @@ const DynamicTag = (props: any) => {
                                 checkable
                                 checked={tag.isCheck}
                                 onCheck={() => {
-                                    navigate('?category=' + tag.name);
+                                    // 编码特殊字符
+                                    navigate('?category=' + escape(tag.name));
                                     props.searchTag(tag);
                                 }}
                                 className="tag"
