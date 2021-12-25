@@ -212,12 +212,12 @@ const Artist = (props:any) => {
                         {all?(
                             <div>
                                 <TrackList playlist={artist?.hotSongs} />
-                                <Button onClick={()=>setAll(false)}>收回</Button>
+                                <Button size='mini' onClick={()=>setAll(false)}>收回</Button>
                             </div>
                         ):(
                             <div>
                                 <TrackList playlist={hotSong} />
-                                <Button onClick={()=>setAll(true)}>显示全部</Button>
+                                <Button size='mini onClick={()=>setAll(true)}>显示全部</Button>
                             </div>
                         )}
                     </div>
