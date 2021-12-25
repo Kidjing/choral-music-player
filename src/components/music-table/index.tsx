@@ -28,7 +28,7 @@ interface LikeState {
 const MusicTable = (props: MusicTableProps<IMusic>) => {
     const { data, type, status } = props;
     const navigate = useNavigate()
-    const [play, setPlay] = useState<boolean>(false);
+    const [play, setPlay] = useState<boolean[]>(new Array(data!==undefined? data.length:0).fill(false));
     const [checkId, setCheckId] = useState(0);
     const [showPlay, setShowPlay] = useState({ num: 1, show: false });
     const [showAction, setShowAction] = useState<ShowState>({ musicId: 1, show: false });
@@ -48,11 +48,13 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
                             {item === showPlay.num && showPlay.show ? (
                                 <Button
                                     onClick={() => {
-                                        setPlay(true);
+                                        let newplays = new Array(data!==undefined? data.length:0).fill(false)
+                                        newplays[item] = true
+                                        setPlay(newplays)
                                     }}
                                     className="album-prefix-btn"
                                     icon={
-                                        play ? (
+                                        play[item] ? (
                                             <IconSound style={{ fontSize: 16, color: 'blue' }} />
                                         ) : (
                                             <IconCaretRight style={{ fontSize: 16, color: 'blue' }} />
