@@ -105,7 +105,7 @@ const Home = () => {
                                 <CommonCard
                                     imgSrc={album.picUrl}
                                     title={album.name}
-                                    desc={<a href={'artist?=' + album.artist.id}>{album.artist.name} </a>}
+                                    desc={<a href={'artist?id=' + album.artist.id}>{album.artist.name} </a>}
                                     type="album"
                                     id={album.id}
                                     shape="round"
