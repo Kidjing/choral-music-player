@@ -1,14 +1,14 @@
 import { Layout, Button, Avatar, Switch, Popover } from '@arco-design/web-react';
 import { IconLeft, IconMoon, IconRight, IconSun, IconToRight } from '@arco-design/web-react/icon';
-import { logout,loginStatus } from 'src/api/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { logout, loginStatus } from 'src/api/auth';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Searcher from './searcher';
-import { UserInfo } from 'src/api/types/user'
+import { UserInfo } from 'src/api/types/user';
 
 import { connect } from 'react-redux';
-import { clearInfo, setInfo } from 'src/store/user/reducer'
+import { clearInfo, setInfo } from 'src/store/user/reducer';
 import { useEffect } from 'react';
-import {getLoginStatus} from 'src/utils/user'
+import { getLoginStatus } from 'src/utils/user';
 import './index.less';
 
 const Head = Layout.Header;
@@ -22,14 +22,14 @@ const Header = (props: any) => {
     const libraryLink = () => {
         if (!props.userInfo.status) {
             navigate('/login_qr');
-        }else{
-            navigate('/library')
+        } else {
+            navigate('/library');
         }
     };
 
-    useEffect(()=>{
-        if(getLoginStatus()){
-            loginStatus().then(res=>{
+    useEffect(() => {
+        if (getLoginStatus()) {
+            loginStatus().then((res) => {
                 const state: UserInfo = {
                     userId: res.account.id,
                     avatarUrl: res.profile.avatarUrl,
@@ -38,23 +38,32 @@ const Header = (props: any) => {
                 };
 
                 props.setInfo(state);
-            })
-
+            });
         }
-    },[])
+    }, []);
 
-    const content = <span>
-        {
-            // 如果status为false显示登录，否则显示登出
-            !props.userInfo.status ?
-                <Button onClick={() => { navigate('/login_qr') }} >
-                    <IconToRight />登录
-                </Button> :
-                <Button onClick={loginOut} >
-                    <IconToRight />登出
-                </Button>
-        }
-    </span>;
+    const content = (
+        <span>
+            {
+                // 如果status为false显示登录，否则显示登出
+                !props.userInfo.status ? (
+                    <Button
+                        onClick={() => {
+                            navigate('/login_qr');
+                        }}
+                    >
+                        <IconToRight />
+                        登录
+                    </Button>
+                ) : (
+                    <Button onClick={loginOut}>
+                        <IconToRight />
+                        登出
+                    </Button>
+                )
+            }
+        </span>
+    );
     const handleTheme = (e: any) => {
         if (e === true) {
             document.body.setAttribute('arco-theme', 'dark');
@@ -74,9 +83,13 @@ const Header = (props: any) => {
                     </Button>
                 </div>
                 <div className="navbar-link">
-                    <Link to="/">首页</Link>
-                    <Link to="/explore">发现</Link>
-                    <a onClick={libraryLink}>音乐库</a>
+                    <NavLink to="/">首页</NavLink>
+                    <NavLink to="/explore">发现</NavLink>
+                    {props.userInfo.status ? (
+                        <NavLink to="/library">音乐库</NavLink>
+                    ) : (
+                        <a onClick={libraryLink}>音乐库</a>
+                    )}
                 </div>
                 <div className="navbar-right">
                     <Searcher />
@@ -84,7 +97,7 @@ const Header = (props: any) => {
                     <Popover position="bl" content={content} trigger="click">
                         <Avatar className="navbar-right-avatar" size={30}>
                             {props.userInfo.status ? (
-                                <img alt="avatar" src={props.userInfo.avatarUrl+'?param=60y60'} />
+                                <img alt="avatar" src={props.userInfo.avatarUrl + '?param=60y60'} />
                             ) : (
                                 <img
                                     alt="avatar"
@@ -112,6 +125,6 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-const mapDispatchToProps = { clearInfo,setInfo};
+const mapDispatchToProps = { clearInfo, setInfo };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

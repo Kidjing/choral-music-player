@@ -21,6 +21,13 @@ export const beforeReducer=(state=0,action:IAction<number>)=>{
     return state;
 }
 
+export const btnDisplayReducer=(state=true,action:IAction<boolean>)=>{
+    if(action.type === "CHANGE_DISPLAY"){
+        return action.payload;
+    }
+    return state;
+}
+
 export const getPlayList = (playList: ISonglist[] | IRecommandSonglist[]) => {
     return {
         type: 'CHANGE_SEARCH',
@@ -50,5 +57,12 @@ export const getBefore=(lasttime:number)=>{
     return {
         type: 'GET_BEFORE',
         payload: lasttime
+    };
+}
+
+export const setBtn=(status:boolean)=>{
+    return {
+        type: 'CHANGE_DISPLAY',
+        payload: status
     };
 }

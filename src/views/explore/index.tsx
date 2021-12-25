@@ -24,13 +24,13 @@ const Explore = (props: any) => {
 
     // 首页跳转逻辑
     useEffect(() => {
-        if (searchParams.get('category')) {
+        if (param) {
             const tag = { name: param, isCheck: true };
             props.searchTag(tag);
         } else {
             props.searchTag({ name: '全部', isCheck: true });
         }
-    }, []);
+    }, [param]);
 
     return (
         <div className="explore">
@@ -57,7 +57,7 @@ const Explore = (props: any) => {
                 </Row>
             </div>
             <div className="load-more">
-                {tag !== '推荐歌单' && tag !== '排行榜' && props.playList ? (
+                {tag !== '推荐歌单' && tag !== '排行榜' && props.showBtn? (
                     <Button
                         className="load-more-btn"
                         onClick={() => {
@@ -83,6 +83,7 @@ const mapStateToProps = (state: any) => {
         tag: state.tagReducer,
         playList: state.playListReducer,
         before: state.beforeReducer,
+        showBtn:state.btnDisplayReducer
     };
 };
 
