@@ -21,16 +21,16 @@ export const Track = (props: TrackProps) => {
     const { album , hoverable=true} = props;
     const navigate = useNavigate()
     return (
-        <div className={classNames("track", hoverable?'hover':'')}>
-            <img src={album.al.picUrl+'?param=100y100'} loading='lazy' onClick={()=>{navigate('/album?id='+album.al.id)}} />
+        <div className={classNames("track", hoverable?'hover':'')} onClick={()=>{navigate('/song?id='+album.id)}}>
+            <img src={album.al.picUrl} loading='lazy'/>
             <div className="title-and-artist">
-                <div className="title" onClick={()=>{navigate('/song?id='+album.id)}}>{album.name}</div>
+                <div className="title">{album.name}</div>
                 <div className="artist">
                     {album.ar.map((item: IArtistItem, index: number) => {
                         if (index === album.ar.length - 1) {
-                            return <a onClick={()=>{navigate('/artist?id='+item.id)}}>{item.name} </a>;
+                            return <a>{item.name} </a>;
                         } else {
-                            return <a onClick={()=>{navigate('/artist?id='+item.id)}}>{item.name},</a>;
+                            return <a>{item.name},</a>;
                         }
                     })}
                 </div>
