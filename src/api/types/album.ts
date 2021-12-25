@@ -13,7 +13,7 @@ export interface IAlbum {
     id: number;  // 歌曲id
     size?: number;  // 歌曲数目
     company?: string;  // 发行公司
-
+    liked?: boolean;
 }
 // 
 export interface IAlbumArtistItem {

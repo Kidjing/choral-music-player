@@ -1,7 +1,7 @@
 import React from 'react';
 import { login, refreshStatus } from 'src/api/auth';
 import { UserInfo } from 'src/api/types/user'
-import { Image, Input, Space, Button } from '@arco-design/web-react';
+import { Image, Input, Space, Button, Message } from '@arco-design/web-react';
 import './index.less'
 import { setInfo } from 'src/store/user/reducer'
 import { connect } from 'react-redux';
@@ -31,6 +31,9 @@ const PasswordLogin = (props: any) => {
 
                 props.setInfo(state);
                 navigate('/library');
+                Message.success('登录成功');
+            } else if(res.code === 400){
+                Message.error('账号不存在');
             }
         })
     }
@@ -53,11 +56,12 @@ const PasswordLogin = (props: any) => {
                                 placeholder='密码'
                                 className='input'
                                 onChange={passwordInputChange}
+                                onPressEnter={summit}
                             />
                             <Button className='button' type='primary' onClick={summit}>提交</Button>
                         </Space>
                     </div>
-                    <a onClick={() => { navigate('/login_qr') }}>二维码登录</a>
+                    <a onClick={() => { navigate('/login/qr') }}>二维码登录</a>
                 </div>
             </div>
         </div>

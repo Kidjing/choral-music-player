@@ -2,7 +2,8 @@ import ReactDOM from 'react-dom';
 import Routes from 'src/router';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from 'src/store';
+import { store, persistor } from 'src/store';
+import { PersistGate } from "redux-persist/integration/react";
 
 const App = () => {
     const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)');
@@ -15,9 +16,12 @@ const App = () => {
     });
     return (
         <Provider store={store}>
-            <Router>
-                <Routes />
-            </Router>
+            <PersistGate persistor={persistor}>
+                <Router>
+                    <Routes />
+                </Router>
+            </PersistGate>
+
         </Provider>
     );
 };

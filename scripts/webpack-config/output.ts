@@ -8,7 +8,7 @@ const getOutput = ({ isProduction }: IBuildOptions) => {
     const output = {
         filename: isProduction ? `[name]${HASH}.js` : '[name].js',
         path: outputPath,
-        publicPath: isProduction ? cdnPath : `/`,
+        publicPath: isProduction ? `/` : `/`,
         chunkFilename: isProduction ? `[name]${HASH}.js` : '[name].js',
     };
 

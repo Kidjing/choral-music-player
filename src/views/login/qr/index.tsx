@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { loginForKey, loginForCreate, loginForCheck, loginStatus,refreshStatus} from 'src/api/auth';
 import { UserInfo } from 'src/api/types/user'
-import { Image } from '@arco-design/web-react';
+import { Image ,Message } from '@arco-design/web-react';
 import './index.less'
 import { getLoginStatus } from 'src/utils/user'
 import { setInfo } from 'src/store/user/reducer'
@@ -47,6 +47,8 @@ const QrLogin = (props: any) => {
     React.useEffect(() => {
         return () => {
             if (code === 803) {
+                navigate('/library');
+                Message.normal('登录成功')
                 clearInterval(intervalRef.current!)
                 loginStatus().then(res => {
                     const state: UserInfo = {
@@ -56,8 +58,6 @@ const QrLogin = (props: any) => {
                         status: true,
                     };
                     props.setInfo(state);
-
-                    navigate('/library');
                 })
             }
         }
@@ -81,7 +81,7 @@ const QrLogin = (props: any) => {
                             />
                             <div>状态:{message}</div>
                             <h3>打开网易云APP扫码登录</h3>
-                            <a onClick={()=>{navigate('/login_password')}}>手机号登录</a>
+                            <a onClick={()=>{navigate('/login/password')}}>手机号登录</a>
                         </div>
                     </div>
                     : null

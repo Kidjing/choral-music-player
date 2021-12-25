@@ -34,9 +34,9 @@ const AlbumSearch = () => {
                             <CommonCard
                                 imgSrc={item.picUrl}
                                 title={item.name}
+                                desc={<a href={'artist?id=' + item.artist.id}>{item.artist.name} </a>}
                                 id={item.id}
                                 type='album'
-                                desc={item.artist.name}
                                 textPostion="left"
                             />
                         </Col>

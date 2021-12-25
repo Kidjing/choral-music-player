@@ -12,12 +12,11 @@ const UserSongs = (props: any) => {
     useEffect(() => {
         getUserLikelistByID(props.userInfo.userId).then(res => {
             getSongDetail(res).then(res => {
-                setLikedList(res.songs.slice(0, 12))
+                setLikedList(res.songs)
             })
         })
     }, [])
     return (
-        
         <div className="user-songs">
             <h1>
                 <Avatar className="avatar">

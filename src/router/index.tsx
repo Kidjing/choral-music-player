@@ -42,7 +42,7 @@ const RouteConfig = () => {
         { path: '/playlist', element: <Playlist /> },
         { path: '/song', element: <Song /> },
         { path: '/album', element: <Album /> },
-        { path: '/new-album', element: <NewAlbum /> },
+        { path: '/new/album', element: <NewAlbum /> },
         { path: '/artist', element: <Artist /> },
         {
             path: '/search', children: [
@@ -63,8 +63,8 @@ const RouteConfig = () => {
                 }
             ]
         },
-        { path: '/login_qr', element: <QrLogin /> },
-        { path: '/login_password', element: <PasswordLogin /> },
+        { path: '/login/qr', element: <QrLogin /> },
+        { path: '/login/password', element: <PasswordLogin /> },
         { path: '/daily/songs', element: <Daily /> },
     ]);
     return routes;

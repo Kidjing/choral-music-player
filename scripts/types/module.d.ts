@@ -2,3 +2,4 @@
 
 declare module 'mini-css-extract-plugin';
 declare module '@arco-design/webpack-plugin';
+declare module 'redux-persist/lib/storage'

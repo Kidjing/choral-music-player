@@ -10,6 +10,7 @@ export interface ILoginInResponce {
     profile: IProfile;  // 个人详细信息
     bindings: IBindingsItem[];  // 和返回值所绑定的一些信息
     cookie: string;  // 很重要cookie，后续很多参数需要cookie
+    msg?:string;
 }
 
 export interface ILoginStatus {

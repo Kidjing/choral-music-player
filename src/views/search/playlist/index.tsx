@@ -1,4 +1,3 @@
-
 import { Grid } from "@arco-design/web-react";
 import { useEffect, useState } from "react";
 import { CommonCard } from "src/components";
@@ -35,7 +34,7 @@ const PlaylistSearch = () => {
                                     title={item.name}
                                     type="playlist"
                                     id={item.id}
-                                    shape="circle"
+                                    shape="round"
                                     textPostion="left"
                                     desc={item.description}
                                 />

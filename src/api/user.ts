@@ -80,5 +80,5 @@ export const getUserLikelistByID: GetUserLikelistByID = async (uid) => {
         },
     })
     // 直接返回歌单列表
-    return response.ids;
+    return response.ids.reverse();
 }

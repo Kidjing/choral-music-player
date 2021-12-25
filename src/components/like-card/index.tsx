@@ -14,7 +14,7 @@ const LikeCard = (props: IProps) => {
         <div className="like-card" onClick={() => { navigate('/library/songs') }}>
             <div className="top">
                 <p>
-                    <span>{props.comment}</span>
+                    <p>{props.comment}</p>
                 </p>
             </div>
             <div className="bottom">

@@ -26,21 +26,21 @@ interface IData {
 }
 
 const UserLibrary = (data: IData) => {
-    
+
     for (let item of data.tag) {
-        if (item.name === '创建的歌单'&&item.isCheck) {
+        if (item.name === '创建的歌单' && item.isCheck) {
             data.playList = data.playList.filter((item) => {
                 return !item.subscribed
             })
             break;
         }
-        if (item.name === '收藏的歌单'&&item.isCheck) {
+        if (item.name === '收藏的歌单' && item.isCheck) {
             data.playList = data.playList.filter((item) => {
                 return item.subscribed
             })
             break;
         }
-        if (item.name === '专辑'&&item.isCheck) {
+        if (item.name === '专辑' && item.isCheck) {
             return (
                 <Row className="cover-row" gutter={[44, 24]}>
                     {data.userAlbum.map((item: IAlbum, index: number) => {
@@ -60,9 +60,9 @@ const UserLibrary = (data: IData) => {
                     })}
                 </Row>
             )
-            
+
         }
-        if (item.name === '艺人'&&item.isCheck) {
+        if (item.name === '艺人' && item.isCheck) {
             return (
                 <Row className="cover-row" gutter={[44, 24]}>
                     {data.userArtist.map((item: IArtist, index: number) => {
@@ -75,7 +75,7 @@ const UserLibrary = (data: IData) => {
                                     textPostion="center"
                                     type='artist'
                                     id={item.id}
-                                    
+
                                 />
                             </Col>
                         );
@@ -166,6 +166,7 @@ const Library = (props: any) => {
                 <LikeCard likedNumber={likedNumber} comment={comment} />
                 <TrackList playlist={likedList!} />
             </div>
+
             <div className="section-two">
                 <div className="tabs-row">
                     <div className="tabs">
@@ -233,7 +234,7 @@ const Library = (props: any) => {
                     </div>
                 </div>
             </Modal>
-        </div>
+        </div >
     );
 };
 

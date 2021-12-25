@@ -21,7 +21,7 @@ const Header = (props: any) => {
     };
     const libraryLink = () => {
         if (!props.userInfo.status) {
-            navigate('/login_qr');
+            navigate('/login/qr');
         } else {
             navigate('/library');
         }
@@ -49,7 +49,7 @@ const Header = (props: any) => {
                 !props.userInfo.status ? (
                     <Button
                         onClick={() => {
-                            navigate('/login_qr');
+                            navigate('/login/qr');
                         }}
                     >
                         <IconToRight />

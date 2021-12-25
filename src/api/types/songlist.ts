@@ -32,6 +32,7 @@ export interface ISonglistDetail {
     id: number; // 歌曲id
     name: string; // 歌单名
     playCount: number; // 观看数量，可以放在首页进行展示
+    subscribed: boolean;
     tracks:IMusic[];
     trackIds: ITrackId[]; // 这个是这个songlist的ID集合，需要通过ids来获取所有的歌曲，以后会用到
 }

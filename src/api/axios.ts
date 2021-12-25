@@ -1,3 +1,5 @@
+import {  Message } from '@arco-design/web-react';
+
 import axios, { AxiosRequestConfig, ResponseType, AxiosInstance } from 'axios'
 import { SERVER } from '../contants/server'
 
@@ -20,8 +22,13 @@ const handleResponse = (response: any) => {
 }
   
 const handleError = (error: any) => {
-    const { response, message } = error
-    return Promise.reject(response ? new Error(response.data.message || message) : error)
+    const { response } = error
+    console.log(error);
+    
+    if(response.data.code >= 400){
+        Message.error(response.data.message)
+    }
+    return response.data
 }
 
 // 创建axios实例

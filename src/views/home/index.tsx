@@ -96,7 +96,7 @@ const Home = () => {
             </div>
             <div className="index-row">
                 <div className="title">
-                    新专速递<a href="new-album">查看全部</a>
+                    新专速递<a href="new/album">查看全部</a>
                 </div>
                 <Row gutter={[44, 24]}>
                     {albumList.map((album: IAlbum, index: number) => {
