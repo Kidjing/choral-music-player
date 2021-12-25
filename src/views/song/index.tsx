@@ -159,7 +159,7 @@ const Song = (props:any) => {
                                     })}
                                 </div>
                             )}
-                            <Button onClick={()=>{setAll(!all)}}>{all?'收回':'显示全部'}</Button>
+                            <Button size='mini' onClick={()=>{setAll(!all)}}>{all?'收回':'显示全部'}</Button>
                         </div>
                     </div>
                     <div className='song-comment'>
