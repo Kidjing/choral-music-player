@@ -24,11 +24,18 @@ const initState: IFmMusic[] = [
 
 export const personalFmReducer = (state = initState, action: IAction<IFmMusic[]>) => {
     if (action.type === 'PUSH_FM') {
-        return [...state,...action.payload];
+        if (state.length === 1) {
+            return action.payload;
+        }
+        return [...state, ...action.payload];
     }
     if (action.type === 'GET_FM') {
-        let newState=state.slice(1);
-        return [...newState];
+        let newState=state.concat();
+        if (state.length === 1) {
+            return state
+        }
+        newState = state.slice(1);
+        return newState;
     }
     return state;
 };
