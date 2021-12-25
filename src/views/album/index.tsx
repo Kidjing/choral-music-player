@@ -103,7 +103,7 @@ const Album = () => {
                     onClick={()=>{navigate('/album?id=' + albumId);}}
                 >
                     <CommonCard
-                        imgSrc={album?.album.blurPicUrl !== undefined ? album.album.blurPicUrl : ''}
+                        imgSrc={album?.album.picUrl !== undefined ? album.album.picUrl : ''}
                         title=""
                         shape="round"
                         textPostion="left"
@@ -131,7 +131,7 @@ const Album = () => {
                     />
                     <br/>
                     <Space size="large">
-                    {play?(
+                        {play?(
                             <Button
                                 onClick={()=>{setPlay(!play)}}
                                 type='primary' 
