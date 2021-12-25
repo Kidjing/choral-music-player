@@ -1,6 +1,6 @@
 import { Effect, put, call, SagaReturnType } from 'redux-saga/effects';
 import { getSonglistByCat, getSonglists, recommendPlaylist, topPlaylist } from '../../api/songlist';
-import { getPlayList } from './reducer';
+import { getBefore, getMorePlayList, getPlayList } from './reducer';
 
 type getServiceRecommendPlaylist = SagaReturnType<typeof recommendPlaylist>;
 type getServiceSongList = SagaReturnType<typeof getSonglists>;
@@ -11,8 +11,9 @@ export function* searchPlayList(action: Effect) {
     const tag = action.payload.name;
     try {
         if (tag === '精品歌单') {
-            const playList: getServiceSongListByCat = yield call(getSonglistByCat, 30);
-            yield put(getPlayList(playList));
+            const result: getServiceSongListByCat = yield call(getSonglistByCat, 30);
+            yield put(getBefore(result.lasttime));
+            yield put(getPlayList(result.playlists));
         } else if (tag === '推荐歌单') {
             const playList: getServiceRecommendPlaylist = yield call(recommendPlaylist, 30);
             yield put(getPlayList(playList));
@@ -29,16 +30,20 @@ export function* searchPlayList(action: Effect) {
 }
 
 export function* loadMorePlayList(action: Effect) {
-    const { tag, limit } = action.payload;
+    const { tag, offset, before } = action.payload;
+
     try {
         if (tag === '精品歌单') {
-            const playList: getServiceSongListByCat = yield call(getSonglistByCat, limit);
-            yield put(getPlayList(playList));
+            const result: getServiceSongListByCat = yield call(getSonglistByCat, 30,'',before);
+            if(result.playlists!==[]){
+                yield put(getMorePlayList(result.playlists));
+                yield put(getBefore(result.lasttime));
+            }
         } else {
-            const result: getServiceSongList = yield call(getSonglists, { limit: limit, cat: tag, offset: 30 });
-            yield put(getPlayList(result.playlists));
+            const result: getServiceSongList = yield call(getSonglists, { cat: tag, offset: offset });
+            yield put(getMorePlayList(result.playlists));
         }
     } catch (e) {
-        yield put({ type: 'LOAD_MORE', message: e.message });
+        console.log(e.message)
     }
 }

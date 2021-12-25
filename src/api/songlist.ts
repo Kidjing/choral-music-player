@@ -17,10 +17,10 @@ export const getPlaylistDetail: GetPlaylistDetail = async (id) => {
 };
 
 // 获取精品歌单
-type GetSonglistByCat = (limit: number, cat?: string, before?: number) => Promise<ISonglist[]>;
+type GetSonglistByCat = (limit: number, cat?: string, before?: number) => Promise<{ playlists: ISonglist[]; lasttime: number }>;
 // 获取精品歌单
 // http://www.yili.fit:3000/top/playlist/highquality?limit=1&before=0&cat=欧美
-export const getSonglistByCat: GetSonglistByCat = async (limit, cat?, before = 0) => {
+export const getSonglistByCat: GetSonglistByCat = async (limit=30, cat?, before = 0) => {
     const response = await request({
         url: '/top/playlist/highquality',
         params: {
@@ -30,7 +30,7 @@ export const getSonglistByCat: GetSonglistByCat = async (limit, cat?, before = 0
         },
     });
 
-    return response.playlists;
+    return response;
 };
 
 // 分页获取歌单信息（可以使用offset和limit）

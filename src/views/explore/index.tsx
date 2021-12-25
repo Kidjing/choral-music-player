@@ -15,24 +15,23 @@ const Col = Grid.Col;
 
 const Explore = (props: any) => {
     const [searchParams] = useSearchParams();
-    const [limit, setLimit] = useState(30);
+    const [offset, setOffset] = useState(30);
     const tag = props.tag.filter((item: ITag) => item.isCheck)[0].name;
     const param = searchParams.get('category');
-    // 初始化playList
     useEffect(() => {
-        props.searchTag({ name: '全部', isCheck: true });
-        props.loadMore(tag, limit);
-    }, [limit]);
+        props.loadMore(tag, offset, props.before);
+    }, [offset]);
 
     // 首页跳转逻辑
     useEffect(() => {
         if (searchParams.get('category')) {
             const tag = { name: param, isCheck: true };
             props.searchTag(tag);
+        } else {
+            props.searchTag({ name: '全部', isCheck: true });
         }
     }, []);
 
-    console.log(searchParams.get('category'));
     return (
         <div className="explore">
             <h1>发现</h1>
@@ -58,8 +57,17 @@ const Explore = (props: any) => {
                 </Row>
             </div>
             <div className="load-more">
-                {tag !== '推荐歌单' && tag !== '排行榜' ? (
-                    <Button className="load-more-btn" onClick={() => setLimit(limit + 30)}>
+                {tag !== '推荐歌单' && tag !== '排行榜' && props.playList ? (
+                    <Button
+                        className="load-more-btn"
+                        onClick={() => {
+                            if (tag === '精品歌单') {
+                                props.loadMore(tag, offset, props.before);
+                            } else {
+                                setOffset(offset + 30);
+                            }
+                        }}
+                    >
                         加载更多
                     </Button>
                 ) : (
@@ -74,6 +82,7 @@ const mapStateToProps = (state: any) => {
     return {
         tag: state.tagReducer,
         playList: state.playListReducer,
+        before: state.beforeReducer,
     };
 };
 
