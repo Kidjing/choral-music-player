@@ -2,13 +2,11 @@ import { Comment, CommonCard } from 'src/components';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { getMusicComment } from 'src/api/comment'
-import { CommentsRequest } from 'src/api/types/comment'
-import { CommentsResponce } from 'src/api/types/comment'
+import { CommentsRequest, CommentsResponce } from 'src/api/types/comment'
 import { getLyricBySongID, getSongDetail } from 'src/api/song'
-import { ICreator, UserInfo } from 'src/api/types/user'
+import { ICreator } from 'src/api/types/user'
 import { ILyric } from 'src/api/types/lyric';
-import { IMusic } from "src/api/types/song";
-import { IArtistItem } from "src/api/types/song"
+import { IMusic, IArtistItem } from "src/api/types/song";
 import { Button, Space } from '@arco-design/web-react';
 import { IconCaretRight, IconPause, IconHeart} from '@arco-design/web-react/icon';
 import { connect } from 'react-redux';
@@ -38,6 +36,9 @@ const Song = (props:any) => {
         });
         getMusicComment(request).then(res =>{
             setComment(res);
+            if(res.hotComments.length === 0){
+                setSort(false)
+            }
         });
     },[searchParams]);
     let lyrics:string[] = [];
@@ -86,21 +87,21 @@ const Song = (props:any) => {
                         </p>
                         <Space size='large'>
                             {play?(
-                                    <Button
-                                        onClick={()=>{setPlay(!play)}}
-                                        type='primary' 
-                                        icon={<IconPause />}
-                                    > 
+                                <Button
+                                    onClick={()=>{setPlay(!play)}}
+                                    type='primary' 
+                                    icon={<IconPause />}
+                                > 
                                         暂停
-                                    </Button>
-                                ):(
-                                    <Button
-                                        onClick={()=>{setPlay(!play)}} 
-                                        type='primary' 
-                                        icon={<IconCaretRight />}
-                                    > 
+                                </Button>
+                            ):(
+                                <Button
+                                    onClick={()=>{setPlay(!play)}} 
+                                    type='primary' 
+                                    icon={<IconCaretRight />}
+                                > 
                                         播放
-                                    </Button>
+                                </Button>
                             )}
                         </Space>
                         <Space size='large' style={{marginLeft:10}}>
@@ -133,19 +134,19 @@ const Song = (props:any) => {
                 {hotsort?(
                     <div className='sort' onClick={()=>{setSort(!hotsort)}}>
                         <Button type='primary'>
-                            按热度排序
+                            热评
                         </Button>
                         <Button>
-                            按时间排序
+                            最新评论
                         </Button>
                     </div>
                 ):(
                     <div className='sort' onClick={()=>{setSort(!hotsort)}}>
                         <Button>
-                            按热度排序
+                            热评
                         </Button>
                         <Button type='primary'>
-                            按时间排序
+                            最新评论
                         </Button>
                     </div>
                 )}
@@ -160,6 +161,9 @@ const Song = (props:any) => {
                 ):(
                     <div>加载中</div>
                 )}
+                {comment?.hotComments.length === 0 && hotsort === true ?(
+                    <p>暂无热评</p>
+                ):null}
             </div>
         </div>
     );

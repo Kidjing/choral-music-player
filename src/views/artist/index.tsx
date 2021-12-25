@@ -126,38 +126,7 @@ const Artist = () => {
                         }}
                     >
                         <CommonCard
-                            imgSrc={albums?.[0].blurPicUrl !== undefined ? String(albums[0].blurPicUrl) : ''}
-                            title=""
-                            shape="round"
-                            textPostion="left"
-                        />
-                    </div>
-                    {(albums !== undefined ? albums?.length : 0) >= 2 ? (
-                        <div className="new-album-msg">
-                            <h3
-                                className="h3"
-                                onClick={() => {
-                                    navigate('/album?id=' + (albums !== undefined ? albums[0].id : 0));
-                                }}
-                            >
-                                {albums !== undefined ? albums[0].name : ''}
-                            </h3>
-                            <p>{dateTrans(Number(albums !== undefined ? albums[0].publishTime : 0))}</p>
-                            <p>{albums !== undefined ? albums[0].size : 0}首歌</p>
-                        </div>
-                    ) : (
-                        <p />
-                    )}
-                </div>
-                <div className="new-album">
-                    <div
-                        onClick={() => {
-                            navigate('/album?id=' + (albums !== undefined ? albums[1].id : 0));
-                        }}
-                        className="new-album-img"
-                    >
-                        <CommonCard
-                            imgSrc={albums?.[1].blurPicUrl !== undefined ? String(albums[1].blurPicUrl) : ''}
+                            imgSrc={albums?.[0].picUrl !== undefined ? String(albums[0].picUrl) : ''}
                             title=""
                             shape="round"
                             textPostion="left"
@@ -170,12 +139,45 @@ const Artist = () => {
                                 navigate('/album?id=' + (albums !== undefined ? albums[0].id : 0));
                             }}
                         >
-                            {albums !== undefined ? albums[1].name : ''}
+                            {albums !== undefined ? albums[0].name : ''}
                         </h3>
-                        <p>{dateTrans(Number(albums !== undefined ? albums[1].publishTime : 0))}</p>
-                        <p>{albums !== undefined ? albums[1].size : 0}首歌</p>
+                        <p>{dateTrans(Number(albums !== undefined ? albums[0].publishTime : 0))}</p>
+                        <p>{albums !== undefined ? albums[0].size : 0}首歌</p>
                     </div>
                 </div>
+                {albums!==undefined && albums.length>=2?(
+                    <div className="new-album">
+                        <div
+                            onClick={() => {
+                                navigate('/album?id=' + (albums !== undefined ? albums[1].id : 0));
+                            }}
+                            className="new-album-img"
+                        >
+                            <CommonCard
+                                imgSrc={albums?.[1].picUrl !== undefined ? String(albums[1].picUrl) : ''}
+                                title=""
+                                shape="round"
+                                textPostion="left"
+                            />
+                        </div>
+                        <div className="new-album-msg">
+                            <h3
+                                className="h3"
+                                onClick={() => {
+                                    navigate('/album?id=' + (albums !== undefined ? albums[1].id : 0));
+                                }}
+                            >
+                                {albums !== undefined ? albums[1].name : ''}
+                            </h3>
+                            <p>{dateTrans(Number(albums !== undefined ? albums[1].publishTime : 0))}</p>
+                            <p>{albums !== undefined ? albums[1].size : 0}首歌</p>
+                        </div>
+                    </div>
+                ):(
+                    <div>
+                        {' '}
+                    </div>
+                )}
             </div>
 
             <div id="hotSongs">
@@ -197,13 +199,14 @@ const Artist = () => {
                                     >
                                         <CommonCard
                                             imgSrc={
-                                                albums?.[index].blurPicUrl !== undefined
-                                                    ? String(albums[index].blurPicUrl)
+                                                albums?.[index].picUrl !== undefined
+                                                    ? String(albums[index].picUrl)
                                                     : ''
                                             }
                                             title={albums !== undefined ? albums[index].name : ''}
                                             shape="round"
                                             textPostion="left"
+                                            type = "album"
                                             id={albums !== undefined ? albums[index].id : 0}
                                         />
                                     </div>
