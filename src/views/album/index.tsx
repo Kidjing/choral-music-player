@@ -107,7 +107,7 @@ const Album = (props:any) => {
     return (
         <div className="album">
             {alert?(
-                <Alert className='alert' closable type='info' title='请先登录' content='需要登录才能使用该功能' onClose={()=>{setAlert(false)}} />
+                <Alert className='alert' closable type='warning' title='请先登录' content='需要登录才能使用该功能' onClose={()=>{setAlert(false)}} />
             ):(
                 null
             )}
