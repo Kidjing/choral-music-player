@@ -19,24 +19,6 @@ const initState: IFmMusic[] = [
             picUrl: 'http://p3.music.126.net/blZlhdVmYSUwgqSUxFs88Q==/19047939439853431.jpg',
         },
         duration: 215773,
-        
-    },
-    {
-        name: "Nothing's Gonna Stop Us Now",
-        id: 21680447,
-        artists: [
-            {
-                name: 'Starship',
-                id: 74939,
-            },
-        ],
-        album: {
-            name: 'No Protection',
-            id: 1995776,
-            pic: 109951166677563220,
-            picUrl: 'http://p4.music.126.net/fNjCgSDoEegZWgKD2UGjaA==/109951166677563218.jpg',
-        },
-        duration: 270367,
     },
 ];
 

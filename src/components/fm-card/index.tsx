@@ -31,7 +31,7 @@ const FmCard = (props: any) => {
     useEffect(()=>{
         props.playMusic(currentFm.album.id,'album');
     },[currentFm.album])
-
+    
     return (
         <div className="fm-card" style={{ background: `linear-gradient(to top left, ${data?.[0]}, ${data?.[1]})` }}>
             <img className="fm-card-cover" loading="lazy" src={currentFm.album.picUrl} />
