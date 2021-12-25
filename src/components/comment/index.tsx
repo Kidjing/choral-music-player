@@ -1,32 +1,35 @@
-import { Comment, Button, Input } from '@arco-design/web-react';
+import { Comment, Button, Input, Alert } from '@arco-design/web-react';
 import { IconMessage, IconThumbUp } from '@arco-design/web-react/icon';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { IComment } from '../../api/types/comment';
 import { ICreator } from '../../api/types/user';
 import { dateTrans } from '../../utils/timetrans';
 
 import './index.less';
 
-interface CommentsProps {
-    commentList: IComment[];
-    creator: ICreator;
-}
-
 interface CommentItemProps {
     comment: IComment;
     creator: ICreator;
+    status:boolean;
 }
 
 const CommentItem = (props: CommentItemProps) => {
-    const { comment, creator } = props;
+    const { comment, creator, status } = props;
     const { user, content, time, likedCount, liked } = comment;
     const [like, setLike] = useState<boolean>(liked);
     const [reply, setReply] = useState<boolean>(false);
+    const [alert, setAlert] = React.useState<boolean>(false);
 
     const actions = [
-        <span className="comment-action" key="like" onClick={() => setLike(!like)}>
+        <span className="comment-action" key="like" onClick={() =>{
+            if(status){
+                setLike(!like);
+            }else{
+                setAlert(true);
+            }
+        }}>
             {like ? <IconThumbUp style={{ color: '#f53f3f' }} /> : <IconThumbUp />}{' '}
-            {!!likedCount && <span>{likedCount}</span>}
+            {!!likedCount && <span>{likedCount + (like?1:0)}</span>}
         </span>,
         <span
             className="comment-action"
@@ -48,6 +51,11 @@ const CommentItem = (props: CommentItemProps) => {
             content={<div>{content}</div>}
             datetime={dateTrans(time)}
         >
+            {alert?(
+                <Alert className='alert' closable type='warning' title='请先登录' content='需要登录才能使用该功能' onClose={()=>{setAlert(false)}} />
+            ):(
+                null
+            )}
             {reply && (
                 <Comment
                     align="right"
@@ -55,7 +63,11 @@ const CommentItem = (props: CommentItemProps) => {
                         <Button key="0" type="secondary">
                             取消
                         </Button>,
-                        <Button key="1" type="primary">
+                        <Button key="1" type="primary" onClick={()=>{
+                            if(status === false){
+                                setAlert(true);
+                            }
+                        }}>
                             评论
                         </Button>,
                     ]}
@@ -72,10 +84,22 @@ const CommentItem = (props: CommentItemProps) => {
     );
 };
 
-const Comments = (props: CommentsProps) => {
-    const { commentList, creator } = props;
+interface Comment{
+    commentList: IComment[];
+    creator: ICreator;
+    status:boolean
+}
+
+const Comments = (props: Comment) => {
+    const { commentList, creator, status } = props;
+    const [alert, setAlert] = React.useState<boolean>(false);
     return (
         <div className="comments">
+            {alert?(
+                <Alert className='alert' closable type='warning' title='请先登录' content='需要登录才能使用该功能' onClose={()=>{setAlert(false)}} />
+            ):(
+                null
+            )}
             <div className="comments-top">
                 <Comment
                     align="right"
@@ -83,7 +107,11 @@ const Comments = (props: CommentsProps) => {
                         <Button key="0" type="secondary">
                             取消
                         </Button>,
-                        <Button key="1" type="primary">
+                        <Button key="1" type="primary" onClick={()=>{
+                            if(status === false){
+                                setAlert(true);
+                            }
+                        }}>
                             评论
                         </Button>,
                     ]}
@@ -100,7 +128,7 @@ const Comments = (props: CommentsProps) => {
                 {commentList.map((comment: IComment, index: number) => {
                     return (
                         <div className="comments-list-item" key={index}>
-                            <CommentItem comment={comment} creator={creator} />
+                            <CommentItem comment={comment} creator={creator} status={status} />
                         </div>
                     );
                 })}

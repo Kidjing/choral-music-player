@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Button } from '@arco-design/web-react';
+import { Table, Button, Alert } from '@arco-design/web-react';
 import { IconCaretRight, IconHeart, IconHeartFill, IconSound } from '@arco-design/web-react/icon';
 import { IMusic, IArtistItem } from '../../api/types/song';
 import { timeToMinute } from 'src/utils/timetrans';
@@ -13,6 +13,7 @@ interface MusicTableProps<T> {
     className?: string;
     type: 'playlist' | 'album';
     data?: T[];
+    status?:boolean;
 }
 
 interface ShowState {
@@ -25,13 +26,14 @@ interface LikeState {
     like?: boolean;
 }
 const MusicTable = (props: MusicTableProps<IMusic>) => {
-    const { data, type } = props;
+    const { data, type, status } = props;
     const navigate = useNavigate()
     const [play, setPlay] = useState<boolean>(false);
     const [checkId, setCheckId] = useState(0);
     const [showPlay, setShowPlay] = useState({ num: 1, show: false });
     const [showAction, setShowAction] = useState<ShowState>({ musicId: 1, show: false });
     const [LikeAction, setLikeAction] = useState<LikeState>({ musicId: 1, like: false });
+    const [alert, setAlert] = React.useState<boolean>(false);
 
     const columns = [
         {
@@ -106,7 +108,11 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
                     <Button
                         className={classNames(record.id === showAction.musicId && showAction.show ? '' : 'hidden')}
                         onClick={() => {
-                            setLikeAction({ musicId: record.id, like: !LikeAction.like });
+                            if(status){
+                                setLikeAction({ musicId: record.id, like: !LikeAction.like });
+                            }else{
+                                setAlert(true)
+                            }
                         }}
                         style={{ background: 'transparent' }}
                         icon={
@@ -127,34 +133,41 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
         },
     ];
     return (
-        <Table
-            className="music-table"
-            showHeader={false}
-            border={{ cell: false }}
-            rowClassName={(record) => {
-                return record.id === checkId ? 'clickrow' : '';
-            }}
-            onRow={(record, index) => {
-                return {
-                    onClick: () => {
-                        setCheckId(record.id);
-                    },
-                    onDoubleClick: () => {
-                        console.log(record.name);
-                    },
-                    onMouseEnter: () => {
-                        setShowPlay({ num: index, show: true });
-                        setShowAction({ musicId: record.id, show: true });
-                    },
-                    onMouseLeave: () => {
-                        setShowPlay({ num: index, show: false });
-                        setShowAction({ musicId: record.id, show: false });
-                    },
-                };
-            }}
-            columns={columns}
-            data={data}
-        />
+        <div>
+            {alert?(
+                <Alert className='alert' closable type='warning' title='请先登录' content='需要登录才能使用该功能' onClose={()=>{setAlert(false)}} />
+            ):(
+                null
+            )}
+            <Table
+                className="music-table"
+                showHeader={false}
+                border={{ cell: false }}
+                rowClassName={(record) => {
+                    return record.id === checkId ? 'clickrow' : '';
+                }}
+                onRow={(record, index) => {
+                    return {
+                        onClick: () => {
+                            setCheckId(record.id);
+                        },
+                        onDoubleClick: () => {
+                            console.log(record.name);
+                        },
+                        onMouseEnter: () => {
+                            setShowPlay({ num: index, show: true });
+                            setShowAction({ musicId: record.id, show: true });
+                        },
+                        onMouseLeave: () => {
+                            setShowPlay({ num: index, show: false });
+                            setShowAction({ musicId: record.id, show: false });
+                        },
+                    };
+                }}
+                columns={columns}
+                data={data}
+            />
+        </div>
     );
 };
 
