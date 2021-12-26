@@ -1,6 +1,6 @@
 import { MusicTable,CommonCard, TextModal } from 'src/components';
 import React, { useEffect } from 'react';
-import { Button, Space, Alert } from '@arco-design/web-react';
+import { Button, Space, Message } from '@arco-design/web-react';
 import { IconHeart, IconCaretRight, IconPause} from '@arco-design/web-react/icon';
 import './index.less';
 import { getPlaylistDetail } from 'src/api/songlist';
@@ -41,7 +41,6 @@ const Playlist=(props:any)=>{
     const [list, setList] = React.useState<ISonglistDetail>();
     const [heart, setHeart] = React.useState<boolean>(false);
     const [play, setPlay] = React.useState<boolean>(false);
-    const [alert, setAlert] = React.useState<boolean>(false);
     useEffect(()=>{
         id = Number(searchParams.get('id'))
         getPlaylistDetail(id).then(res =>{
@@ -56,11 +55,6 @@ const Playlist=(props:any)=>{
         <div className='list'>
             {list!==undefined?(
                 <div className='list'>
-                    {alert?(
-                        <Alert className='alert' closable type='warning' title='请先登录' content='需要登录才能使用该功能' onClose={()=>{setAlert(false)}} />
-                    ):(
-                        null
-                    )}
                     <div className='list-msg'>
                         <div className='list-img'
                             onClick={()=>{navigate('/playlist?id=' + list?.id);}}
@@ -112,7 +106,7 @@ const Playlist=(props:any)=>{
                                             if(props.userInfo.status){
                                                 setHeart(!heart)
                                             }else{
-                                                setAlert(true)
+                                                Message.info({ content: '收藏需要先登录哦!', showIcon: true, position: 'top' })
                                             }
                                         }} style={{fontSize:26,color:'red'}}/>
                                     ):(
@@ -120,7 +114,7 @@ const Playlist=(props:any)=>{
                                             if(props.userInfo.status){
                                                 setHeart(!heart)
                                             }else{
-                                                setAlert(true)
+                                                Message.info({ content: '收藏需要先登录哦!', showIcon: true, position: 'top' })
                                             }
                                         }} style={{fontSize:26}}/>
                                     )}
