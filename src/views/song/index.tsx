@@ -144,17 +144,17 @@ const Song = (props:any) => {
                             <h1>{msg?.songs[0].name}</h1>
                             {all?(
                                 <div>
-                                    {lyrics.map((str,index)=>{
+                                    {lyrics.map(str=>{
                                         return(
-                                            <p key={index}>{str.split(']',2)[1]}</p>
+                                            <p>{str.split(']',2)[1]}</p>
                                         )
                                     })}
                                 </div>
                             ):(
                                 <div>
-                                    {lyricss.map((str,index)=>{
+                                    {lyricss.map(str=>{
                                         return(
-                                            <p key={index}>{str.split(']',2)[1]}</p>
+                                            <p>{str.split(']',2)[1]}</p>
                                         )
                                     })}
                                 </div>
@@ -190,7 +190,7 @@ const Song = (props:any) => {
                                 ):(
                                     <div>
                                         <Comment sort={false} commentList={comment.comments} creator={creator} status={props.userInfo.status}/>
-                                        <Pagination total={(hotComment.total<5000?hotComment.total:5000)} current={current} onChange={(pageNumber)=>{
+                                        <Pagination total={(hotComment.total<1000?hotComment.total:1000)} current={current} onChange={(pageNumber)=>{
                                             setOffset((pageNumber-1)*10)
                                             setCurrent(pageNumber)
                                         }}
