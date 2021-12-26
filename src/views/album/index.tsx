@@ -1,6 +1,6 @@
 import { CommonCard, MusicTable, TextModal } from 'src/components';
 import React, { useEffect } from 'react';
-import { Button, Space, Grid, Alert } from '@arco-design/web-react';
+import { Button, Space, Grid, Message } from '@arco-design/web-react';
 import { IconHeart, IconCaretRight, IconPause } from '@arco-design/web-react/icon';
 import { getAlbum, getArtistAlbum } from 'src/api/album';
 import { IGetAlbumResponse, IAlbum } from 'src/api/types/album'
@@ -46,18 +46,12 @@ const More = (props:{ artist:number,name:string }) => {
                                         span={4}
                                     >
                                         <CommonCard
-                                            imgSrc={
-                                                ((album !== undefined?
-                                                    (album[index].picUrl)
-                                                    :''))
-                                            }
-                                            title={String((album !== undefined?
-                                                (album[index].name):''))
-                                            }
+                                            imgSrc={album[index].picUrl}
+                                            title={String((album[index].name))}
                                             shape="round"
                                             textPosition="left"
                                             type="album"
-                                            id={album !== undefined?(album[index].id):0}
+                                            id={(album[index].id)}
                                         />
                                     </Col>
                                 );
@@ -79,7 +73,6 @@ const Album = (props:any) => {
     const [album, setAlbum] = React.useState<IGetAlbumResponse>();
     const [heart, setHeart] = React.useState<boolean>(false);
     const [play, setPlay] = React.useState<boolean>(false);
-    const [alert, setAlert] = React.useState<boolean>(false);
     useEffect(() => {
         id = Number(searchParams.get('id'));
         getAlbum(Number(id)).then((res) => {
@@ -106,11 +99,6 @@ const Album = (props:any) => {
     }
     return (
         <div className="album">
-            {alert?(
-                <Alert className='alert' closable type='warning' title='请先登录' content='需要登录才能使用该功能' onClose={()=>{setAlert(false)}} />
-            ):(
-                null
-            )}
             {album!==undefined?(
                 <div>
                     <div className="album-msg">
@@ -183,7 +171,7 @@ const Album = (props:any) => {
                                                 if(props.userInfo.status){
                                                     setHeart(!heart);
                                                 }else{
-                                                    setAlert(true);
+                                                    Message.info({ content: '收藏需要先登录哦!', showIcon: true, position: 'top' })
                                                 }
                                             }}
                                             style={{ fontSize: 26 }}
@@ -198,7 +186,7 @@ const Album = (props:any) => {
                         <MusicTable type="album" data={data} status={props.userInfo.status} />
                     </div>
 
-                    {album !== undefined ? <More artist={album.album.artist.id} name={album.album.artist.name} /> : <div className="more">More by</div>}
+                    <More artist={album.album.artist.id} name={album.album.artist.name} />
                 </div>
             ):null}
         </div>
