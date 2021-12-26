@@ -78,11 +78,11 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
             title: 'Song',
             render: (col: string, record: IMusic) => (
                 <div className="music-table-song">
-                    <div className="music-table-song-name">
+                    <div className="name">
                         <span onClick={() => { navigate('/song?id=' + record.id) }}>{record.name}</span>
                     </div>
                     {type === 'playlist' ? (
-                        <div className="music-table-song-artist">
+                        <div className="artist">
                             {record.ar.map((item: IArtistItem, index: number) => {
                                 if (index === record.ar.length - 1) {
                                     return <a onClick={() => { navigate('/artist?id=' + record.ar[index].id) }}>{item.name} </a>;
@@ -172,6 +172,7 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
                 }}
                 columns={columns}
                 data={data}
+                pagePosition='bottomCenter'
             />
         </div>
     );

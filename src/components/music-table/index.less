@@ -26,34 +26,35 @@
         }
     }
     &-song{
-        &-name{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        .name {
             font-size: 18px;
             font-weight: 600;
             cursor: default;
             padding-right: 16px;
-            overflow: hidden;
             cursor: pointer;
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1;
             overflow: hidden;
         }
-        &-artist{
+        .artist {
             margin-top: 2px;
-            font-size: 13px;
-            opacity: .68;
+            opacity: 0.68;
+            color: var(--color-text-2);
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
             overflow: hidden;
-            a{
+            a {
                 color: inherit;
-                text-decoration: auto;
+                text-decoration: none;
                 cursor: pointer;
-                display: -webkit-box;
-                -webkit-box-orient: vertical;
-                -webkit-line-clamp: 1;
-                overflow: hidden;
-            }
-            a:hover{
-                text-decoration:underline;
+                &:hover {
+                    text-decoration:underline;
+                }
             }
         }
     }
