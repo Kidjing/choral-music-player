@@ -3,7 +3,7 @@ import { Table, Button, Message } from '@arco-design/web-react';
 import { IconCaretRight, IconHeart, IconHeartFill, IconSound } from '@arco-design/web-react/icon';
 import { IMusic, IArtistItem } from '../../api/types/song';
 import { timeToMinute } from 'src/utils/timetrans';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { store } from 'src/store/index'
 
 import './index.less';
@@ -14,7 +14,7 @@ interface MusicTableProps<T> {
     className?: string;
     type: 'playlist' | 'album';
     data?: T[];
-    status?:boolean;
+    status?: boolean;
 }
 
 interface ShowState {
@@ -30,7 +30,7 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
     const { data, type } = props;
     const status = store.getState().userInfoReducer.status
     const navigate = useNavigate()
-    const [play, setPlay] = useState<boolean[]>(new Array(data!==undefined? data.length:0).fill(false));
+    const [play, setPlay] = useState<boolean[]>(new Array(data !== undefined ? data.length : 0).fill(false));
     const [checkId, setCheckId] = useState(0);
     const [showPlay, setShowPlay] = useState({ num: 1, show: false });
     const [showAction, setShowAction] = useState<ShowState>({ musicId: 1, show: false });
@@ -40,16 +40,20 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
         {
             title: '',
             width: '20px',
+            headerCellStyle: {
+                borderBottom: 0,
+                borderRadius: 12,
+            },
             render: (col: string, record: IMusic, item: number) => {
                 if (type === 'playlist') {
-                    return <img className="playlist-img" src={record.al.picUrl} onClick={()=>{navigate('/album?id='+record.al.id)}} />;
+                    return <img  className="playlist-img" src={record.al.picUrl + '?param=100y100'} onClick={() => { navigate('/album?id=' + record.al.id) }} />;
                 } else {
                     return (
                         <div className="album-prefix">
                             {item === showPlay.num && showPlay.show ? (
                                 <Button
                                     onClick={() => {
-                                        let newplays = new Array(data!==undefined? data.length:0).fill(false)
+                                        let newplays = new Array(data !== undefined ? data.length : 0).fill(false)
                                         newplays[item] = true
                                         setPlay(newplays)
                                     }}
@@ -74,18 +78,16 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
             title: 'Song',
             render: (col: string, record: IMusic) => (
                 <div className="music-table-song">
-                    <div className="music-table-song-name"
-                        onClick={()=>{navigate('/song?id='+record.id)}}
-                    >
-                        {record.name}
+                    <div className="music-table-song-name">
+                        <span onClick={() => { navigate('/song?id=' + record.id) }}>{record.name}</span>
                     </div>
                     {type === 'playlist' ? (
                         <div className="music-table-song-artist">
                             {record.ar.map((item: IArtistItem, index: number) => {
                                 if (index === record.ar.length - 1) {
-                                    return <a onClick={()=>{navigate('/artist?id='+record.ar[index].id)}}>{item.name} </a>;
+                                    return <a onClick={() => { navigate('/artist?id=' + record.ar[index].id) }}>{item.name} </a>;
                                 } else {
-                                    return <a onClick={()=>{navigate('/artist?id='+record.ar[index].id)}}>{item.name},</a>;
+                                    return <a onClick={() => { navigate('/artist?id=' + record.ar[index].id) }}>{item.name},</a>;
                                 }
                             })}
                         </div>
@@ -98,7 +100,7 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
             render: (col: string, record: IMusic) =>
                 type === 'playlist' ? (
                     <div className="playlist-album">
-                        <a onClick={()=>{navigate('/album?id='+record.al.id)}}>{record.al.name}</a>
+                        <a onClick={() => { navigate('/album?id=' + record.al.id) }}>{record.al.name}</a>
                     </div>
                 ) : null,
         },
@@ -111,9 +113,9 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
                     <Button
                         className={classNames(record.id === showAction.musicId && showAction.show ? '' : 'hidden')}
                         onClick={() => {
-                            if(status){
+                            if (status) {
                                 setLikeAction({ musicId: record.id, like: !LikeAction.like });
-                            }else{
+                            } else {
                                 Message.info({ content: '收藏请先登录哦!', showIcon: true, position: 'top' })
                             }
                         }}
@@ -130,6 +132,10 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
             ),
         },
         {
+            headerCellStyle: {
+                borderBottom: "0px",
+                borderRadius: "12px",
+            },
             title: 'Time',
             width: '8%',
             render: (col: string, record: IMusic) => <div className="music-table-time">{timeToMinute(record.dt!)}</div>,
@@ -141,10 +147,10 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
                 className="music-table"
                 showHeader={false}
                 border={{ cell: false }}
-                loading = {data!==undefined?false:true}
-                noDataElement = {<div> </div>}
+                loading={data !== undefined ? false : true}
+                noDataElement={<div> </div>}
                 rowClassName={(record) => {
-                    return record.id === checkId ? 'clickrow' : '';
+                    return record.id === checkId ? 'clickrow' : 'clickrow';
                 }}
                 onRow={(record, index) => {
                     return {

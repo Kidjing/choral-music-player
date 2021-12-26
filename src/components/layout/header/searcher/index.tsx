@@ -42,6 +42,7 @@ const Searcher = (props: any) => {
         if (input === '') {
             Message.info('请勿输入空字符!');
         } else {
+            addRecord(input);
             navigate('/search?keyword=' + input);
         }
     }

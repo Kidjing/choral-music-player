@@ -1,6 +1,6 @@
 .music-table{
     width: 95%;
-    margin-left: 20px;
+    margin-left: 10px;
     .playlist-img{
         border-radius: 8px;
         height: 46px;
@@ -33,6 +33,10 @@
             padding-right: 16px;
             overflow: hidden;
             cursor: pointer;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
         }
         &-artist{
             margin-top: 2px;
@@ -43,6 +47,10 @@
                 color: inherit;
                 text-decoration: auto;
                 cursor: pointer;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+                overflow: hidden;
             }
             a:hover{
                 text-decoration:underline;
@@ -57,6 +65,10 @@
             color: inherit;
             text-decoration: auto;
             cursor: pointer;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
         }
         a:hover{
             text-decoration:underline;
@@ -79,4 +91,16 @@
             display: none;
         }
     }
+    td:first-child{
+        border-top-left-radius: 12px;
+        border-bottom-left-radius: 12px;
+    }
+    td:last-child{
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
+    td{
+        border-bottom: 0px !important;
+    }
 }
+

@@ -27,7 +27,7 @@
   "license": "ISC",
   "dependencies": {
     "@arco-design/web-react": "^2.27.1",
-    "@arco-themes/react-choral-music": "0.0.1",
+    "@arco-themes/react-choral-music": "0.0.2",
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
     "color-thief-react": "^2.1.0",
