@@ -29,7 +29,6 @@ interface LikeState {
 const MusicTable = (props: MusicTableProps<IMusic>) => {
     const { data, type } = props;
     const status = store.getState().userInfoReducer.status
-    console.log(status)
     const navigate = useNavigate()
     const [play, setPlay] = useState<boolean[]>(new Array(data!==undefined? data.length:0).fill(false));
     const [checkId, setCheckId] = useState(0);
@@ -142,6 +141,8 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
                 className="music-table"
                 showHeader={false}
                 border={{ cell: false }}
+                loading = {data!==undefined?false:true}
+                noDataElement = {<div> </div>}
                 rowClassName={(record) => {
                     return record.id === checkId ? 'clickrow' : '';
                 }}
