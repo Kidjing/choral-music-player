@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Alert } from '@arco-design/web-react';
+import { Button, Message } from '@arco-design/web-react';
 import { IconHeart } from '@arco-design/web-react/icon';
 import { Track } from 'src/components/track-list';
 import { IMusic } from 'src/api/types/song';
@@ -15,21 +15,15 @@ interface SongMsg {
 const Song = (props: any) => {
     const {song,isCollected}=props
     const [like, setLike] = React.useState<boolean>(isCollected)
-    const [alert, setAlert] = React.useState<boolean>(false)
     return (
         <div className="current-song">
-            {alert?(
-                <Alert className='alert' closable type='warning'  content='需要登录才能使用该功能' onClose={()=>{setAlert(false)}} />
-            ):(
-                null
-            )}
             <Track album={song} hoverable={false}/>
             <Button
                 onClick={()=>{
                     if(props.userInfo.status){
                         setLike(!like)
                     }else{
-                        setAlert(true)
+                        Message.info({ content: '收藏需要登录哦！', showIcon: true, position: 'bottom' })
                     }
                 }}
                 className="like-btn"
