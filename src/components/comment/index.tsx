@@ -1,4 +1,4 @@
-import { Comment, Button, Input, Alert } from '@arco-design/web-react';
+import { Comment, Button, Input, Message } from '@arco-design/web-react';
 import { IconMessage, IconThumbUp } from '@arco-design/web-react/icon';
 import React, { useState } from 'react';
 import { IComment } from '../../api/types/comment';
@@ -18,14 +18,13 @@ const CommentItem = (props: CommentItemProps) => {
     const { user, content, time, likedCount, liked } = comment;
     const [like, setLike] = useState<boolean>(liked);
     const [reply, setReply] = useState<boolean>(false);
-    const [alert, setAlert] = React.useState<boolean>(false);
 
     const actions = [
         <span className="comment-action" key="like" onClick={() =>{
             if(status){
                 setLike(!like);
             }else{
-                setAlert(true);
+                Message.info({ content: '点赞需要先登录哦!', showIcon: true, position: 'top' })
             }
         }}>
             {like ? <IconThumbUp style={{ color: '#f53f3f' }} /> : <IconThumbUp />}{' '}
@@ -34,8 +33,12 @@ const CommentItem = (props: CommentItemProps) => {
         <span
             className="comment-action"
             key="reply"
-            onClick={() => {
-                setReply(!reply);
+            onClick={()=>{
+                if(status === false){
+                    Message.info({ content: '评论需要先登录哦!', showIcon: true, position: 'top' })
+                }else{
+                    setReply(!reply);
+                }
             }}
         >
             <IconMessage />
@@ -51,11 +54,6 @@ const CommentItem = (props: CommentItemProps) => {
             content={<div>{content}</div>}
             datetime={dateTrans(time)}
         >
-            {alert?(
-                <Alert className='alert' closable type='warning' title='请先登录' content='需要登录才能使用该功能' onClose={()=>{setAlert(false)}} />
-            ):(
-                null
-            )}
             {reply && (
                 <Comment
                     align="right"
@@ -63,11 +61,7 @@ const CommentItem = (props: CommentItemProps) => {
                         <Button key="0" type="secondary">
                             取消
                         </Button>,
-                        <Button key="1" type="primary" onClick={()=>{
-                            if(status === false){
-                                setAlert(true);
-                            }
-                        }}>
+                        <Button key="1" type="primary" >
                             评论
                         </Button>,
                     ]}
@@ -92,14 +86,8 @@ interface Comment{
 
 const Comments = (props: Comment) => {
     const { commentList, creator, status } = props;
-    const [alert, setAlert] = React.useState<boolean>(false);
     return (
         <div className="comments">
-            {alert?(
-                <Alert className='alert' closable type='warning' title='请先登录' content='需要登录才能使用该功能' onClose={()=>{setAlert(false)}} />
-            ):(
-                null
-            )}
             <div className="comments-top">
                 <Comment
                     align="right"
@@ -109,7 +97,7 @@ const Comments = (props: Comment) => {
                         </Button>,
                         <Button key="1" type="primary" onClick={()=>{
                             if(status === false){
-                                setAlert(true);
+                                Message.info({ content: '评论请先登录哦!', showIcon: true, position: 'top' })
                             }
                         }}>
                             评论
