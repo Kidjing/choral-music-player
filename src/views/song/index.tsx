@@ -7,7 +7,7 @@ import { getLyricBySongID, getSongDetail } from 'src/api/song'
 import { ICreator } from 'src/api/types/user'
 import { ILyric } from 'src/api/types/lyric';
 import { IMusic, IArtistItem } from "src/api/types/song";
-import { Button, Space, Message } from '@arco-design/web-react';
+import { Button, Space, Message, Pagination } from '@arco-design/web-react';
 import { IconCaretRight, IconPause, IconHeart } from '@arco-design/web-react/icon';
 import { connect } from 'react-redux';
 import './index.less';
@@ -20,8 +20,11 @@ const Song = (props:any) => {
     const [heart, setHeart] = React.useState<boolean>(false);
     const [play, setPlay] = React.useState<boolean>(false);
     const [comment, setComment] = React.useState<CommentsResponce>();
+    const [hotComment, setHotComment] = React.useState<CommentsResponce>();
     const [hotsort, setSort] = React.useState<boolean>(true);
     const [all, setAll] = React.useState<boolean>(false)
+    const [offset, setOffset] = React.useState<number>(0)
+    const [current, setCurrent] = React.useState<number>(1)
     let id:number;
     let ids:number[];
     let request:CommentsRequest = {id:0};
@@ -29,6 +32,8 @@ const Song = (props:any) => {
         id = Number(searchParams.get('id'));
         ids = [id];
         request.id = id!==undefined?id:0
+        request.limit = 10
+        request.offset = offset
         getLyricBySongID(id).then(res =>{
             setLyric(res);
         });
@@ -37,11 +42,12 @@ const Song = (props:any) => {
         });
         getMusicComment(request).then(res =>{
             setComment(res);
-            if(res.hotComments.length === 0){
-                setSort(false)
-            }
         });
-    },[searchParams]);
+        request.offset = 0
+        getMusicComment(request).then(res =>{
+            setHotComment(res);
+        });
+    },[searchParams,offset]);
     let lyrics:string[] = [];
     let lyricss:string[] = [];
     if(lyric!==undefined){
@@ -66,7 +72,7 @@ const Song = (props:any) => {
     }
     return (
         <div className='song'>
-            {(msg!==undefined&&lyric!==undefined&&comment!==undefined)?(
+            {(msg!==undefined&&lyric!==undefined&&comment!==undefined&&hotComment!==undefined)?(
                 <div>
                     <div className='song-detail'>
                         <div className='song-detail-msg'>
@@ -180,16 +186,23 @@ const Song = (props:any) => {
                         {comment!==undefined?(
                             <div>
                                 {hotsort?(
-                                    <Comment commentList={comment.hotComments} creator={creator} status={props.userInfo.status}/>
+                                    <Comment commentList={hotComment.hotComments} creator={creator} status={props.userInfo.status}/>
                                 ):(
-                                    <Comment commentList={comment.comments} creator={creator} status={props.userInfo.status}/>
+                                    <div>
+                                        <Comment commentList={comment.comments} creator={creator} status={props.userInfo.status}/>
+                                        <Pagination total={(hotComment.total)} current={current} onChange={(pageNumber)=>{
+                                            setOffset((pageNumber-1)*10)
+                                            setCurrent(pageNumber)
+                                        }}
+                                        />
+                                    </div>
                                 )}
                             </div>
                         ):(
                             <div>加载中</div>
                         )}
-                        {comment?.hotComments.length === 0 && hotsort === true ?(
-                            <p>暂无热评</p>
+                        {hotsort === true ?(
+                            <p>{hotComment.hotComments.length===0?'暂无热评':null}</p>
                         ):null}
                     </div>
                 </div>
