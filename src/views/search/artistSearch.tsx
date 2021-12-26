@@ -24,25 +24,28 @@ const ArtistSearch = () => {
     }, [searchParams])
     return (
         <div>
-            <div className="title">艺人
-                <a onClick={() => navigate('artist?keyword=' + key)}>查看全部</a>
-            </div>
-            <Row gutter={[30, 40]} className='card'>
-                {artistList ? artistList.map((item, index) => {
-                    return (
-                        <Col key={index} span={6}>
-                            <CommonCard
-                                imgSrc={item.picUrl}
-                                title={item.name}
-                                id={item.id}
-                                type='artist'
-                                shape="circle"
-                                textPostion="center"
-                            />
-                        </Col>
-                    );
-                }) : null}
-            </Row>
+            {artistList ? <div>
+                <div className="title">艺人
+                    <a onClick={() => navigate('artist?keyword=' + key)}>查看全部</a>
+                </div>
+                <Row gutter={[30, 40]} className='card'>
+                    {artistList ? artistList.map((item, index) => {
+                        return (
+                            <Col key={index} span={6}>
+                                <CommonCard
+                                    imgSrc={item.picUrl}
+                                    title={item.name}
+                                    id={item.id}
+                                    type='artist'
+                                    shape="circle"
+                                    textPostion="center"
+                                />
+                            </Col>
+                        );
+                    }) : null}
+                </Row>
+            </div> : null}
+
         </div>)
 }
 export default ArtistSearch

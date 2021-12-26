@@ -13,6 +13,7 @@ import './index.less';
 const FmCard = (props: any) => {
     const [play,setPlay]=useState(false);
     const currentFm=props.personalFm[0]
+    
     const { data } = usePalette(currentFm.album.picUrl, 2, 'hex', { crossOrigin: 'anonymous' });
 
     const getNext = () => {

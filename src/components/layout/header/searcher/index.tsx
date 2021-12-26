@@ -15,10 +15,12 @@ const Searcher = (props: any) => {
     const [search, setSearch] = React.useState<ISuggestSearch>()
     const inputChange = (inputValue: string) => {
         setShow(inputValue === '' ? 0 : 1)
+        if (search?.artists === undefined || inputValue.startsWith(input) && inputValue.length !== 0) {
+            suggestSearch(inputValue).then(res => {
+                setSearch(res)
+            })
+        }
         setInput(inputValue)
-        suggestSearch(inputValue).then(res => {
-            setSearch(res)
-        })
     }
     const addRecord = (input: string) => {
         if (/^[\u4E00-\u9FA5\uFE30-\uFFA0]+$/.test(input))
@@ -35,6 +37,13 @@ const Searcher = (props: any) => {
     }
     const replaceStyle = (str: string) => {
         return str.replace(input, "<span class='searcher-list-item-hunt'>" + input + "</span>");
+    }
+    const pressEnter = () => {
+        if (input === '') {
+            Message.info('请勿输入空字符!');
+        } else {
+            navigate('/search?keyword=' + input);
+        }
     }
 
     const pop = () => {
@@ -116,7 +125,7 @@ const Searcher = (props: any) => {
     return (
         <Trigger popup={pop} position='bottom' trigger={['click']} clickToClose={false}>
             <Input size='large' className="searcher" prefix={<IconSearch style={{ fontSize: 18 }} />}
-                allowClear placeholder="搜索" onPressEnter={() => { navigate('/search?keyword=' + input) }}
+                allowClear placeholder="搜索" onPressEnter={() => { pressEnter() }}
                 onChange={inputChange} value={input} style={{ borderRadius: "6px" }} />
         </Trigger>
     );
