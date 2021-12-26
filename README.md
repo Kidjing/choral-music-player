@@ -1,8 +1,9 @@
 
+<div align="center">
+    <img src="https://yili979.oss-cn-beijing.aliyuncs.com/img/image-20211227010055879.png" alt="netease-web" style="width: 230px; height: 200px;"></img>
+</div>
 
-<img src="https://yili979.oss-cn-beijing.aliyuncs.com/img/image-20211227010055879.png" alt="image-20211227010055879" style="zoom:50%;" />
-
-<h1 align="center">choral-music 👋</h1>
+<h1 align="center"> choral-music 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/Kidjing/choral-music-player#readme" target="_blank">
