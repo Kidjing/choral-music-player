@@ -81,11 +81,12 @@ const CommentItem = (props: CommentItemProps) => {
 interface Comment{
     commentList: IComment[];
     creator: ICreator;
-    status:boolean
+    status:boolean;
+    sort:boolean;
 }
 
 const Comments = (props: Comment) => {
-    const { commentList, creator, status } = props;
+    const { commentList, creator, status, sort } = props;
     return (
         <div className="comments">
             <div className="comments-top">
@@ -112,7 +113,7 @@ const Comments = (props: Comment) => {
                 />
             </div>
             <div className="comments-list">
-                <h3>精彩评论</h3>
+                <h3>{sort?'精彩评论':'最新评论'}</h3>
                 {commentList.map((comment: IComment, index: number) => {
                     return (
                         <div className="comments-list-item" key={index}>
