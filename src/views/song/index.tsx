@@ -144,17 +144,17 @@ const Song = (props:any) => {
                             <h1>{msg?.songs[0].name}</h1>
                             {all?(
                                 <div>
-                                    {lyrics.map(str=>{
+                                    {lyrics.map((str,index)=>{
                                         return(
-                                            <p>{str.split(']',2)[1]}</p>
+                                            <p key={index}>{str.split(']',2)[1]}</p>
                                         )
                                     })}
                                 </div>
                             ):(
                                 <div>
-                                    {lyricss.map(str=>{
+                                    {lyricss.map((str,index)=>{
                                         return(
-                                            <p>{str.split(']',2)[1]}</p>
+                                            <p key={index}>{str.split(']',2)[1]}</p>
                                         )
                                     })}
                                 </div>
