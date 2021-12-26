@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Button, Alert } from '@arco-design/web-react';
+import { Table, Button, Message } from '@arco-design/web-react';
 import { IconCaretRight, IconHeart, IconHeartFill, IconSound } from '@arco-design/web-react/icon';
 import { IMusic, IArtistItem } from '../../api/types/song';
 import { timeToMinute } from 'src/utils/timetrans';
@@ -33,7 +33,6 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
     const [showPlay, setShowPlay] = useState({ num: 1, show: false });
     const [showAction, setShowAction] = useState<ShowState>({ musicId: 1, show: false });
     const [LikeAction, setLikeAction] = useState<LikeState>({ musicId: 1, like: false });
-    const [alert, setAlert] = React.useState<boolean>(false);
 
     const columns = [
         {
@@ -113,7 +112,7 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
                             if(status){
                                 setLikeAction({ musicId: record.id, like: !LikeAction.like });
                             }else{
-                                setAlert(true)
+                                Message.info({ content: '收藏请先登录哦!', showIcon: true, position: 'top' })
                             }
                         }}
                         style={{ background: 'transparent' }}
@@ -136,11 +135,6 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
     ];
     return (
         <div>
-            {alert?(
-                <Alert className='alert' closable type='warning' title='请先登录' content='需要登录才能使用该功能' onClose={()=>{setAlert(false)}} />
-            ):(
-                null
-            )}
             <Table
                 className="music-table"
                 showHeader={false}
