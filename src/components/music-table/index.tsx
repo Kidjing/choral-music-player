@@ -4,6 +4,7 @@ import { IconCaretRight, IconHeart, IconHeartFill, IconSound } from '@arco-desig
 import { IMusic, IArtistItem } from '../../api/types/song';
 import { timeToMinute } from 'src/utils/timetrans';
 import { useNavigate} from 'react-router-dom';
+import { store } from 'src/store/index'
 
 import './index.less';
 import classNames from 'classnames';
@@ -26,7 +27,9 @@ interface LikeState {
     like?: boolean;
 }
 const MusicTable = (props: MusicTableProps<IMusic>) => {
-    const { data, type, status } = props;
+    const { data, type } = props;
+    const status = store.getState().userInfoReducer.status
+    console.log(status)
     const navigate = useNavigate()
     const [play, setPlay] = useState<boolean[]>(new Array(data!==undefined? data.length:0).fill(false));
     const [checkId, setCheckId] = useState(0);
