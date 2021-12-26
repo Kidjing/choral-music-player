@@ -1,6 +1,6 @@
 import { CommonCard, TextModal, TrackList } from 'src/components';
 import React, { useEffect } from 'react';
-import { Button, Space, Grid, Alert } from '@arco-design/web-react';
+import { Button, Space, Grid, Message } from '@arco-design/web-react';
 import { IconCaretRight, IconPause } from '@arco-design/web-react/icon';
 import { getArtistDetail } from 'src/api/artist';
 import { IArtist } from 'src/api/types/artist';
@@ -24,7 +24,6 @@ const Artist = (props:any) => {
     const [play, setPlay] = React.useState<boolean>(false);
     const [follow, setFollow] = React.useState<boolean>(false);
     const [all, setAll] =React.useState<boolean>(false);
-    const [alert, setAlert] = React.useState<boolean>(false);
     let id: number;
     useEffect(() => {
         id = Number(searchParams.get('id'));
@@ -50,11 +49,6 @@ const Artist = (props:any) => {
     }
     return (
         <div className="artist">
-            {alert?(
-                <Alert className='alert' closable type='warning' title='请先登录' content='需要登录才能使用该功能' onClose={()=>{setAlert(false)}} />
-            ):(
-                null
-            )}
             {(artist!==undefined&&albums!==undefined)?(
                 <div>
                     <div className="artist-msg">
@@ -131,7 +125,7 @@ const Artist = (props:any) => {
                                             if(status){
                                                 setFollow(!follow);
                                             }else{
-                                                setAlert(true);
+                                                Message.info({ content: '关注需要先登录哦!', showIcon: true, position: 'top' })
                                             }
                                         }}
                                         type="primary"
@@ -163,25 +157,25 @@ const Artist = (props:any) => {
                                 <h3
                                     className="h3"
                                     onClick={() => {
-                                        navigate('/album?id=' + (albums !== undefined ? albums[0].id : 0));
+                                        navigate('/album?id=' + albums[0].id);
                                     }}
                                 >
-                                    {albums !== undefined ? albums[0].name : ''}
+                                    {albums[0].name}
                                 </h3>
-                                <p>{dateTrans(Number(albums !== undefined ? albums[0].publishTime : 0))}</p>
-                                <p>{albums !== undefined ? albums[0].size : 0}首歌</p>
+                                <p>{dateTrans(Number(albums[0].publishTime))}</p>
+                                <p>{albums[0].size}首歌</p>
                             </div>
                         </div>
                         {albums!==undefined && albums.length>=2?(
                             <div className="new-album">
                                 <div
                                     onClick={() => {
-                                        navigate('/album?id=' + (albums !== undefined ? albums[1].id : 0));
+                                        navigate('/album?id=' + (albums[1].id));
                                     }}
                                     className="new-album-img"
                                 >
                                     <CommonCard
-                                        imgSrc={albums?.[1].picUrl !== undefined ? String(albums[1].picUrl) : ''}
+                                        imgSrc={String(albums[1].picUrl)}
                                         title=""
                                         shape="round"
                                         textPosition="left"
@@ -197,7 +191,7 @@ const Artist = (props:any) => {
                                         {albums[1].name}
                                     </h3>
                                     <p>{dateTrans(Number(albums[1].publishTime))}</p>
-                                    <p>{albums !== undefined ? albums[1].size : 0}首歌</p>
+                                    <p>{albums[1].size}首歌</p>
                                 </div>
                             </div>
                         ):(
@@ -236,7 +230,7 @@ const Artist = (props:any) => {
                                             >
                                                 <CommonCard
                                                     imgSrc={String(albums[index].picUrl)}
-                                                    title={albums !== undefined ? albums[index].name : ''}
+                                                    title={albums[index].name}
                                                     shape="round"
                                                     textPosition="left"
                                                     type = "album"
