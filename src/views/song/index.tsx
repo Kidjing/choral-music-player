@@ -119,7 +119,7 @@ const Song = (props:any) => {
                                 </Space>
                                 <Space size='large' style={{marginLeft:10}}>
                                     <Button style={{backgroundColor:'transparent'}}>
-                                        <a href='#comment'>{'评论('}{(comment!==undefined&&comment.total<5000)?comment?.total:'>5000'}{')'}</a>
+                                        <a href='#comment'>{'评论('}{comment?.total}{')'}</a>
                                     </Button>
                                 </Space>
                                 <Space size='large' style={{marginLeft:10}}>
@@ -190,7 +190,7 @@ const Song = (props:any) => {
                                 ):(
                                     <div>
                                         <Comment commentList={comment.comments} creator={creator} status={props.userInfo.status}/>
-                                        <Pagination total={(hotComment.total)} current={current} onChange={(pageNumber)=>{
+                                        <Pagination total={(hotComment.total<5000?hotComment.total:5000)} current={current} onChange={(pageNumber)=>{
                                             setOffset((pageNumber-1)*10)
                                             setCurrent(pageNumber)
                                         }}
