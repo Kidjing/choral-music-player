@@ -7,7 +7,7 @@ import { getLyricBySongID, getSongDetail } from 'src/api/song'
 import { ICreator } from 'src/api/types/user'
 import { ILyric } from 'src/api/types/lyric';
 import { IMusic, IArtistItem } from "src/api/types/song";
-import { Button, Space, Alert } from '@arco-design/web-react';
+import { Button, Space, Message } from '@arco-design/web-react';
 import { IconCaretRight, IconPause, IconHeart } from '@arco-design/web-react/icon';
 import { connect } from 'react-redux';
 import './index.less';
@@ -21,7 +21,6 @@ const Song = (props:any) => {
     const [play, setPlay] = React.useState<boolean>(false);
     const [comment, setComment] = React.useState<CommentsResponce>();
     const [hotsort, setSort] = React.useState<boolean>(true);
-    const [alert, setAlert] = React.useState<boolean>(false);
     const [all, setAll] = React.useState<boolean>(false)
     let id:number;
     let ids:number[];
@@ -67,11 +66,6 @@ const Song = (props:any) => {
     }
     return (
         <div className='song'>
-            {alert?(
-                <Alert className='alert' closable type='warning' title='请先登录' content='需要登录才能使用该功能' onClose={()=>{setAlert(false)}} />
-            ):(
-                null
-            )}
             {(msg!==undefined&&lyric!==undefined&&comment!==undefined)?(
                 <div>
                     <div className='song-detail'>
@@ -127,7 +121,7 @@ const Song = (props:any) => {
                                         if(props.userInfo.status){
                                             setHeart(!heart);
                                         }else{
-                                            setAlert(true);
+                                            Message.info({ content: '收藏需要先登录哦！', showIcon: true, position: 'top' })
                                         }
                                     }}
                                     >
