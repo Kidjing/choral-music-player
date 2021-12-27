@@ -64,14 +64,13 @@ const Artist = (props: any) => {
                             <h1>{artist?.artist.name}</h1>
                             <p>艺人</p>
                             <p>
-                                <a href="#hotSongs" className="a">
+                                <a href="#hotSongs">
                                     {artist?.artist.musicSize}首歌
                                 </a>
                                 {'  .  '}
-                                <a href="#album" className="a">
+                                <a href="#album">
                                     {artist?.artist.albumSize}专辑
                                 </a>
-                                . {artist?.artist.mvSize}个MV
                             </p>
                             <p>
                                 {artist.artist.briefDesc !== null ? (

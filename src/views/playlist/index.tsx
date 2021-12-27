@@ -70,16 +70,17 @@ const Playlist=(props:any)=>{
                             <h1>{list?.name}</h1>
                             <p>最后更新于{date}</p>
                             <p>{list?.trackCount}首歌</p>
-                            <p>
+                            <div>
                                 {list.description !== null?(
                                     <TextModal 
                                         desc={String(list?.description)} 
                                         title='歌单介绍'
+                                        
                                     />
                                 ):(
                                     ' '
                                 )}
-                            </p>
+                            </div>
                             <Space size='large'>
                                 {play?(
                                     <Button

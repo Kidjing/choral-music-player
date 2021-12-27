@@ -131,6 +131,8 @@ const Song = (props: any) => {
                                             <IconHeart onClick={() => {
                                                 if (props.userInfo.status) {
                                                     setHeart(!heart)
+                                                } else {
+                                                    Message.info({ content: '收藏需要先登录哦!', showIcon: true, position: 'top' })
                                                 }
                                             }} style={{ fontSize: 26, color: 'red' }} />
                                         )}
