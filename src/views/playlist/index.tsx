@@ -21,7 +21,11 @@ const Table = (props:{ids:ITrackId[]|undefined,status:boolean}) =>{
             let trackId:ITrackId
             for(trackId of trackIds){
                 ids.push(trackId.id)
+                if(ids.length >= 200){
+                    break
+                }
             }
+            
         }
         getSongDetail(ids).then(res=>{
             setSongs(res)
