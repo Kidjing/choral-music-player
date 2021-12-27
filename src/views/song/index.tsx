@@ -22,7 +22,6 @@ const Song = (props: any) => {
     const [comment, setComment] = React.useState<CommentsResponce>();
     const [hotComment, setHotComment] = React.useState<CommentsResponce>();
     const [hotsort, setSort] = React.useState<boolean>(true);
-    const [all, setAll] = React.useState<boolean>(false)
     const [offset, setOffset] = React.useState<number>(0)
     const [current, setCurrent] = React.useState<number>(1)
     let id: number;
@@ -140,27 +139,19 @@ const Song = (props: any) => {
                                 </Space>
                             </div>
                         </div>
-                        <div className='lyric'>
-                            <h1>{msg?.songs[0].name}</h1>
-                            {all ? (
-                                <div>
+                        <div className='outer'>
+                            <div className='lyric'>
+                                <h1>{msg?.songs[0].name}</h1>
+                                <div className='container'>
                                     {lyrics.map((str, index) => {
                                         return (
                                             <p key={index}>{str.split(']', 2)[1]}</p>
                                         )
                                     })}
                                 </div>
-                            ) : (
-                                <div>
-                                    {lyricss.map((str, index) => {
-                                        return (
-                                            <p key={index}>{str.split(']', 2)[1]}</p>
-                                        )
-                                    })}
-                                </div>
-                            )}
-                            <Button size='mini' onClick={() => { setAll(!all) }}>{all ? '收回' : '显示全部'}</Button>
+                            </div>
                         </div>
+
                     </div>
                     <div className='song-comment'>
                         <h1 id='comment'>评 论</h1>

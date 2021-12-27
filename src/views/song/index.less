@@ -24,11 +24,23 @@
                 }
             }
         }
-        .lyric{
+        .outer{
+            overflow: hidden;
+            height: 460px;
             margin-left: 50%;
             width:50%;
-            min-height: 500px;
+            .lyric{
+                padding-left: 30px;
+                height: 460px;
+                overflow-y: auto;
+            }
+            .lyric::-webkit-scrollbar {
+                /*隐藏滚轮*/
+                display: none;
+            }
         }
+        
+        
         .btn{
             border-radius: 8px;
             padding: 8px 16px;
