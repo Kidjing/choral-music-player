@@ -1,4 +1,4 @@
-import { CommonCard, TextModal, TrackList } from 'src/components';
+import { CommonCard, TextModal } from 'src/components';
 import React, { useEffect } from 'react';
 import { Button, Space, Grid, Message } from '@arco-design/web-react';
 import { IconCaretRight, IconPause } from '@arco-design/web-react/icon';
@@ -10,12 +10,13 @@ import { getArtistAlbum } from 'src/api/album';
 import { IAlbum } from 'src/api/types/album';
 import { dateTrans } from 'src/utils/timetrans';
 import { connect } from 'react-redux';
+import { Track } from 'src/components/track-list';
 import './index.less';
 
 const Row = Grid.Row;
 const Col = Grid.Col;
 
-const Artist = (props:any) => {
+const Artist = (props: any) => {
     const status = props.userInfo.status
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
@@ -23,7 +24,7 @@ const Artist = (props:any) => {
     const [albums, setAlbums] = React.useState<IAlbum[]>();
     const [play, setPlay] = React.useState<boolean>(false);
     const [follow, setFollow] = React.useState<boolean>(false);
-    const [all, setAll] =React.useState<boolean>(false);
+    const [all, setAll] = React.useState<boolean>(false);
     let id: number;
     useEffect(() => {
         id = Number(searchParams.get('id'));
@@ -41,15 +42,9 @@ const Artist = (props:any) => {
             albumNum[i] = 1;
         }
     }
-    let hotSong:IMusic[] = []
-    if(artist!== undefined){
-        for(let i=0; i<12&&i<artist.hotSongs.length; i++){
-            hotSong.push(artist.hotSongs[i])
-        }
-    }
     return (
         <div className="artist">
-            {(artist!==undefined&&albums!==undefined)?(
+            {(artist !== undefined && albums !== undefined) ? (
                 <div>
                     <div className="artist-msg">
                         <div
@@ -72,27 +67,27 @@ const Artist = (props:any) => {
                                 <a href="#hotSongs" className="a">
                                     {artist?.artist.musicSize}首歌
                                 </a>
-                                .{' '}
+                                {'  .  '}
                                 <a href="#album" className="a">
                                     {artist?.artist.albumSize}专辑
                                 </a>
                                 . {artist?.artist.mvSize}个MV
                             </p>
                             <p>
-                                {artist.artist.briefDesc !== null?(
+                                {artist.artist.briefDesc !== null ? (
                                     <TextModal desc={String(artist?.artist.briefDesc)} title="艺术家介绍" />
-                                ):(
+                                ) : (
                                     null
                                 )}
                             </p>
                             <br />
-                            <Space style={{ marginRight: 20 }} size="large">
+                            <Space size='large'>
                                 {play ? (
                                     <Button
                                         onClick={() => {
                                             setPlay(!play);
                                         }}
-                                        type="primary"
+                                        className='btn'
                                         icon={<IconPause />}
                                     >
                                         暂停
@@ -102,33 +97,31 @@ const Artist = (props:any) => {
                                         onClick={() => {
                                             setPlay(!play);
                                         }}
-                                        type="primary"
+                                        className='btn'
                                         icon={<IconCaretRight />}
                                     >
                                         播放
                                     </Button>
                                 )}
-                            </Space>
-                            <Space size="large">
                                 {follow ? (
                                     <Button
                                         onClick={() => {
                                             setFollow(!follow);
                                         }}
-                                        type="primary"
+                                        className='btn'
                                     >
                                         已关注
                                     </Button>
                                 ) : (
                                     <Button
                                         onClick={() => {
-                                            if(status){
+                                            if (status) {
                                                 setFollow(!follow);
-                                            }else{
+                                            } else {
                                                 Message.info({ content: '关注需要先登录哦!', showIcon: true, position: 'top' })
                                             }
                                         }}
-                                        type="primary"
+                                        className='btn'
                                     >
                                         关注
                                     </Button>
@@ -166,7 +159,7 @@ const Artist = (props:any) => {
                                 <p>{albums[0].size}首歌</p>
                             </div>
                         </div>
-                        {albums!==undefined && albums.length>=2?(
+                        {albums !== undefined && albums.length >= 2 ? (
                             <div className="new-album">
                                 <div
                                     onClick={() => {
@@ -194,7 +187,7 @@ const Artist = (props:any) => {
                                     <p>{albums[1].size}首歌</p>
                                 </div>
                             </div>
-                        ):(
+                        ) : (
                             <div>
                                 {' '}
                             </div>
@@ -203,15 +196,34 @@ const Artist = (props:any) => {
 
                     <div id="hotSongs">
                         <h2>热门歌曲</h2>
-                        {all?(
+                        {all ? (
                             <div>
-                                <TrackList playlist={artist?.hotSongs} />
-                                <Button size='mini' onClick={()=>setAll(false)}>收回</Button>
+                                <Row gutter={[4, 4]}>
+                                    {artist?.hotSongs.slice(0, 24).map((item, index) => {
+                                        return (
+                                            <Col key={index} span={6}>
+                                                <Track album={item} />
+                                            </Col>
+                                        );
+                                    })}
+                                </Row>
+                                <div className='get-all' onClick={() => setAll(false)}>收回</div>
                             </div>
-                        ):(
+                        ) : (
                             <div>
-                                <TrackList playlist={hotSong} />
-                                <Button size='mini' onClick={()=>setAll(true)}>显示全部</Button>
+
+                                <Row gutter={[4, 4]}>
+                                    {artist?.hotSongs.slice(0, 12).map((item, index) => {
+                                        return (
+                                            <Col key={index} span={6}>
+                                                <Track album={item} />
+                                            </Col>
+                                        );
+                                    })}
+                                </Row>
+                                {artist?.hotSongs.length > 12 ?
+                                    <div className='get-all' onClick={() => setAll(true)}>显示全部</div>
+                                    : null}
                             </div>
                         )}
                     </div>
@@ -233,7 +245,7 @@ const Artist = (props:any) => {
                                                     title={albums[index].name}
                                                     shape="round"
                                                     textPosition="left"
-                                                    type = "album"
+                                                    type="album"
                                                     id={albums[index].id}
                                                 />
                                             </div>
@@ -244,7 +256,7 @@ const Artist = (props:any) => {
                         </div>
                     </div>
                 </div>
-            ):(
+            ) : (
                 null
             )}
         </div>

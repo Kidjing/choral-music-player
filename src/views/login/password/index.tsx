@@ -58,7 +58,7 @@ const PasswordLogin = (props: any) => {
                                 onChange={passwordInputChange}
                                 onPressEnter={summit}
                             />
-                            <Button className='button' type='primary' onClick={summit}>提交</Button>
+                            <Button className='button' onClick={summit}>提交</Button>
                         </Space>
                     </div>
                     <a onClick={() => { navigate('/login/qr') }}>二维码登录</a>

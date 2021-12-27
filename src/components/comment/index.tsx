@@ -1,4 +1,4 @@
-import { Comment, Button, Input, Message } from '@arco-design/web-react';
+import { Comment, Button, Input, Message,Space } from '@arco-design/web-react';
 import { IconMessage, IconThumbUp } from '@arco-design/web-react/icon';
 import React, { useState } from 'react';
 import { IComment } from '../../api/types/comment';
@@ -10,7 +10,7 @@ import './index.less';
 interface CommentItemProps {
     comment: IComment;
     creator: ICreator;
-    status:boolean;
+    status: boolean;
 }
 
 const CommentItem = (props: CommentItemProps) => {
@@ -20,23 +20,23 @@ const CommentItem = (props: CommentItemProps) => {
     const [reply, setReply] = useState<boolean>(false);
 
     const actions = [
-        <span className="comment-action" key="like" onClick={() =>{
-            if(status){
+        <span className="comment-action" key="like" onClick={() => {
+            if (status) {
                 setLike(!like);
-            }else{
+            } else {
                 Message.info({ content: '点赞需要先登录哦!', showIcon: true, position: 'top' })
             }
         }}>
             {like ? <IconThumbUp style={{ color: '#f53f3f' }} /> : <IconThumbUp />}{' '}
-            {!!likedCount && <span>{likedCount + (like?1:0)}</span>}
+            {!!likedCount && <span>{likedCount + (like ? 1 : 0)}</span>}
         </span>,
         <span
             className="comment-action"
             key="reply"
-            onClick={()=>{
-                if(status === false){
+            onClick={() => {
+                if (status === false) {
                     Message.info({ content: '评论需要先登录哦!', showIcon: true, position: 'top' })
-                }else{
+                } else {
                     setReply(!reply);
                 }
             }}
@@ -54,35 +54,36 @@ const CommentItem = (props: CommentItemProps) => {
             content={<div>{content}</div>}
             datetime={dateTrans(time)}
         >
-            {reply && (
-                <Comment
-                    align="right"
-                    actions={[
-                        <Button key="0" type="secondary">
-                            取消
-                        </Button>,
-                        <Button key="1" type="primary" >
-                            评论
-                        </Button>,
-                    ]}
-                    author={creator.nickname}
-                    avatar={creator.avatarUrl}
-                    content={
-                        <div>
-                            <Input.TextArea defaultValue={'回复_' + user.nickname + ':'} />
-                        </div>
-                    }
-                />
-            )}
-        </Comment>
+            {
+                reply && (
+                    <Comment
+                        align="right"
+                        actions={[
+                            <Button key="0" type="secondary">
+                                取消
+                            </Button>,
+                            <Button key="1" type="primary" >
+                                评论
+                            </Button>,
+                        ]}
+                        author={creator.nickname}
+                        avatar={creator.avatarUrl}
+                        content={
+                            <div>
+                                <Input.TextArea defaultValue={'回复_' + user.nickname + ':'} />
+                            </div>
+                        }
+                    />
+                )}        </Comment>
     );
 };
 
-interface Comment{
+interface Comment {
     commentList: IComment[];
     creator: ICreator;
-    status:boolean;
-    sort:boolean;
+    status: boolean;
+    sort: boolean;
+    setSort: Function;
 }
 
 const Comments = (props: Comment) => {
@@ -93,11 +94,11 @@ const Comments = (props: Comment) => {
                 <Comment
                     align="right"
                     actions={[
-                        <Button key="0" type="secondary">
+                        <Button key="0" className='btn-cancel'>
                             取消
                         </Button>,
-                        <Button key="1" type="primary" onClick={()=>{
-                            if(status === false){
+                        <Button key="1" className='btn' onClick={() => {
+                            if (status === false) {
                                 Message.info({ content: '评论请先登录哦!', showIcon: true, position: 'top' })
                             }
                         }}>
@@ -113,7 +114,15 @@ const Comments = (props: Comment) => {
                 />
             </div>
             <div className="comments-list">
-                <h3>{sort?'精彩评论':'最新评论'}</h3>
+                <Space className='space'>
+                    <Button className={sort ? 'btn' : 'btn-noactive'} onClick={() => { props.setSort(true) }}>
+                        热评
+                    </Button>
+                    <Button className={sort ? 'btn-noactive' : 'btn'} onClick={() => { props.setSort(false) }}>
+                        最新评论
+                    </Button>
+                </Space>
+
                 {commentList.map((comment: IComment, index: number) => {
                     return (
                         <div className="comments-list-item" key={index}>

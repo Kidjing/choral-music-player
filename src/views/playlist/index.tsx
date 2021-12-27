@@ -1,7 +1,7 @@
 import { MusicTable,CommonCard, TextModal } from 'src/components';
 import React, { useEffect } from 'react';
 import { Button, Space, Message } from '@arco-design/web-react';
-import { IconHeart, IconCaretRight, IconPause} from '@arco-design/web-react/icon';
+import { IconHeart, IconCaretRight, IconPause,IconHeartFill} from '@arco-design/web-react/icon';
 import './index.less';
 import { getPlaylistDetail } from 'src/api/songlist';
 import { ISonglistDetail,ITrackId } from 'src/api/types/songlist'
@@ -84,7 +84,7 @@ const Playlist=(props:any)=>{
                                 {play?(
                                     <Button
                                         onClick={()=>{setPlay(!play)}}
-                                        type='primary' 
+                                        className='btn'
                                         icon={<IconPause />}
                                     > 
                                         暂停
@@ -92,17 +92,17 @@ const Playlist=(props:any)=>{
                                 ):(
                                     <Button
                                         onClick={()=>{setPlay(!play)}} 
-                                        type='primary' 
+                                        className='btn'
                                         icon={<IconCaretRight />}
                                     > 
                                         播放
                                     </Button>
                                 )}
-                            </Space>
-                            <Space size='large'>
-                                <Button style={{marginLeft:20,backgroundColor:'transparent'}} title='收藏'>
+                                <Button title='收藏'
+                                    className='btn'
+                                >
                                     {heart? (
-                                        <IconHeart onClick={()=>{
+                                        <IconHeartFill onClick={()=>{
                                             if(props.userInfo.status){
                                                 setHeart(!heart)
                                             }else{
@@ -113,10 +113,8 @@ const Playlist=(props:any)=>{
                                         <IconHeart onClick={()=>{
                                             if(props.userInfo.status){
                                                 setHeart(!heart)
-                                            }else{
-                                                Message.info({ content: '收藏需要先登录哦!', showIcon: true, position: 'top' })
                                             }
-                                        }} style={{fontSize:26}}/>
+                                        }} style={{fontSize:26,color:'red'}}/>
                                     )}
                                 </Button>
                             </Space>

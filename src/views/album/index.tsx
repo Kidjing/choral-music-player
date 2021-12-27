@@ -1,7 +1,7 @@
 import { CommonCard, MusicTable, TextModal } from 'src/components';
 import React, { useEffect } from 'react';
 import { Button, Space, Grid, Message } from '@arco-design/web-react';
-import { IconHeart, IconCaretRight, IconPause } from '@arco-design/web-react/icon';
+import { IconHeart, IconCaretRight, IconPause ,IconHeartFill } from '@arco-design/web-react/icon';
 import { getAlbum, getArtistAlbum } from 'src/api/album';
 import { IGetAlbumResponse, IAlbum } from 'src/api/types/album'
 import { IMusic } from 'src/api/types/song';
@@ -141,7 +141,7 @@ const Album = (props:any) => {
                                 {play?(
                                     <Button
                                         onClick={()=>{setPlay(!play)}}
-                                        type='primary' 
+                                        className='btn'
                                         icon={<IconPause />}
                                     > 
                                         暂停
@@ -149,17 +149,15 @@ const Album = (props:any) => {
                                 ):(
                                     <Button
                                         onClick={()=>{setPlay(!play)}} 
-                                        type='primary' 
+                                        className='btn'
                                         icon={<IconCaretRight />}
                                     > 
                                         播放
                                     </Button>
                                 )}
-                            </Space>
-                            <Space size="large">
-                                <Button style={{ marginLeft: 20, backgroundColor: 'transparent' }} title="收藏">
+                                <Button className='btn' title="收藏">
                                     {heart ? (
-                                        <IconHeart
+                                        <IconHeartFill
                                             onClick={() => {
                                                 setHeart(!heart);
                                             }}
@@ -174,7 +172,7 @@ const Album = (props:any) => {
                                                     Message.info({ content: '收藏需要先登录哦!', showIcon: true, position: 'top' })
                                                 }
                                             }}
-                                            style={{ fontSize: 26 }}
+                                            style={{ fontSize: 26 ,color: 'red'}}
                                         />
                                     )}
                                 </Button>
