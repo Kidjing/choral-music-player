@@ -10,7 +10,7 @@ import saga from "./saga";
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ['tagReducer','musicReducer','searchRecordReducer'],
+    whitelist: ['tagReducer','musicReducer','searchRecordReducer','personalFmReducer'],
     blacklist: [], 
 }
 

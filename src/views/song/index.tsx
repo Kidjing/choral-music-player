@@ -65,8 +65,8 @@ const Song = (props: any) => {
     } else {
         creator = {
             userId: 409041521,
-            nickname: '嘟噜o匈',
-            avatarUrl: 'https://p1.music.126.net/4cA7-y3r_aUqC5k8RUZImQ==/19057835044640063.jpg',
+            nickname: '',
+            avatarUrl: 'https://s4.music.126.net/style/web2/img/default/default_avatar.jpg?param=60y60',
         }
     }
     return (
