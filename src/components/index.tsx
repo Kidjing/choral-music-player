@@ -12,6 +12,7 @@ import FmCard from './fm-card';
 import TrackList from './track-list';
 import LikeCard from './like-card';
 import SelectTag from './select-tag';
+import PlayButton from './play-button';
 
 export {
     CommonCard,
@@ -25,4 +26,5 @@ export {
     TextModal,
     Layout,
     Comments as Comment,
+    PlayButton,
 };

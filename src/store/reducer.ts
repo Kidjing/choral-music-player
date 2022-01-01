@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import {musicReducer, playingReducer} from './playing/reducer';
+import {musicReducer, playingReducer ,musicStatusReducer} from './playing/reducer';
 import {tagReducer} from './dynamic-tag/reducer';
 import { beforeReducer, btnDisplayReducer, playListReducer } from './playlist/reducer';
 import searchRecordReducer from './search-record/reducer';
@@ -19,5 +19,6 @@ export const reducer = combineReducers({
     personalFmReducer,
     musicReducer,
     beforeReducer,
-    btnDisplayReducer
+    btnDisplayReducer,
+    musicStatusReducer
 });

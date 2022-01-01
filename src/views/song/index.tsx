@@ -1,4 +1,4 @@
-import { Comment, CommonCard } from 'src/components';
+import { Comment, CommonCard, PlayButton } from 'src/components';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { getMusicComment } from 'src/api/comment'
@@ -8,7 +8,7 @@ import { ICreator } from 'src/api/types/user'
 import { ILyric } from 'src/api/types/lyric';
 import { IMusic, IArtistItem } from "src/api/types/song";
 import { Button, Space, Message, Pagination } from '@arco-design/web-react';
-import { IconCaretRight, IconPause, IconHeart, IconHeartFill } from '@arco-design/web-react/icon';
+import { IconHeart, IconHeartFill } from '@arco-design/web-react/icon';
 import { connect } from 'react-redux';
 import './index.less';
 
@@ -18,13 +18,12 @@ const Song = (props: any) => {
     const [lyric, setLyric] = React.useState<ILyric>();
     const [msg, setMsg] = React.useState<{ songs: IMusic[] }>();
     const [heart, setHeart] = React.useState<boolean>(false);
-    const [play, setPlay] = React.useState<boolean>(false);
     const [comment, setComment] = React.useState<CommentsResponce>();
     const [hotComment, setHotComment] = React.useState<CommentsResponce>();
     const [hotsort, setSort] = React.useState<boolean>(true);
     const [offset, setOffset] = React.useState<number>(0)
     const [current, setCurrent] = React.useState<number>(1)
-    let id: number;
+    let id = Number(searchParams.get('id'));;
     let ids: number[];
     let request: CommentsRequest = { id: 0 };
     useEffect(() => {
@@ -98,23 +97,7 @@ const Song = (props: any) => {
                                     所属专辑: <u>{msg?.songs[0].al.name}</u>
                                 </p>
                                 <Space size='large'>
-                                    {play ? (
-                                        <Button
-                                            onClick={() => { setPlay(!play) }}
-                                            className='btn'
-                                            icon={<IconPause />}
-                                        >
-                                            暂停
-                                        </Button>
-                                    ) : (
-                                        <Button
-                                            onClick={() => { setPlay(!play) }}
-                                            className='btn'
-                                            icon={<IconCaretRight />}
-                                        >
-                                            播放
-                                        </Button>
-                                    )}
+                                    <PlayButton id={id} type='song'/>
                                     <Button title='收藏'
                                         className='btn'
                                     >

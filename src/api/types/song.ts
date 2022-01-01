@@ -36,3 +36,7 @@ export interface IFmMusic {
     publishTime?: number;
     duration: number; // 歌曲时长，单位ms
 }
+
+export interface IUrlResponse {
+    url: string
+}

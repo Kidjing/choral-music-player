@@ -1,14 +1,14 @@
-import { MusicTable,CommonCard, TextModal } from 'src/components';
+import { MusicTable,CommonCard, TextModal, PlayButton } from 'src/components';
 import React, { useEffect } from 'react';
 import { Button, Space, Message } from '@arco-design/web-react';
-import { IconHeart, IconCaretRight, IconPause,IconHeartFill} from '@arco-design/web-react/icon';
+import { IconHeart, IconHeartFill} from '@arco-design/web-react/icon';
 import './index.less';
 import { getPlaylistDetail } from 'src/api/songlist';
 import { ISonglistDetail,ITrackId } from 'src/api/types/songlist'
 import { dateTrans } from 'src/utils/timetrans'
 import { IMusic } from 'src/api/types/song'
 import { getSongDetail } from 'src/api/song'
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams,  } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const Table = (props:{ids:ITrackId[]|undefined,status:boolean}) =>{
@@ -40,11 +40,9 @@ const Table = (props:{ids:ITrackId[]|undefined,status:boolean}) =>{
 
 const Playlist=(props:any)=>{
     const [searchParams] = useSearchParams()
-    const navigate = useNavigate();
-    let id:number;
+    let id = Number(searchParams.get('id'));
     const [list, setList] = React.useState<ISonglistDetail>();
     const [heart, setHeart] = React.useState<boolean>(false);
-    const [play, setPlay] = React.useState<boolean>(false);
     useEffect(()=>{
         id = Number(searchParams.get('id'))
         getPlaylistDetail(id).then(res =>{
@@ -61,12 +59,13 @@ const Playlist=(props:any)=>{
                 <div className='list'>
                     <div className='list-msg'>
                         <div className='list-img'
-                            onClick={()=>{navigate('/playlist?id=' + list?.id);}}
                         >
                             <CommonCard
                                 imgSrc={list?.coverImgUrl as string}
                                 title=""
                                 shape="round"
+                                id={list?.id}
+                                type='playlist'
                                 textPostion="left"
                             />
                         </div>
@@ -86,23 +85,7 @@ const Playlist=(props:any)=>{
                                 )}
                             </div>
                             <Space size='large'>
-                                {play?(
-                                    <Button
-                                        onClick={()=>{setPlay(!play)}}
-                                        className='btn'
-                                        icon={<IconPause />}
-                                    > 
-                                        暂停
-                                    </Button>
-                                ):(
-                                    <Button
-                                        onClick={()=>{setPlay(!play)}} 
-                                        className='btn'
-                                        icon={<IconCaretRight />}
-                                    > 
-                                        播放
-                                    </Button>
-                                )}
+                                <PlayButton id={id} type='playlist'/>
                                 <Button title='收藏'
                                     className='btn'
                                 >

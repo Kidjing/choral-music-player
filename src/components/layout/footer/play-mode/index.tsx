@@ -1,14 +1,14 @@
 import React from 'react';
 import { Button } from '@arco-design/web-react';
 import { IconLoop, IconSwap } from '@arco-design/web-react/icon';
-import { useDispatch } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 
 import './index.less';
 
-const PlayMode = () => {
+const PlayMode = (props: any) => {
     const dispatch = useDispatch();
-    const [mode, setMode] = React.useState(0);
     let modes = ['PLAY_IN_ORDER', 'PLAY_IN_SINGLE', 'PLAY_IN_RANDOM'];
+    const [mode, setMode] = React.useState(modes.indexOf(props.playMode));
     const judgeMode = (mode: number) => {
         if (mode === 0)
             return (
@@ -46,4 +46,14 @@ const PlayMode = () => {
     );
 };
 
-export default PlayMode;
+const mapStateToProps = (state: any) => {
+    return {
+        song: state.musicReducer,
+        playing: state.playingReducer,
+        status: state.musicStatusReducer,
+    };
+};
+
+const mapDispatchToProps = {
+};
+export default connect(mapStateToProps, mapDispatchToProps)(PlayMode);

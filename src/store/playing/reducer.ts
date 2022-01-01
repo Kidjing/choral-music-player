@@ -42,7 +42,7 @@ const playInit = {
     playlistId: -1,  // 播放列表的ID
     playlistIndex: 0,  // 歌曲在播放列表中的索引
     volume: 0, // 声音
-    status: false,
+    url: '',
 }
 
 
@@ -57,18 +57,30 @@ export const playingReducer = (state = playInit, action: any) => {
         newState.volume = action.playVolume;
         return newState;
     }
-    if (action.type === ACTIONS.CHANGE_STATUS) {
-        let newState = { ...state };
-        newState.status = !state.status;
+    if(action.type === 'CHANGE_VOLUME'){
+        let newState = { ...state }
+        newState.volume = action.playVolume;
         return newState;
     }
+    // 设置播放列表的信息
     if (action.type === 'SET_PLAYLIST_INFO') {
         let newState = { ...state }
         newState.playlistType = action.payload.type;
         newState.playlistId = action.payload.id;
+        newState.playlistIndex = 0;
         return newState;
     }
+    // 设置播放中的url
+    if (action.type === 'SET_MUSIC_URL') {
+        let newState = { ...state }
+        newState.url = action.payload.url;
+        return newState;
+    }
+    // 播放下一首或者上一首
     if (action.type === ACTIONS.CHANGE_PLAYLIST_INDEX) {
+        if(state.playlistType === 'FM'){
+            return state;
+        }
         const seq = action.payload.seq;
         const len = seq.length;
         let newState = { ...state }
@@ -80,6 +92,14 @@ export const playingReducer = (state = playInit, action: any) => {
         }
 
         return newState;
+    }
+    return state;
+}
+
+export const musicStatusReducer = (state = false,action: any) => {
+    if (action.type === ACTIONS.CHANGE_STATUS) {
+        const newstate = state;
+        return !newstate
     }
     return state;
 }
@@ -96,6 +116,13 @@ export const musicReducer = (state = initSonglistItem, action: IAction<IMusic[]>
 
 
 
+
+export const setMusicUrl = (url:string) => {
+    return {
+        type: "SET_MUSIC_URL",
+        payload: url
+    }
+}
 
 export const getSongList = (songList: IMusic[]) => {
     return {

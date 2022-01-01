@@ -1,7 +1,7 @@
-import { CommonCard, MusicTable, TextModal } from 'src/components';
+import { CommonCard, MusicTable, TextModal, PlayButton } from 'src/components';
 import React, { useEffect } from 'react';
 import { Button, Space, Grid, Message } from '@arco-design/web-react';
-import { IconHeart, IconCaretRight, IconPause ,IconHeartFill } from '@arco-design/web-react/icon';
+import { IconHeart, IconHeartFill } from '@arco-design/web-react/icon';
 import { getAlbum, getArtistAlbum } from 'src/api/album';
 import { IGetAlbumResponse, IAlbum } from 'src/api/types/album'
 import { IMusic } from 'src/api/types/song';
@@ -13,25 +13,24 @@ import './index.less';
 const Row = Grid.Row;
 const Col = Grid.Col;
 
-const More = (props:{ artist:number,name:string }) => {
-    const navigate = useNavigate();
+const More = (props: { artist: number, name: string }) => {
     const id = props.artist;
     const [album, setAlbum] = React.useState<IAlbum[]>()
-    useEffect(()=>{
-        getArtistAlbum(id).then(res =>{
+    useEffect(() => {
+        getArtistAlbum(id).then(res => {
             setAlbum(res);
         })
-    },[id])
+    }, [id])
     let data = [1]
-    if(album !== undefined){
-        const n = album?.length>=6? 6 : album?.length
-        for(let i=0;i<n;i++){
+    if (album !== undefined) {
+        const n = album?.length >= 6 ? 6 : album?.length
+        for (let i = 0; i < n; i++) {
             data[i] = 1
         }
     }
     return (
         <div className="more">
-            {album!==undefined?(
+            {album !== undefined ? (
                 <div>
                     <h2>More by {props.name}</h2>
                     <div className="index-row">
@@ -39,9 +38,6 @@ const More = (props:{ artist:number,name:string }) => {
                             {data.map((item, index) => {
                                 return (
                                     <Col
-                                        onClick={() => {
-                                            navigate('/album?id='+(album !== undefined?(album[index].id):0));
-                                        }}
                                         key={index}
                                         span={4}
                                     >
@@ -59,20 +55,21 @@ const More = (props:{ artist:number,name:string }) => {
                         </Row>
                     </div>
                 </div>
-            ):(
+            ) : (
                 null
             )}
         </div>
     );
 };
 
-const Album = (props:any) => {
+const Album = (props: any) => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     let id: number;
     const [album, setAlbum] = React.useState<IGetAlbumResponse>();
     const [heart, setHeart] = React.useState<boolean>(false);
-    const [play, setPlay] = React.useState<boolean>(false);
+    id = Number(searchParams.get('id'));
+
     useEffect(() => {
         id = Number(searchParams.get('id'));
         getAlbum(Number(id)).then((res) => {
@@ -92,18 +89,18 @@ const Album = (props:any) => {
         date = dateTrans(album.album.publishTime);
     }
     let artistId: number;
-    let albumId:number;
+    let albumId: number;
     if (album?.album !== undefined) {
         artistId = album.album.artist.id;
         albumId = album.album.id;
     }
     return (
         <div className="album">
-            {album!==undefined?(
+            {album !== undefined ? (
                 <div>
                     <div className="album-msg">
                         <div className="album-img"
-                            onClick={()=>{navigate('/album?id=' + albumId);}}
+                            onClick={() => { navigate('/album?id=' + albumId); }}
                         >
                             <CommonCard
                                 imgSrc={album?.album.picUrl !== undefined ? album.album.picUrl : ''}
@@ -129,32 +126,16 @@ const Album = (props:any) => {
                                 {date}.{album?.album.size}首歌,{Math.floor(dt / 1000 / 60)}分钟
                             </p>
                             <p>
-                                {album.album.description!==null?(
-                                    <TextModal 
-                                        desc={String(album?album.album.description:'')} 
+                                {album.album.description !== null ? (
+                                    <TextModal
+                                        desc={String(album ? album.album.description : '')}
                                         title='专辑介绍'
                                     />
-                                ):' '}
+                                ) : ' '}
                             </p>
-                            <br/>
+                            <br />
                             <Space size="large">
-                                {play?(
-                                    <Button
-                                        onClick={()=>{setPlay(!play)}}
-                                        className='btn'
-                                        icon={<IconPause />}
-                                    > 
-                                        暂停
-                                    </Button>
-                                ):(
-                                    <Button
-                                        onClick={()=>{setPlay(!play)}} 
-                                        className='btn'
-                                        icon={<IconCaretRight />}
-                                    > 
-                                        播放
-                                    </Button>
-                                )}
+                                <PlayButton id={id} type='album'/>
                                 <Button className='btn' title="收藏">
                                     {heart ? (
                                         <IconHeartFill
@@ -166,13 +147,13 @@ const Album = (props:any) => {
                                     ) : (
                                         <IconHeart
                                             onClick={() => {
-                                                if(props.userInfo.status){
+                                                if (props.userInfo.status) {
                                                     setHeart(!heart);
-                                                }else{
+                                                } else {
                                                     Message.info({ content: '收藏需要先登录哦!', showIcon: true, position: 'top' })
                                                 }
                                             }}
-                                            style={{ fontSize: 26 ,color: 'red'}}
+                                            style={{ fontSize: 26, color: 'red' }}
                                         />
                                     )}
                                 </Button>
@@ -186,7 +167,7 @@ const Album = (props:any) => {
 
                     <More artist={album.album.artist.id} name={album.album.artist.name} />
                 </div>
-            ):null}
+            ) : null}
         </div>
     );
 };

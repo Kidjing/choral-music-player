@@ -19,8 +19,6 @@ const PlayControl = (props: any) => {
                 className={classNames('play-control-btn', 'play')}
                 onClick={() => {
                     props.changeStatus();
-                    console.log(props.status);
-
                 }}
             >
                 {props.status ? (
@@ -40,7 +38,7 @@ const PlayControl = (props: any) => {
 
 const mapStateToProps = (state: any) => {
     return {
-        status: state.playingReducer.status,
+        status: state.musicStatusReducer,
         playlistItem: state.musicReducer,
     };
 };

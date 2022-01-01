@@ -1,6 +1,6 @@
 import request from "./axios";
 import { ILyric } from "./types/lyric";
-import { IMusic } from "./types/song";
+import { IMusic,IUrlResponse } from "./types/song";
 
 type GetSongDetail = (ids: number[]) => Promise<{songs: IMusic[]}>
 
@@ -24,6 +24,35 @@ type GetLyricBySongID = (id: number) => Promise<ILyric>
 export const getLyricBySongID: GetLyricBySongID = async (id) => {
     const response = await request({
         url: '/lyric',
+        params: {
+            id,
+        },
+    })
+  
+    return response
+}
+
+
+// 获取歌曲的URL
+// http://www.yili.fit:3000/song/url?id=33894312
+type GetMusicUrl = (id: number) => Promise<IUrlResponse[]>
+
+export const getMusicUrl: GetMusicUrl = async (id) => {
+    const response = await request({
+        url: '/song/url',
+        params: {
+            id,
+        },
+    })
+  
+    return response.data
+}
+
+type CheckMusicPlay = (id: number) => Promise<{success: boolean,message: string}>
+
+export const checkMusicPlay: CheckMusicPlay = async (id) => {
+    const response = await request({
+        url: '/check/music',
         params: {
             id,
         },

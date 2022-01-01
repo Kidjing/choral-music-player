@@ -32,7 +32,7 @@ const FmCard = (props: any) => {
         if(props.playing.playlistType === 'FM'){
             props.changeStatus()
         }else{
-            if(!props.playing.status){
+            if(!props.status){
                 props.changeStatus()
             }
             props.setPlaylistInfo(-1,'FM')
@@ -74,7 +74,7 @@ const FmCard = (props: any) => {
                                 setPlay();
                             }}
                         >
-                            {props.playing.status&&props.playing.playlistType === 'FM' ? (
+                            {props.status&&props.playing.playlistType === 'FM' ? (
                                 <IconPause style={{ width: '100%', height: '100%' }} />
                             ) : (
                                 <IconPlayArrow style={{ width: '100%', height: '100%' }} />
@@ -98,6 +98,7 @@ const mapStateToProps = (state: any) => {
         userInfo: state.userInfoReducer,
         personalFm: state.personalFmReducer,
         playing: state.playingReducer,
+        status: state.musicStatusReducer,
     };
 };
 

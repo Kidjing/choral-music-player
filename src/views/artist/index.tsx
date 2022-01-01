@@ -1,7 +1,6 @@
-import { CommonCard, TextModal } from 'src/components';
+import { CommonCard, TextModal, PlayButton } from 'src/components';
 import React, { useEffect } from 'react';
 import { Button, Space, Grid, Message } from '@arco-design/web-react';
-import { IconCaretRight, IconPause } from '@arco-design/web-react/icon';
 import { getArtistDetail } from 'src/api/artist';
 import { IArtist } from 'src/api/types/artist';
 import { IMusic } from 'src/api/types/song';
@@ -11,6 +10,7 @@ import { IAlbum } from 'src/api/types/album';
 import { dateTrans } from 'src/utils/timetrans';
 import { connect } from 'react-redux';
 import { Track } from 'src/components/track-list';
+
 import './index.less';
 
 const Row = Grid.Row;
@@ -22,12 +22,11 @@ const Artist = (props: any) => {
     const [searchParams] = useSearchParams();
     const [artist, setArtist] = React.useState<{ artist: IArtist; hotSongs: IMusic[] }>();
     const [albums, setAlbums] = React.useState<IAlbum[]>();
-    const [play, setPlay] = React.useState<boolean>(false);
     const [follow, setFollow] = React.useState<boolean>(false);
     const [all, setAll] = React.useState<boolean>(false);
-    let id: number;
+    const id = Number(searchParams.get('id'));
     useEffect(() => {
-        id = Number(searchParams.get('id'));
+        const id = Number(searchParams.get('id'));
         getArtistDetail(id).then((res) => {
             setArtist(res);
         });
@@ -49,11 +48,10 @@ const Artist = (props: any) => {
                     <div className="artist-msg">
                         <div
                             className="artist-img"
-                            onClick={() => {
-                                navigate('/artist?id=' + artist?.artist.id);
-                            }}
                         >
                             <CommonCard
+                                type='artist'
+                                id={artist.artist.id}
                                 imgSrc={artist.artist.picUrl}
                                 title=""
                                 shape="circle"
@@ -81,27 +79,7 @@ const Artist = (props: any) => {
                             </p>
                             <br />
                             <Space size='large'>
-                                {play ? (
-                                    <Button
-                                        onClick={() => {
-                                            setPlay(!play);
-                                        }}
-                                        className='btn'
-                                        icon={<IconPause />}
-                                    >
-                                        暂停
-                                    </Button>
-                                ) : (
-                                    <Button
-                                        onClick={() => {
-                                            setPlay(!play);
-                                        }}
-                                        className='btn'
-                                        icon={<IconCaretRight />}
-                                    >
-                                        播放
-                                    </Button>
-                                )}
+                                <PlayButton type='artist' id={id} />
                                 {follow ? (
                                     <Button
                                         onClick={() => {
@@ -134,12 +112,11 @@ const Artist = (props: any) => {
                         <div className="new-album">
                             <div
                                 className="new-album-img"
-                                onClick={() => {
-                                    navigate('/album?id=' + (albums !== undefined ? albums[0].id : 0));
-                                }}
                             >
                                 <CommonCard
+                                    id={albums[0].id}
                                     imgSrc={String(albums[0].picUrl)}
+                                    type='album'
                                     title=""
                                     shape="round"
                                     textPosition="left"
@@ -161,12 +138,11 @@ const Artist = (props: any) => {
                         {albums !== undefined && albums.length >= 2 ? (
                             <div className="new-album">
                                 <div
-                                    onClick={() => {
-                                        navigate('/album?id=' + (albums[1].id));
-                                    }}
                                     className="new-album-img"
                                 >
                                     <CommonCard
+                                        id={albums[1].id}
+                                        type='album'
                                         imgSrc={String(albums[1].picUrl)}
                                         title=""
                                         shape="round"
@@ -234,20 +210,14 @@ const Artist = (props: any) => {
                                 {albumNum.map((item, index) => {
                                     return (
                                         <Col key={index} span={4}>
-                                            <div
-                                                onClick={() => {
-                                                    navigate('/album?id=' + albums[index].id);
-                                                }}
-                                            >
-                                                <CommonCard
-                                                    imgSrc={String(albums[index].picUrl)}
-                                                    title={albums[index].name}
-                                                    shape="round"
-                                                    textPosition="left"
-                                                    type="album"
-                                                    id={albums[index].id}
-                                                />
-                                            </div>
+                                            <CommonCard
+                                                imgSrc={String(albums[index].picUrl)}
+                                                title={albums[index].name}
+                                                shape="round"
+                                                textPosition="left"
+                                                type="album"
+                                                id={albums[index].id}
+                                            />
                                         </Col>
                                     );
                                 })}
