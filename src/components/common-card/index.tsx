@@ -4,7 +4,7 @@ import { IconCaretRight } from '@arco-design/web-react/icon';
 import classNames from 'classnames';
 import './index.less';
 import { useNavigate } from 'react-router-dom';
-import { playMusic } from 'src/store/playing/reducer';
+import { playMusic, setPlaylistInfo } from 'src/store/playing/reducer';
 import { connect } from 'react-redux';
 
 interface CommonCardProps {
@@ -16,17 +16,17 @@ interface CommonCardProps {
     desc?: string | React.ReactNode;
     style?: React.CSSProperties;
     className?: string | string[];
-    id?:number;
-    type?:string;
+    id?: number;
+    type?: string;
 }
 
 const CommonCard = (props: any) => {
     const navigate = useNavigate();
-    const { imgSrc, style, title, desc, shape = 'round', textPostion, id ,type} = props.ownProps;
+    const { imgSrc, style, title, desc, shape = 'round', textPostion, id, type } = props.ownProps;
     const [isVisible, setIsVisible] = useState<boolean>(false);
-    const goToAlbum=(id:number,type:string)=>{
-        if(id===0) return;
-        navigate('/'+type+'?id='+id);
+    const goToAlbum = (id: number, type: string) => {
+        if (id === 0) return;
+        navigate('/' + type + '?id=' + id);
     }
 
     return (
@@ -37,7 +37,7 @@ const CommonCard = (props: any) => {
                 onMouseLeave={() => setIsVisible(false)}
             >
                 <Button
-                    onClick={() => {props.playMusic(id,type)}}
+                    onClick={() => { props.playMusic(id, type) ; props.setPlaylistInfo(id,type) }}
                     className={classNames('play-button', isVisible ? '' : 'none')}
                     size="large"
                     shape="round"
@@ -47,16 +47,16 @@ const CommonCard = (props: any) => {
                     className="common-card-cover-img"
                     loading='lazy'
                     style={{ borderRadius: shape === 'round' ? '0.75em' : '50%' }}
-                    src={imgSrc+'?param=300y300'}
-                    onClick={()=>goToAlbum(id as number,type as string)}
+                    src={imgSrc + '?param=300y300'}
+                    onClick={() => goToAlbum(id as number, type as string)}
                 />
             </div>
             <div
                 className="common-card-text"
-                style={{ justifyContent: textPostion}}
+                style={{ justifyContent: textPostion }}
             >
-                <div className="common-card-text-title" style={{width:textPostion==='left'?'100%':''}}>
-                    <a href={'/'+type+'?id='+id}>{title}</a>
+                <div className="common-card-text-title" style={{ width: textPostion === 'left' ? '100%' : '' }}>
+                    <a href={'/' + type + '?id=' + id}>{title}</a>
                 </div>
                 <div className="common-card-text-info">
                     <span>{desc}</span>
@@ -66,15 +66,16 @@ const CommonCard = (props: any) => {
     );
 };
 
-const mapStateToProps = (state: any,ownProps:CommonCardProps) => {
+const mapStateToProps = (state: any, ownProps: CommonCardProps) => {
     return {
         song: state.currentMusicReducer,
-        ownProps:ownProps
+        ownProps: ownProps
     };
 };
 
 const mapDispatchToProps = {
     playMusic,
+    setPlaylistInfo,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CommonCard);
 

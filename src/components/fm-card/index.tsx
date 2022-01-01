@@ -5,13 +5,12 @@ import { IconThumbDown, IconPlayArrow, IconPause, IconSkipNext } from '@arco-des
 import { connect } from 'react-redux';
 import { getFm } from 'src/store/fm-card/reducer';
 import { trashPersonalFM } from 'src/api/songlist';
-import { changeStatus, playMusic } from 'src/store/playing/reducer';
-import { useEffect, useState } from 'react';
+import { changeStatus, playMusic ,setPlaylistInfo} from 'src/store/playing/reducer';
+import { useEffect } from 'react';
 
 import './index.less';
 
 const FmCard = (props: any) => {
-    const [play,setPlay]=useState(false);
     const currentFm=props.personalFm[0]
     
     const { data } = usePalette(currentFm.album.picUrl, 2, 'hex', { crossOrigin: 'anonymous' });
@@ -28,14 +27,27 @@ const FmCard = (props: any) => {
             })
             .catch();
     };
+
+    const setPlay = () => {
+        if(props.playing.playlistType === 'FM'){
+            props.changeStatus()
+        }else{
+            if(!props.playing.status){
+                props.changeStatus()
+            }
+            props.setPlaylistInfo(-1,'FM')
+        }
+    }
     
     useEffect(()=>{
-        props.playMusic(currentFm.album.id,'album');
-    },[currentFm.album])
+        if(props.playing.playlistType === 'FM'){
+            props.playMusic(currentFm.id,'song');
+        }
+    },[currentFm,props.playing.playlistType])
     
     return (
         <div className="fm-card" style={{ background: `linear-gradient(to top left, ${data?.[0]}, ${data?.[1]})` }}>
-            <img className="fm-card-cover" loading="lazy" src={currentFm.album.picUrl} />
+            <img className="fm-card-cover" src={currentFm.album.picUrl+"?param=300y300"} />
             <div className="fm-card-right">
                 <div className="info">
                     <div className="title">{currentFm.name}</div>
@@ -59,10 +71,10 @@ const FmCard = (props: any) => {
                         <Button
                             className="btn"
                             onClick={() => {
-                                setPlay(!play);
+                                setPlay();
                             }}
                         >
-                            {play ? (
+                            {props.playing.status&&props.playing.playlistType === 'FM' ? (
                                 <IconPause style={{ width: '100%', height: '100%' }} />
                             ) : (
                                 <IconPlayArrow style={{ width: '100%', height: '100%' }} />
@@ -85,14 +97,15 @@ const mapStateToProps = (state: any) => {
     return {
         userInfo: state.userInfoReducer,
         personalFm: state.personalFmReducer,
-        playStatus: state.playStatusReducer,
+        playing: state.playingReducer,
     };
 };
 
 const mapDispatchToProps = {
     getFm,
     changeStatus,
-    playMusic
+    playMusic,
+    setPlaylistInfo
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FmCard);

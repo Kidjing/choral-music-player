@@ -37,7 +37,7 @@ const PlayMode = () => {
                 setMode((mode + 1) % 3);
                 dispatch({
                     type: 'SET_PLAY_MODE',
-                    playMode: modes[mode],
+                    playMode: modes[(mode + 1) % 3],
                 });
             }}
         >

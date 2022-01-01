@@ -18,7 +18,7 @@ const Footer = (props: any) => {
         <Foot className="layout-footer">
             <Row className="controls">
                 <Col span={8}>
-                    <Song isCollected={false} song={props.song[0]} />
+                    <Song isCollected={false} song={props.song.songlist[0]} />
                 </Col>
                 <Col className="middle-control-buttons" span={8}>
                     <PlayControl />
