@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Layout, Button, Grid } from '@arco-design/web-react';
 import { IconMenu, IconUp } from '@arco-design/web-react/icon';
 import PlayMode from './play-mode';
 import PlayVolume from './play-volume';
 import PlayControl from './play-control';
 import AudioPlay from './audio-play';
+import SongDetail from './song-detail';
 import Song from './song';
 import './index.less';
 import { connect } from 'react-redux';
@@ -15,6 +16,8 @@ const Row = Grid.Row;
 const Col = Grid.Col;
 
 const Footer = (props: any) => {
+    let audioRef = useRef(new Audio());
+    const [visible, setVisible] = useState(false);
     useEffect(() => {
         if (props.status) {
             props.changeStatus();
@@ -22,17 +25,18 @@ const Footer = (props: any) => {
     }, [])
     const song = props.playMode === 'PLAY_IN_RANDOM' ? props.songlist[props.seq[props.index]] : props.songlist[props.index]
     return (
+        // 第一次登录的时候不显示底部的栏
         <div>
             {props.id !== -2 ?
                 <Foot className="layout-footer">
-                    <AudioPlay />
+                    <AudioPlay audioRef={audioRef} />
                     <Row className="controls">
                         <Col span={8}>
-                            <Song isCollected={false} song={song}
+                            <Song isCollected={false} song={song} detail={true}
                             />
                         </Col>
                         <Col className="middle-control-buttons" span={8}>
-                            <PlayControl />
+                            <PlayControl detail={false}/>
                         </Col>
                         <Col className="right-control-buttons" span={8}>
                             <Button className="footer-btn" title="播放列表">
@@ -40,7 +44,12 @@ const Footer = (props: any) => {
                             </Button>
                             <PlayMode />
                             <PlayVolume />
-                            <WordsOfSong />
+                            <div>
+                                <Button className="footer-btn" title="歌词" onClick={() => setVisible(true)} >
+                                    <IconUp style={{ fontSize: 20 }} />
+                                </Button>
+                                <SongDetail audioRef={audioRef} visible={visible} setVisible={setVisible}/>
+                            </div>
                         </Col>
                     </Row>
                 </Foot>
@@ -50,15 +59,6 @@ const Footer = (props: any) => {
     );
 };
 
-const WordsOfSong = () => {
-    return (
-        <div>
-            <Button className="footer-btn" title="歌词">
-                <IconUp style={{ fontSize: 20 }} />
-            </Button>
-        </div>
-    );
-};
 
 const mapStateToProps = (state: any) => {
     return {

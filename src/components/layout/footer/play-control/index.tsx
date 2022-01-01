@@ -7,16 +7,22 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { changeStatus, changePlaylistIndex } from 'src/store/playing/reducer';
 
+interface IProps {
+    detail: boolean,
+}
+
 const PlayControl = (props: any) => {
+    const cls = props.own.detail ?  'play-control-btn-white' : 'play-control-btn'
+
     return (
         <div className="play-control">
             <Button
                 onClick={() => { props.changePlaylistIndex(1, props.playlistItem.seq.length) }}
-                className="play-control-btn">
+                className={cls}>
                 <IconSkipPrevious style={{ fontSize: 20 }} />
             </Button>
             <Button
-                className={classNames('play-control-btn', 'play')}
+                className={classNames(cls, 'play')}
                 onClick={() => {
                     props.changeStatus();
                 }}
@@ -29,17 +35,18 @@ const PlayControl = (props: any) => {
             </Button>
             <Button
                 onClick={() => { props.changePlaylistIndex(0, props.playlistItem.seq.length) }}
-                className="play-control-btn">
+                className={cls}>
                 <IconSkipNext style={{ fontSize: 20 }} />
             </Button>
         </div>
     );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any, own: IProps) => {
     return {
         status: state.musicStatusReducer,
         playlistItem: state.musicReducer,
+        own,
     };
 };
 

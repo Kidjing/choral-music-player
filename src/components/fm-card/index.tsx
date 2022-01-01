@@ -13,7 +13,7 @@ import './index.less';
 const FmCard = (props: any) => {
     const currentFm=props.personalFm[0]
     
-    const { data } = usePalette(currentFm.album.picUrl, 2, 'hex', { crossOrigin: 'anonymous' });
+    const { data } = usePalette(currentFm.album.picUrl+'?param=40y40', 2, 'hex', { crossOrigin: 'anonymous' });
 
     const getNext = () => {
         props.getFm(props.userInfo);
