@@ -39,9 +39,9 @@ const playInit = {
     playMode: 'PLAY_IN_ORDER',  // 歌曲播放的方式
     isCollected: 'NO_COLLECTED',
     playlistType: 'NULL',  // 播放列表的类型
-    playlistId: -1,  // 播放列表的ID
+    playlistId: -2,  // 播放列表的ID
     playlistIndex: 0,  // 歌曲在播放列表中的索引
-    volume: 0, // 声音
+    volume: 30, // 声音
     url: '',
 }
 
@@ -81,8 +81,7 @@ export const playingReducer = (state = playInit, action: any) => {
         if(state.playlistType === 'FM'){
             return state;
         }
-        const seq = action.payload.seq;
-        const len = seq.length;
+        const len = action.payload.len;
         let newState = { ...state }
         
         if (action.payload.type === 0) {
@@ -150,12 +149,12 @@ export const setPlaylistInfo = (id: number, type: string) => {
 }
 
 // type为0选择下一首，为1选择上一首
-export const changePlaylistIndex = (type: number,seq: number[]) => {
+export const changePlaylistIndex = (type: number,len: number) => {
     return {
         type: "CHANGE_PLAYLIST_INDEX",
         payload: {
             type,
-            seq
+            len
         }
     }
 }

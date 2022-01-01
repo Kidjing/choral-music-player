@@ -22,26 +22,31 @@ const Footer = (props: any) => {
     }, [])
     const song = props.playMode === 'PLAY_IN_RANDOM' ? props.songlist[props.seq[props.index]] : props.songlist[props.index]
     return (
-        <Foot className="layout-footer">
-            <AudioPlay />
-            <Row className="controls">
-                <Col span={8}>
-                    <Song isCollected={false} song={song}
-                    />
-                </Col>
-                <Col className="middle-control-buttons" span={8}>
-                    <PlayControl />
-                </Col>
-                <Col className="right-control-buttons" span={8}>
-                    <Button className="footer-btn" title="播放列表">
-                        <IconMenu style={{ fontSize: 20 }} />
-                    </Button>
-                    <PlayMode />
-                    <PlayVolume />
-                    <WordsOfSong />
-                </Col>
-            </Row>
-        </Foot>
+        <div>
+            {props.id !== -2 ?
+                <Foot className="layout-footer">
+                    <AudioPlay />
+                    <Row className="controls">
+                        <Col span={8}>
+                            <Song isCollected={false} song={song}
+                            />
+                        </Col>
+                        <Col className="middle-control-buttons" span={8}>
+                            <PlayControl />
+                        </Col>
+                        <Col className="right-control-buttons" span={8}>
+                            <Button className="footer-btn" title="播放列表">
+                                <IconMenu style={{ fontSize: 20 }} />
+                            </Button>
+                            <PlayMode />
+                            <PlayVolume />
+                            <WordsOfSong />
+                        </Col>
+                    </Row>
+                </Foot>
+                : null}
+        </div>
+
     );
 };
 
@@ -59,6 +64,7 @@ const mapStateToProps = (state: any) => {
     return {
         songlist: state.musicReducer.songlist,
         index: state.playingReducer.playlistIndex,
+        id: state.playingReducer.playlistId,
         playMode: state.musicReducer.seq,
         seq: state.musicReducer.seq,
         status: state.musicStatusReducer,

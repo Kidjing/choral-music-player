@@ -27,26 +27,30 @@ export const Track = (props: TrackProps) => {
         event.stopPropagation();
     }
 
-    const clickTitle = (event: any,id:number) => {
+    const clickTitle = (event: any, id: number) => {
         navigate('/artist?id=' + id)
         event.stopPropagation();
     }
     return (
-        <div className={classNames("track", hoverable ? 'hover' : '')} onClick={() => { navigate('/song?id=' + album.id) }}>
-            <img src={album.al.picUrl+'?param=80y80'} loading='lazy' onClick={(event) => clickImg(event)} />
-            <div className="title-and-artist">
-                <div className="title">{album.name}</div>
-                <div className="artist">
-                    {album.ar.map((item: IArtistItem, index: number) => {
-                        if (index === album.ar.length - 1) {
-                            return <a onClick={(event) => clickTitle(event,item.id)}>{item.name} </a>;
-                        } else {
-                            return <a onClick={(event) => clickTitle(event,item.id)}>{item.name},</a>;
-                        }
-                    })}
+        <div>{album ?
+            <div className={classNames("track", hoverable ? 'hover' : '')} onClick={() => { navigate('/song?id=' + album.id) }}>
+                <img src={album.al.picUrl + '?param=80y80'} loading='lazy' onClick={(event) => clickImg(event)} />
+                <div className="title-and-artist">
+                    <div className="title">{album.name}</div>
+                    <div className="artist">
+                        {album.ar.map((item: IArtistItem, index: number) => {
+                            if (index === album.ar.length - 1) {
+                                return <a onClick={(event) => clickTitle(event, item.id)}>{item.name} </a>;
+                            } else {
+                                return <a onClick={(event) => clickTitle(event, item.id)}>{item.name},</a>;
+                            }
+                        })}
+                    </div>
                 </div>
             </div>
-        </div>
+            : null}</div>
+
+
     );
 };
 

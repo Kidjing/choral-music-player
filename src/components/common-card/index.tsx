@@ -4,9 +4,8 @@ import { IconCaretRight } from '@arco-design/web-react/icon';
 import classNames from 'classnames';
 import './index.less';
 import { useNavigate } from 'react-router-dom';
-import { playMusic, setPlaylistInfo } from 'src/store/playing/reducer';
+import { playMusic, setPlaylistInfo, changeStatus } from 'src/store/playing/reducer';
 import { connect } from 'react-redux';
-
 interface CommonCardProps {
     imgSrc: string;
     shape?: 'circle' | 'round';
@@ -37,7 +36,13 @@ const CommonCard = (props: any) => {
                 onMouseLeave={() => setIsVisible(false)}
             >
                 <Button
-                    onClick={() => { props.playMusic(id, type) ; props.setPlaylistInfo(id,type) }}
+                    onClick={() => {
+                        props.playMusic(id, type);
+                        props.setPlaylistInfo(id, type);
+                        if(!props.status){
+                            props.changeStatus();
+                        }
+                    }}
                     className={classNames('play-button', isVisible ? '' : 'none')}
                     size="large"
                     shape="round"
@@ -69,6 +74,7 @@ const CommonCard = (props: any) => {
 const mapStateToProps = (state: any, ownProps: CommonCardProps) => {
     return {
         song: state.currentMusicReducer,
+        status: state.musicStatusReducer,
         ownProps: ownProps
     };
 };
@@ -76,6 +82,7 @@ const mapStateToProps = (state: any, ownProps: CommonCardProps) => {
 const mapDispatchToProps = {
     playMusic,
     setPlaylistInfo,
+    changeStatus,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CommonCard);
 

@@ -8,7 +8,8 @@ import './index.less';
 const PlayMode = (props: any) => {
     const dispatch = useDispatch();
     let modes = ['PLAY_IN_ORDER', 'PLAY_IN_SINGLE', 'PLAY_IN_RANDOM'];
-    const [mode, setMode] = React.useState(modes.indexOf(props.playMode));
+    const index = modes.indexOf(props.playing.playMode)
+    const [mode, setMode] = React.useState<number>(index);
     const judgeMode = (mode: number) => {
         if (mode === 0)
             return (

@@ -3,7 +3,7 @@ import { Slider } from '@arco-design/web-react';
 import { connect } from 'react-redux';
 import { checkMusicPlay, getMusicUrl } from 'src/api/song'
 import { changeStatus, changePlaylistIndex } from 'src/store/playing/reducer'
-
+import './index.less'
 
 const AudioPlay = (props: any) => {
 
@@ -24,7 +24,7 @@ const AudioPlay = (props: any) => {
         setProcessTime(val);
         audioRef.current.currentTime = val
     }
-
+    
     useEffect(() => {
         const id = setInterval(() => {
             setProcessTime(Math.floor(audioRef.current.currentTime));
@@ -35,15 +35,17 @@ const AudioPlay = (props: any) => {
                     audioRef.current.currentTime = 0;
                     audioRef.current.play();
                 } else {
-                    props.changePlaylistIndex(0, props.song.seq)
+                    console.log(props.song);
+                    
+                    props.changePlaylistIndex(0, props.song.seq.length)
                 }
             }
-        }, 300)
+        }, 400)
         intervalRef.current = id
         return () => {
             clearInterval(intervalRef.current!)
         }
-    }, [])
+    }, [props.song])
 
 
     useEffect(() => {
@@ -80,7 +82,7 @@ const AudioPlay = (props: any) => {
     }, [props.playing.playlistIndex, props.song])
 
     return (
-        <div>
+        <div className='footer-slider'>
             <Slider value={processTime} onChange={changeProcess} max={max}
                 style={{ width: '100%' }} formatTooltip={formatTooltip} />
         </div>

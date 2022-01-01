@@ -11,7 +11,7 @@ const PlayControl = (props: any) => {
     return (
         <div className="play-control">
             <Button
-                onClick={() => { props.changePlaylistIndex(1, props.playlistItem.seq) }}
+                onClick={() => { props.changePlaylistIndex(1, props.playlistItem.seq.length) }}
                 className="play-control-btn">
                 <IconSkipPrevious style={{ fontSize: 20 }} />
             </Button>
@@ -28,7 +28,7 @@ const PlayControl = (props: any) => {
                 )}
             </Button>
             <Button
-                onClick={() => { props.changePlaylistIndex(0, props.playlistItem.seq) }}
+                onClick={() => { props.changePlaylistIndex(0, props.playlistItem.seq.length) }}
                 className="play-control-btn">
                 <IconSkipNext style={{ fontSize: 20 }} />
             </Button>
