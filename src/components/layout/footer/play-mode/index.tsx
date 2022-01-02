@@ -13,20 +13,20 @@ const PlayMode = (props: any) => {
     const judgeMode = (mode: number) => {
         if (mode === 0)
             return (
-                <Button className="footer-btn" title="列表循环">
+                <Button className="footer-btn" title="列表循环" disabled={props.type === 'FM'}>
                     <IconLoop style={{ fontSize: 20 }} />
                 </Button>
             );
         else if (mode === 1)
             return (
-                <Button className="footer-btn" title="单曲循环">
+                <Button className="footer-btn" title="单曲循环" disabled={props.type === 'FM'}>
                     <IconLoop style={{ fontSize: 20 }} />
                     <text style={{ fontSize: 10 }}>1</text>
                 </Button>
             );
         else
             return (
-                <Button className="footer-btn" title="随机播放">
+                <Button className="footer-btn" title="随机播放" disabled={props.type === 'FM'}>
                     <IconSwap style={{ fontSize: 20 }} />
                 </Button>
             );
@@ -51,6 +51,7 @@ const mapStateToProps = (state: any) => {
     return {
         song: state.musicReducer,
         playing: state.playingReducer,
+        type: state.playingReducer.playlistType,
         status: state.musicStatusReducer,
     };
 };

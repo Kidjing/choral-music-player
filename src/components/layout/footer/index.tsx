@@ -9,6 +9,7 @@ import SongDetail from './song-detail';
 import Song from './song';
 import './index.less';
 import { connect } from 'react-redux';
+import { setCurrentMusic } from 'src/store/current-music/reducer';
 
 const Foot = Layout.Footer;
 
@@ -23,7 +24,13 @@ const Footer = (props: any) => {
             props.changeStatus();
         }
     }, [])
-    const song = props.playMode === 'PLAY_IN_RANDOM' ? props.songlist[props.seq[props.index]] : props.songlist[props.index]
+    useEffect(()=>{
+        let index = props.index;
+        if (props.playMode === 'PLAY_IN_RANDOM') {
+            index = props.seq[index]
+        }
+        props.setCurrentMusic(props.songlist[index])
+    },[props.songlist,props.seq,props.index])
     return (
         // 第一次登录的时候不显示底部的栏
         <div>
@@ -32,14 +39,14 @@ const Footer = (props: any) => {
                     <AudioPlay audioRef={audioRef} />
                     <Row className="controls">
                         <Col span={8}>
-                            <Song isCollected={false} song={song} detail={true}
+                            <Song isCollected={false} song={props.currentMusic} detail={true}
                             />
                         </Col>
                         <Col className="middle-control-buttons" span={8}>
                             <PlayControl detail={false}/>
                         </Col>
                         <Col className="right-control-buttons" span={8}>
-                            <Button className="footer-btn" title="播放列表">
+                            <Button className="footer-btn" title="播放列表" disabled={props.type === 'FM'}>
                                 <IconMenu style={{ fontSize: 20 }} />
                             </Button>
                             <PlayMode />
@@ -65,11 +72,16 @@ const mapStateToProps = (state: any) => {
         songlist: state.musicReducer.songlist,
         index: state.playingReducer.playlistIndex,
         id: state.playingReducer.playlistId,
-        playMode: state.musicReducer.seq,
+        playMode: state.playingReducer.playMode,
+        
         seq: state.musicReducer.seq,
         status: state.musicStatusReducer,
+        currentMusic: state.currentMusicReducer,
+        type: state.playingReducer.playlistType,
     };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+    setCurrentMusic,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Footer);

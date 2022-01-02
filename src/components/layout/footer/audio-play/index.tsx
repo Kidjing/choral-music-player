@@ -35,12 +35,11 @@ const AudioPlay = (props: any) => {
             setMax(audioRef.current.duration);
             // 通过判断这个的循环类型来做出判断
             if (audioRef.current.ended) {
+                // audioRef.current.ended = false;
                 if (props.playing.playMode === 'PLAY_IN_SINGLE') {
                     audioRef.current.currentTime = 0;
                     audioRef.current.play();
                 } else {
-                    console.log(props.song);
-                    
                     props.changePlaylistIndex(0, props.song.seq.length)
                 }
             }
@@ -66,14 +65,9 @@ const AudioPlay = (props: any) => {
 
     useEffect(() => {
         // 修改歌曲的URL
-        let index = props.playing.playlistIndex;
-        if (props.playing.playMode === 'PLAY_IN_RANDOM') {
-            index = props.song.seq[index]
-        }
-        const id = props.song.songlist[index].id
-        checkMusicPlay(id).then(res => {
+        checkMusicPlay(props.currentMusic.id).then(res => {
             if (res.success) {
-                getMusicUrl(id).then(res => {
+                getMusicUrl(props.currentMusic.id).then(res => {
                     audioRef.current.src = res[0].url.replace('http://','https://')
                     if (props.status) {
                         audioRef.current.play();
@@ -100,6 +94,7 @@ const mapStateToProps = (state: any ,ownProps:IProps) => {
         song: state.musicReducer,
         playing: state.playingReducer,
         status: state.musicStatusReducer,
+        currentMusic: state.currentMusicReducer,
         ownProps,
     };
 };

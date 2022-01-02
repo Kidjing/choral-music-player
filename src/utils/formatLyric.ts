@@ -3,12 +3,10 @@ import { ILyric, IFormatLyric, IFormatLrc } from 'src/api/types/lyric';
 type FormatLyric = (lyric: ILyric) => IFormatLyric;
 export const formatLyric: FormatLyric = (lyric: ILyric) => {
     const lrc = format(lyric.lrc.lyric);
-    const klyric = format(lyric.klyric!.lyric);
-    const tlyric = format(lyric.tlyric!.lyric);
+    const tlyric = lyric.tlyric ? format(lyric.tlyric!.lyric) : undefined;
 
     return {
         lrc,
-        klyric,
         tlyric,
     };
 };

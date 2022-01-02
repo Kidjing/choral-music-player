@@ -7,6 +7,7 @@ import userInfoReducer from './user/reducer';
 import { libReducer } from './library/reducer';
 import { dailySongsReducer } from './daily-card/reducer';
 import { personalFmReducer } from './fm-card/reducer';
+import { currentMusicReducer } from './current-music/reducer'
 
 export const reducer = combineReducers({
     playingReducer,
@@ -20,5 +21,6 @@ export const reducer = combineReducers({
     musicReducer,
     beforeReducer,
     btnDisplayReducer,
-    musicStatusReducer
+    musicStatusReducer,
+    currentMusicReducer,
 });

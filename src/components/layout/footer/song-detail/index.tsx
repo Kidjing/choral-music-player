@@ -32,10 +32,8 @@ const SongDetail = (props: any) => {
     const [lyric, setLyric] = useState<IFormatLyric>();
     const [searchParams] = useSearchParams();
     const [index, setIndex] = useState(0);
-    const song =
-        props.playMode === 'PLAY_IN_RANDOM' ? props.songlist[props.seq[props.index]] : props.songlist[props.index];
 
-    const { data } = usePalette(song.al.picUrl + '?param=200y200', 2, 'hex', { crossOrigin: 'anonymous' });
+    const { data } = usePalette(props.currentMusic.al.picUrl + '?param=200y200', 2, 'hex', { crossOrigin: 'anonymous' });
 
     const formatTooltip = (val: number) => {
         let str = String(val % 60);
@@ -55,24 +53,15 @@ const SongDetail = (props: any) => {
     }, [searchParams]);
 
     useEffect(() => {
-        getLyricBySongID(song.id).then((res) => {
+        getLyricBySongID(props.currentMusic.id).then((res) => {
             setLyric(formatLyric(res));
         });
-    }, [song]);
+    }, [props.currentMusic]);
 
     useEffect(() => {
         const id = setInterval(() => {
             setProcessTime(Math.floor(audioRef.current.currentTime));
             if (!isNaN(audioRef.current.duration)) setMax(Math.floor(audioRef.current.duration));
-            // 通过判断这个的循环类型来做出判断
-            if (audioRef.current.ended) {
-                if (props.playing.playMode === 'PLAY_IN_SINGLE') {
-                    audioRef.current.currentTime = 0;
-                    audioRef.current.play();
-                } else {
-                    props.changePlaylistIndex(0, props.song.seq.length);
-                }
-            }
         }, 200);
         intervalRef.current = id;
         return () => {
@@ -123,7 +112,7 @@ const SongDetail = (props: any) => {
                 <Row style={{ marginBottom: 16 }}>
                     <Col span={12}>
                         <div className="left">
-                            <Song isCollected={false} song={song} detail={false} />
+                            <Song isCollected={false} song={props.currentMusic} detail={false} />
                             <Typography.Text className="detail-text-left">{formatTooltip(processTime)}</Typography.Text>
                             <Slider
                                 value={processTime}
@@ -138,26 +127,30 @@ const SongDetail = (props: any) => {
                     </Col>
                     <Col span={11}>
                         <div className="center">
-                            <div className="lyric">
-                                {lyric?.lrc?.contents.map((item, id) => {
-                                    return (
-                                        <div
-                                            key={id}
-                                            className="line"
-                                            id={'line' + id}
-                                            onClick={() => {
-                                                const times = lyric?.lrc?.times;
-                                                if (times) {
-                                                    setProcessTime(times![id]);
-                                                    audioRef.current.currentTime = times![id];
-                                                }
-                                            }}
-                                        >
-                                            <span className={id === index ? 'span-play' : 'span-unplay'}>{item}</span>
-                                        </div>
-                                    );
-                                })}
-                            </div>
+                            {lyric && (
+                                <div className="lyric">
+                                    {lyric?.lrc?.contents.map((item, id) => {
+                                        return (
+                                            <div
+                                                key={id}
+                                                className="line"
+                                                id={'line' + id}
+                                                onClick={() => {
+                                                    const times = lyric?.lrc?.times;
+                                                    if (times) {
+                                                        setProcessTime(times![id]);
+                                                        audioRef.current.currentTime = times![id];
+                                                    }
+                                                }}
+                                            >
+                                                <span className={id === index ? 'span-play' : 'span-unplay'}>
+                                                    {item}
+                                                </span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
                         </div>
                     </Col>
                     <Col span={1}>
@@ -175,10 +168,7 @@ const SongDetail = (props: any) => {
 
 const mapStateToProps = (state: any, ownProps: IProps) => {
     return {
-        songlist: state.musicReducer.songlist,
-        index: state.playingReducer.playlistIndex,
-        playMode: state.musicReducer.seq,
-        seq: state.musicReducer.seq,
+        currentMusic: state.currentMusicReducer,
 
         song: state.musicReducer,
         playing: state.playingReducer,
