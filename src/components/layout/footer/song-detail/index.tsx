@@ -1,150 +1,177 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Slider, Drawer, Grid, Typography, Space } from '@arco-design/web-react';
+import { Slider, Drawer, Grid, Typography, Button } from '@arco-design/web-react';
 import { connect } from 'react-redux';
-import { checkMusicPlay, getMusicUrl } from 'src/api/song'
-import { changeStatus, changePlaylistIndex } from 'src/store/playing/reducer'
+import { IconDown } from '@arco-design/web-react/icon';
+import { changeStatus, changePlaylistIndex } from 'src/store/playing/reducer';
 import Song from '../song';
 import { usePalette } from 'color-thief-react';
-import PlayControl from '../play-control'
+import PlayControl from '../play-control';
+import { useSearchParams } from 'react-router-dom';
 
-import './index.less'
+import { getLyricBySongID } from 'src/api/song';
+import { IFormatLyric } from 'src/api/types/lyric';
+import { formatLyric } from 'src/utils/formatLyric';
 
+import './index.less';
 
 const Row = Grid.Row;
 const Col = Grid.Col;
 
 interface IProps {
-    audioRef: React.MutableRefObject<HTMLAudioElement>,
-    visible: boolean,
-    setVisible: Function,
+    audioRef: React.MutableRefObject<HTMLAudioElement>;
+    visible: boolean;
+    setVisible: Function;
 }
 
 const SongDetail = (props: any) => {
-
     // eslint-disable-next-line no-undef
     const intervalRef = useRef<NodeJS.Timeout>();
-
-
-
     const { audioRef, visible, setVisible } = props.ownProps;
-    const [processTime, setProcessTime] = useState(0)
-    const [max, setMax] = useState(100)
+    const [processTime, setProcessTime] = useState(0);
+    const [max, setMax] = useState(100);
+    const [lyric, setLyric] = useState<IFormatLyric>();
+    const [searchParams] = useSearchParams();
+    const [index, setIndex] = useState(0);
+    const song =
+        props.playMode === 'PLAY_IN_RANDOM' ? props.songlist[props.seq[props.index]] : props.songlist[props.index];
 
-    const song = props.playMode === 'PLAY_IN_RANDOM' ? props.songlist[props.seq[props.index]] : props.songlist[props.index]
-
-    const { data } = usePalette(song.al.picUrl+'?param=200y200', 2, 'hex', { crossOrigin: 'anonymous' });
-
+    const { data } = usePalette(song.al.picUrl + '?param=200y200', 2, 'hex', { crossOrigin: 'anonymous' });
 
     const formatTooltip = (val: number) => {
-        let str = String(val % 60)
+        let str = String(val % 60);
         if (val % 60 < 10) {
-            str = '0' + str
+            str = '0' + str;
         }
-        return <span>{`${Math.floor(val / 60)}:${str}`}</span>
-    }
+        return <span>{`${Math.floor(val / 60)}:${str}`}</span>;
+    };
+
     const changeProcess = (val: any) => {
         setProcessTime(val);
-        audioRef.current.currentTime = val
-    }
+        audioRef.current.currentTime = val;
+    };
+
+    useEffect(() => {
+        if (visible) setVisible(false);
+    }, [searchParams]);
+
+    useEffect(() => {
+        getLyricBySongID(song.id).then((res) => {
+            setLyric(formatLyric(res));
+        });
+    }, [song]);
 
     useEffect(() => {
         const id = setInterval(() => {
             setProcessTime(Math.floor(audioRef.current.currentTime));
-            setMax(Math.floor(audioRef.current.duration));
+            if (!isNaN(audioRef.current.duration)) setMax(Math.floor(audioRef.current.duration));
             // 通过判断这个的循环类型来做出判断
             if (audioRef.current.ended) {
                 if (props.playing.playMode === 'PLAY_IN_SINGLE') {
                     audioRef.current.currentTime = 0;
                     audioRef.current.play();
                 } else {
-                    props.changePlaylistIndex(0, props.song.seq.length)
+                    props.changePlaylistIndex(0, props.song.seq.length);
                 }
             }
-        }, 400)
-        intervalRef.current = id
+        }, 200);
+        intervalRef.current = id;
         return () => {
-            clearInterval(intervalRef.current!)
-        }
-    }, [props.song])
-
-
-    useEffect(() => {
-        audioRef.current.volume = props.playing.volume / 100;
-    }, [props.playing.volume]);
+            clearInterval(intervalRef.current!);
+        };
+    }, [props.song]);
 
     useEffect(() => {
-        if (props.status) {
-            audioRef.current.play();
-        } else {
-            audioRef.current.pause();
-        }
-    }, [props.status]);
-
-    useEffect(() => {
-        // 修改歌曲的URL
-        let index = props.playing.playlistIndex;
-        if (props.playing.playMode === 'PLAY_IN_RANDOM') {
-            index = props.song.seq[index]
-        }
-        const id = props.song.songlist[index].id
-        checkMusicPlay(id).then(res => {
-            if (res.success) {
-                getMusicUrl(id).then(res => {
-                    audioRef.current.src = res[0].url.replace('http://', 'https://')
-                    if (props.status) {
-                        audioRef.current.play();
-                    } else {
-                        audioRef.current.pause();
+        const times = lyric?.lrc?.times;
+        if (times) {
+            times.every((item, id) => {
+                if (id !== index) {
+                    if (item <= processTime && (times[id + 1] !== undefined ? times[id + 1] > processTime : true)) {
+                        const el = document.getElementById('line' + id);
+                        if (el) {
+                            el.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center',
+                            });
+                            setIndex(id);
+                            return false;
+                        }
                     }
-                })
-            }
-        })
-    }, [props.playing.playlistIndex, props.song])
+                }
+                return true;
+            });
+        }
+    }, [processTime]);
 
     return (
-        <div className='footer-slider'>
+        <div className="footer-slider">
             <Drawer
-                height='100%'
+                height="100%"
                 title={null}
                 footer={null}
                 visible={visible}
                 closable={false}
-                placement='bottom'
+                placement="bottom"
                 onOk={() => {
                     setVisible(false);
                 }}
                 onCancel={() => {
                     setVisible(false);
                 }}
-                className='footer-drawer'
+                className="footer-drawer"
                 style={{ background: `linear-gradient(to top left, ${data?.[0]}, ${data?.[1]})` }}
             >
                 <Row style={{ marginBottom: 16 }}>
                     <Col span={12}>
-                        <div className='left'>
-                            <Song isCollected={false} song={song} detail={false}
+                        <div className="left">
+                            <Song isCollected={false} song={song} detail={false} />
+                            <Typography.Text className="detail-text-left">{formatTooltip(processTime)}</Typography.Text>
+                            <Slider
+                                value={processTime}
+                                onChange={changeProcess}
+                                max={max}
+                                className="slider"
+                                tooltipVisible={false}
                             />
-                            <Space>
-                                <Typography.Text className='detail-text'>{formatTooltip(processTime)}</Typography.Text>
-                                <Slider value={processTime} onChange={changeProcess} max={max}
-                                    className='slider' tooltipVisible={false} />
-                                <Typography.Text className='detail-text'>{formatTooltip(max)}</Typography.Text>
-                            </Space>
-                            <PlayControl detail={true}/>
+                            <Typography.Text className="detail-text-right">{formatTooltip(max)}</Typography.Text>
+                            <PlayControl detail={true} />
                         </div>
-
                     </Col>
-                    <Col span={12}>
-                        <div className='right'>123</div>
+                    <Col span={11}>
+                        <div className="center">
+                            <div className="lyric">
+                                {lyric?.lrc?.contents.map((item, id) => {
+                                    return (
+                                        <div
+                                            key={id}
+                                            className="line"
+                                            id={'line' + id}
+                                            onClick={() => {
+                                                const times = lyric?.lrc?.times;
+                                                if (times) {
+                                                    setProcessTime(times![id]);
+                                                    audioRef.current.currentTime = times![id];
+                                                }
+                                            }}
+                                        >
+                                            <span className={id === index ? 'span-play' : 'span-unplay'}>{item}</span>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </Col>
+                    <Col span={1}>
+                        <div className="right">
+                            <Button className="play-control-btn-white" onClick={() => setVisible(false)}>
+                                <IconDown className="icon" />
+                            </Button>
+                        </div>
                     </Col>
                 </Row>
-
             </Drawer>
         </div>
     );
 };
-
-
 
 const mapStateToProps = (state: any, ownProps: IProps) => {
     return {
