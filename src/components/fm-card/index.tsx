@@ -5,15 +5,14 @@ import { IconThumbDown, IconPlayArrow, IconPause, IconSkipNext } from '@arco-des
 import { connect } from 'react-redux';
 import { getFm } from 'src/store/fm-card/reducer';
 import { trashPersonalFM } from 'src/api/songlist';
-import { changeStatus, playMusic ,setPlaylistInfo} from 'src/store/playing/reducer';
-import { useEffect } from 'react';
-
+import { changeStatus, playMusic, setPlaylistInfo } from 'src/store/playing/reducer';
+import { useUpdateEffect } from 'react-use';
 import './index.less';
 
 const FmCard = (props: any) => {
-    const currentFm=props.personalFm[0]
-    
-    const { data } = usePalette(currentFm.album.picUrl+'?param=40y40', 2, 'hex', { crossOrigin: 'anonymous' });
+    const currentFm = props.personalFm[0];
+
+    const { data } = usePalette(currentFm.album.picUrl + '?param=40y40', 2, 'hex', { crossOrigin: 'anonymous' });
 
     const getNext = () => {
         props.getFm(props.userInfo);
@@ -29,25 +28,25 @@ const FmCard = (props: any) => {
     };
 
     const setPlay = () => {
-        if(props.playing.playlistType === 'FM'){
-            props.changeStatus()
-        }else{
-            if(!props.status){
-                props.changeStatus()
+        if (props.playing.playlistType === 'FM') {
+            props.changeStatus();
+        } else {
+            if (!props.status) {
+                props.changeStatus();
             }
-            props.setPlaylistInfo(-1,'FM')
+            props.setPlaylistInfo(-1, 'FM');
         }
-    }
-    
-    useEffect(()=>{
-        if(props.playing.playlistType === 'FM'){
-            props.playMusic(currentFm.id,'song');
+    };
+
+    useUpdateEffect(() => {
+        if (props.playing.playlistType === 'FM') {
+            props.playMusic(currentFm.id, 'song');
         }
-    },[currentFm,props.playing.playlistType])
-    
+    }, [currentFm, props.playing.playlistType]);
+
     return (
         <div className="fm-card" style={{ background: `linear-gradient(to top left, ${data?.[0]}, ${data?.[1]})` }}>
-            <img className="fm-card-cover" src={currentFm.album.picUrl+"?param=300y300"} />
+            <img className="fm-card-cover" src={currentFm.album.picUrl + '?param=300y300'} />
             <div className="fm-card-right">
                 <div className="info">
                     <div className="title">{currentFm.name}</div>
@@ -74,7 +73,7 @@ const FmCard = (props: any) => {
                                 setPlay();
                             }}
                         >
-                            {props.status&&props.playing.playlistType === 'FM' ? (
+                            {props.status && props.playing.playlistType === 'FM' ? (
                                 <IconPause style={{ width: '100%', height: '100%' }} />
                             ) : (
                                 <IconPlayArrow style={{ width: '100%', height: '100%' }} />
@@ -106,7 +105,7 @@ const mapDispatchToProps = {
     getFm,
     changeStatus,
     playMusic,
-    setPlaylistInfo
+    setPlaylistInfo,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FmCard);
