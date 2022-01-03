@@ -77,7 +77,7 @@ const AudioPlay = (props: any) => {
                 })
             }
         })
-    }, [props.playing.playlistIndex, props.song])
+    }, [props.playing.playlistIndex, props.currentMusic])
 
     return (
         <div className='footer-slider'>
