@@ -39,7 +39,7 @@ const AudioPlay = (props: any) => {
                 if (props.playing.playlistType === 'FM') {
                     console.log('end');
                     console.log(props.playing.playlistType);
-                    
+
                     props.getFm(props.userInfo);
                 } else if (props.playing.playMode === 'PLAY_IN_SINGLE') {
                     audioRef.current.currentTime = 0;

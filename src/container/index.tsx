@@ -6,6 +6,7 @@ import { store, persistor } from 'src/store';
 import { PersistGate } from "redux-persist/integration/react";
 
 const App = () => {
+    
     const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)');
     darkThemeMq.addEventListener('change', (e) => {
         if (e.matches) {

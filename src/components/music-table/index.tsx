@@ -172,7 +172,7 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
                 }}
                 columns={columns}
                 data={data}
-                pagePosition='bottomCenter'
+                pagination={false}
             />
         </div>
     );
