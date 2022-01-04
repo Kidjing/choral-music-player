@@ -13,19 +13,40 @@ interface CommentItemProps {
     comment: IComment;
     creator: ICreator;
     status: boolean;
+    reply?: IReply;
+    onChange?: any;
+}
+
+interface Comment {
+    commentList: IComment[];
+    creator: ICreator;
+    status: boolean;
+    sort: boolean;
+    setSort: Function;
+}
+
+interface IReply {
+    id: number;
+    show: boolean;
 }
 
 const CommentItem = (props: CommentItemProps) => {
-    const { comment, creator, status } = props;
+    const { comment, creator, status, reply, onChange } = props;
     const { user, content, time, likedCount, liked, commentId } = comment;
     const [like, setLike] = useState<boolean>(liked);
-    const [reply, setReply] = useState<boolean>(false);
+
     const [value, setValue] = useState<string>('');
     const [searchParams] = useSearchParams();
 
     const replyComment = () => {
         const id = Number(searchParams.get('id'));
-        operateComment({ t: 2, type: 0, id: id, content: value, commentId: commentId })
+        operateComment({ t: 2, type: 0, id: id, content: value, commentId: commentId }).then((res) => {
+            if (res.code === 200) {
+                Message.success('评论成功');
+            } else if (res.code === 250) {
+                Message.error(res.message as string);
+            }
+        });
     };
 
     const actions = [
@@ -50,14 +71,17 @@ const CommentItem = (props: CommentItemProps) => {
                 if (status === false) {
                     Message.info({ content: '评论需要先登录哦!', showIcon: true, position: 'top' });
                 } else {
-                    setReply(!reply);
+                    if (commentId === reply?.id) {
+                        onChange({ id: commentId, show: !reply?.show });
+                    } else {
+                        onChange({ id: commentId, show: true });
+                    }
                 }
             }}
         >
             <IconMessage />
         </span>,
     ];
-
     return (
         <Comment
             align="right"
@@ -67,7 +91,7 @@ const CommentItem = (props: CommentItemProps) => {
             content={<div>{content}</div>}
             datetime={dateTrans(time)}
         >
-            {reply && (
+            {reply?.id === commentId && reply.show && (
                 <Comment
                     align="right"
                     actions={[
@@ -95,24 +119,17 @@ const CommentItem = (props: CommentItemProps) => {
     );
 };
 
-interface Comment {
-    commentList: IComment[];
-    creator: ICreator;
-    status: boolean;
-    sort: boolean;
-    setSort: Function;
-}
-
 const Comments = (props: Comment) => {
     const { commentList, creator, status, sort } = props;
+    const [reply, setReply] = useState<IReply>({ id: 0, show: false });
     const [searchParams] = useSearchParams();
     const [value, setValue] = useState<string>('');
     const addComment = () => {
         const id = Number(searchParams.get('id'));
-        operateComment({ t: 1, type: 0, id: id, content: value }).then(res=>{
-            if(res.code===200){
+        operateComment({ t: 1, type: 0, id: id, content: value }).then((res) => {
+            if (res.code === 200) {
                 Message.success('评论成功');
-            }else if(res.code===250){
+            } else if (res.code === 250) {
                 Message.error(res.message as string);
             }
         });
@@ -171,7 +188,13 @@ const Comments = (props: Comment) => {
                 {commentList.map((comment: IComment, index: number) => {
                     return (
                         <div className="comments-list-item" key={index}>
-                            <CommentItem comment={comment} creator={creator} status={status} />
+                            <CommentItem
+                                comment={comment}
+                                creator={creator}
+                                status={status}
+                                reply={reply}
+                                onChange={setReply}
+                            />
                         </div>
                     );
                 })}
