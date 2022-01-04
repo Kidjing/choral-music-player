@@ -29,7 +29,7 @@ const DailyCard = (props: any) => {
                 </div>
             </div>
             <Button
-                className="play-btn"
+                className="play-button"
                 onClick={() => {}}
                 icon={<IconCaretRight style={{ width: '80%', height: '80%' }} />}
             />

@@ -23,7 +23,6 @@ const handleResponse = (response: any) => {
   
 const handleError = (error: any) => {
     const { response } = error
-    console.log(error);
     
     if(response.data.code >= 400){
         Message.error(response.data.message)
