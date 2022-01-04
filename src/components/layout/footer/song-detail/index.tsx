@@ -33,7 +33,9 @@ const SongDetail = (props: any) => {
     const [searchParams] = useSearchParams();
     const [index, setIndex] = useState(0);
 
-    const { data } = usePalette(props.currentMusic.al.picUrl + '?param=200y200', 2, 'hex', { crossOrigin: 'anonymous' });
+    const { data } = usePalette(props.currentMusic.al.picUrl + '?param=200y200', 2, 'hex', {
+        crossOrigin: 'anonymous',
+    });
 
     const formatTooltip = (val: number) => {
         let str = String(val % 60);
@@ -169,7 +171,6 @@ const SongDetail = (props: any) => {
 const mapStateToProps = (state: any, ownProps: IProps) => {
     return {
         currentMusic: state.currentMusicReducer,
-
         song: state.musicReducer,
         playing: state.playingReducer,
         status: state.musicStatusReducer,

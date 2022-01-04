@@ -12,6 +12,7 @@ export interface IComment {
     parentCommentId: number;  // 最高层级评论的id
     liked: boolean;  // 是否对这条评论点赞了
 }
+
 // 评论中的用户展示
 interface IUser {
     anonym: number;
@@ -56,6 +57,12 @@ export interface HotCommentsResponce {
     hasMore: boolean // 是否还有更多的热门歌曲
 }
 
+export interface OperateCommentResponse{
+    code:number;
+    message?:string;
+    msg?:string;
+    // data:{};
+}
 // type
 // 0: 歌曲
 // 1: mv
@@ -79,4 +86,16 @@ export interface NewTypeCommentsResponce {
     hasMore: boolean // 是否还有更多的热门歌曲
     cursor: string // 时间戳
     sortType: number // 排序类型
+}
+
+// t
+// 0:删除
+// 1:发送
+// 2:回复
+export interface CommentInfo{
+    t:number;
+    type:number;
+    id:number; // 对应资源的id
+    content:string; // 要发送的内容
+    commentId?:number; // 回复评论时的id
 }
