@@ -37,9 +37,16 @@ const CommentItem = (props: CommentItemProps) => {
 
     const [value, setValue] = useState<string>('');
     const [searchParams] = useSearchParams();
+    const id = Number(searchParams.get('id'));
 
+    // useEffect(()=>{
+    //     const opt=like?1:0;
+    //     likeComment({ t: opt, type: 0, id: id, cid: commentId }).then(res=>{
+    //         console.log("like",res)
+    //     })
+    // },[like])
+    
     const replyComment = () => {
-        const id = Number(searchParams.get('id'));
         operateComment({ t: 2, type: 0, id: id, content: value, commentId: commentId }).then((res) => {
             if (res.code === 200) {
                 Message.success('评论成功');

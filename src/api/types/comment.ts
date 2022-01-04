@@ -96,6 +96,7 @@ export interface CommentInfo{
     t:number;
     type:number;
     id:number; // 对应资源的id
-    content:string; // 要发送的内容
+    content?:string; // 要发送的内容
     commentId?:number; // 回复评论时的id
+    cid?:number;
 }

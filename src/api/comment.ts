@@ -117,3 +117,19 @@ export const operateComment: OperateComment = async (req) => {
     });
     return response;
 };
+
+// 评论点赞
+type LikeComment = (req: CommentInfo) => Promise<OperateCommentResponse>;
+
+export const likeComment: LikeComment = async (req) => {
+    const response = await request({
+        url: '/comment/like',
+        params: {
+            t: req.t,
+            type: req.type,
+            id: req.id,
+            cid: req.cid,
+        },
+    });
+    return response;
+};

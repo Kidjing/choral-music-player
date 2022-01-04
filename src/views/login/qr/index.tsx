@@ -48,7 +48,7 @@ const QrLogin = (props: any) => {
         return () => {
             if (code === 803) {
                 navigate('/library');
-                Message.normal('登录成功')
+                Message.success('登录成功')
                 clearInterval(intervalRef.current!)
                 loginStatus().then(res => {
                     const state: UserInfo = {
