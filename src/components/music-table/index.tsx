@@ -203,7 +203,7 @@ const MusicTable = (props: any) => {
                             setCheckId(record.id);
                         },
                         onDoubleClick: () => {
-                            console.log(record.name);
+                            // console.log(record.name);
                         },
                         onMouseEnter: () => {
                             setShowPlay({ num: index, show: true });

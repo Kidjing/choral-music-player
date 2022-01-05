@@ -37,8 +37,8 @@ const AudioPlay = (props: any) => {
             if (audioRef.current.ended) {
                 // audioRef.current.ended = false;
                 if (props.playing.playlistType === 'FM') {
-                    console.log('end');
-                    console.log(props.playing.playlistType);
+                    // console.log('end');
+                    // console.log(props.playing.playlistType);
 
                     props.getFm(props.userInfo);
                 } else if (props.playing.playMode === 'PLAY_IN_SINGLE') {
