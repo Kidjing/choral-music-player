@@ -75,11 +75,12 @@ const MusicTable = (props: any) => {
                                         setPlay(newplays);
                                     }}
                                     className="album-prefix-btn"
+                                    style={{ background: 'transparent' }}
                                     icon={
                                         play[item] ? (
-                                            <IconSound style={{ fontSize: 16, color: 'blue' }} />
+                                            <IconSound style={{ fontSize: 16 }} />
                                         ) : (
-                                            <IconCaretRight style={{ fontSize: 16, color: 'blue' }} />
+                                            <IconCaretRight style={{ fontSize: 16}} />
                                         )
                                     }
                                 />
