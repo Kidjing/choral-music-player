@@ -7,14 +7,14 @@ import { PersistGate } from "redux-persist/integration/react";
 
 const App = () => {
     
-    const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)');
-    darkThemeMq.addEventListener('change', (e) => {
-        if (e.matches) {
-            document.body.setAttribute('arco-theme', 'dark');
-        } else {
-            document.body.removeAttribute('arco-theme');
-        }
-    });
+    // const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)');
+    // darkThemeMq.addEventListener('change', (e) => {
+    //     if (e.matches) {
+    //         document.body.setAttribute('arco-theme', 'dark');
+    //     } else {
+    //         document.body.removeAttribute('arco-theme');
+    //     }
+    // });
     return (
         <Provider store={store}>
             <PersistGate persistor={persistor}>

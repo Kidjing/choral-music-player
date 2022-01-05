@@ -7,12 +7,14 @@ import { UserInfo } from 'src/api/types/user';
 
 import { connect } from 'react-redux';
 import { clearInfo, setInfo } from 'src/store/user/reducer';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getLoginStatus } from 'src/utils/user';
 import './index.less';
 
 const Head = Layout.Header;
 const Header = (props: any) => {
+    let theme = localStorage.getItem('theme');
+    const [checked, setChecked] = useState(theme === 'dark' ? true : false);
     const navigate = useNavigate();
     const loginOut = () => {
         logout();
@@ -28,6 +30,11 @@ const Header = (props: any) => {
     };
 
     useEffect(() => {
+        if (theme === 'dark') {
+            document.body.setAttribute('arco-theme', 'dark');
+        } else {
+            document.body.removeAttribute('arco-theme');
+        }
         if (getLoginStatus()) {
             loginStatus().then((res) => {
                 const state: UserInfo = {
@@ -66,8 +73,12 @@ const Header = (props: any) => {
     );
     const handleTheme = (e: any) => {
         if (e === true) {
+            setChecked(true);
+            localStorage.setItem('theme', 'dark');
             document.body.setAttribute('arco-theme', 'dark');
         } else {
+            setChecked(false);
+            localStorage.setItem('theme', 'light');
             document.body.removeAttribute('arco-theme');
         }
     };
@@ -109,6 +120,7 @@ const Header = (props: any) => {
 
                     <Switch
                         className="navbar-right-switch"
+                        checked={checked}
                         onChange={handleTheme}
                         uncheckedIcon={<IconSun />}
                         checkedIcon={<IconMoon />}
