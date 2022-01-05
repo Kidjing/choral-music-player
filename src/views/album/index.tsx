@@ -65,17 +65,16 @@ const More = (props: { artist: number, name: string }) => {
 const Album = (props: any) => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
-    let id: number;
     const [album, setAlbum] = React.useState<IGetAlbumResponse>();
     const [heart, setHeart] = React.useState<boolean>(false);
-    id = Number(searchParams.get('id'));
+    let id = Number(searchParams.get('id'));
 
     useEffect(() => {
-        id = Number(searchParams.get('id'));
         getAlbum(Number(id)).then((res) => {
             setAlbum(res);
         });
     }, [searchParams]);
+    
     let dt = 0;
     let d: IMusic;
     const data = album?.songs;

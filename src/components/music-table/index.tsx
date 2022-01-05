@@ -4,10 +4,13 @@ import { IconCaretRight, IconHeart, IconHeartFill, IconSound } from '@arco-desig
 import { IMusic, IArtistItem } from '../../api/types/song';
 import { timeToMinute } from 'src/utils/timetrans';
 import { useNavigate } from 'react-router-dom';
-import { store } from 'src/store/index'
+import { store } from 'src/store/index';
 
 import './index.less';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import { setCurrentMusic } from 'src/store/current-music/reducer';
+import { changeStatus, playMusic, setPlaylistInfo } from 'src/store/playing/reducer';
 
 interface MusicTableProps<T> {
     style?: React.CSSProperties;
@@ -26,10 +29,10 @@ interface LikeState {
     musicId: number;
     like?: boolean;
 }
-const MusicTable = (props: MusicTableProps<IMusic>) => {
-    const { data, type } = props;
-    const status = store.getState().userInfoReducer.status
-    const navigate = useNavigate()
+const MusicTable = (props: any) => {
+    const { data, type } = props.ownProps;
+    const status = store.getState().userInfoReducer.status;
+    const navigate = useNavigate();
     const [play, setPlay] = useState<boolean[]>(new Array(data !== undefined ? data.length : 0).fill(false));
     const [checkId, setCheckId] = useState(0);
     const [showPlay, setShowPlay] = useState({ num: 1, show: false });
@@ -46,16 +49,30 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
             },
             render: (col: string, record: IMusic, item: number) => {
                 if (type === 'playlist') {
-                    return <img  className="playlist-img" src={record.al.picUrl + '?param=100y100'} onClick={() => { navigate('/album?id=' + record.al.id) }} />;
+                    return (
+                        <img
+                            className="playlist-img"
+                            src={record.al.picUrl + '?param=100y100'}
+                            onClick={() => {
+                                navigate('/album?id=' + record.al.id);
+                            }}
+                        />
+                    );
                 } else {
                     return (
                         <div className="album-prefix">
                             {item === showPlay.num && showPlay.show ? (
                                 <Button
                                     onClick={() => {
-                                        let newplays = new Array(data !== undefined ? data.length : 0).fill(false)
-                                        newplays[item] = true
-                                        setPlay(newplays)
+                                        props.playMusic(record.al.id, type) ;
+                                        props.setPlaylistInfo(record.al.id, type,item);
+
+                                        if(!props.status){
+                                            props.changeStatus();
+                                        }
+                                        let newplays = new Array(data !== undefined ? data.length : 0).fill(false);
+                                        newplays[item] = true;
+                                        setPlay(newplays);
                                     }}
                                     className="album-prefix-btn"
                                     icon={
@@ -79,15 +96,37 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
             render: (col: string, record: IMusic) => (
                 <div className="music-table-song">
                     <div className="name">
-                        <span onClick={() => { navigate('/song?id=' + record.id) }}>{record.name}</span>
+                        <span
+                            onClick={() => {
+                                navigate('/song?id=' + record.id);
+                            }}
+                        >
+                            {record.name}
+                        </span>
                     </div>
                     {type === 'playlist' ? (
                         <div className="artist">
                             {record.ar.map((item: IArtistItem, index: number) => {
                                 if (index === record.ar.length - 1) {
-                                    return <a onClick={() => { navigate('/artist?id=' + record.ar[index].id) }}>{item.name} </a>;
+                                    return (
+                                        <a
+                                            onClick={() => {
+                                                navigate('/artist?id=' + record.ar[index].id);
+                                            }}
+                                        >
+                                            {item.name}{' '}
+                                        </a>
+                                    );
                                 } else {
-                                    return <a onClick={() => { navigate('/artist?id=' + record.ar[index].id) }}>{item.name},</a>;
+                                    return (
+                                        <a
+                                            onClick={() => {
+                                                navigate('/artist?id=' + record.ar[index].id);
+                                            }}
+                                        >
+                                            {item.name},
+                                        </a>
+                                    );
                                 }
                             })}
                         </div>
@@ -100,7 +139,13 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
             render: (col: string, record: IMusic) =>
                 type === 'playlist' ? (
                     <div className="playlist-album">
-                        <a onClick={() => { navigate('/album?id=' + record.al.id) }}>{record.al.name}</a>
+                        <a
+                            onClick={() => {
+                                navigate('/album?id=' + record.al.id);
+                            }}
+                        >
+                            {record.al.name}
+                        </a>
                     </div>
                 ) : null,
         },
@@ -116,7 +161,7 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
                             if (status) {
                                 setLikeAction({ musicId: record.id, like: !LikeAction.like });
                             } else {
-                                Message.info({ content: '收藏请先登录哦!', showIcon: true, position: 'top' })
+                                Message.info({ content: '收藏请先登录哦!', showIcon: true, position: 'top' });
                             }
                         }}
                         style={{ background: 'transparent' }}
@@ -133,8 +178,8 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
         },
         {
             headerCellStyle: {
-                borderBottom: "0px",
-                borderRadius: "12px",
+                borderBottom: '0px',
+                borderRadius: '12px',
             },
             title: 'Time',
             width: '8%',
@@ -178,4 +223,21 @@ const MusicTable = (props: MusicTableProps<IMusic>) => {
     );
 };
 
-export default MusicTable;
+const mapStateToProps = (state: any, ownProps: MusicTableProps<IMusic>) => {
+    return {
+        song: state.musicReducer,
+        playing: state.playingReducer,
+        status: state.musicStatusReducer,
+        currentMusic: state.currentMusicReducer,
+        ownProps: ownProps,
+    };
+};
+
+const mapDispatchToProps = {
+    setCurrentMusic,
+    setPlaylistInfo,
+    playMusic,
+    changeStatus
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MusicTable);
