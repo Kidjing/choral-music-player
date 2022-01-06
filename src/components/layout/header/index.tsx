@@ -87,7 +87,10 @@ const Header = (props: any) => {
         <Head
             className="layout-header"
             onDoubleClick={() => {
-                document.getElementsByTagName('main')[0].scrollTop=0;
+                document.getElementsByTagName('main')[0].scrollTo({
+                    top:0,
+                    behavior:'smooth'
+                });
             }}
         >
             <nav className="navbar">
