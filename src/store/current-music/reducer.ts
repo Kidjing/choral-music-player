@@ -25,17 +25,20 @@ const initMusic: IMusic = {
     publishTime: 1610899200000,
 };
 
-export const currentMusicReducer = (state = initMusic,action: any) => {
+export const currentMusicReducer = (state = initMusic, action: any) => {
     if (action.type === ACTIONS.SET_CURRENT_MUSIC) {
-        return action.payload
+        if (action.payload) {
+            return action.payload;
+        } else {
+            return state;
+        }
     }
     return state;
-}
+};
 
-export const setCurrentMusic = (music:IMusic) => {
-    
+export const setCurrentMusic = (music: IMusic) => {
     return {
-        type: "SET_CURRENT_MUSIC",
-        payload: music
-    }
-}
+        type: 'SET_CURRENT_MUSIC',
+        payload: music,
+    };
+};

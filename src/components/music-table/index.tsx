@@ -229,7 +229,6 @@ const mapStateToProps = (state: any, ownProps: MusicTableProps<IMusic>) => {
         song: state.musicReducer,
         playing: state.playingReducer,
         status: state.musicStatusReducer,
-        currentMusic: state.currentMusicReducer,
         ownProps: ownProps,
     };
 };

@@ -73,7 +73,6 @@ const CommonCard = (props: any) => {
 
 const mapStateToProps = (state: any, ownProps: CommonCardProps) => {
     return {
-        song: state.currentMusicReducer,
         status: state.musicStatusReducer,
         ownProps: ownProps
     };

@@ -34,6 +34,7 @@ const DailyCard = (props: any) => {
                 onClick={() => {
                     props.playMusic(props.dailyPlayList[0].al.id, 'album');
                     props.setPlaylistInfo(props.dailyPlayList[0].al.id, 'album');
+
                     if (!props.status) {
                         props.changeStatus();
                     }
@@ -48,6 +49,7 @@ const mapStateToProps = (state: any) => {
     return {
         userInfo: state.userInfoReducer,
         dailyPlayList: state.dailySongsReducer,
+        status: state.musicStatusReducer,
     };
 };
 const mapDispatchToProps = {
