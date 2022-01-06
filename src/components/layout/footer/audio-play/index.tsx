@@ -35,11 +35,7 @@ const AudioPlay = (props: any) => {
             setMax(audioRef.current.duration);
             // 通过判断这个的循环类型来做出判断
             if (audioRef.current.ended) {
-                // audioRef.current.ended = false;
                 if (props.playing.playlistType === 'FM') {
-                    // console.log('end');
-                    // console.log(props.playing.playlistType);
-
                     props.getFm(props.userInfo);
                 } else if (props.playing.playMode === 'PLAY_IN_SINGLE') {
                     audioRef.current.currentTime = 0;
@@ -66,6 +62,14 @@ const AudioPlay = (props: any) => {
             audioRef.current.pause();
         }
     }, [props.status]);
+
+    useEffect(() => {
+        if (!props.status) {
+            document.title = 'Choral Music';
+        } else {
+            document.title = props.currentMusic.name + '——' + props.currentMusic.ar[0].name;
+        }
+    }, [props.status, props.currentMusic]);
 
     useEffect(() => {
         // 修改歌曲的URL

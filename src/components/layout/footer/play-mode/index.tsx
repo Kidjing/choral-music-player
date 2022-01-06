@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '@arco-design/web-react';
 import { IconLoop, IconSwap } from '@arco-design/web-react/icon';
 import { useDispatch, connect } from 'react-redux';
@@ -8,8 +8,13 @@ import './index.less';
 const PlayMode = (props: any) => {
     const dispatch = useDispatch();
     let modes = ['PLAY_IN_ORDER', 'PLAY_IN_SINGLE', 'PLAY_IN_RANDOM'];
-    const index = modes.indexOf(props.playing.playMode)
+    const index = modes.indexOf(props.playing.playMode);
     const [mode, setMode] = React.useState<number>(index);
+    useEffect(() => {
+        const mode = modes.indexOf(props.playing.playMode);
+        setMode(mode);
+    }, [props.playing.playMode]);
+
     const judgeMode = (mode: number) => {
         if (mode === 0)
             return (
@@ -56,6 +61,5 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-const mapDispatchToProps = {
-};
+const mapDispatchToProps = {};
 export default connect(mapStateToProps, mapDispatchToProps)(PlayMode);
