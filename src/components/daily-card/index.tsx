@@ -2,6 +2,7 @@ import { Button } from '@arco-design/web-react';
 import { IconCaretRight } from '@arco-design/web-react/icon';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { changeStatus, playMusic, setPlaylistInfo } from 'src/store/playing/reducer';
 
 import './index.less';
 
@@ -18,7 +19,7 @@ const DailyCard = (props: any) => {
     return (
         <div className="daily-card">
             <div onClick={handleDaily}>
-                <img loading='lazy' src={props.dailyPlayList[0].al.picUrl} />
+                <img loading="lazy" src={props.dailyPlayList[0].al.picUrl} />
                 <div className="title-box">
                     <div className="title">
                         <span>每</span>
@@ -30,7 +31,13 @@ const DailyCard = (props: any) => {
             </div>
             <Button
                 className="play-button"
-                onClick={() => {}}
+                onClick={() => {
+                    props.playMusic(props.dailyPlayList[0].al.id, 'album');
+                    props.setPlaylistInfo(props.dailyPlayList[0].al.id, 'album');
+                    if (!props.status) {
+                        props.changeStatus();
+                    }
+                }}
                 icon={<IconCaretRight style={{ width: '80%', height: '80%' }} />}
             />
         </div>
@@ -40,8 +47,13 @@ const DailyCard = (props: any) => {
 const mapStateToProps = (state: any) => {
     return {
         userInfo: state.userInfoReducer,
-        dailyPlayList:state.dailySongsReducer,
-    }
+        dailyPlayList: state.dailySongsReducer,
+    };
+};
+const mapDispatchToProps = {
+    playMusic,
+    setPlaylistInfo,
+    changeStatus,
 };
 
-export default connect(mapStateToProps)(DailyCard);
+export default connect(mapStateToProps, mapDispatchToProps)(DailyCard);
