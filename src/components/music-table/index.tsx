@@ -8,7 +8,7 @@ import { store } from 'src/store/index';
 
 import './index.less';
 import classNames from 'classnames';
-import { connect ,useDispatch} from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { setCurrentMusic } from 'src/store/current-music/reducer';
 import { changeStatus, playMusic, setPlaylistInfo } from 'src/store/playing/reducer';
 
@@ -67,7 +67,7 @@ const MusicTable = (props: any) => {
                                     onClick={() => {
                                         let index = item;
                                         props.setPlaylistInfo(record.al.id, type, index);
-                                        if (props.playing.playMode === 'PLAY_IN_RANDOM'){
+                                        if (props.playing.playMode === 'PLAY_IN_RANDOM') {
                                             dispatch({
                                                 type: 'SET_PLAY_MODE',
                                                 playMode: 'PLAY_IN_ORDER',

@@ -88,8 +88,8 @@ const Header = (props: any) => {
             className="layout-header"
             onDoubleClick={() => {
                 document.getElementsByTagName('main')[0].scrollTo({
-                    top:0,
-                    behavior:'smooth'
+                    top: 0,
+                    behavior: 'smooth',
                 });
             }}
         >

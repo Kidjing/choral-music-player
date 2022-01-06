@@ -21,12 +21,12 @@ export const store = createStore(persistedReducer, composeWithDevTools(applyMidd
 
 export const getPersistor = () => {
     // 修改store之后要对版本号进行修改
-    const deployVer = '0.1.0';
-    const curVersion = localStorage.getItem('myAppVer');
+    const deployVer = '0.1.1';
+    const curVersion = localStorage.getItem('choral-music');
 
     if (typeof curVersion === 'undefined' || curVersion === null || curVersion !== deployVer) {
         localStorage.removeItem('persist:root');
-        localStorage.setItem('myAppVer', deployVer);
+        localStorage.setItem('choral-music', deployVer);
     }
 
     return persistStore(store);
