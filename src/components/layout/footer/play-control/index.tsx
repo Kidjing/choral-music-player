@@ -6,7 +6,8 @@ import { getFm } from 'src/store/fm-card/reducer';
 import './index.less';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { changeStatus, changePlaylistIndex } from 'src/store/playing/reducer';
+import { changeStatus, changePlaylistIndex, playMusic } from 'src/store/playing/reducer';
+import { useUpdateEffect } from 'react-use';
 
 interface IProps {
     detail: boolean;
@@ -21,6 +22,12 @@ const PlayControl = (props: any) => {
             props.changePlaylistIndex(0, props.playlistItem.seq.length);
         }
     };
+
+    useUpdateEffect(() => {
+        if (props.type === 'FM') {
+            props.playMusic(props.personalFm[0].id, 'song');
+        }
+    }, [props.personalFm, props.type]);
 
     return (
         <div className="play-control">
@@ -68,6 +75,6 @@ const mapStateToProps = (state: any, own: IProps) => {
     };
 };
 
-const mapDispatchToProps = { changeStatus, changePlaylistIndex, getFm };
+const mapDispatchToProps = { changeStatus, changePlaylistIndex, getFm, playMusic };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayControl);

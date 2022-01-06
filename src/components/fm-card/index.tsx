@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { getFm } from 'src/store/fm-card/reducer';
 import { trashPersonalFM } from 'src/api/songlist';
 import { changeStatus, playMusic, setPlaylistInfo } from 'src/store/playing/reducer';
-import { useUpdateEffect } from 'react-use';
 import './index.less';
 
 const FmCard = (props: any) => {
@@ -38,11 +37,7 @@ const FmCard = (props: any) => {
         }
     };
 
-    useUpdateEffect(() => {
-        if (props.playing.playlistType === 'FM') {
-            props.playMusic(currentFm.id, 'song');
-        }
-    }, [currentFm, props.playing.playlistType]);
+
 
     return (
         <div className="fm-card" style={{ background: `linear-gradient(to top left, ${data?.[0]}, ${data?.[1]})` }}>

@@ -26,8 +26,6 @@ export const getPersistor = () => {
 
     if (typeof curVersion === 'undefined' || curVersion === null || curVersion !== deployVer) {
         localStorage.removeItem('persist:root');
-        localStorage.clear();
-        sessionStorage.clear();
         localStorage.setItem('myAppVer', deployVer);
     }
 
