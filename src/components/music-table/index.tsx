@@ -8,7 +8,7 @@ import { store } from 'src/store/index';
 
 import './index.less';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
+import { connect ,useDispatch} from 'react-redux';
 import { setCurrentMusic } from 'src/store/current-music/reducer';
 import { changeStatus, playMusic, setPlaylistInfo } from 'src/store/playing/reducer';
 
@@ -30,6 +30,7 @@ interface LikeState {
     like?: boolean;
 }
 const MusicTable = (props: any) => {
+    const dispatch = useDispatch();
     const { data, type } = props.ownProps;
     const status = store.getState().userInfoReducer.status;
     const navigate = useNavigate();
@@ -64,10 +65,18 @@ const MusicTable = (props: any) => {
                             {item === showPlay.num && showPlay.show ? (
                                 <Button
                                     onClick={() => {
-                                        props.playMusic(record.al.id, type) ;
-                                        props.setPlaylistInfo(record.al.id, type,item);
+                                        let index = item;
+                                        props.setPlaylistInfo(record.al.id, type, index);
+                                        if (props.playing.playMode === 'PLAY_IN_RANDOM'){
+                                            dispatch({
+                                                type: 'SET_PLAY_MODE',
+                                                playMode: 'PLAY_IN_ORDER',
+                                            });
+                                        }
+                                        props.playMusic(record.al.id, type);
+                                        props.setPlaylistInfo(record.al.id, type, index);
 
-                                        if(!props.status){
+                                        if (!props.status) {
                                             props.changeStatus();
                                         }
                                         let newplays = new Array(data !== undefined ? data.length : 0).fill(false);
@@ -80,7 +89,7 @@ const MusicTable = (props: any) => {
                                         play[item] ? (
                                             <IconSound style={{ fontSize: 16 }} />
                                         ) : (
-                                            <IconCaretRight style={{ fontSize: 16}} />
+                                            <IconCaretRight style={{ fontSize: 16 }} />
                                         )
                                     }
                                 />
@@ -237,7 +246,7 @@ const mapDispatchToProps = {
     setCurrentMusic,
     setPlaylistInfo,
     playMusic,
-    changeStatus
+    changeStatus,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicTable);

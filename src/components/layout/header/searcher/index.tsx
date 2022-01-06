@@ -6,6 +6,7 @@ import { suggestSearch } from 'src/api/search'
 import { ISuggestSearch } from 'src/api/types/search'
 import { addRecord, clearRecord } from 'src/store/search-record/reducer'
 import { connect } from 'react-redux';
+import { useDebounce } from 'react-use';
 import './index.less';
 
 const Searcher = (props: any) => {
@@ -13,13 +14,19 @@ const Searcher = (props: any) => {
     const [input, setInput] = React.useState('')
     const [show, setShow] = React.useState(0)
     const [search, setSearch] = React.useState<ISuggestSearch>()
-    const inputChange = (inputValue: string) => {
-        setShow(inputValue === '' ? 0 : 1)
-        if (search?.artists === undefined || inputValue.startsWith(input) && inputValue.length !== 0) {
-            suggestSearch(inputValue).then(res => {
+
+    // 防抖
+    useDebounce(()=>{
+        if (search?.artists === undefined || input.startsWith(input) && input.length !== 0) {
+            suggestSearch(input).then(res => {
                 setSearch(res)
             })
         }
+    },200,[input])
+
+    const inputChange = (inputValue: string) => {
+        setShow(inputValue === '' ? 0 : 1)
+        
         setInput(inputValue)
     }
     const addRecord = (input: string) => {
