@@ -82,8 +82,14 @@ const Header = (props: any) => {
             document.body.removeAttribute('arco-theme');
         }
     };
+
     return (
-        <Head className="layout-header">
+        <Head
+            className="layout-header"
+            onDoubleClick={() => {
+                document.getElementsByTagName('main')[0].scrollTop=0;
+            }}
+        >
             <nav className="navbar">
                 <div className="navbar-btn">
                     <Button onClick={() => navigate(-1)} style={{ background: 'transparent' }}>
