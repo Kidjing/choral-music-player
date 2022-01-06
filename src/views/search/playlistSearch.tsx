@@ -1,6 +1,5 @@
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { search } from 'src/api/search';
-import { subscribePlaylist } from 'src/api/subscribe';
 import { ISonglist } from 'src/api/types/songlist';
 import React, { useState, useEffect } from 'react';
 import { Grid } from '@arco-design/web-react';
@@ -16,12 +15,6 @@ const PlaylistSearch = () => {
     const key = searchParams.get('keyword')!;
 
     useEffect(() => {
-        subscribePlaylist(2135794938, 1).then(res => {
-            console.log(res);
-        })
-        subscribePlaylist(2135794938, 2).then(res => {
-            console.log(res);
-        })
         const key = searchParams.get('keyword')!;
         search({ key, type: 1000, limit: 12 }).then(res => {
             setPlaylistList(res.playlists);
