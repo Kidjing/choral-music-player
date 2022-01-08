@@ -55,6 +55,10 @@ npm run dev
 * [项目目录](./docs/项目目录.md)
 * [技术栈清单](./docs/技术栈清单.md)
 
+## slides
+
+* [项目答辩](./docs/presentation.pdf)
+
 ## ⭐️ 支持
 
 如果您喜欢本项目给一个 ⭐️ 吧
