@@ -50,6 +50,10 @@ npm run dev
 
 * Github: [@yili](https://github.com/qiuyuyin)
 
+:man_astronaut: **sjszhdlyl**
+
+* Github: [@sjszhdlyl](https://github.com/sjszhdlyl)
+
 ## :book: 文档
 
 * [项目目录](./docs/项目目录.md)
