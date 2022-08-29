@@ -20,7 +20,7 @@
 
 > 一款高颜值的音乐播放器
 
-### ✨ [项目上线地址](https://music.yili.fit)
+### ✨ [项目上线地址](https://music.yili.fit) music.yili.fit
 
 ![image-20211227010653425](https://yili979.oss-cn-beijing.aliyuncs.com/img/image-20211227010653425.png)
 
